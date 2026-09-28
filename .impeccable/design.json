@@ -1,0 +1,694 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-28T16:14:37.894Z",
+  "title": "Design System: Crisur Polarizados",
+  "extensions": {
+    "colorMeta": {
+      "brand-red": {
+        "role": "primary",
+        "displayName": "Logo Red",
+        "canonical": "#e3262b",
+        "tonalRamp": [
+          "oklch(15.0% 0.2208 26.4)",
+          "oklch(26.4% 0.2208 26.4)",
+          "oklch(37.9% 0.2208 26.4)",
+          "oklch(49.3% 0.2208 26.4)",
+          "oklch(60.7% 0.2208 26.4)",
+          "oklch(72.1% 0.2208 26.4)",
+          "oklch(83.6% 0.2208 26.4)",
+          "oklch(95.0% 0.2208 26.4)"
+        ]
+      },
+      "cta": {
+        "role": "primary",
+        "displayName": "Action Red",
+        "canonical": "#d91f26",
+        "tonalRamp": [
+          "oklch(15.0% 0.2162 26.4)",
+          "oklch(26.4% 0.2162 26.4)",
+          "oklch(37.9% 0.2162 26.4)",
+          "oklch(49.3% 0.2162 26.4)",
+          "oklch(60.7% 0.2162 26.4)",
+          "oklch(72.1% 0.2162 26.4)",
+          "oklch(83.6% 0.2162 26.4)",
+          "oklch(95.0% 0.2162 26.4)"
+        ]
+      },
+      "cta-hover": {
+        "role": "primary",
+        "displayName": "Action Red Lit",
+        "canonical": "#ee2b32",
+        "tonalRamp": [
+          "oklch(15.0% 0.2269 25.8)",
+          "oklch(26.4% 0.2269 25.8)",
+          "oklch(37.9% 0.2269 25.8)",
+          "oklch(49.3% 0.2269 25.8)",
+          "oklch(60.7% 0.2269 25.8)",
+          "oklch(72.1% 0.2269 25.8)",
+          "oklch(83.6% 0.2269 25.8)",
+          "oklch(95.0% 0.2269 25.8)"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Signal Coral",
+        "canonical": "#ff5a5f",
+        "tonalRamp": [
+          "oklch(15.0% 0.2004 22.4)",
+          "oklch(26.4% 0.2004 22.4)",
+          "oklch(37.9% 0.2004 22.4)",
+          "oklch(49.3% 0.2004 22.4)",
+          "oklch(60.7% 0.2004 22.4)",
+          "oklch(72.1% 0.2004 22.4)",
+          "oklch(83.6% 0.2004 22.4)",
+          "oklch(95.0% 0.2004 22.4)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Tinted Graphite",
+        "canonical": "#0c0f13",
+        "tonalRamp": [
+          "oklch(15.0% 0.0097 255.7)",
+          "oklch(26.4% 0.0097 255.7)",
+          "oklch(37.9% 0.0097 255.7)",
+          "oklch(49.3% 0.0097 255.7)",
+          "oklch(60.7% 0.0097 255.7)",
+          "oklch(72.1% 0.0097 255.7)",
+          "oklch(83.6% 0.0097 255.7)",
+          "oklch(95.0% 0.0097 255.7)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Graphite Surface",
+        "canonical": "#1a1e24",
+        "tonalRamp": [
+          "oklch(15.0% 0.0131 258.4)",
+          "oklch(26.4% 0.0131 258.4)",
+          "oklch(37.9% 0.0131 258.4)",
+          "oklch(49.3% 0.0131 258.4)",
+          "oklch(60.7% 0.0131 258.4)",
+          "oklch(72.1% 0.0131 258.4)",
+          "oklch(83.6% 0.0131 258.4)",
+          "oklch(95.0% 0.0131 258.4)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Chrome Ink",
+        "canonical": "#eef1f4",
+        "tonalRamp": [
+          "oklch(15.0% 0.0052 247.9)",
+          "oklch(26.4% 0.0052 247.9)",
+          "oklch(37.9% 0.0052 247.9)",
+          "oklch(49.3% 0.0052 247.9)",
+          "oklch(60.7% 0.0052 247.9)",
+          "oklch(72.1% 0.0052 247.9)",
+          "oklch(83.6% 0.0052 247.9)",
+          "oklch(95.0% 0.0052 247.9)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Chrome",
+        "canonical": "#c9cfd6",
+        "tonalRamp": [
+          "oklch(15.0% 0.0117 252.1)",
+          "oklch(26.4% 0.0117 252.1)",
+          "oklch(37.9% 0.0117 252.1)",
+          "oklch(49.3% 0.0117 252.1)",
+          "oklch(60.7% 0.0117 252.1)",
+          "oklch(72.1% 0.0117 252.1)",
+          "oklch(83.6% 0.0117 252.1)",
+          "oklch(95.0% 0.0117 252.1)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Brushed Steel",
+        "canonical": "#a9b0b9",
+        "tonalRamp": [
+          "oklch(15.0% 0.0151 254.6)",
+          "oklch(26.4% 0.0151 254.6)",
+          "oklch(37.9% 0.0151 254.6)",
+          "oklch(49.3% 0.0151 254.6)",
+          "oklch(60.7% 0.0151 254.6)",
+          "oklch(72.1% 0.0151 254.6)",
+          "oklch(83.6% 0.0151 254.6)",
+          "oklch(95.0% 0.0151 254.6)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(238, 241, 244, 0.14)",
+        "tonalRamp": [
+          "oklch(15.0% 0.0052 247.9 / 0.14)",
+          "oklch(26.4% 0.0052 247.9 / 0.14)",
+          "oklch(37.9% 0.0052 247.9 / 0.14)",
+          "oklch(49.3% 0.0052 247.9 / 0.14)",
+          "oklch(60.7% 0.0052 247.9 / 0.14)",
+          "oklch(72.1% 0.0052 247.9 / 0.14)",
+          "oklch(83.6% 0.0052 247.9 / 0.14)",
+          "oklch(95.0% 0.0052 247.9 / 0.14)"
+        ]
+      },
+      "on-red": {
+        "role": "neutral",
+        "displayName": "On-Red White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15.0% 0.0000 0.0)",
+          "oklch(26.4% 0.0000 0.0)",
+          "oklch(37.9% 0.0000 0.0)",
+          "oklch(49.3% 0.0000 0.0)",
+          "oklch(60.7% 0.0000 0.0)",
+          "oklch(72.1% 0.0000 0.0)",
+          "oklch(83.6% 0.0000 0.0)",
+          "oklch(95.0% 0.0000 0.0)"
+        ]
+      },
+      "film-clear": {
+        "role": "tertiary",
+        "displayName": "Clear Glass",
+        "canonical": "rgba(172, 198, 224, 0.34)",
+        "tonalRamp": [
+          "oklch(15.0% 0.0464 248.4 / 0.34)",
+          "oklch(26.4% 0.0464 248.4 / 0.34)",
+          "oklch(37.9% 0.0464 248.4 / 0.34)",
+          "oklch(49.3% 0.0464 248.4 / 0.34)",
+          "oklch(60.7% 0.0464 248.4 / 0.34)",
+          "oklch(72.1% 0.0464 248.4 / 0.34)",
+          "oklch(83.6% 0.0464 248.4 / 0.34)",
+          "oklch(95.0% 0.0464 248.4 / 0.34)"
+        ]
+      },
+      "film-tint-top": {
+        "role": "tertiary",
+        "displayName": "Smoke Film (top)",
+        "canonical": "#161b22",
+        "tonalRamp": [
+          "oklch(15.0% 0.0157 256.8)",
+          "oklch(26.4% 0.0157 256.8)",
+          "oklch(37.9% 0.0157 256.8)",
+          "oklch(49.3% 0.0157 256.8)",
+          "oklch(60.7% 0.0157 256.8)",
+          "oklch(72.1% 0.0157 256.8)",
+          "oklch(83.6% 0.0157 256.8)",
+          "oklch(95.0% 0.0157 256.8)"
+        ]
+      },
+      "film-tint-bottom": {
+        "role": "tertiary",
+        "displayName": "Smoke Film (bottom)",
+        "canonical": "#040506",
+        "tonalRamp": [
+          "oklch(15.0% 0.0044 245.0)",
+          "oklch(26.4% 0.0044 245.0)",
+          "oklch(37.9% 0.0044 245.0)",
+          "oklch(49.3% 0.0044 245.0)",
+          "oklch(60.7% 0.0044 245.0)",
+          "oklch(72.1% 0.0044 245.0)",
+          "oklch(83.6% 0.0044 245.0)",
+          "oklch(95.0% 0.0044 245.0)"
+        ]
+      },
+      "film-mirror-light": {
+        "role": "tertiary",
+        "displayName": "Mirror Film (light band)",
+        "canonical": "#eef2f6",
+        "tonalRamp": [
+          "oklch(15.0% 0.0069 247.9)",
+          "oklch(26.4% 0.0069 247.9)",
+          "oklch(37.9% 0.0069 247.9)",
+          "oklch(49.3% 0.0069 247.9)",
+          "oklch(60.7% 0.0069 247.9)",
+          "oklch(72.1% 0.0069 247.9)",
+          "oklch(83.6% 0.0069 247.9)",
+          "oklch(95.0% 0.0069 247.9)"
+        ]
+      },
+      "film-mirror-mid": {
+        "role": "tertiary",
+        "displayName": "Mirror Film (mid band)",
+        "canonical": "#8e98a4",
+        "tonalRamp": [
+          "oklch(15.0% 0.0211 252.9)",
+          "oklch(26.4% 0.0211 252.9)",
+          "oklch(37.9% 0.0211 252.9)",
+          "oklch(49.3% 0.0211 252.9)",
+          "oklch(60.7% 0.0211 252.9)",
+          "oklch(72.1% 0.0211 252.9)",
+          "oklch(83.6% 0.0211 252.9)",
+          "oklch(95.0% 0.0211 252.9)"
+        ]
+      },
+      "film-mirror-dark": {
+        "role": "tertiary",
+        "displayName": "Mirror Film (dark band)",
+        "canonical": "#545c67",
+        "tonalRamp": [
+          "oklch(15.0% 0.0205 256.4)",
+          "oklch(26.4% 0.0205 256.4)",
+          "oklch(37.9% 0.0205 256.4)",
+          "oklch(49.3% 0.0205 256.4)",
+          "oklch(60.7% 0.0205 256.4)",
+          "oklch(72.1% 0.0205 256.4)",
+          "oklch(83.6% 0.0205 256.4)",
+          "oklch(95.0% 0.0205 256.4)"
+        ]
+      },
+      "film-frost-top": {
+        "role": "tertiary",
+        "displayName": "Frost Film (top)",
+        "canonical": "rgba(236, 241, 246, 0.72)",
+        "tonalRamp": [
+          "oklch(15.0% 0.0086 247.9 / 0.72)",
+          "oklch(26.4% 0.0086 247.9 / 0.72)",
+          "oklch(37.9% 0.0086 247.9 / 0.72)",
+          "oklch(49.3% 0.0086 247.9 / 0.72)",
+          "oklch(60.7% 0.0086 247.9 / 0.72)",
+          "oklch(72.1% 0.0086 247.9 / 0.72)",
+          "oklch(83.6% 0.0086 247.9 / 0.72)",
+          "oklch(95.0% 0.0086 247.9 / 0.72)"
+        ]
+      },
+      "film-frost-bottom": {
+        "role": "tertiary",
+        "displayName": "Frost Film (bottom)",
+        "canonical": "rgba(205, 213, 222, 0.52)",
+        "tonalRamp": [
+          "oklch(15.0% 0.0152 251.2 / 0.52)",
+          "oklch(26.4% 0.0152 251.2 / 0.52)",
+          "oklch(37.9% 0.0152 251.2 / 0.52)",
+          "oklch(49.3% 0.0152 251.2 / 0.52)",
+          "oklch(60.7% 0.0152 251.2 / 0.52)",
+          "oklch(72.1% 0.0152 251.2 / 0.52)",
+          "oklch(83.6% 0.0152 251.2 / 0.52)",
+          "oklch(95.0% 0.0152 251.2 / 0.52)"
+        ]
+      },
+      "chrome-mid": {
+        "role": "tertiary",
+        "displayName": "Chrome Stroke (mid)",
+        "canonical": "#c7ced6",
+        "tonalRamp": [
+          "oklch(15.0% 0.0135 251.6)",
+          "oklch(26.4% 0.0135 251.6)",
+          "oklch(37.9% 0.0135 251.6)",
+          "oklch(49.3% 0.0135 251.6)",
+          "oklch(60.7% 0.0135 251.6)",
+          "oklch(72.1% 0.0135 251.6)",
+          "oklch(83.6% 0.0135 251.6)",
+          "oklch(95.0% 0.0135 251.6)"
+        ]
+      },
+      "chrome-shadow": {
+        "role": "tertiary",
+        "displayName": "Chrome Stroke (shadow)",
+        "canonical": "#8b949f",
+        "tonalRamp": [
+          "oklch(15.0% 0.0194 253.4)",
+          "oklch(26.4% 0.0194 253.4)",
+          "oklch(37.9% 0.0194 253.4)",
+          "oklch(49.3% 0.0194 253.4)",
+          "oklch(60.7% 0.0194 253.4)",
+          "oklch(72.1% 0.0194 253.4)",
+          "oklch(83.6% 0.0194 253.4)",
+          "oklch(95.0% 0.0194 253.4)"
+        ]
+      },
+      "art-paint-top": {
+        "role": "tertiary",
+        "displayName": "Body Paint (top)",
+        "canonical": "#3a424c",
+        "tonalRamp": [
+          "oklch(15.0% 0.0202 254.1)",
+          "oklch(26.4% 0.0202 254.1)",
+          "oklch(37.9% 0.0202 254.1)",
+          "oklch(49.3% 0.0202 254.1)",
+          "oklch(60.7% 0.0202 254.1)",
+          "oklch(72.1% 0.0202 254.1)",
+          "oklch(83.6% 0.0202 254.1)",
+          "oklch(95.0% 0.0202 254.1)"
+        ]
+      },
+      "art-paint-bottom": {
+        "role": "tertiary",
+        "displayName": "Body Paint (bottom)",
+        "canonical": "#21272e",
+        "tonalRamp": [
+          "oklch(15.0% 0.0156 252.4)",
+          "oklch(26.4% 0.0156 252.4)",
+          "oklch(37.9% 0.0156 252.4)",
+          "oklch(49.3% 0.0156 252.4)",
+          "oklch(60.7% 0.0156 252.4)",
+          "oklch(72.1% 0.0156 252.4)",
+          "oklch(83.6% 0.0156 252.4)",
+          "oklch(95.0% 0.0156 252.4)"
+        ]
+      },
+      "art-tire": {
+        "role": "tertiary",
+        "displayName": "Tire",
+        "canonical": "#08090b",
+        "tonalRamp": [
+          "oklch(15.0% 0.0048 262.8)",
+          "oklch(26.4% 0.0048 262.8)",
+          "oklch(37.9% 0.0048 262.8)",
+          "oklch(49.3% 0.0048 262.8)",
+          "oklch(60.7% 0.0048 262.8)",
+          "oklch(72.1% 0.0048 262.8)",
+          "oklch(83.6% 0.0048 262.8)",
+          "oklch(95.0% 0.0048 262.8)"
+        ]
+      },
+      "art-interior": {
+        "role": "tertiary",
+        "displayName": "Interior",
+        "canonical": "#12161b",
+        "tonalRamp": [
+          "oklch(15.0% 0.0118 254.1)",
+          "oklch(26.4% 0.0118 254.1)",
+          "oklch(37.9% 0.0118 254.1)",
+          "oklch(49.3% 0.0118 254.1)",
+          "oklch(60.7% 0.0118 254.1)",
+          "oklch(72.1% 0.0118 254.1)",
+          "oklch(83.6% 0.0118 254.1)",
+          "oklch(95.0% 0.0118 254.1)"
+        ]
+      },
+      "art-interior-ink": {
+        "role": "tertiary",
+        "displayName": "Interior Ink",
+        "canonical": "#4b5561",
+        "tonalRamp": [
+          "oklch(15.0% 0.0235 253.1)",
+          "oklch(26.4% 0.0235 253.1)",
+          "oklch(37.9% 0.0235 253.1)",
+          "oklch(49.3% 0.0235 253.1)",
+          "oklch(60.7% 0.0235 253.1)",
+          "oklch(72.1% 0.0235 253.1)",
+          "oklch(83.6% 0.0235 253.1)",
+          "oklch(95.0% 0.0235 253.1)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The one giant service word in the hero (AUTOS, LOCALES, HOGARES); fit-to-word via --title-chars."
+      },
+      "display-prefix": {
+        "displayName": "Display Prefix",
+        "purpose": "First line of the hero h1 (\"Polarizado para\"), one step below the display word."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section h2, max 14ch, balanced wrap."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Service card h3."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "Glass pane caption name."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Hero lede (Soft Chrome, max 40rem) and services intro (Brushed Steel, max 52ch)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base text and card summaries."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Benefit lines; lead-in phrase in ink at 620."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Every CTA and pill button label."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Header navigation links."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Treatment line under the featured glass pane."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Treatment chips on cards."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-pane",
+        "value": "inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 36px 60px -36px rgba(0, 0, 0, 0.9)",
+        "purpose": "Side glass panes: lit top edge, faint rim, long soft drop."
+      },
+      {
+        "name": "glass-pane-lit",
+        "value": "inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 40px 70px -34px rgba(227, 38, 43, 0.5)",
+        "purpose": "The featured pane; the drop turns red."
+      },
+      {
+        "name": "cta-glow",
+        "value": "0 12px 28px -12px rgba(227, 38, 43, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+        "purpose": "Hero primary button at rest."
+      },
+      {
+        "name": "cta-glow-hover",
+        "value": "0 16px 32px -12px rgba(227, 38, 43, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.25)",
+        "purpose": "Hero primary button on hover."
+      },
+      {
+        "name": "card-cta-glow",
+        "value": "0 12px 24px -14px rgba(227, 38, 43, 0.8)",
+        "purpose": "Card WhatsApp buttons."
+      },
+      {
+        "name": "menu-lift",
+        "value": "0 24px 48px -12px rgba(0, 0, 0, 0.6), inset 0 0 0 1px var(--color-line)",
+        "purpose": "Mobile menu panel."
+      },
+      {
+        "name": "hairline-ring",
+        "value": "inset 0 0 0 1px var(--color-line)",
+        "purpose": "Cards, chips, ghost button."
+      },
+      {
+        "name": "glass-backdrop",
+        "value": "backdrop-filter: blur(16px) saturate(1.3)",
+        "purpose": "Not a shadow: the only backdrop blur in the system, on the three hero panes."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Default easing for movement, lifts, crossfades and film application (--ease-out)."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Film peel on the leaving pane and the burger morph (--ease-in-out)."
+      },
+      {
+        "name": "state",
+        "value": "0.2s",
+        "purpose": "Color and background changes on links and buttons."
+      },
+      {
+        "name": "lift",
+        "value": "0.25s",
+        "purpose": "Button translateY(-1px) lift and box-shadow change."
+      },
+      {
+        "name": "crossfade",
+        "value": "0.4s (opacity, blur) / 0.6s (translate), 0.1s arrival delay",
+        "purpose": "Hero copy variants swap."
+      },
+      {
+        "name": "film-peel",
+        "value": "0.4s",
+        "purpose": "--film 1 to 0 on the pane leaving center."
+      },
+      {
+        "name": "pane-slide",
+        "value": "0.8s",
+        "purpose": "Glass panes moving between left, center and right."
+      },
+      {
+        "name": "card-film",
+        "value": "0.9s",
+        "purpose": "Card film completing from its rest point on hover or focus-within."
+      },
+      {
+        "name": "film-apply",
+        "value": "1.1s, 0.55s delay",
+        "purpose": "Squeegee applying film on the featured pane (keyframes on --film, replays on every change)."
+      },
+      {
+        "name": "shine-sweep",
+        "value": "0.7s",
+        "purpose": "White diagonal shine across the primary CTA on hover."
+      },
+      {
+        "name": "entrance",
+        "value": "0.9s staggered: header 0.05s, prefix 0.08s, title 0.16s, lede 0.3s, actions 0.42s, panes 0.4–0.55s",
+        "purpose": "One orchestrated load moment; text rises and un-blurs without fading from zero."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "max-width: 520px"
+      },
+      {
+        "name": "tablet-card",
+        "value": "600px–899px"
+      },
+      {
+        "name": "portrait-tablet",
+        "value": "min-width: 600px and max-aspect-ratio: 4/5"
+      },
+      {
+        "name": "mobile-nav",
+        "value": "max-width: 880px"
+      },
+      {
+        "name": "desktop-grid",
+        "value": "min-width: 900px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The WhatsApp call to action: Action Red pill with a red glow; on hover a white shine sweeps across it like the squeegee.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"ds-icon-solid\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/></svg><span>Consultar por WhatsApp</span></a>",
+      "css": ".ds-icon { width: 1.25rem; height: 1.25rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-icon-solid { width: 1.25rem; height: 1.25rem; flex: none; fill: currentColor; } .ds-btn-primary { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 3.25rem; padding: 0 1.5rem; overflow: hidden; border-radius: var(--radius-control); background: var(--color-cta); color: #ffffff; font-family: var(--font-family); font-size: 1rem; font-weight: 650; text-decoration: none; box-shadow: 0 12px 28px -12px rgba(227, 38, 43, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.2); transition: background-color 0.2s, transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out); } .ds-btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%); transform: translateX(-120%); transition: transform 0.7s var(--ease-out); } .ds-btn-primary:hover { background: var(--color-cta-hover); transform: translateY(-1px); box-shadow: 0 16px 32px -12px rgba(227, 38, 43, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.25); } .ds-btn-primary:hover::after { transform: translateX(120%); } .ds-btn-primary:active { transform: translateY(0) scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-accent-ink); outline-offset: 3px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary, .ds-btn-primary::after { transition: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ghost pill beside the primary CTA: 4% white fill, hairline ring, ink label.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"ds-icon\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/><circle cx=\"17.3\" cy=\"6.7\" r=\"1\" fill=\"currentColor\" stroke=\"none\"/></svg><span>Ver trabajos</span></a>",
+      "css": ".ds-icon { width: 1.25rem; height: 1.25rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-icon-solid { width: 1.25rem; height: 1.25rem; flex: none; fill: currentColor; } .ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 3.25rem; padding: 0 1.5rem; border-radius: var(--radius-control); background: rgba(255, 255, 255, 0.04); color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-line); font-family: var(--font-family); font-size: 1rem; font-weight: 650; text-decoration: none; transition: background-color 0.2s, transform 0.25s var(--ease-out); } .ds-btn-secondary:hover { background: rgba(255, 255, 255, 0.09); transform: translateY(-1px); } .ds-btn-secondary:active { transform: translateY(0) scale(0.98); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-accent-ink); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Wordmark lockup, pill links in Brushed Steel, the current service underlined by a 2px Logo Red bar, icon-only Instagram and a compact red \"Consultar\" pill.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\"><span class=\"ds-nav-name\">crisur</span><span class=\"ds-nav-suffix\">polarizados</span></a><nav class=\"ds-nav-links\" aria-label=\"Servicios\"><a href=\"#\">Locales</a><a href=\"#\" aria-current=\"true\">Autos</a><a href=\"#\">Hogares</a><a class=\"ds-nav-icon\" href=\"#\" aria-label=\"Instagram\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"ds-icon\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/><circle cx=\"17.3\" cy=\"6.7\" r=\"1\" fill=\"currentColor\" stroke=\"none\"/></svg></a><a class=\"ds-nav-cta\" href=\"#\">Consultar</a></nav></header>",
+      "css": ".ds-icon { width: 1.25rem; height: 1.25rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-icon-solid { width: 1.25rem; height: 1.25rem; flex: none; fill: currentColor; } .ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 4.5rem; padding: 0 clamp(1rem, 3vw, 2.5rem); background: var(--color-bg); border-bottom: 1px solid var(--color-line); font-family: var(--font-family); } .ds-nav-brand { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--color-ink); text-decoration: none; line-height: 1; } .ds-nav-name { font-stretch: var(--font-display-stretch); font-weight: var(--font-display-weight); font-size: 1.2rem; letter-spacing: -0.02em; } .ds-nav-suffix { font-size: 1rem; font-weight: 450; color: var(--color-ink-muted); } .ds-nav-links { display: flex; align-items: center; gap: 0.25rem; } .ds-nav-links a { position: relative; display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.95rem; border-radius: var(--radius-control); color: var(--color-ink-muted); font-weight: 550; text-decoration: none; transition: color 0.2s, background-color 0.2s; } .ds-nav-links a:hover { color: var(--color-ink); background: rgba(255, 255, 255, 0.05); } .ds-nav-links a[aria-current='true'] { color: var(--color-ink); } .ds-nav-links a[aria-current='true']::after { content: ''; position: absolute; left: 0.95rem; right: 0.95rem; bottom: 0.35rem; height: 2px; border-radius: 2px; background: var(--color-brand-red); } .ds-nav-links .ds-nav-icon { width: 2.75rem; justify-content: center; padding: 0; } .ds-nav-links .ds-nav-cta { margin-left: 0.5rem; padding: 0 1.2rem; min-height: 2.5rem; background: var(--color-cta); color: #ffffff; font-weight: 650; } .ds-nav-links .ds-nav-cta:hover { background: var(--color-cta-hover); color: #ffffff; } .ds-nav-links a:focus-visible { outline: 2px solid var(--color-accent-ink); outline-offset: 3px; }"
+    },
+    {
+      "name": "Treatment Chips",
+      "kind": "chip",
+      "refersTo": "chip-treatment",
+      "description": "Informational tags naming the films a service uses: no fill, hairline ring, pill, Brushed Steel label.",
+      "html": "<ul class=\"ds-chips\" role=\"list\" aria-label=\"Qué colocamos\"><li>Polarizado</li><li>Espejado</li><li>Esmerilado</li><li>Láminas de seguridad</li></ul>",
+      "css": ".ds-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; font-family: var(--font-family); } .ds-chips li { padding: 0.28rem 0.7rem; border-radius: var(--radius-control); box-shadow: inset 0 0 0 1px var(--color-line); font-size: 0.8125rem; font-weight: 550; color: var(--color-ink-muted); }"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "refersTo": "card-service",
+      "description": "Solid Graphite Surface card; its art rests with the film half applied and hover or focus inside completes it (0.9s).",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-media\"><svg class=\"ds-card-art\" viewBox=\"0 0 160 100\" aria-hidden=\"true\"><defs><linearGradient id=\"ds-card-paint\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" style=\"stop-color:var(--art-paint-top)\"/><stop offset=\"1\" style=\"stop-color:var(--art-paint-bottom)\"/></linearGradient><linearGradient id=\"ds-card-tint\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" style=\"stop-color:var(--film-tint-top);stop-opacity:0.94\"/><stop offset=\"1\" style=\"stop-color:var(--film-tint-bottom);stop-opacity:0.97\"/></linearGradient><linearGradient id=\"ds-card-edge\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" style=\"stop-color:var(--color-accent-ink);stop-opacity:0\"/><stop offset=\"0.7\" style=\"stop-color:var(--color-accent-ink);stop-opacity:0.9\"/><stop offset=\"1\" stop-color=\"#fff\"/></linearGradient><linearGradient id=\"ds-card-chrome\" gradientUnits=\"userSpaceOnUse\" x1=\"0\" y1=\"12\" x2=\"0\" y2=\"92\"><stop offset=\"0\" stop-color=\"#ffffff\"/><stop offset=\"0.55\" stop-color=\"#c7ced6\"/><stop offset=\"1\" stop-color=\"#8b949f\"/></linearGradient><clipPath id=\"ds-card-glass\"><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\"/></clipPath></defs><rect x=\"12\" y=\"12\" width=\"136\" height=\"80\" fill=\"url(#ds-card-paint)\"/><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\" style=\"fill:var(--art-interior)\"/><path d=\"M30 50h44v2H30ZM34 40h6v10h-6ZM44 42h6v8h-6ZM56 38h6v12h-6ZM86 44h40v2H86ZM90 46h6v22h-6ZM100 46h6v16h-6ZM112 46h6v24h-6Z\" style=\"fill:var(--art-interior-ink)\"/><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\" style=\"fill:var(--film-clear)\"/><g clip-path=\"url(#ds-card-glass)\"><g class=\"ds-card-film\"><rect width=\"160\" height=\"100\" fill=\"url(#ds-card-tint)\"/><rect x=\"155\" width=\"5\" height=\"100\" fill=\"url(#ds-card-edge)\"/></g></g><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\" fill=\"none\" stroke=\"#eef1f4\" stroke-opacity=\"0.5\" stroke-width=\"1.2\" vector-effect=\"non-scaling-stroke\"/><rect x=\"12\" y=\"12\" width=\"136\" height=\"80\" fill=\"none\" stroke=\"url(#ds-card-chrome)\" stroke-width=\"1.6\" vector-effect=\"non-scaling-stroke\"/></svg></div><div class=\"ds-card-body\"><h3>Locales</h3><p class=\"ds-card-summary\">Vidrieras, ventanales y oficinas con la lámina justa para cada vidrio.</p><p class=\"ds-card-benefit\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"ds-icon\"><path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9v7\"/></svg><span><strong>Menos calor</strong> para clientes y empleados.</span></p><a class=\"ds-card-cta\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" class=\"ds-icon-solid\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/></svg><span>Consultar por mi local</span></a></div></article>",
+      "css": ".ds-icon { width: 1.25rem; height: 1.25rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-icon-solid { width: 1.25rem; height: 1.25rem; flex: none; fill: currentColor; } .ds-card { display: flex; flex-direction: column; max-width: 24rem; overflow: hidden; border-radius: var(--radius-surface); background: var(--color-surface); box-shadow: inset 0 0 0 1px var(--color-line); color: var(--color-ink); font-family: var(--font-family); } .ds-card-media { aspect-ratio: 16 / 10; border-bottom: 1px solid var(--color-line); background: linear-gradient(180deg, #1c222a 0%, #13171d 60%, #0e1115 100%); } .ds-card-art { display: block; width: 100%; height: 100%; } .ds-card-film { transform-box: fill-box; transform: translateX(-42%); transition: transform 0.9s var(--ease-out); } .ds-card:hover .ds-card-film, .ds-card:focus-within .ds-card-film { transform: none; } .ds-card-body { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem 1.5rem 1.75rem; } .ds-card h3 { margin: 0; font-stretch: 118%; font-weight: 780; font-size: 1.6rem; line-height: 1.1; letter-spacing: -0.02em; } .ds-card-summary { margin: 0; line-height: 1.6; color: var(--color-ink-soft); } .ds-card-benefit { display: grid; grid-template-columns: 1.25rem 1fr; gap: 0.75rem; margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--color-ink-muted); } .ds-card-benefit strong { font-weight: 620; color: var(--color-ink); } .ds-card-cta { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 3rem; padding: 0 1.25rem; border-radius: var(--radius-control); background: var(--color-cta); color: #ffffff; font-weight: 650; text-decoration: none; box-shadow: 0 12px 24px -14px rgba(227, 38, 43, 0.8); transition: background-color 0.2s, transform 0.25s var(--ease-out); } .ds-card-cta:hover { background: var(--color-cta-hover); transform: translateY(-1px); } .ds-card-cta:active { transform: scale(0.98); } .ds-card-cta:focus-visible { outline: 2px solid var(--color-accent-ink); outline-offset: 3px; } @media (prefers-reduced-motion: reduce) { .ds-card-film, .ds-card-cta { transition: none; } }"
+    },
+    {
+      "name": "Glass Pane (featured)",
+      "kind": "custom",
+      "refersTo": "glass-pane",
+      "description": "Signature: the hero window frame. Translucent gradient with 16px backdrop blur over a red backlight; the squeegee applies the film on arrival (1.1s).",
+      "html": "<div class=\"ds-pane-stage\"><button class=\"ds-pane\" type=\"button\" role=\"tab\" aria-selected=\"true\"><span class=\"ds-pane-window\"><svg class=\"ds-pane-art\" viewBox=\"0 0 160 100\" aria-hidden=\"true\"><defs><linearGradient id=\"ds-pane-paint\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" style=\"stop-color:var(--art-paint-top)\"/><stop offset=\"1\" style=\"stop-color:var(--art-paint-bottom)\"/></linearGradient><linearGradient id=\"ds-pane-tint\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" style=\"stop-color:var(--film-tint-top);stop-opacity:0.94\"/><stop offset=\"1\" style=\"stop-color:var(--film-tint-bottom);stop-opacity:0.97\"/></linearGradient><linearGradient id=\"ds-pane-edge\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" style=\"stop-color:var(--color-accent-ink);stop-opacity:0\"/><stop offset=\"0.7\" style=\"stop-color:var(--color-accent-ink);stop-opacity:0.9\"/><stop offset=\"1\" stop-color=\"#fff\"/></linearGradient><linearGradient id=\"ds-pane-chrome\" gradientUnits=\"userSpaceOnUse\" x1=\"0\" y1=\"12\" x2=\"0\" y2=\"92\"><stop offset=\"0\" stop-color=\"#ffffff\"/><stop offset=\"0.55\" stop-color=\"#c7ced6\"/><stop offset=\"1\" stop-color=\"#8b949f\"/></linearGradient><clipPath id=\"ds-pane-glass\"><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\"/></clipPath></defs><rect x=\"12\" y=\"12\" width=\"136\" height=\"80\" fill=\"url(#ds-pane-paint)\"/><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\" style=\"fill:var(--art-interior)\"/><path d=\"M30 50h44v2H30ZM34 40h6v10h-6ZM44 42h6v8h-6ZM56 38h6v12h-6ZM86 44h40v2H86ZM90 46h6v22h-6ZM100 46h6v16h-6ZM112 46h6v24h-6Z\" style=\"fill:var(--art-interior-ink)\"/><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\" style=\"fill:var(--film-clear)\"/><g clip-path=\"url(#ds-pane-glass)\"><g class=\"ds-pane-film\"><rect width=\"160\" height=\"100\" fill=\"url(#ds-pane-tint)\"/><rect x=\"155\" width=\"5\" height=\"100\" fill=\"url(#ds-pane-edge)\"/></g></g><rect x=\"22\" y=\"26\" width=\"116\" height=\"52\" fill=\"none\" stroke=\"#eef1f4\" stroke-opacity=\"0.5\" stroke-width=\"1.2\" vector-effect=\"non-scaling-stroke\"/><rect x=\"12\" y=\"12\" width=\"136\" height=\"80\" fill=\"none\" stroke=\"url(#ds-pane-chrome)\" stroke-width=\"1.6\" vector-effect=\"non-scaling-stroke\"/></svg></span><span class=\"ds-pane-name\">Locales</span><span class=\"ds-pane-treatments\">Polarizado, espejado y esmerilado</span></button></div>",
+      "css": ".ds-pane-stage { position: relative; display: grid; place-items: center; padding: 2rem 1rem 3rem; background: linear-gradient(180deg, var(--color-bg) 0%, #0e1116 62%, #0a0c10 100%); font-family: var(--font-family); } .ds-pane-stage::before { content: ''; grid-area: 1 / 1; width: 22rem; height: 10rem; translate: 0 30%; background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(227, 38, 43, 0.5), transparent 72%); pointer-events: none; } .ds-pane { grid-area: 1 / 1; position: relative; display: flex; flex-direction: column; gap: 0.15rem; width: min(17rem, 80vw); padding: 0.55rem 0.55rem 0.8rem; border: 0; border-radius: 20px; color: var(--color-ink); font: inherit; text-align: center; background: linear-gradient(155deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 46%, rgba(255, 255, 255, 0.06)); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 40px 70px -34px rgba(227, 38, 43, 0.5); } .ds-pane-window { display: block; aspect-ratio: 16 / 10; margin-bottom: 0.55rem; overflow: hidden; border-radius: var(--radius-surface); background: linear-gradient(180deg, #1c222a 0%, #13171d 60%, #0e1115 100%); } .ds-pane-art { display: block; width: 100%; height: 100%; } .ds-pane-film { transform-box: fill-box; } .ds-pane-name { font-stretch: 112%; font-weight: 750; font-size: 1.15rem; letter-spacing: -0.01em; } .ds-pane-treatments { font-size: 0.875rem; color: var(--color-ink-muted); } .ds-pane:focus-visible { outline: 2px solid var(--color-accent-ink); outline-offset: 3px; } @media (prefers-reduced-motion: no-preference) { .ds-pane-film { animation: ds-film-apply 1.1s var(--ease-out) 0.3s backwards; } .ds-pane:hover .ds-pane-film { animation: ds-film-reapply 1.1s var(--ease-out); } } @keyframes ds-film-apply { from { transform: translateX(-100%); } } @keyframes ds-film-reapply { from { transform: translateX(-100%); } }"
+    },
+    {
+      "name": "Film Materials",
+      "kind": "custom",
+      "refersTo": "film-clear",
+      "description": "The four glass states over the same interior: clear glass shows it, smoke hides it, mirror reflects, frost diffuses.",
+      "html": "<div class=\"ds-films\"><figure><span class=\"ds-film ds-film-clear\"></span><figcaption>Vidrio limpio</figcaption></figure><figure><span class=\"ds-film ds-film-tint\"></span><figcaption>Polarizado</figcaption></figure><figure><span class=\"ds-film ds-film-mirror\"></span><figcaption>Espejado</figcaption></figure><figure><span class=\"ds-film ds-film-frost\"></span><figcaption>Esmerilado</figcaption></figure></div>",
+      "css": ".ds-films { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: 0.75rem; padding: 1rem; background: var(--color-bg); font-family: var(--font-family); } .ds-films figure { margin: 0; display: grid; gap: 0.4rem; } .ds-films figcaption { font-size: 0.8125rem; font-weight: 550; color: var(--color-ink-muted); text-align: center; } .ds-film { position: relative; display: block; aspect-ratio: 16 / 10; border-radius: var(--radius-surface); overflow: hidden; box-shadow: inset 0 0 0 1px var(--color-line); background: repeating-linear-gradient(90deg, var(--art-interior-ink) 0 10%, var(--art-interior) 10% 22%), var(--art-interior); } .ds-film::after { content: ''; position: absolute; inset: 0; } .ds-film-clear::after { background: var(--film-clear); } .ds-film-tint::after { background: linear-gradient(180deg, var(--film-tint-top), var(--film-tint-bottom)); opacity: 0.95; } .ds-film-mirror::after { background: linear-gradient(135deg, var(--film-mirror-light) 0%, var(--film-mirror-mid) 38%, var(--film-mirror-light) 50%, var(--film-mirror-dark) 78%, var(--film-mirror-mid) 100%); } .ds-film-frost::after { background: linear-gradient(180deg, var(--film-frost-top), var(--film-frost-bottom)); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Glass Under Red Light",
+    "overview": "A window-film workshop after dark. The page is tinted graphite, the product (glass) is the only translucent material on it, and the brand's logo red behaves as light: it glows behind the featured pane, rides the squeegee's edge, and fills the button that starts a WhatsApp chat. Everything that is not glass is solid, quiet and dark, so the one memorable moment (film sliding across a window, left to right) reads clearly.\n\nDensity is low and mobile-first. One family, Archivo, carries the whole hierarchy by changing width and weight: headings run wide and heavy like automotive lettering, body copy sits at normal width. Illustrations are fine chrome line drawings of a car, a house and a shopfront whose glass panes take real film fills (smoke, mirror, frost) and visibly hide the interior behind them. The system shows privacy instead of naming it.\n\nThe previous 3D showroom was replaced by this flat vector glass world on purpose; palette and type survived the change. Real job photos, when they exist, replace the illustrations one-for-one; nothing is faked in the meantime.",
+    "keyCharacteristics": [
+      "Tinted blue-graphite ground, never flat black.",
+      "Red used only as light and action, never as decoration.",
+      "Real glassmorphism (backdrop blur) only on the three hero panes, because they are windows.",
+      "One variable typeface, hierarchy by width axis (100 to 125) and weight (400 to 820).",
+      "Pill controls, softly rounded solid cards, hairline edges at 14% ink.",
+      "One signature motion: a squeegee applying film, driven by a single CSS number (`--film`, 0 to 1)."
+    ],
+    "rules": [
+      {
+        "name": "The Red Is Light Rule",
+        "body": "Red appears only where light or action is: the backlight under the featured pane, CTA fills and their glow, the squeegee edge, the active-nav underline, the focus ring and text selection. Icons, headings, borders and ornaments stay in ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Clear Glass Rule",
+        "body": "Unfilmed glass is always lighter than its surroundings and shows the interior behind it; a film must visibly darken, mirror or frost that view. If a film does not change what is seen through the glass, it is not reading as film.",
+        "section": "colors"
+      },
+      {
+        "name": "The Graphite Not Black Rule",
+        "body": "Page and surface backgrounds are blue graphite (#0c0f13, #1a1e24). Near-black values exist only as materials inside the drawings (tire, smoke film).",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Archivo is the only typeface. Hierarchy comes from the width axis and weight, never from a second family or a system display face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Fit-To-Word Rule",
+        "body": "The display word scales to its own length and to the viewport height (`--title-chars`), so the longest service name never clips and the shortest never floats small.",
+        "section": "typography"
+      },
+      {
+        "name": "The Glass Only Where Glass Is Rule",
+        "body": "`backdrop-filter` blur (16px, saturate 1.3) exists only on the three hero panes, because they are windows. Cards, menus and sections are solid.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Light Behind Glass Rule",
+        "body": "The featured pane is lit from behind: a red radial glow shares its grid cell and sits under it, and the pane's own blur diffuses it. Red light is placed behind glass, not painted on it.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every color, radius, easing and film fill from the custom properties in `src/styles/tokens.css`; add new values there first.",
+      "Do use pills (999px) for every control, 14px for solid surfaces, and 20px only for glass frames.",
+      "Do draw new illustrations as chrome line art over filled body shapes, with the interior visible through clear glass, so a dark film has something to hide.",
+      "Do drive any film animation through the single `--film` number (0 to 1) and let CSS transitions interpolate it; script only changes state attributes.",
+      "Do ease with `--ease-out` (cubic-bezier(0.16, 1, 0.3, 1)) for movement and `--ease-in-out` (cubic-bezier(0.65, 0, 0.35, 1)) for peeling and toggles; keep state changes at 0.2–0.25s.",
+      "Do honor `prefers-reduced-motion`: drop transitions and the entrance. With motion on, the hero headline, lede and actions stay visible from the first frame: their entrance rises and un-blurs them but never fades them in from zero."
+    ],
+    "donts": [
+      "Don't put `backdrop-filter` glass on cards, menus or sections; translucent blur is reserved for the hero panes.",
+      "Don't use red on icons, headings, borders or decorative accents; red is light and action only.",
+      "Don't use pure black or flat neutral grey for page or surface backgrounds.",
+      "Don't add a second typeface or a system display face.",
+      "Don't bring back 3D or WebGL scenes; the world is flat vector glass and CSS.",
+      "Don't replace the illustrations with stock or placeholder photos; only real job photos, through the service's `photo` field, replace the art.",
+      "Don't animate layout properties (width, height, top, margin); motion uses transform, opacity, filter and `--film`."
+    ]
+  }
+}

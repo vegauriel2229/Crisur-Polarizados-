@@ -2,7 +2,7 @@
 :root {
   --color-bg: #0c0f13;
   --color-surface: #1a1e24;
-  --color-surface-raised: #232830;
+  --color-ink-soft: #c9cfd6;
   --color-ink: #eef1f4;
   --color-ink-muted: #a9b0b9;
   --color-line: rgba(238, 241, 244, 0.14);
@@ -10,6 +10,22 @@
   --color-cta: #d91f26;
   --color-cta-hover: #ee2b32;
   --color-accent-ink: #ff5a5f;
+
+  /* Ilustraciones (ServiceArt): carrocería/paredes y rellenos de las láminas. */
+  --art-paint-top: #3a424c;
+  --art-paint-bottom: #21272e;
+  --art-tire: #08090b;
+  --art-interior: #12161b;
+  --art-interior-ink: #4b5561;
+  /* El vidrio limpio es claro a propósito: el polarizado se reconoce porque lo oscurece. */
+  --film-clear: rgba(172, 198, 224, 0.34);
+  --film-tint-top: #161b22;
+  --film-tint-bottom: #040506;
+  --film-mirror-light: #eef2f6;
+  --film-mirror-mid: #8e98a4;
+  --film-mirror-dark: #545c67;
+  --film-frost-top: rgba(236, 241, 246, 0.72);
+  --film-frost-bottom: rgba(205, 213, 222, 0.52);
 
   --font-family: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   /* Display: Archivo expandido y extra negrita (eje wdth 125). */

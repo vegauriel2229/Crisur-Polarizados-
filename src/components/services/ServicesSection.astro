@@ -1,0 +1,280 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../Icon.astro';
+import ServiceArt from '../ServiceArt.astro';
+import { TREATMENT_LABEL, type Service, type ServiceId } from '../../data/services';
+import { buildWhatsAppUrl } from '../../lib/whatsapp';
+
+interface Props {
+  services: readonly Service[];
+  whatsappNumber: string;
+  yearsOfExperience: number;
+  serviceArea: string;
+}
+
+const { services, whatsappNumber, yearsOfExperience, serviceArea } = Astro.props;
+const capitalize = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1);
+
+/**
+ * Hasta dónde llega la espátula en cada tarjeta (0–1 del ancho del dibujo). Se elige para que
+ * el filo quede SOBRE un vidrio: a la izquierda se ve la lámina, a la derecha el vidrio limpio.
+ */
+const CARD_FILM_REST: Record<ServiceId, number> = { locales: 0.58, autos: 0.7, hogares: 0.58 };
+---
+
+<section class="services" id="servicios" aria-labelledby="services-title">
+  <div class="services-inner">
+    <header class="services-header">
+      <h2 id="services-title">Más de {yearsOfExperience} años colocando láminas</h2>
+      <p>
+        Polarizamos, espejamos y esmerilamos vidrios de autos, casas y comercios en {serviceArea}. Trabajamos con todas las
+        láminas y tonos: contanos qué necesitás (menos calor, privacidad, protección UV o seguridad) y te recomendamos la lámina justa.
+      </p>
+    </header>
+
+    <ul class="service-grid" role="list">
+      {
+        services.map((service) => (
+          <li>
+            <article class="card" aria-labelledby={`card-${service.id}-title`} style={`--film-rest:${CARD_FILM_REST[service.id]}`}>
+              <div class="card-media">
+                {service.photo ? (
+                  /* FOTO REAL: se completa desde src/data/services.ts (campo `photo`); acá no hay que tocar nada. */
+                  <Image
+                    src={service.photo.src}
+                    alt={service.photo.alt}
+                    widths={[400, 800]}
+                    sizes="(min-width: 900px) 33vw, 100vw"
+                    loading="lazy"
+                    class="card-photo"
+                  />
+                ) : (
+                  <ServiceArt service={service.id} uid={`card-${service.id}`} />
+                )}
+              </div>
+              <div class="card-body">
+                <h3 id={`card-${service.id}-title`}>{service.navLabel}</h3>
+                <ul class="treatments" role="list" aria-label="Qué colocamos">
+                  {service.treatments.map((treatment) => (
+                    <li>{capitalize(TREATMENT_LABEL[treatment])}</li>
+                  ))}
+                </ul>
+                <p class="card-summary">{service.summary}</p>
+                <ul class="benefits" role="list">
+                  {service.benefits.map((benefit) => (
+                    <li>
+                      <Icon name={benefit.kind} class="benefit-icon" />
+                      <span>
+                        <strong>{benefit.title}</strong> {benefit.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <a class="card-cta" href={buildWhatsAppUrl(whatsappNumber, service.whatsappMessage).href} target="_blank" rel="noopener noreferrer">
+                  <Icon name="whatsapp" />
+                  <span>{service.ctaLabel}</span>
+                </a>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: clamp(4.5rem, 10vw, 8rem) clamp(1rem, 4vw, 2.5rem);
+    background: var(--color-bg);
+  }
+  .services-inner {
+    max-width: 76rem;
+    margin: 0 auto;
+  }
+
+  .services-header {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  h2 {
+    max-width: 14ch;
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.1rem, 1.3rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .services-header p {
+    max-width: 52ch;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    text-wrap: pretty;
+  }
+
+  .service-grid {
+    display: grid;
+    gap: 1.25rem;
+    list-style: none;
+  }
+
+  /*
+   * Tarjeta: sólida (el vidrio translúcido queda para el hero). La ilustración muestra
+   * la lámina aplicada a medias (--film-rest, por servicio): la espátula quedó sobre un vidrio,
+   * un "antes / después" en una sola imagen. Al pasar el mouse o enfocar el botón,
+   * --film sube a 1 y la transición termina de aplicarla.
+   */
+  .card {
+    --film: var(--film-rest);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-surface);
+    background: var(--color-surface);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    transition: --film 0.9s var(--ease-out);
+  }
+  .card:hover,
+  .card:focus-within {
+    --film: 1;
+  }
+
+  .card-media {
+    aspect-ratio: 16 / 10;
+    border-bottom: 1px solid var(--color-line);
+    background: linear-gradient(180deg, #1c222a 0%, #13171d 60%, #0e1115 100%);
+  }
+  .card-media :global(.card-photo) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+  h3 {
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .treatments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+  }
+  .treatments li {
+    padding: 0.28rem 0.7rem;
+    border-radius: var(--radius-control);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    font-size: 0.8125rem;
+    font-weight: 550;
+    color: var(--color-ink-muted);
+  }
+  .card-summary {
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+  .benefits {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 0.25rem;
+    list-style: none;
+  }
+  .benefits li {
+    display: grid;
+    grid-template-columns: 1.25rem 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-ink-muted);
+  }
+  .benefits strong {
+    font-weight: 620;
+    color: var(--color-ink);
+  }
+  /* Íconos en tinta, no en rojo: el rojo queda reservado para la luz (espátula) y la acción (CTA). */
+  .benefit-icon {
+    margin-top: 0.1rem;
+    color: var(--color-ink);
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    /* El margen automático empuja el botón al fondo: los 3 quedan alineados aunque los textos midan distinto. */
+    margin-top: auto;
+    padding: 0 1.25rem;
+    border-radius: var(--radius-control);
+    background: var(--color-cta);
+    color: #ffffff;
+    font-weight: 650;
+    text-decoration: none;
+    box-shadow: 0 12px 24px -14px rgba(227, 38, 43, 0.8);
+    transition:
+      background-color 0.2s,
+      transform 0.25s var(--ease-out);
+  }
+  .card-cta:hover {
+    background: var(--color-cta-hover);
+    transform: translateY(-1px);
+  }
+  .card-cta:active {
+    transform: scale(0.98);
+  }
+
+  /* Tablet: tarjeta horizontal (ilustración a la izquierda) para no tener ilustraciones gigantes. */
+  @media (min-width: 600px) and (max-width: 899px) {
+    .card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+    .card-media {
+      aspect-ratio: auto;
+      display: grid;
+      place-items: center;
+      border-bottom: 0;
+      border-right: 1px solid var(--color-line);
+    }
+    .card-media > :global(*) {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .services-header {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: end;
+      gap: 3rem;
+    }
+    .service-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    .card-cta {
+      transition: none;
+    }
+  }
+</style>

@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceHero from '../components/hero/ServiceHero.astro';
-import { heroInitialService, heroSlides } from '../data/hero-slides';
+import ServicesSection from '../components/services/ServicesSection.astro';
+import { initialServiceId, services } from '../data/services';
 import { instagramUrl, siteSettings } from '../config/site';
 ---
 
@@ -11,11 +12,17 @@ import { instagramUrl, siteSettings } from '../config/site';
 >
   <main>
     <ServiceHero
-      slides={heroSlides}
-      initial={heroInitialService}
+      services={services}
+      initial={initialServiceId}
       whatsappNumber={siteSettings.whatsappNumber}
       defaultWhatsappMessage={siteSettings.whatsappDefaultMessage}
       instagramUrl={instagramUrl}
+    />
+    <ServicesSection
+      services={services}
+      whatsappNumber={siteSettings.whatsappNumber}
+      yearsOfExperience={siteSettings.yearsOfExperience}
+      serviceArea={siteSettings.serviceArea}
     />
   </main>
 </BaseLayout>

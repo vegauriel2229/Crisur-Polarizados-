@@ -1,0 +1,316 @@
+---
+/**
+ * Ilustración minimalista de cada servicio (auto, casa, local) con sus vidrios.
+ *
+ * Cómo funciona la animación de la lámina (ver también ServiceHero y ServicesSection):
+ * 1. Detrás de cada vidrio hay un "interior" (asientos, estantes, lámparas). A través del
+ *    vidrio limpio se ve; la lámina lo oscurece, lo refleja o lo esmerila: así se demuestra
+ *    la privacidad en vez de solo nombrarla.
+ * 2. La lámina de cada vidrio está recortada (<clipPath>) con la forma exacta de ese vidrio:
+ *    aunque la capa se mueva, solo se ve dentro del vidrio.
+ * 3. La capa de lámina (.film) es un rectángulo del ancho de todo el dibujo que se desliza
+ *    de izquierda a derecha. Su borde derecho es la "espátula" (.squeegee): la línea de luz
+ *    que aplica la lámina.
+ * 4. Cuánto se deslizó lo decide UNA variable CSS: --film (0 = sin lámina, 1 = aplicada).
+ *    El componente padre solo cambia --film; este componente convierte ese número en movimiento.
+ */
+import type { ServiceId } from '../data/services';
+
+type Film = 'tint' | 'mirror' | 'frost';
+
+interface GlassPane {
+  /** Forma del vidrio (path SVG en el sistema de 320×200). */
+  d: string;
+  film: Film;
+}
+
+interface ArtSpec {
+  /** Encuadre: recorta el lienzo de 320×200 al motivo (siempre con proporción 16:10). */
+  viewBox: string;
+  /** Superficies rellenas (carrocería, paredes): dan contraste a la lámina oscura. */
+  body: readonly { d: string; tone: 'paint' | 'tire' }[];
+  /** Lo que se ve a través del vidrio limpio y la lámina oculta. */
+  interior: readonly string[];
+  /** Contorno principal (trazo cromado). */
+  outline: readonly string[];
+  /** Detalles secundarios: marcos, parantes, manijas (trazo suave). */
+  details: readonly string[];
+  glass: readonly GlassPane[];
+}
+
+interface Props {
+  service: ServiceId;
+  /** Prefijo único: la misma ilustración aparece en el hero y en la tarjeta, y los ids SVG no pueden repetirse. */
+  uid: string;
+}
+
+const CAR_BODY =
+  'M30 148V128C30 120 36 116 46 115L96 108 130 70C134 65 140 62 148 62H232C242 62 250 66 256 74L280 106C288 108 292 114 292 122V148H266A26 26 0 0 0 214 148H106A26 26 0 0 0 54 148Z';
+const FRONT_WHEEL = 'M59 150a21 21 0 1 0 42 0a21 21 0 1 0-42 0';
+const REAR_WHEEL = 'M219 150a21 21 0 1 0 42 0a21 21 0 1 0-42 0';
+const HEADREST = (x: number): string => `M${x} 84a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3a3 3 0 0 1-3 3h-8a3 3 0 0 1-3-3Z`;
+
+const ART: Record<ServiceId, ArtSpec> = {
+  autos: {
+    viewBox: '16 34 288 180',
+    body: [
+      { d: CAR_BODY, tone: 'paint' },
+      { d: FRONT_WHEEL, tone: 'tire' },
+      { d: REAR_WHEEL, tone: 'tire' },
+    ],
+    interior: [HEADREST(156), 'M150 108V98a4 4 0 0 1 4-4h18a4 4 0 0 1 4 4v10Z', HEADREST(214), 'M204 108V98a4 4 0 0 1 4-4h26a4 4 0 0 1 4 4v10Z'],
+    outline: [CAR_BODY, FRONT_WHEEL, REAR_WHEEL],
+    details: [
+      'M72 150a8 8 0 1 0 16 0a8 8 0 1 0-16 0',
+      'M232 150a8 8 0 1 0 16 0a8 8 0 1 0-16 0',
+      'M104 112V144',
+      'M186 110V144',
+      'M150 120H162',
+      'M204 120H216',
+      'M33 124 46 122',
+      'M289 116V124',
+    ],
+    glass: [
+      { d: 'M110 108L136 76C139 72 143 70 148 70H182V108Z', film: 'tint' },
+      { d: 'M190 108V70H232C239 70 244 73 248 78L270 108Z', film: 'tint' },
+    ],
+  },
+  hogares: {
+    viewBox: '16 20 288 180',
+    body: [
+      { d: 'M84 36H292V42H84Z', tone: 'paint' },
+      { d: 'M96 42H284V106H96Z', tone: 'paint' },
+      { d: 'M36 106H240V172H36Z', tone: 'paint' },
+    ],
+    interior: [
+      'M62 172V156a4 4 0 0 1 4-4h40a4 4 0 0 1 4 4v16Z',
+      'M135 142h2v30h-2Z',
+      'M128 142l4-10h8l4 10Z',
+      'M163 54h2v14h-2Z',
+      'M156 74l3-6h10l3 6Z',
+      // Planta en maceta junto al ventanal de arriba.
+      'M194 94l2-9h12l2 9Z',
+      'M202 85c-6-4-8-12-4-19 3 6 5 12 4 19Z',
+      'M202 85c4-6 11-8 16-5-4 4-10 6-16 5Z',
+      'M202 85c-4-3-11-4-15-1 4 3 10 4 15 1Z',
+    ],
+    outline: ['M84 36H292V42H84Z', 'M96 42V106H284V42', 'M36 172V106H96', 'M240 106V172', 'M276 106V172'],
+    details: ['M164 54V94', 'M105 118V172', 'M178 172V120H222V172', 'M208 162V168'],
+    glass: [
+      { d: 'M110 54H218V94H110Z', film: 'mirror' },
+      { d: 'M232 54H270V94H232Z', film: 'frost' },
+      { d: 'M50 118H160V172H50Z', film: 'mirror' },
+      { d: 'M186 126H214V156H186Z', film: 'frost' },
+    ],
+  },
+  locales: {
+    viewBox: '16 20 288 180',
+    body: [{ d: 'M28 34H292V172H28Z', tone: 'paint' }],
+    interior: [
+      'M52 102h60v2h-60ZM52 136h60v2h-60Z',
+      'M56 92h8v10h-8ZM68 94h8v8h-8ZM80 90h8v12h-8ZM94 93h8v9h-8Z',
+      'M56 124h10v12h-10ZM70 127h8v9h-8ZM84 123h10v13h-10Z',
+      'M134 90h52v2h-52Z',
+      'M140 92h8v28h-8ZM152 92h8v22h-8ZM164 92h8v30h-8ZM176 92h6v20h-6Z',
+      'M134 142h56v14h-56Z',
+    ],
+    outline: ['M28 172V34H292V172', 'M28 66H292', 'M100 44H220V56H100Z', 'M216 172V80H278V172'],
+    details: ['M121 80V156', 'M40 156H202', 'M230 118V134'],
+    glass: [
+      { d: 'M44 80H198V108H44Z', film: 'tint' },
+      { d: 'M44 108H198V122H44Z', film: 'frost' },
+      { d: 'M44 122H198V156H44Z', film: 'tint' },
+      { d: 'M224 88H270V164H224Z', film: 'mirror' },
+    ],
+  },
+};
+
+const { service, uid } = Astro.props;
+const art = ART[service];
+const ref = (name: string): string => `${uid}-${name}`;
+---
+
+<svg class="art" viewBox={art.viewBox} aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Rellenos de cada tipo de lámina: los colores salen de los tokens --film-* (tokens.css). -->
+    <linearGradient id={ref('tint')} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" class="stop-tint-top"></stop>
+      <stop offset="1" class="stop-tint-bottom"></stop>
+    </linearGradient>
+    <linearGradient id={ref('mirror')} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-mirror-light"></stop>
+      <stop offset="0.38" class="stop-mirror-mid"></stop>
+      <stop offset="0.5" class="stop-mirror-light"></stop>
+      <stop offset="0.78" class="stop-mirror-dark"></stop>
+      <stop offset="1" class="stop-mirror-mid"></stop>
+    </linearGradient>
+    <linearGradient id={ref('frost')} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" class="stop-frost-top"></stop>
+      <stop offset="1" class="stop-frost-bottom"></stop>
+    </linearGradient>
+    <linearGradient id={ref('paint')} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" class="stop-paint-top"></stop>
+      <stop offset="1" class="stop-paint-bottom"></stop>
+    </linearGradient>
+    <!--
+      Trazo cromado: degradé vertical en coordenadas del dibujo (userSpaceOnUse).
+      Con las unidades por defecto, una línea horizontal (alto 0) se quedaría sin trazo.
+    -->
+    <linearGradient id={ref('chrome')} gradientUnits="userSpaceOnUse" x1="0" y1="34" x2="0" y2="176">
+      <stop offset="0" stop-color="#ffffff"></stop>
+      <stop offset="0.55" stop-color="#c7ced6"></stop>
+      <stop offset="1" stop-color="#8b949f"></stop>
+    </linearGradient>
+    <!-- Reflejo diagonal del vidrio. -->
+    <linearGradient id={ref('sheen')} x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0.3" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="0.16"></stop>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0"></stop>
+    </linearGradient>
+    <!-- Espátula: se desvanece hacia la izquierda y termina en un filo blanco con luz roja. -->
+    <linearGradient id={ref('edge')} x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" class="stop-edge" stop-opacity="0"></stop>
+      <stop offset="0.7" class="stop-edge" stop-opacity="0.9"></stop>
+      <stop offset="1" stop-color="#fff"></stop>
+    </linearGradient>
+    {
+      art.glass.map((pane, index) => (
+        <clipPath id={ref(`pane-${index}`)}>
+          <path d={pane.d} />
+        </clipPath>
+      ))
+    }
+  </defs>
+
+  <path class="ground" d="M8 172H312"></path>
+
+  <!-- Capa 0: carrocería / paredes. Sin este fondo, el polarizado (oscuro) se confundiría con la noche del fondo. -->
+  {art.body.map((surface) => <path d={surface.d} class={`body-${surface.tone}`} fill={surface.tone === 'paint' ? `url(#${ref('paint')})` : undefined} />)}
+
+  <!-- Capa 1: el interior (lo que la lámina va a tapar). -->
+  <g class="interior-room">{art.glass.map((pane) => <path d={pane.d} />)}</g>
+  <g class="interior">{art.interior.map((d) => <path d={d} />)}</g>
+
+  <!-- Capa 2: vidrio limpio (lo que se ve antes de aplicar la lámina). -->
+  <g class="glass-clear">
+    {art.glass.map((pane) => <path d={pane.d} />)}
+    {art.glass.map((pane) => <path d={pane.d} fill={`url(#${ref('sheen')})`} />)}
+  </g>
+
+  <!-- Capa 3: la lámina, recortada a cada vidrio y desplazada según --film. -->
+  {
+    art.glass.map((pane, index) => (
+      <g clip-path={`url(#${ref(`pane-${index}`)})`}>
+        <g class="film">
+          <rect width="320" height="200" fill={`url(#${ref(pane.film)})`} />
+          <rect width="320" height="200" fill={`url(#${ref('sheen')})`} />
+          <rect class="squeegee" x="312" width="8" height="200" fill={`url(#${ref('edge')})`} />
+        </g>
+      </g>
+    ))
+  }
+
+  <!-- Capa 4: marcos y contorno por encima de todo, para que la lámina quede "dentro" del vidrio. -->
+  <g class="details">
+    {art.glass.map((pane) => <path d={pane.d} />)}
+    {art.details.map((d) => <path d={d} />)}
+  </g>
+  <g class="outline" stroke={`url(#${ref('chrome')})`}>{art.outline.map((d) => <path d={d} />)}</g>
+</svg>
+
+<style>
+  /*
+   * --film registrada como número: sin esto el navegador no puede interpolarla
+   * y la lámina "saltaría" de 0 a 1 en vez de deslizarse.
+   */
+  @property --film {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1;
+  }
+
+  .art {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .film {
+    /* transform-box: fill-box hace que el 100% sea el ancho de la capa (320), no el del <svg>. */
+    transform-box: fill-box;
+    /* --film 0 → corrida 100% a la izquierda (fuera del vidrio); --film 1 → en su lugar. */
+    transform: translateX(calc((var(--film) - 1) * 100%));
+  }
+
+  .body-tire {
+    fill: var(--art-tire);
+  }
+  .interior-room path {
+    fill: var(--art-interior);
+  }
+  .interior path {
+    fill: var(--art-interior-ink);
+  }
+  .glass-clear path:not([fill]) {
+    fill: var(--film-clear);
+  }
+
+  .stop-paint-top {
+    stop-color: var(--art-paint-top);
+  }
+  .stop-paint-bottom {
+    stop-color: var(--art-paint-bottom);
+  }
+  .stop-tint-top {
+    stop-color: var(--film-tint-top);
+    stop-opacity: 0.94;
+  }
+  .stop-tint-bottom {
+    stop-color: var(--film-tint-bottom);
+    stop-opacity: 0.97;
+  }
+  .stop-mirror-light {
+    stop-color: var(--film-mirror-light);
+  }
+  .stop-mirror-mid {
+    stop-color: var(--film-mirror-mid);
+  }
+  .stop-mirror-dark {
+    stop-color: var(--film-mirror-dark);
+  }
+  .stop-frost-top {
+    stop-color: var(--film-frost-top);
+  }
+  .stop-frost-bottom {
+    stop-color: var(--film-frost-bottom);
+  }
+  .stop-edge {
+    stop-color: var(--color-accent-ink);
+  }
+
+  .outline path,
+  .details path,
+  .ground {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* El trazo mide lo mismo en pantalla sin importar el tamaño del dibujo. */
+    vector-effect: non-scaling-stroke;
+  }
+  /* Sin `stroke` acá: el contorno hereda el degradé cromado del atributo del <g>. */
+  .outline path {
+    stroke-width: 1.6;
+  }
+  .details path,
+  .ground {
+    stroke: var(--color-ink);
+  }
+  .details path {
+    stroke-width: 1.2;
+    stroke-opacity: 0.5;
+  }
+  .ground {
+    stroke-width: 1;
+    stroke-opacity: 0.22;
+  }
+</style>

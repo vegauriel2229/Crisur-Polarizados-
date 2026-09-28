@@ -1,6 +1,8 @@
 # Crisur — Software Design Document
 
-> Estado: **v0.4 — Hero showroom 3D** · Última actualización: 2026-09-28
+> Estado: **v0.5 — Selector de vidrio + sección Servicios** · Última actualización: 2026-09-28
+>
+> v0.5 reemplaza el showroom 3D (v0.4, recuperable en el commit `07b90f7`) por un selector de ventanas de vidrio dibujadas con SVG + CSS, y agrega la sección de servicios.
 
 ## 1. Objetivo
 
@@ -130,23 +132,21 @@ En desarrollo, Keystatic usa almacenamiento `local` (sin credenciales).
 src/
   components/
     hero/
-      ServiceHero.astro      # markup, estilos y posters de respaldo
-      hero-controller.ts     # estado de la ruleta, DOM, teclado, #hash, carga diferida del 3D
-      showroom/              # Three.js (chunk diferido)
-        showroom.ts          # renderer, cámara/encuadre, ruleta, animación, ciclo de vida
-        dioramas/            # car.ts · storefront.ts · house.ts · common.ts (pedestal, helpers)
-        materials.ts · environment.ts · textures.ts · geometry.ts · motion.ts · types.ts
+      ServiceHero.astro      # header, copy por servicio y selector de ventanas (tablist)
+      hero-controller.ts     # estado del selector, teclado, swipe, #hash, menú mobile
+    services/
+      ServicesSection.astro  # grilla de tarjetas de servicio
+    ServiceArt.astro         # ilustración SVG de cada servicio + capa de lámina animable
+    Icon.astro               # íconos SVG (WhatsApp, Instagram, beneficios)
   assets/brand/     # logo
-  assets/hero/posters/  # PNG generados del 3D (npm run posters)
   config/site.ts    # datos del negocio (provisorio hasta Keystatic)
-  data/hero-slides.ts
+  data/services.ts  # contenido de los 3 servicios (hero + tarjetas)
   layouts/ · pages/ · lib/ · styles/
-scripts/render-posters.mjs  # genera los posters con Chrome/Edge headless (CHROME_PATH)
 ```
 
-## 9. Sistema de diseño (v2 — showroom 3D)
+## 9. Sistema de diseño (v3 — vidrio y lámina)
 
-- Todos los valores visuales viven como **custom properties en `src/styles/tokens.css`** (un único archivo para cambiar tipografía o paleta).
+- Todos los valores visuales viven como **custom properties en `src/styles/tokens.css`** (un único archivo para cambiar tipografía o paleta, incluidos los colores de las láminas).
 - Fuentes self-hosted (`@fontsource-variable`), sin Google Fonts.
 - Recursos de marca en `src/assets/brand/`.
 
@@ -157,107 +157,123 @@ scripts/render-posters.mjs  # genera los posters con Chrome/Edge headless (CHROM
 | `--color-bg` | `#0c0f13` | Vidrio polarizado (grafito azulado, no negro plano) |
 | `--color-surface` | `#1a1e24` | Superficies/controles |
 | `--color-ink` | `#eef1f4` | Texto principal (cromo) |
+| `--color-ink-soft` | `#c9cfd6` | Bajadas y resúmenes (entre ink e ink-muted) |
 | `--color-ink-muted` | `#a9b0b9` | Texto secundario (8.5:1 sobre bg) |
-| `--color-brand-red` | `#e3262b` | Rojo del logo: **como luz** (rim light, LED de pedestales) y CTA |
+| `--color-brand-red` | `#e3262b` | Rojo del logo: **como luz** (brillo bajo la ventana destacada) y CTA |
 | `--color-cta` | `#d91f26` | Fondo del CTA (texto blanco ≥ 5:1) |
-| `--color-accent-ink` | `#ff5a5f` | Rojo para texto/foco sobre fondo oscuro |
+| `--color-accent-ink` | `#ff5a5f` | Foco visible y borde de la espátula (los íconos van en tinta) |
+| `--film-*` | ver `tokens.css` | Rellenos de lámina: `tint` (polarizado), `mirror` (espejado), `frost` (esmerilado), `clear` (vidrio sin lámina) |
 
 ### 9.2 Tipografía
 
 - **Archivo Variable** (una sola familia, dos anchos):
-  - Display: `wdth 125` · `wght 800` — ancha y rellena, lenguaje automotriz.
+  - Display: `wdth 125` · `wght 820` — ancha y rellena, lenguaje automotriz.
   - Texto: `wdth 100` · `wght 400/500`.
 - Escala 1.25; display máx. 6rem; tracking mínimo −0.03em; títulos escalan según largo (`--title-chars`).
 
 ### 9.3 Principios
 
-1. **Un solo momento memorable:** el showroom 3D. El resto (texto, nav, controles) es sobrio.
-2. **El vidrio es el tema, no la decoración:** polarizado, espejado y esmerilado se renderizan físicamente (PBR); la UI no usa glassmorphism.
-3. **El rojo es luz:** aparece en rim lights, anillos LED y el CTA; no se reparte en adornos.
-4. **Nada tapa el producto:** el texto y los CTA viven en su propia zona; el diorama destacado se encuadra en la zona libre.
+1. **Un solo momento memorable:** la lámina que se aplica sobre la ventana elegida. El resto es sobrio.
+2. **El vidrio es el tema:** los marcos translúcidos con blur existen porque el producto es vidrio; no se usa glassmorphism como adorno en otras superficies (las tarjetas son sólidas).
+3. **El rojo es luz:** brillo bajo la ventana destacada, borde de la espátula y CTA; no se reparte en adornos.
+4. **Nada inventado:** sin cifras técnicas, fotos ni testimonios falsos (ver `PRODUCT.md`).
 
-Revisión contra defaults genéricos: se eliminan eyebrow en mayúsculas con tracking, separadores "·", flechas "→" en botones y la serif fina de la v1.
-
-## 9.4 Hero "Showroom 3D" (home) — reemplaza al switcher 2D
+## 9.4 Hero "Selector de vidrio" (home) — reemplaza al showroom 3D
 
 ### Layout
 
 ```
 Desktop / tablet                                      Mobile
 ┌──────────────────────────────────────────────┐     ┌──────────────────┐
-│ ◉ crisur polarizados   Autos Locales Hogares ☐│     │ ◉ crisur      ☰  │
+│ ◉ crisur polarizados   Locales Autos Hogares ☐│     │ ◉ crisur      ☰  │
 ├──────────────────────────────────────────────┤     ├──────────────────┤
 │              Polarizado para                 │     │ Polarizado para  │
 │                  AUTOS                       │     │      AUTOS       │
 │     Privacidad, menos calor y protección…    │     │  Privacidad, …   │
 │   [ ◯ Consultar por WhatsApp ] [ Trabajos ]  │     │ [◯ Consultar  ]  │
 │                                              │     │   Ver trabajos   │
-│ ‹ Locales      ▄▆█ AUTO 3D █▆▄      Hogares › │     │‹   ▄▆█ 3D █▆▄  › │
-│   (diorama)      (pedestal LED)    (diorama) │     │  Locales Hogares │
+│  ┌──────┐   ┌────────────────┐   ┌──────┐    │     │┐ ┌────────────┐ ┌│
+│  │local │   │  AUTO + lámina │   │ casa │    │     ││ │AUTO+lámina │ ││
+│  └──────┘   └────────────────┘   └──────┘    │     │┘ └────────────┘ └│
+│   Locales     Autos (brillo rojo)  Hogares   │     │      Autos       │
 └──────────────────────────────────────────────┘     └──────────────────┘
 ```
 
-- `.stage` = columna flex, `min-height: max(100svh, 640px)`: copy arriba, **zona de showroom** abajo (`flex: 1`). El canvas WebGL cubre todo el stage (fondo con niebla), pero la cámara encuadra el diorama destacado **dentro de la zona de showroom** (`setViewOffset`), así nunca queda debajo del texto ni del CTA.
+- `.stage` = columna flex, `min-height: max(100svh, 640px)`: copy arriba, selector abajo (`flex: 1`).
+- Las 3 ventanas comparten la misma celda de grid; su lugar (izquierda/centro/derecha) es un `transform` según `data-pos`. En mobile las laterales asoman desde los bordes.
 
 ### Ruleta (orden fijo, cíclico)
 
-`['locales', 'autos', 'hogares']` → al cargar: **Locales izquierda · Autos centro · Hogares derecha**. Los 3 dioramas están sobre un anillo a 120°; elegir uno lateral **rota el anillo** por el camino más corto.
+`['locales', 'autos', 'hogares']` → al cargar: **Locales izquierda · Autos centro · Hogares derecha**. Elegir una lateral la trae al centro y las otras rotan un lugar.
 
-| `ServiceId` | Título | Diorama 3D | Técnicas visibles |
-|---|---|---|---|
-| `locales` | LOCALES | Frente comercial con vidriera y puerta | Polarizado + banda esmerilada + puerta espejada |
-| `autos` | AUTOS | Sedán 0 km (proporciones Fiat Cronos) blanco perlado | Vidrios polarizados, pintura con clearcoat |
-| `hogares` | HOGARES | Casa moderna de dos plantas | Ventanales espejados + vidrios esmerilados con luz interior |
+| `ServiceId` | Ilustración | Láminas dibujadas |
+|---|---|---|
+| `locales` | Frente comercial con vidriera y puerta | Vidriera polarizada + banda esmerilada + puerta espejada |
+| `autos` | Sedán de perfil | Ventanillas polarizadas |
+| `hogares` | Casa moderna de dos plantas | Ventanales espejados + ventanas esmeriladas |
 
 ### Contratos
 
 ```ts
-// src/components/hero/showroom/types.ts
-interface ShowroomOptions {
-  order: readonly ServiceId[];
-  initial: ServiceId;
-  reducedMotion: boolean;
-  getFramingZone(): FramingZone;          // px relativos al canvas
-  onSelect(id: ServiceId): void;          // tap/click sobre un diorama lateral
+// src/data/services.ts
+type ServiceId = 'locales' | 'autos' | 'hogares';
+type Treatment = 'polarizado' | 'espejado' | 'esmerilado' | 'seguridad';
+type BenefitKind = 'heat' | 'privacy' | 'uv' | 'security';
+interface Benefit { kind: BenefitKind; title: string; text: string }
+interface Service {
+  id: ServiceId;
+  navLabel: string;
+  hero: { titlePrefix: string; title: string; lede: string };   // h1 en dos líneas (prefijo + palabra display) + bajada
+  summary: string;                                          // párrafo de la tarjeta
+  treatments: readonly Treatment[];
+  benefits: readonly Benefit[];
+  whatsappMessage: string;
+  ctaLabel: string;
+  photo?: { src: ImageMetadata; alt: string };             // foto real: reemplaza a la ilustración en hero y tarjeta
 }
-interface FramingZone { top: number; bottom: number }
-interface ScreenAnchor { x: number; y: number; visible: boolean }
-interface Showroom {
-  show(id: ServiceId): void;              // rota la ruleta; idempotente
-  getAnchors(): ReadonlyMap<ServiceId, ScreenAnchor>;
-  dispose(): void;                        // libera geometrías, materiales, texturas, contexto
-}
-function createShowroom(canvas: HTMLCanvasElement, options: ShowroomOptions): Showroom;
-// @throws WebGLUnavailableError → el hero mantiene los posters estáticos
+const services: readonly Service[];      // orden = orden de la ruleta
+const initialServiceId: ServiceId;
+
+// src/components/ServiceArt.astro
+interface Props { service: ServiceId; uid: string }        // uid: prefijo único de ids SVG (clipPath/gradientes)
+// API de estilo: --film ∈ [0, 1] (heredable, registrada con @property) = cuánto de la lámina está aplicada.
+
+// src/components/hero/ServiceHero.astro
+interface Props { services: readonly Service[]; initial: ServiceId; whatsappNumber: string;
+                  defaultWhatsappMessage: string; instagramUrl: string }
+// @throws Error si services.length !== 3 o `initial` no existe (build time).
+
+// src/components/services/ServicesSection.astro
+interface Props { services: readonly Service[]; whatsappNumber: string; yearsOfExperience: number; serviceArea: string }
 ```
 
 ### Animación
 
 | Momento | Qué pasa | Duración |
 |---|---|---|
-| Entrada | Cámara desde lejos y en altura **se acerca** al destacado; el anillo gira a su lugar; los LED de los pedestales se encienden en secuencia; el copy se revela en paralelo | ~2.6 s |
-| Cambio de servicio | El anillo rota 120°; la cámara retrocede y vuelve a acercarse (dolly) | ~1.3 s |
-| Reposo | El destacado gira suave (±12°); un barrido de luz recorre los vidrios | continuo |
-| `prefers-reduced-motion` | Sin entrada, sin reposo; cambio instantáneo | — |
+| Entrada | Copy sube y se enfoca; las ventanas aparecen (centro primero); la espátula aplica la lámina en la ventana central | ~1.9 s |
+| Cambio de servicio | Las ventanas se deslizan a su nuevo lugar; la saliente pierde la lámina, la nueva destacada la recibe; el copy hace crossfade | ~1.6 s |
+| Tarjetas (hover/foco) | La lámina, detenida a mitad de camino, termina de aplicarse | 0.9 s |
+| `prefers-reduced-motion` | Sin entrada ni deslizamientos; cambio instantáneo | — |
+
+- La lámina se mueve con una sola variable CSS (`--film`), registrada con `@property` para que sea animable. Sin JS de animación: el JS solo cambia `data-pos`.
 
 ### Interacción y accesibilidad
 
-- Controles: botones ‹ › , etiquetas laterales (botones anclados a la proyección 3D de cada pedestal), nav, teclado ←/→ dentro del hero, swipe horizontal, click en el diorama.
-- `aria-live="polite"` anuncia el servicio mostrado; canvas `aria-hidden` (la información vive en el texto).
-- Deep link por `#hash` (`/#hogares`).
+- Selector = `role="tablist"`; cada ventana es un `role="tab"` que controla el copy (`role="tabpanel"`). Tabindex móvil: solo la ventana elegida entra en el orden de tabulación; ←/→ cambian de servicio.
+- Otros controles: click/tap en una lateral, swipe horizontal, links del nav, deep link por `#hash` (`/#hogares`).
+- `aria-live="polite"` anuncia el servicio mostrado. Las ilustraciones son `aria-hidden` (la información vive en el texto).
 
 ### Rendimiento
 
-- Three.js se carga **diferido** (import dinámico) después del primer render; el HTML inicial ya muestra texto + poster.
-- `pixelRatio ≤ 2` (≤ 1.5 en mobile), sombras 1024–2048 según dispositivo, render pausado fuera de viewport o con la pestaña oculta, `dispose()` completo.
-- Respaldo estático (posters PNG generados del mismo 3D con `npm run posters`) cuando: no hay WebGL, falla la descarga del chunk 3D, o JavaScript está desactivado. Con 3D activo los posters no se descargan (`display:none` + `loading="lazy"`).
-- Presupuesto medido: JS inicial ≈ 5 KB; chunk 3D ≈ 580 KB sin comprimir (~150 KB gzip), cargado en `requestIdleCallback`.
-- Shaders precompilados (`compileAsync`) antes del primer frame; animaciones por tiempo real (no por frame) para terminar a tiempo en equipos lentos.
+- Sin dependencias de runtime: SVG inline + CSS; JS del hero ≈ 2 KB.
+- Solo se animan `transform`, `opacity`, `filter` y `--film` (que termina en un `transform`). `backdrop-filter` solo en las 3 ventanas del hero.
 
-### Verificación realizada
+## 9.5 Sección "Servicios" (home, debajo del hero)
 
-- `tsc --noEmit` y `astro check`: 0 errores.
-- Capturas headless (Edge + SwiftShader) en 1920, 1440, 1366, tablet 820×1180, teléfono 390×844 y horizontal 844×390; los tres servicios destacados, entrada animada, giro de la ruleta a mitad de animación y respaldo sin WebGL.
+- `id="servicios"`. Encabezado: h2 con el aval de años (`yearsOfExperience`) + párrafo de alcance (`serviceArea`).
+- Grilla de 3 tarjetas (1 columna < 900 px, 3 columnas ≥ 900 px). Cada tarjeta: ilustración con la lámina aplicada a medias (o `photo` si existe), técnicas (chips), resumen, 4 beneficios con ícono (calor, privacidad, UV, seguridad) y CTA a WhatsApp con el mensaje del servicio.
+- Copy provisorio y **sin cifras** (decisión del cliente). Crisur coloca láminas de seguridad (confirmado).
 
 ## 10. Operación
 
@@ -271,8 +287,8 @@ function createShowroom(canvas: HTMLCanvasElement, options: ShowroomOptions): Sh
 | Logo vectorial (SVG/PNG alta resolución) | Cliente | Nada (se usa el JPEG recibido, recortado en círculo) |
 | Confirmar paleta derivada del logo (§9.1) | Cliente | Nada |
 | Diseño de las secciones siguientes | Cliente | Resto de la home |
-| Probar el 3D en celulares reales (gama media) | Cliente | Ajuste fino de calidad/rendimiento |
 | Dirección exacta | Cliente | Footer, JSON-LD (no bloquea build) |
 | Horarios | Cliente | Footer, JSON-LD (no bloquea build) |
-| Fotos de trabajos | Cliente | Galería (no bloquea build) |
+| Fotos de trabajos | Cliente | Galería; foto por servicio en hero y tarjetas vía `Service.photo` (no bloquea build) |
+| Cifras técnicas de las láminas (UV, calor) | Cliente | Nada: hoy se publican beneficios sin cifras |
 | Dominio | Cliente | Nada en v1 |
