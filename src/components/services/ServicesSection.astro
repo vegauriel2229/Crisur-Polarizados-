@@ -146,7 +146,7 @@ const CARD_FILM_REST: Record<ServiceId, number> = { locales: 0.58, autos: 0.7, h
   .card-media {
     aspect-ratio: 16 / 10;
     border-bottom: 1px solid var(--color-line);
-    background: linear-gradient(180deg, #1c222a 0%, #13171d 60%, #0e1115 100%);
+    background: var(--art-backdrop);
   }
   .card-media :global(.card-photo) {
     display: block;
@@ -224,7 +224,7 @@ const CARD_FILM_REST: Record<ServiceId, number> = { locales: 0.58, autos: 0.7, h
     padding: 0 1.25rem;
     border-radius: var(--radius-control);
     background: var(--color-cta);
-    color: #ffffff;
+    color: var(--color-on-red);
     font-weight: 650;
     text-decoration: none;
     box-shadow: 0 12px 24px -14px rgba(227, 38, 43, 0.8);

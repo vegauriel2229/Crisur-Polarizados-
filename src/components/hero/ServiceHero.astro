@@ -153,7 +153,7 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
     overflow: hidden;
     /* Fondo: grafito con una luz fría arriba. La luz roja vive pegada a la ventana destacada (.selector::before). */
     background:
-      radial-gradient(ellipse 80% 55% at 50% 0%, rgba(160, 180, 205, 0.09), transparent 70%),
+      radial-gradient(ellipse 80% 55% at 50% 0%, var(--color-cool-light), transparent 70%),
       linear-gradient(180deg, var(--color-bg) 0%, #0e1116 62%, #0a0c10 100%);
   }
   /* Tablet vertical: la pantalla es más alta que el contenido; el hero no se estira y la sección siguiente asoma. */
@@ -235,7 +235,7 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
     right: 0.95rem;
     bottom: 0.35rem;
     height: 2px;
-    border-radius: 2px;
+    border-radius: var(--radius-hairline);
     background: var(--color-brand-red);
   }
   .site-nav .nav-icon {
@@ -251,12 +251,12 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
     padding: 0 1.2rem;
     min-height: 2.5rem;
     background: var(--color-cta);
-    color: #ffffff;
+    color: var(--color-on-red);
     font-weight: 650;
   }
   .site-nav .nav-cta:hover {
     background: var(--color-cta-hover);
-    color: #ffffff;
+    color: var(--color-on-red);
   }
 
   .burger {
@@ -276,7 +276,7 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
     display: block;
     width: 22px;
     height: 2px;
-    border-radius: 2px;
+    border-radius: var(--radius-hairline);
     background: var(--color-ink);
     transition:
       transform 0.28s var(--ease-in-out),
@@ -400,7 +400,7 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
   }
   .button-primary {
     background: var(--color-cta);
-    color: #ffffff;
+    color: var(--color-on-red);
     box-shadow:
       0 12px 28px -12px rgba(227, 38, 43, 0.75),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -439,7 +439,7 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
 
   /* ── Selector de ventanas ───────────────────────────── */
   .selector {
-    --pane-w: min(27rem, 34vw, 46svh);
+    --pane-w: min(31rem, 34vw, 46svh);
     /* Distancia del centro a cada ventana lateral. */
     --pane-offset: calc(var(--pane-w) * 0.98);
     --side-scale: 0.74;
@@ -541,7 +541,7 @@ const positionOf = (index: number): 'left' | 'center' | 'right' => {
      * (la ruta es de la carpeta public/). Lo recomendado es el campo `photo` de services.ts,
      * que optimiza la imagen automáticamente.
      */
-    background: linear-gradient(180deg, #1c222a 0%, #13171d 60%, #0e1115 100%);
+    background: var(--art-backdrop);
   }
   .pane-window :global(.pane-photo) {
     display: block;

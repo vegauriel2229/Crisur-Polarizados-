@@ -37,16 +37,16 @@
       "cta-hover": {
         "role": "primary",
         "displayName": "Action Red Lit",
-        "canonical": "#ee2b32",
+        "canonical": "#e0232a",
         "tonalRamp": [
-          "oklch(15.0% 0.2269 25.8)",
-          "oklch(26.4% 0.2269 25.8)",
-          "oklch(37.9% 0.2269 25.8)",
-          "oklch(49.3% 0.2269 25.8)",
-          "oklch(60.7% 0.2269 25.8)",
-          "oklch(72.1% 0.2269 25.8)",
-          "oklch(83.6% 0.2269 25.8)",
-          "oklch(95.0% 0.2269 25.8)"
+          "oklch(15.0% 0.2199 26.2)",
+          "oklch(26.4% 0.2199 26.2)",
+          "oklch(37.9% 0.2199 26.2)",
+          "oklch(49.3% 0.2199 26.2)",
+          "oklch(60.7% 0.2199 26.2)",
+          "oklch(72.1% 0.2199 26.2)",
+          "oklch(83.6% 0.2199 26.2)",
+          "oklch(95.0% 0.2199 26.2)"
         ]
       },
       "accent-ink": {
@@ -393,6 +393,21 @@
           "oklch(83.6% 0.0235 253.1)",
           "oklch(95.0% 0.0235 253.1)"
         ]
+      },
+      "cool-light": {
+        "role": "neutral",
+        "displayName": "Cool Light",
+        "canonical": "rgba(160, 180, 205, 0.09)",
+        "tonalRamp": [
+          "oklch(15.0% 0.0423 254.1 / 0.09)",
+          "oklch(26.4% 0.0423 254.1 / 0.09)",
+          "oklch(37.9% 0.0423 254.1 / 0.09)",
+          "oklch(49.3% 0.0423 254.1 / 0.09)",
+          "oklch(60.7% 0.0423 254.1 / 0.09)",
+          "oklch(72.1% 0.0423 254.1 / 0.09)",
+          "oklch(83.6% 0.0423 254.1 / 0.09)",
+          "oklch(95.0% 0.0423 254.1 / 0.09)"
+        ]
       }
     },
     "typographyMeta": {
@@ -443,6 +458,14 @@
       "label": {
         "displayName": "Label",
         "purpose": "Treatment chips on cards."
+      },
+      "nav-mobile": {
+        "displayName": "Nav Mobile",
+        "purpose": "Full-width link rows of the mobile menu."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "\"crisur\" in the header brand lockup, display face."
       }
     },
     "shadows": [

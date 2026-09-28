@@ -36,7 +36,7 @@ body {
 
 ::selection {
   background: var(--color-brand-red);
-  color: #ffffff;
+  color: var(--color-on-red);
 }
 
 :focus-visible {

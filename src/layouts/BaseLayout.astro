@@ -1,6 +1,10 @@
 ---
 import { getImage } from 'astro:assets';
 import logo from '../assets/brand/logo.jpeg';
+// Misma fuente que declara global.css: precargarla evita que el título gigante (LCP) espere al CSS.
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import { instagramUrl, siteSettings } from '../config/site';
+import { buildLocalBusinessSchema } from '../lib/seo';
 import '../styles/global.css';
 
 interface Props {
@@ -10,6 +14,20 @@ interface Props {
 
 const { title, description } = Astro.props;
 const favicon = await getImage({ src: logo, width: 64, height: 64, format: 'png' });
+const touchIcon = await getImage({ src: logo, width: 180, height: 180, format: 'png' });
+
+// Sin dominio configurado (PUBLIC_SITE_URL, ver astro.config.mjs) no hay URLs absolutas:
+// se omiten canonical, og:url y og:image en vez de publicar enlaces rotos.
+const site = Astro.site;
+const canonical = site === undefined ? undefined : new URL(Astro.url.pathname, site);
+const ogImage = site === undefined ? undefined : new URL('/og-image.jpg', site);
+const schema = buildLocalBusinessSchema(siteSettings, {
+  site: canonical,
+  image: site === undefined ? undefined : new URL(touchIcon.src, site),
+  instagram: instagramUrl,
+});
+// "<" escapado: el JSON va dentro de <script> y no puede cerrar la etiqueta antes de tiempo.
+const schemaJson = JSON.stringify(schema).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -20,7 +38,31 @@ const favicon = await getImage({ src: logo, width: 64, height: 64, format: 'png'
     <meta name="theme-color" content="#0c0f13" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/png" href={favicon.src} />
+    <link rel="apple-touch-icon" href={touchIcon.src} />
+    {canonical && <link rel="canonical" href={canonical.href} />}
+
+    <!-- Vista previa al compartir el link (WhatsApp, Instagram, Facebook). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content={siteSettings.businessName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical.href} />}
+    {
+      ogImage && (
+        <>
+          <meta property="og:image" content={ogImage.href} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={`${siteSettings.businessName}: polarizado para autos, locales y hogares`} />
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={schemaJson} />
     <slot name="head" />
   </head>
   <body>

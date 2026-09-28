@@ -97,8 +97,11 @@ interface SiteSettings {
 function buildWhatsAppUrl(phoneNumber: string, message: string): URL;
 
 // src/lib/seo.ts
-/** Genera JSON-LD schema.org/LocalBusiness para SEO local. */
-function buildLocalBusinessSchema(settings: SiteSettings): Record<string, unknown>;
+/** Genera JSON-LD schema.org/LocalBusiness para SEO local. Omite url/image si no hay dominio. */
+function buildLocalBusinessSchema(
+  settings: SiteSettings,
+  links: { site: URL | undefined; image: URL | undefined; instagram: string },
+): Record<string, unknown>;
 ```
 
 - La validación del número se ejecuta en **build time**: un número inválido rompe el build (fail-fast) en vez de publicar links rotos.
@@ -115,7 +118,7 @@ Variables (en Vercel, nunca en el repo):
 | `KEYSTATIC_GITHUB_CLIENT_SECRET` | OAuth de la GitHub App |
 | `KEYSTATIC_SECRET` | Firma de sesión |
 | `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Identificador público de la App |
-| `PUBLIC_SITE_URL` | URL canónica (sitemap, OG, JSON-LD) |
+| `PUBLIC_SITE_URL` | URL canónica (sitemap, OG, JSON-LD). Si falta, se usa `VERCEL_PROJECT_PRODUCTION_URL` (Vercel la define sola); sin ninguna, se omiten canonical, `og:image` y el sitemap queda vacío |
 
 En desarrollo, Keystatic usa almacenamiento `local` (sin credenciales).
 
@@ -141,7 +144,11 @@ src/
   assets/brand/     # logo
   config/site.ts    # datos del negocio (provisorio hasta Keystatic)
   data/services.ts  # contenido de los 3 servicios (hero + tarjetas)
-  layouts/ · pages/ · lib/ · styles/
+  lib/whatsapp.ts · lib/seo.ts
+  layouts/BaseLayout.astro  # <head>: meta, Open Graph, canonical, JSON-LD, preload de fuente
+  pages/index.astro · pages/robots.txt.ts · pages/sitemap.xml.ts
+  styles/
+public/og-image.jpg  # vista previa al compartir (captura del hero, 1200×630)
 ```
 
 ## 9. Sistema de diseño (v3 — vidrio y lámina)
@@ -169,7 +176,7 @@ src/
 - **Archivo Variable** (una sola familia, dos anchos):
   - Display: `wdth 125` · `wght 820` — ancha y rellena, lenguaje automotriz.
   - Texto: `wdth 100` · `wght 400/500`.
-- Escala 1.25; display máx. 6rem; tracking mínimo −0.03em; títulos escalan según largo (`--title-chars`).
+- Tamaños fluidos con `clamp()` (sin escala modular fija); display máx. 6rem; tracking mínimo −0.03em; el título escala según su largo (`--title-chars`).
 
 ### 9.3 Principios
 
@@ -291,4 +298,5 @@ interface Props { services: readonly Service[]; whatsappNumber: string; yearsOfE
 | Horarios | Cliente | Footer, JSON-LD (no bloquea build) |
 | Fotos de trabajos | Cliente | Galería; foto por servicio en hero y tarjetas vía `Service.photo` (no bloquea build) |
 | Cifras técnicas de las láminas (UV, calor) | Cliente | Nada: hoy se publican beneficios sin cifras |
+| `og-image.jpg` con foto real (1200×630) | Cliente | Nada: hoy es una captura del hero |
 | Dominio | Cliente | Nada en v1 |

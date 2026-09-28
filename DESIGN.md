@@ -1,10 +1,10 @@
 ---
 name: Crisur Polarizados
-description: Window-film workshop landing: graphite glass, red brand light, film applied live by a squeegee.
+description: "Window-film workshop landing: graphite glass, red brand light, film applied live by a squeegee."
 colors:
   brand-red: "#e3262b"
   cta: "#d91f26"
-  cta-hover: "#ee2b32"
+  cta-hover: "#e0232a"
   accent-ink: "#ff5a5f"
   bg: "#0c0f13"
   surface: "#1a1e24"
@@ -12,6 +12,7 @@ colors:
   ink-soft: "#c9cfd6"
   ink-muted: "#a9b0b9"
   line: "rgba(238, 241, 244, 0.14)"
+  cool-light: "rgba(160, 180, 205, 0.09)"
   on-red: "#ffffff"
   film-clear: "rgba(172, 198, 224, 0.34)"
   film-tint-top: "#161b22"
@@ -86,6 +87,16 @@ typography:
     fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "1rem"
     fontWeight: 550
+  nav-mobile:
+    fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.05rem"
+    fontWeight: 550
+  wordmark:
+    fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.2rem"
+    fontWeight: 820
+    letterSpacing: "-0.02em"
+    fontVariation: "'wdth' 125"
   caption:
     fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "0.875rem"
@@ -95,6 +106,7 @@ typography:
     fontSize: "0.8125rem"
     fontWeight: 550
 rounded:
+  hairline: "2px"
   control: "999px"
   surface: "14px"
   frame: "20px"
@@ -198,11 +210,11 @@ A cold, low-light graphite palette with one warm voice: the logo red, rationed a
 ### Primary
 - **Logo Red** (#e3262b): the brand's light source. The radial backlight behind the featured hero pane (at 50% alpha), the glow shadows under CTAs (75–85% alpha), the 2px underline of the active nav link, and text selection.
 - **Action Red** (#d91f26): the fill of every WhatsApp call to action, always with white text (about 5:1).
-- **Action Red Lit** (#ee2b32): CTA hover fill.
-- **Signal Coral** (#ff5a5f): the red that has to read on dark at small sizes: the 2px focus outline and the squeegee's leading edge. The spec also names it the red for text on dark; the build sets no red text, and icons stay in ink (see The Red Is Light Rule). Action Red is never a text color on graphite (under 4.5:1).
+- **Action Red Lit** (#e0232a): CTA hover fill; the brightest red that still keeps white text at 4.5:1 (AA).
+- **Signal Coral** (#ff5a5f): the red that has to read on dark at small sizes: the 2px focus outline and the squeegee's leading edge. No text or icon is red (see The Red Is Light Rule). Action Red is never a text color on graphite (under 4.5:1).
 
 ### Neutral
-- **Tinted Graphite** (#0c0f13): page background and browser theme color. The hero deepens it to #0e1116 then #0a0c10 and lays a cool top light (rgba(160, 180, 205, 0.09)) over it.
+- **Tinted Graphite** (#0c0f13): page background and browser theme color. The hero deepens it to #0e1116 then #0a0c10 and lays a cool top light over it (**Cool Light**, rgba(160, 180, 205, 0.09), `--color-cool-light`).
 - **Graphite Surface** (#1a1e24): solid containers: service cards and the mobile menu panel.
 - **Chrome Ink** (#eef1f4): headings, primary text, line icons, illustration detail strokes.
 - **Soft Chrome** (#c9cfd6, `--color-ink-soft`): long reading text one step below ink: the hero lede and card summaries.
@@ -218,6 +230,7 @@ The film and illustration materials. They live in `tokens.css` so a film color c
 - **Frost Film** (rgba(236, 241, 246, 0.72) to rgba(205, 213, 222, 0.52)): esmerilado.
 - **Chrome Stroke** (white to #c7ced6 to #8b949f, vertical): the main outline of every drawing.
 - **Body Paint** (#3a424c to #21272e), **Tire** (#08090b), **Interior** (#12161b) and **Interior Ink** (#4b5561): car bodywork and walls, wheels, and the room seen through clear glass.
+- **Art Backdrop** (`--art-backdrop`, #1c222a to #13171d to #0e1115, vertical): the well behind every illustration, in the hero window and the card media.
 
 ### Named Rules
 **The Red Is Light Rule.** Red appears only where light or action is: the backlight under the featured pane, CTA fills and their glow, the squeegee edge, the active-nav underline, the focus ring and text selection. Icons, headings, borders and ornaments stay in ink.
@@ -242,10 +255,11 @@ The film and illustration materials. They live in `tokens.css` so a film color c
 - **Lede** (400, clamp 1–1.125rem, 1.6): hero lede (Soft Chrome, max 40rem) and the services intro (Brushed Steel, line height 1.65, max 52ch). Pretty wrap.
 - **Body** (400, 1rem, 1.55): base text and card summaries (line height 1.6).
 - **Body Small** (400, 0.95rem, 1.5): benefit lines; the lead-in phrase is ink at weight 620, the rest Brushed Steel.
-- **Button / Nav** (650 / 550, 1rem): control labels.
+- **Button / Nav** (650 / 550, 1rem): control labels. **Nav Mobile** (550, 1.05rem) for the full-width rows of the mobile menu.
+- **Wordmark** (820, 1.2rem, -0.02em, width 125): "crisur" in the header lockup.
 - **Caption** (400, 0.875rem) and **Label** (550, 0.8125rem): pane treatment line and treatment chips, both Brushed Steel.
 
-The spec (SDD §9.2) states display weight 800 and a 1.25 scale; the build ships 820 and a fluid, clamp-driven ramp. The build is authoritative.
+Sizes are fluid (`clamp()` between a mobile floor and a desktop ceiling) rather than a fixed modular scale; the steps above are the whole ramp.
 
 ### Named Rules
 **The One Family Rule.** Archivo is the only typeface. Hierarchy comes from the width axis and weight, never from a second family or a system display face.
@@ -279,7 +293,7 @@ Hybrid: tonal layering (graphite ground, graphite surface) plus light. Shadows c
 
 ## Shapes
 
-Three radii. Every control is a full pill (999px): buttons, nav links, chips, the burger. Solid surfaces are gently rounded (14px): cards, the mobile menu, and the window inside each glass pane. The glass frame itself is a little rounder (20px) so the inner window reads as set into it. Illustration and media wells are 16:10. The logo is a circle. Strokes in drawings are round-capped and non-scaling (1.6 outline, 1.2 details at 50% ink, 1 ground line at 22%).
+Three radii, plus a 2px hairline radius for the thin bars (active-nav underline, burger lines). Every control is a full pill (999px): buttons, nav links, chips, the burger. Solid surfaces are gently rounded (14px): cards, the mobile menu, and the window inside each glass pane. The glass frame itself is a little rounder (20px) so the inner window reads as set into it. Illustration and media wells are 16:10. The logo is a circle. Strokes in drawings are round-capped and non-scaling (1.6 outline, 1.2 details at 50% ink, 1 ground line at 22%).
 
 ## Components
 
