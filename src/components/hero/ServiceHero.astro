@@ -1,0 +1,720 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo.jpeg';
+import type { ImageMetadata } from 'astro';
+import type { HeroSlide, ServiceId } from '../../data/hero-slides';
+import { buildWhatsAppUrl } from '../../lib/whatsapp';
+
+interface Props {
+  slides: readonly HeroSlide[];
+  initial: ServiceId;
+  whatsappNumber: string;
+  defaultWhatsappMessage: string;
+  instagramUrl: string;
+}
+
+const { slides, initial, whatsappNumber, defaultWhatsappMessage, instagramUrl } = Astro.props;
+
+// La ruleta tiene un destacado y dos laterales: exactamente 3 servicios.
+const initialSlide = slides.find((slide) => slide.id === initial);
+if (slides.length !== 3 || initialSlide === undefined) {
+  throw new Error(`ServiceHero requires exactly 3 slides including "${initial}".`);
+}
+
+const whatsappUrls = Object.fromEntries(
+  slides.map((slide) => [slide.id, buildWhatsAppUrl(whatsappNumber, slide.whatsappMessage).href]),
+) as Record<ServiceId, string>;
+const config = {
+  order: slides.map((slide) => slide.id),
+  initial,
+  whatsappUrls,
+  titles: Object.fromEntries(slides.map((slide) => [slide.id, slide.navLabel])),
+};
+const defaultWhatsappUrl = buildWhatsAppUrl(whatsappNumber, defaultWhatsappMessage).href;
+
+// Posters generados del mismo 3D (npm run posters). Si falta alguno, ese servicio queda sin respaldo estático.
+const posterModules = import.meta.glob<{ default: ImageMetadata }>('../../assets/hero/posters/*.png', { eager: true });
+const posterFor = (id: ServiceId): ImageMetadata | undefined => posterModules[`../../assets/hero/posters/${id}.png`]?.default;
+const initialIndex = slides.indexOf(initialSlide);
+const sideOf = (index: number): 'left' | 'center' | 'right' => {
+  const offset = (index - initialIndex + slides.length) % slides.length;
+  return offset === 0 ? 'center' : offset === 1 ? 'right' : 'left';
+};
+---
+
+<section
+  class="stage"
+  data-service-hero
+  data-showroom="loading"
+  data-config={JSON.stringify(config)}
+  aria-label="Servicios de Crisur Polarizados"
+>
+  <canvas class="showroom-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Crisur Polarizados, inicio">
+      <Image src={logo} alt="" width={96} class="brand-mark" loading="eager" />
+      <span class="brand-name">crisur</span>
+      <span class="brand-suffix">polarizados</span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Servicios">
+      {
+        slides.map((slide) => (
+          <a href={`#${slide.id}`} data-nav-service={slide.id} aria-current={slide.id === initial ? 'true' : undefined}>
+            {slide.navLabel}
+          </a>
+        ))
+      }
+      <a class="nav-icon" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram de Crisur">
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle
+            cx="17.3"
+            cy="6.7"
+            r="1"
+            class="icon-fill"></circle></svg
+        >
+        <span class="nav-icon-label">Instagram</span>
+      </a>
+      <a class="nav-cta" href={defaultWhatsappUrl} target="_blank" rel="noopener noreferrer">Consultar</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="copy">
+    <h1 class="headline">
+      {
+        slides.map((slide) => (
+          <span class:list={['variant', { 'is-active': slide.id === initial }]} data-variant={slide.id}>
+            <span class="kicker">{slide.kicker}</span>
+            <span class="title" style={`--title-chars:${slide.title.length}`}>
+              {slide.title}
+            </span>
+          </span>
+        ))
+      }
+    </h1>
+    <div class="lede-stack">
+      {
+        slides.map((slide) => (
+          <p class:list={['lede', 'variant', { 'is-active': slide.id === initial }]} data-variant={slide.id}>
+            {slide.lede}
+          </p>
+        ))
+      }
+    </div>
+    <div class="actions">
+      <a class="button button-primary" data-cta href={whatsappUrls[initial]} target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-solid"
+          ><path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+          ></path></svg
+        >
+        <span>Consultar por WhatsApp</span>
+      </a>
+      <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver trabajos en Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle
+            cx="17.3"
+            cy="6.7"
+            r="1"
+            class="icon-fill"></circle></svg
+        >
+        <span>Ver trabajos</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="showroom-zone" data-showroom-zone>
+    {
+      slides.map((slide) => {
+        const poster = posterFor(slide.id);
+        return (
+          poster && (
+            <Image
+              src={poster}
+              alt={slide.sceneDescription}
+              widths={[720, 1440, 2160]}
+              sizes="100vw"
+              loading="lazy"
+              class:list={['poster', { 'is-active': slide.id === initial }]}
+              data-variant={slide.id}
+            />
+          )
+        );
+      })
+    }
+    <noscript><style is:inline>.showroom-zone .poster.is-active { display: block; }</style></noscript>
+  </div>
+
+  <div class="carousel-controls" data-carousel-controls>
+    {
+      slides.map((slide, index) => (
+        <button
+          class="side-label"
+          type="button"
+          data-select={slide.id}
+          data-side={sideOf(index)}
+          tabindex={sideOf(index) === 'center' ? -1 : 0}
+          aria-hidden={sideOf(index) === 'center' ? 'true' : 'false'}
+          aria-label={`Ver ${slide.navLabel.toLowerCase()}`}
+        >
+          <svg class="chevron chevron-left" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+          <span>{slide.navLabel}</span>
+          <svg class="chevron chevron-right" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      ))
+    }
+    <p class="sr-only" aria-live="polite" data-live></p>
+  </div>
+</section>
+
+<script>
+  import './hero-controller';
+</script>
+
+<style>
+  .stage {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: max(100svh, 640px);
+    overflow: hidden;
+    /* Fondo del showroom: el canvas 3D es transparente y se funde sobre este degradé. */
+    background:
+      radial-gradient(ellipse 46% 30% at 50% 76%, rgba(227, 38, 43, 0.2), transparent 72%),
+      radial-gradient(ellipse 80% 55% at 50% 0%, rgba(160, 180, 205, 0.09), transparent 70%),
+      linear-gradient(180deg, var(--color-bg) 0%, #0e1116 62%, #0a0c10 100%);
+  }
+
+  .showroom-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    touch-action: pan-y;
+    transition: opacity 1.4s var(--ease-out);
+  }
+  .stage[data-showroom='ready'] .showroom-canvas {
+    opacity: 1;
+  }
+
+  /* ── Header ─────────────────────────────────────────── */
+  .site-header {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: 4.5rem;
+    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .brand :global(.brand-mark) {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    clip-path: circle(48%);
+  }
+  .brand-name {
+    font-stretch: var(--font-display-stretch);
+    font-weight: var(--font-display-weight);
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-suffix {
+    font-size: 1rem;
+    font-weight: 450;
+    color: var(--color-ink-muted);
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .site-nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 0.95rem;
+    border-radius: var(--radius-control);
+    color: var(--color-ink-muted);
+    font-weight: 550;
+    text-decoration: none;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+  .site-nav a:hover {
+    color: var(--color-ink);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .site-nav a[aria-current='true'] {
+    color: var(--color-ink);
+  }
+  .site-nav a[aria-current='true']::after {
+    content: '';
+    position: absolute;
+    left: 0.95rem;
+    right: 0.95rem;
+    bottom: 0.35rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-brand-red);
+  }
+  .site-nav .nav-icon {
+    width: 2.75rem;
+    justify-content: center;
+    padding: 0;
+  }
+  .nav-icon svg {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .nav-icon-label {
+    display: none;
+  }
+  .site-nav .nav-cta {
+    margin-left: 0.5rem;
+    padding: 0 1.2rem;
+    min-height: 2.5rem;
+    background: var(--color-cta);
+    color: #ffffff;
+    font-weight: 650;
+  }
+  .site-nav .nav-cta:hover {
+    background: var(--color-cta-hover);
+    color: #ffffff;
+  }
+  svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  svg .icon-fill {
+    fill: currentColor;
+    stroke: none;
+  }
+  svg.icon-solid {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  .burger {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: none;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-ink);
+    transition:
+      transform 0.28s var(--ease-in-out),
+      opacity 0.18s linear;
+  }
+  .site-header[data-open='true'] .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .site-header[data-open='true'] .burger span:nth-child(2) {
+    opacity: 0;
+  }
+  .site-header[data-open='true'] .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── Copy ───────────────────────────────────────────── */
+  .copy {
+    position: relative;
+    z-index: 2;
+    /* Con alto de sobra (tablets en vertical) copy + showroom se centran como bloque. */
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(1.5rem, 5.5vh, 3.75rem) 1.25rem 0;
+    text-align: center;
+    pointer-events: none;
+  }
+  .copy a {
+    pointer-events: auto;
+  }
+  /* Las 3 variantes comparten celda: el alto no cambia al rotar la ruleta (sin saltos de layout). */
+  .headline,
+  .lede-stack {
+    display: grid;
+  }
+  .headline .variant,
+  .lede-stack .variant {
+    grid-area: 1 / 1;
+  }
+  .headline .variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+  .variant {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    filter: blur(6px);
+    transition:
+      opacity 0.4s var(--ease-out),
+      transform 0.6s var(--ease-out),
+      filter 0.4s var(--ease-out),
+      visibility 0s linear 0.4s;
+  }
+  .variant.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    filter: none;
+    transition-delay: 0.1s, 0.1s, 0.1s, 0s;
+  }
+  .kicker {
+    font-size: clamp(1rem, 0.9rem + 0.45vw, 1.3rem);
+    font-weight: 500;
+    color: var(--color-ink-muted);
+  }
+  .title {
+    font-stretch: var(--font-display-stretch);
+    font-weight: var(--font-display-weight);
+    /* Escala según largo: "HOGARES" no desborda donde "AUTOS" entra holgado. */
+    font-size: min(6rem, calc((100vw - 2.5rem) / (var(--title-chars) * 0.9)));
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+  }
+  .lede-stack {
+    max-width: 40rem;
+    margin-top: clamp(0.9rem, 2.2vh, 1.4rem);
+  }
+  .lede {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.6;
+    color: #c9cfd6;
+    text-wrap: pretty;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: clamp(1.1rem, 3vh, 1.9rem);
+  }
+  .button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0 1.5rem;
+    overflow: hidden;
+    border-radius: var(--radius-control);
+    font-size: 1rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition:
+      background-color 0.2s,
+      transform 0.25s var(--ease-out),
+      box-shadow 0.25s var(--ease-out);
+  }
+  .button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: none;
+  }
+  .button-primary {
+    background: var(--color-cta);
+    color: #ffffff;
+    box-shadow:
+      0 12px 28px -12px rgba(227, 38, 43, 0.75),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  /* Brillo que cruza el botón al pasar el mouse: responde a la acción, no decora en reposo. */
+  .button-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+    transform: translateX(-120%);
+    transition: transform 0.7s var(--ease-out);
+  }
+  .button-primary:hover {
+    background: var(--color-cta-hover);
+    transform: translateY(-1px);
+    box-shadow:
+      0 16px 32px -12px rgba(227, 38, 43, 0.85),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  .button-primary:hover::after {
+    transform: translateX(120%);
+  }
+  .button-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  .button-secondary:hover {
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-1px);
+  }
+  .button:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* ── Showroom ───────────────────────────────────────── */
+  /* Posters: solo sin WebGL (o sin JS); display:none + lazy = no se descargan si el 3D funciona. */
+  .showroom-zone :global(.poster) {
+    position: absolute;
+    inset: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .stage[data-showroom='unavailable'] .showroom-zone :global(.poster.is-active) {
+    display: block;
+  }
+  .showroom-zone {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: clamp(17rem, 44vh, 36rem);
+    max-height: 100vw;
+    margin-bottom: auto;
+  }
+  .carousel-controls {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .side-label {
+    position: absolute;
+    bottom: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: rgba(12, 15, 19, 0.74);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    pointer-events: auto;
+    transition:
+      opacity 0.35s var(--ease-out),
+      background-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .side-label:hover {
+    background: rgba(26, 30, 36, 0.92);
+    box-shadow: inset 0 0 0 1px rgba(227, 38, 43, 0.6);
+  }
+  .side-label[data-side='left'] {
+    left: 1rem;
+  }
+  .side-label[data-side='right'] {
+    right: 1rem;
+  }
+  .side-label[data-side='center'] {
+    left: 50%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .side-label[data-anchored] {
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    transform: translate3d(calc(var(--x) - 50%), var(--y), 0);
+  }
+  .side-label[data-anchored='false'] {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .chevron {
+    width: 1.1rem;
+    height: 1.1rem;
+    stroke-width: 2.2;
+  }
+  .side-label[data-side='left'] .chevron-right,
+  .side-label[data-side='right'] .chevron-left,
+  .side-label[data-side='center'] .chevron {
+    display: none;
+  }
+
+  /* ── Mobile ─────────────────────────────────────────── */
+  @media (max-width: 880px) {
+    .site-header {
+      height: 4rem;
+    }
+    .burger {
+      display: flex;
+    }
+    .site-nav {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 1rem;
+      left: 1rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      padding: 0.75rem;
+      border-radius: var(--radius-surface);
+      background: var(--color-surface);
+      box-shadow:
+        0 24px 48px -12px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px var(--color-line);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.22s ease,
+        transform 0.28s var(--ease-out),
+        visibility 0s linear 0.28s;
+    }
+    .site-header[data-open='true'] .site-nav {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
+    .site-nav a {
+      min-height: 3rem;
+      padding: 0 1rem;
+      font-size: 1.05rem;
+      color: var(--color-ink);
+    }
+    .site-nav a[aria-current='true']::after {
+      left: 1rem;
+      right: auto;
+      width: 1.5rem;
+      bottom: 0.45rem;
+    }
+    .site-nav .nav-icon {
+      width: auto;
+      justify-content: flex-start;
+      gap: 0.6rem;
+      padding: 0 1rem;
+    }
+    .nav-icon-label {
+      display: inline;
+    }
+    .site-nav .nav-cta {
+      margin: 0.5rem 0 0;
+      justify-content: center;
+      min-height: 3rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .actions {
+      width: 100%;
+      max-width: 22rem;
+    }
+    .button {
+      flex: 1 1 100%;
+    }
+    .button-secondary {
+      min-height: 2.75rem;
+      background: none;
+      box-shadow: none;
+    }
+    .brand-suffix {
+      display: none;
+    }
+  }
+
+  /* ── Entrada (acompaña el acercamiento del 3D) ──────── */
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header {
+      animation: hero-fade 0.9s ease 0.05s both;
+    }
+    .headline .variant.is-active .kicker {
+      animation: hero-rise 0.9s var(--ease-out) 0.08s both;
+    }
+    .headline .variant.is-active .title {
+      animation: hero-rise 1s var(--ease-out) 0.16s both;
+    }
+    .lede-stack {
+      animation: hero-rise 0.9s var(--ease-out) 0.3s both;
+    }
+    .actions {
+      animation: hero-rise 0.9s var(--ease-out) 0.42s both;
+    }
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .variant,
+    .showroom-canvas,
+    .site-nav,
+    .burger span,
+    .button,
+    .button-primary::after {
+      transition: none;
+    }
+  }
+</style>

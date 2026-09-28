@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceHero from '../components/hero/ServiceHero.astro';
+import { heroInitialService, heroSlides } from '../data/hero-slides';
+import { instagramUrl, siteSettings } from '../config/site';
+---
+
+<BaseLayout
+  title={`${siteSettings.businessName} | Polarizado de autos, locales y hogares en ${siteSettings.serviceArea}`}
+  description={`Polarizado, espejado y esmerilado para autos, locales y hogares. Más de ${siteSettings.yearsOfExperience} años en ${siteSettings.serviceArea}. Consultá por WhatsApp.`}
+>
+  <main>
+    <ServiceHero
+      slides={heroSlides}
+      initial={heroInitialService}
+      whatsappNumber={siteSettings.whatsappNumber}
+      defaultWhatsappMessage={siteSettings.whatsappDefaultMessage}
+      instagramUrl={instagramUrl}
+    />
+  </main>
+</BaseLayout>

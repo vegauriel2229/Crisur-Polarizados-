@@ -1,0 +1,176 @@
+{
+  "astro.config.mjs": {
+    "mtime": 1790566321.8782918,
+    "seen": 1790599237.2413743,
+    "ast_hash": "24baf9b6f19fc3f9e070458d2b36960f",
+    "semantic_hash": "24baf9b6f19fc3f9e070458d2b36960f"
+  },
+  "package.json": {
+    "mtime": 1790572180.53569,
+    "seen": 1790599237.241384,
+    "ast_hash": "74f219ef2bd5aa0b436dadb12a7d371b",
+    "semantic_hash": "74f219ef2bd5aa0b436dadb12a7d371b"
+  },
+  "scripts/render-posters.mjs": {
+    "mtime": 1790574052.6688447,
+    "seen": 1790599237.2413878,
+    "ast_hash": "2f84160d1d733ecd0d10cf50a170698f",
+    "semantic_hash": "2f84160d1d733ecd0d10cf50a170698f"
+  },
+  "src/components/hero/ServiceHero.astro": {
+    "mtime": 1790574314.1746671,
+    "seen": 1790599237.24139,
+    "ast_hash": "1b904a80277be01eb65e3673c9a89f9d",
+    "semantic_hash": "1b904a80277be01eb65e3673c9a89f9d"
+  },
+  "src/components/hero/hero-controller.ts": {
+    "mtime": 1790574633.534119,
+    "seen": 1790599237.2413924,
+    "ast_hash": "ec4f1dfcef92ae528328461406312691",
+    "semantic_hash": "ec4f1dfcef92ae528328461406312691"
+  },
+  "src/components/hero/showroom/dioramas/car.ts": {
+    "mtime": 1790571329.948171,
+    "seen": 1790599237.2413945,
+    "ast_hash": "810ae7d03a27e8cf0d5a022826dcd8a5",
+    "semantic_hash": "810ae7d03a27e8cf0d5a022826dcd8a5"
+  },
+  "src/components/hero/showroom/dioramas/common.ts": {
+    "mtime": 1790569015.6320138,
+    "seen": 1790599237.2413964,
+    "ast_hash": "3fb9a4408ef70f69ba4760a180862969",
+    "semantic_hash": "3fb9a4408ef70f69ba4760a180862969"
+  },
+  "src/components/hero/showroom/dioramas/house.ts": {
+    "mtime": 1790569150.2941823,
+    "seen": 1790599237.2413986,
+    "ast_hash": "3c58ec2b5f61b70b94d4b4196510bee3",
+    "semantic_hash": "3c58ec2b5f61b70b94d4b4196510bee3"
+  },
+  "src/components/hero/showroom/dioramas/storefront.ts": {
+    "mtime": 1790569103.7840147,
+    "seen": 1790599237.2414007,
+    "ast_hash": "b87d3ae73b81866022eef82514c9d1c0",
+    "semantic_hash": "b87d3ae73b81866022eef82514c9d1c0"
+  },
+  "src/components/hero/showroom/environment.ts": {
+    "mtime": 1790570763.159785,
+    "seen": 1790599237.2414029,
+    "ast_hash": "58815a3100f605cab21694f2536ac6d9",
+    "semantic_hash": "58815a3100f605cab21694f2536ac6d9"
+  },
+  "src/components/hero/showroom/geometry.ts": {
+    "mtime": 1790568989.9581606,
+    "seen": 1790599237.241405,
+    "ast_hash": "e4420415bd871adf78971bc07784fb49",
+    "semantic_hash": "e4420415bd871adf78971bc07784fb49"
+  },
+  "src/components/hero/showroom/materials.ts": {
+    "mtime": 1790570763.1652968,
+    "seen": 1790599237.241407,
+    "ast_hash": "e94ca4db3b089efcee84b68390b89401",
+    "semantic_hash": "e94ca4db3b089efcee84b68390b89401"
+  },
+  "src/components/hero/showroom/motion.ts": {
+    "mtime": 1790574420.5230129,
+    "seen": 1790599237.2414093,
+    "ast_hash": "648d71fec53aba782d96ace27754f847",
+    "semantic_hash": "648d71fec53aba782d96ace27754f847"
+  },
+  "src/components/hero/showroom/showroom.ts": {
+    "mtime": 1790572180.5781422,
+    "seen": 1790599237.2414112,
+    "ast_hash": "67e91c5f5a9b08e671ce7b7679fb05f0",
+    "semantic_hash": "67e91c5f5a9b08e671ce7b7679fb05f0"
+  },
+  "src/components/hero/showroom/textures.ts": {
+    "mtime": 1790570763.1617987,
+    "seen": 1790599237.241413,
+    "ast_hash": "4ca6b72382d281ec9351a964e8fc4600",
+    "semantic_hash": "4ca6b72382d281ec9351a964e8fc4600"
+  },
+  "src/components/hero/showroom/types.ts": {
+    "mtime": 1790572180.5394578,
+    "seen": 1790599237.241415,
+    "ast_hash": "f1124f640ce68cbacd3bf1891e165605",
+    "semantic_hash": "f1124f640ce68cbacd3bf1891e165605"
+  },
+  "src/config/site.ts": {
+    "mtime": 1790566339.0136478,
+    "seen": 1790599237.241417,
+    "ast_hash": "42c6115d00f53b5c362cf362566d9d9a",
+    "semantic_hash": "42c6115d00f53b5c362cf362566d9d9a"
+  },
+  "src/data/hero-slides.ts": {
+    "mtime": 1790574313.9760964,
+    "seen": 1790599237.2414188,
+    "ast_hash": "50ff9b52a01e0b309d39d0ea435caf4f",
+    "semantic_hash": "50ff9b52a01e0b309d39d0ea435caf4f"
+  },
+  "src/layouts/BaseLayout.astro": {
+    "mtime": 1790566697.4522307,
+    "seen": 1790599237.2414207,
+    "ast_hash": "2ab96ead704fe0a41551e9c095b0f758",
+    "semantic_hash": "2ab96ead704fe0a41551e9c095b0f758"
+  },
+  "src/lib/whatsapp.ts": {
+    "mtime": 1790566340.1926696,
+    "seen": 1790599237.241423,
+    "ast_hash": "01d2bcaf35b5a76d9626451c6ec136ae",
+    "semantic_hash": "01d2bcaf35b5a76d9626451c6ec136ae"
+  },
+  "src/pages/index.astro": {
+    "mtime": 1790569656.7613895,
+    "seen": 1790599237.2414248,
+    "ast_hash": "40fb46649d7e8bcdc3da7179c7a12118",
+    "semantic_hash": "40fb46649d7e8bcdc3da7179c7a12118"
+  },
+  "tsconfig.json": {
+    "mtime": 1790566321.952798,
+    "seen": 1790599237.241427,
+    "ast_hash": "bcc46dd12386430729ef7a1c2378a105",
+    "semantic_hash": "bcc46dd12386430729ef7a1c2378a105"
+  },
+  "claude.md": {
+    "mtime": 1790562610.3023849,
+    "seen": 1790599237.24143,
+    "ast_hash": "cb876533a2da68cc53fea6e94d14da30",
+    "semantic_hash": "cb876533a2da68cc53fea6e94d14da30"
+  },
+  "docs/SDD.md": {
+    "mtime": 1790594589.4046788,
+    "seen": 1790599237.2414324,
+    "ast_hash": "d6dbf0d8c7d67c11b8bd27efd956ca64",
+    "semantic_hash": "d6dbf0d8c7d67c11b8bd27efd956ca64"
+  },
+  "src/assets/brand/README.md": {
+    "mtime": 1790564883.8143165,
+    "seen": 1790599237.2414346,
+    "ast_hash": "11b1ba8d713f5cb2b54054a331c7edff",
+    "semantic_hash": "11b1ba8d713f5cb2b54054a331c7edff"
+  },
+  "src/assets/brand/logo.jpeg": {
+    "mtime": 1790565734.1000204,
+    "seen": 1790599237.2414365,
+    "ast_hash": "a2f25a7c06f9e66b658c9222800eafe9",
+    "semantic_hash": "a2f25a7c06f9e66b658c9222800eafe9"
+  },
+  "src/assets/hero/posters/autos.png": {
+    "mtime": 1790574180.7732718,
+    "seen": 1790599237.2414386,
+    "ast_hash": "461ca425643b85870189e741aa59d7c2",
+    "semantic_hash": "461ca425643b85870189e741aa59d7c2"
+  },
+  "src/assets/hero/posters/hogares.png": {
+    "mtime": 1790574242.7631142,
+    "seen": 1790599237.2414405,
+    "ast_hash": "4fd4e054c6927a0398173b4a9e35b375",
+    "semantic_hash": "4fd4e054c6927a0398173b4a9e35b375"
+  },
+  "src/assets/hero/posters/locales.png": {
+    "mtime": 1790574110.585017,
+    "seen": 1790599237.2414424,
+    "ast_hash": "155571c6842a361f40de9ce7422da5a5",
+    "semantic_hash": "155571c6842a361f40de9ce7422da5a5"
+  }
+}

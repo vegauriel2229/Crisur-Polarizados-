@@ -1,0 +1,23 @@
+/* Único punto de verdad del sistema visual: cambiar tipografía o paleta = editar este archivo. */
+:root {
+  --color-bg: #0c0f13;
+  --color-surface: #1a1e24;
+  --color-surface-raised: #232830;
+  --color-ink: #eef1f4;
+  --color-ink-muted: #a9b0b9;
+  --color-line: rgba(238, 241, 244, 0.14);
+  --color-brand-red: #e3262b;
+  --color-cta: #d91f26;
+  --color-cta-hover: #ee2b32;
+  --color-accent-ink: #ff5a5f;
+
+  --font-family: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Display: Archivo expandido y extra negrita (eje wdth 125). */
+  --font-display-stretch: 125%;
+  --font-display-weight: 820;
+
+  --radius-control: 999px;
+  --radius-surface: 14px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
