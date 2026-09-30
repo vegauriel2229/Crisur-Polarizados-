@@ -12,11 +12,11 @@ Particulares y comerciantes de Godoy Cruz / Gran Mendoza que llegan mayormente d
 
 ## Product Purpose
 
-Landing institucional de Crisur Polarizados, negocio familiar con más de 10 años de trayectoria. Existe para convertir visitas en consultas por WhatsApp (y seguimiento por Instagram). Éxito = clic en "Consultar por WhatsApp" con el mensaje prearmado del servicio elegido.
+Sitio institucional de Crisur Polarizados, negocio familiar con más de 10 años de trayectoria. Existe para convertir visitas en consultas por WhatsApp (y seguimiento por Instagram). Éxito = clic en "Consultar por WhatsApp" con el mensaje prearmado del servicio elegido.
 
 ## Positioning
 
-Taller local con más de 10 años que coloca láminas en los tres frentes (autos, hogares, locales) con todas las láminas y tonos del mercado, y resuelve cada caso en una charla directa, sin catálogo cerrado ni precios publicados.
+Taller local con más de 10 años que coloca láminas en los tres frentes (autos, hogares, negocios) con todas las láminas y tonos del mercado, y resuelve cada caso en una charla directa, sin catálogo cerrado ni precios publicados.
 
 ## Operating Context
 
@@ -26,10 +26,12 @@ Taller local con más de 10 años que coloca láminas en los tres frentes (autos
 ## Capabilities and Constraints
 
 - Servicios: polarizado, espejado y esmerilado; láminas de seguridad (anti-astillas / antivandálicas) — confirmado por el cliente 2026-09-28.
-- Categorías: Autos, Hogares, Locales (orden fijo de la ruleta: Locales · Autos · Hogares; inicial: Autos).
+- Categorías: Autos, Hogares, Negocios ("Locales" pasó a "Negocios" por pedido del cliente, 2026-09-30). Orden en el inicio, el menú y el recorrido entre páginas: Autos → Hogares → Negocios → Autos.
+- Inicio (pedido del cliente, 2026-09-30): el logo como moneda que se lanza una vez al entrar (logo en las dos caras, lenta, no interactiva), las redes (WhatsApp, Instagram), los tres servicios para elegir con el diseño 2D y "Sobre nosotros".
+- Páginas: `/` (inicio institucional) y una página por servicio (`/autos`, `/hogares`, `/negocios`) con una escena 3D que aplica la lámina mientras se scrollea. Estilo 3D "cromo y vidrio" elegido por el cliente el 2026-09-30 (no modelos realistas).
 - Sin precios publicados. Sin catálogo de láminas/tonos.
 - Afirmaciones técnicas: **generales, sin cifras** (no publicar % de UV ni de reducción de calor) — decisión del cliente 2026-09-28.
-- Stack: Astro + TypeScript estricto, estático, deploy en Vercel.
+- Stack: Astro + TypeScript estricto, estático, deploy en Vercel. Three.js solo en las páginas de servicio (carga diferida) y Motion para el scroll.
 
 ## Brand Commitments
 

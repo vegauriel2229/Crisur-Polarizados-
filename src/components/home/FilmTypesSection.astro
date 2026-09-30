@@ -1,0 +1,177 @@
+---
+import { FILM_TYPES } from '../../data/home';
+---
+
+<section class="films" aria-labelledby="films-title">
+  <div class="films-inner">
+    <header class="films-head">
+      <h2 id="films-title">Una lámina para cada vidrio</h2>
+      <p>Pasá el mouse (o tocá) cada vidrio para terminar de aplicar la lámina y ver cómo cambia lo que se ve del otro lado.</p>
+    </header>
+    <ul class="swatches">
+      {
+        FILM_TYPES.map((type) => (
+          <li class="swatch" data-film={type.film}>
+            {/* Vidrio de muestra: un ambiente cálido detrás y la lámina aplicada a medias (--film). */}
+            <div class="swatch-glass" aria-hidden="true">
+              <div class="swatch-interior" />
+              {type.film === 'security' && (
+                <svg class="swatch-crack" viewBox="0 0 200 150" preserveAspectRatio="none">
+                  <path d="M118 86 L96 40 L102 8 M118 86 L170 52 L198 44 M118 86 L160 128 L176 150 M118 86 L86 118 L58 150 M118 86 L64 80 L4 92 M118 86 L132 30 L150 0 M104 62 L130 60 L150 70 L144 96 L124 110 L100 104 L94 82 Z" />
+                </svg>
+              )}
+              <div class="swatch-film" />
+              <span class="swatch-squeegee" />
+            </div>
+            <h3>{type.title}</h3>
+            <p>{type.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .films {
+    padding: clamp(4rem, 9vw, 7rem) clamp(1rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--color-line);
+  }
+  .films-inner {
+    max-width: 76rem;
+    margin: 0 auto;
+  }
+  .films-head {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 900px) {
+    .films-head {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: end;
+      gap: 3rem;
+    }
+  }
+  h2 {
+    max-width: 14ch;
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.1rem, 1.3rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .films-head p {
+    max-width: 48ch;
+    color: var(--color-ink-muted);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.65;
+  }
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    list-style: none;
+  }
+  @media (min-width: 900px) {
+    .swatches {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .swatch {
+    --film: 0.55;
+    transition: --film 0.9s var(--ease-out);
+  }
+  .swatch:hover {
+    --film: 1;
+  }
+  .swatch-glass {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-surface);
+    box-shadow:
+      inset 0 0 0 1px var(--color-line),
+      0 24px 40px -28px rgba(0, 0, 0, 0.9);
+  }
+  /* Ambiente del otro lado del vidrio: luz cálida, piso y un sillón. Es lo que la lámina oculta o suaviza. */
+  .swatch-interior {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 74% 26%, var(--art-room-light) 0 5%, var(--art-room-glow) 12%, transparent 34%),
+      linear-gradient(180deg, transparent 64%, var(--art-room-floor) 64%),
+      linear-gradient(180deg, transparent 48%, var(--art-room-furniture) 48%, var(--art-room-furniture) 66%, transparent 66%) 18% 0 / 44%
+        100% no-repeat,
+      linear-gradient(180deg, var(--art-room-wall-top), var(--art-room-wall-bottom));
+  }
+  .swatch-crack {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: rgba(236, 241, 246, 0.85);
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+  }
+  /* La lámina entra desde la izquierda: --film = cuánto del vidrio cubre (0 a 1). */
+  .swatch-film {
+    position: absolute;
+    inset: 0;
+    transform: translateX(calc((var(--film) - 1) * 100%));
+  }
+  .swatch[data-film='tint'] .swatch-film {
+    background: linear-gradient(180deg, var(--film-tint-top), var(--film-tint-bottom));
+    opacity: 0.95;
+  }
+  .swatch[data-film='mirror'] .swatch-film {
+    background: linear-gradient(
+      118deg,
+      var(--film-mirror-light) 0%,
+      var(--film-mirror-mid) 38%,
+      var(--film-mirror-dark) 50%,
+      var(--film-mirror-mid) 64%,
+      var(--film-mirror-light) 100%
+    );
+  }
+  /* El esmerilado es vidrio de verdad: difumina lo que hay detrás (blur) en vez de taparlo. */
+  .swatch[data-film='frost'] .swatch-film {
+    background: linear-gradient(180deg, var(--film-frost-top), var(--film-frost-bottom));
+    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(9px);
+  }
+  /* La lámina de seguridad es transparente: se nota por el brillo y porque la grieta no se desarma. */
+  .swatch[data-film='security'] .swatch-film {
+    background: linear-gradient(135deg, rgba(172, 198, 224, 0.2), rgba(172, 198, 224, 0.06));
+  }
+  .swatch-squeegee {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--film) * 100%);
+    width: 10px;
+    margin-left: -10px;
+    background: linear-gradient(90deg, rgba(255, 90, 95, 0), rgba(255, 90, 95, 0.9) 70%, #fff 100%);
+    opacity: clamp(0, calc((1 - var(--film)) * 14), 1);
+  }
+  h3 {
+    margin-top: 1rem;
+    font-stretch: 112%;
+    font-weight: 750;
+    font-size: 1.15rem;
+  }
+  .swatch p {
+    margin-top: 0.35rem;
+    color: var(--color-ink-muted);
+    font-size: 0.95rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .swatch {
+      transition: none;
+    }
+  }
+</style>

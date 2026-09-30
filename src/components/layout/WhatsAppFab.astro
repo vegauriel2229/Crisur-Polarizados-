@@ -1,0 +1,71 @@
+---
+import Icon from '../Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<!-- Aparece al dejar atrás la primera pantalla (ahí ya hay un CTA visible). -->
+<a class="whatsapp-fab" href={href} target="_blank" rel="noopener noreferrer" aria-label={label} data-whatsapp-fab>
+  <Icon name="whatsapp" class="fab-icon" />
+</a>
+
+<script>
+  const fab = document.querySelector<HTMLElement>('[data-whatsapp-fab]');
+  if (fab !== null) {
+    const update = (): void => {
+      fab.dataset['visible'] = String(window.scrollY > window.innerHeight * 0.8);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>
+
+<style>
+  .whatsapp-fab {
+    position: fixed;
+    right: clamp(1rem, 3vw, 1.75rem);
+    bottom: clamp(1rem, 3vw, 1.75rem);
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-control);
+    background: var(--color-cta);
+    color: var(--color-on-red);
+    box-shadow:
+      0 14px 30px -12px rgba(227, 38, 43, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.4s var(--ease-out),
+      background-color 0.2s,
+      visibility 0s linear 0.4s;
+  }
+  .whatsapp-fab[data-visible='true'] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .whatsapp-fab:hover {
+    background: var(--color-cta-hover);
+  }
+  .whatsapp-fab :global(.fab-icon) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-fab {
+      transition: none;
+    }
+  }
+</style>

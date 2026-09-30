@@ -1,0 +1,265 @@
+---
+import CoinLogo from './CoinLogo.astro';
+import Icon from '../Icon.astro';
+import ServiceArt from '../ServiceArt.astro';
+import { describeTreatments, getService, type ServiceId } from '../../data/services';
+import { instagramUrl, siteSettings } from '../../config/site';
+
+interface Props {
+  whatsappUrl: string;
+}
+
+const { whatsappUrl } = Astro.props;
+// Mismo orden que el menú y el recorrido entre páginas.
+const choices = (['autos', 'hogares', 'negocios'] as const satisfies readonly ServiceId[]).map(getService);
+---
+
+<section class="home-hero" aria-labelledby="home-title">
+  <!-- Header compartido (SiteHeader): vive dentro del inicio para compartir su fondo. -->
+  <slot name="header" />
+
+  <div class="intro">
+    <CoinLogo />
+    <h1 class="home-title" id="home-title">Polarizados para autos, hogares y negocios</h1>
+    <p class="home-lede">
+      Más de {siteSettings.yearsOfExperience} años colocando láminas en {siteSettings.serviceArea}. Elegí qué querés polarizar y mirá cómo queda.
+    </p>
+    <div class="socials">
+      <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="whatsapp" />
+        <span>WhatsApp</span>
+      </a>
+      <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label={`Instagram @${siteSettings.instagramHandle}`}>
+        <Icon name="instagram" />
+        <span>@{siteSettings.instagramHandle}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="chooser" aria-labelledby="chooser-title">
+    <h2 class="chooser-title" id="chooser-title">¿Qué querés polarizar?</h2>
+    <ul class="choices">
+      {
+        choices.map((service) => (
+          <li>
+            {/* La ventana comparte nombre de transición con la escena 3D de su página: al entrar, se convierte en ella. */}
+            <a class="choice" href={`/${service.id}`} style={`view-transition-name: portal-${service.id}`}>
+              <span class="choice-window">
+                <ServiceArt service={service.id} uid={`choice-${service.id}`} />
+              </span>
+              <span class="choice-caption">
+                <span class="choice-name">{service.navLabel}</span>
+                <span class="choice-treatments">{describeTreatments(service.treatments)}</span>
+                <span class="choice-cta">Ver cómo queda</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</section>
+
+<style>
+  .home-hero {
+    position: relative;
+    isolation: isolate;
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+    /* Grafito con luz fría arriba y la luz roja de marca detrás de la moneda. */
+    background:
+      radial-gradient(ellipse 34rem 20rem at 50% 12rem, rgba(227, 38, 43, 0.22), transparent 70%),
+      radial-gradient(ellipse 80% 55% at 50% 0%, var(--color-cool-light), transparent 70%),
+      linear-gradient(180deg, var(--color-bg) 0%, #0e1116 62%, #0a0c10 100%);
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(2rem, 6svh, 3.5rem) 1.25rem 0;
+    text-align: center;
+  }
+  .home-title {
+    max-width: 18ch;
+    margin-top: clamp(0.75rem, 2svh, 1.25rem);
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.1rem, 1.3rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .home-lede {
+    max-width: 40rem;
+    margin-top: 1rem;
+    color: var(--color-ink-soft);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: clamp(1.25rem, 3svh, 1.75rem);
+  }
+
+  .chooser {
+    max-width: 76rem;
+    margin: clamp(3rem, 8svh, 5rem) auto 0;
+    padding: 0 clamp(1rem, 4vw, 2.5rem);
+  }
+  .chooser-title {
+    font-stretch: 112%;
+    font-weight: 750;
+    font-size: clamp(1.3rem, 0.95rem + 1.5vw, 2.3rem);
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+  .choices {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(1.25rem, 3vw, 2rem);
+    list-style: none;
+  }
+  @media (min-width: 760px) {
+    .choices {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /*
+   * Cada opción es una ventana de vidrio (el marco translúcido con blur del sistema) con la
+   * ilustración del servicio adentro. La lámina reposa a medio aplicar y la espátula la
+   * termina al pasar el mouse o enfocar con el teclado; la luz roja se enciende detrás.
+   */
+  .choice {
+    --film: 0.35;
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    height: 100%;
+    padding: 0.55rem 0.55rem 1rem;
+    border-radius: 20px;
+    color: var(--color-ink);
+    text-decoration: none;
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 46%, rgba(255, 255, 255, 0.06));
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+      0 36px 60px -36px rgba(0, 0, 0, 0.9);
+    transition:
+      --film 0.9s var(--ease-out),
+      transform 0.4s var(--ease-out),
+      box-shadow 0.4s var(--ease-out);
+  }
+  .choice::before {
+    content: '';
+    position: absolute;
+    inset: auto 8% -12% 8%;
+    height: 55%;
+    z-index: -1;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(227, 38, 43, 0.5), transparent 72%);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+    pointer-events: none;
+  }
+  .choice:hover,
+  .choice:focus-visible {
+    --film: 1;
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 40px 70px -34px rgba(227, 38, 43, 0.5);
+  }
+  .choice:hover::before,
+  .choice:focus-visible::before {
+    opacity: 1;
+  }
+  .choice-window {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-surface);
+    background: var(--art-backdrop);
+  }
+  .choice-caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    text-align: center;
+  }
+  .choice-name {
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .choice-treatments {
+    color: var(--color-ink-muted);
+    font-size: 0.875rem;
+  }
+  .choice-cta {
+    margin-top: 0.6rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: var(--radius-control);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    font-weight: 650;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+  }
+  .choice:hover .choice-cta,
+  .choice:focus-visible .choice-cta {
+    background: var(--color-cta);
+    box-shadow: none;
+    color: var(--color-on-red);
+  }
+
+  /* Celular: cada opción es una fila (dibujo a la izquierda, texto a la derecha) para ver las tres sin scrollear tanto. */
+  @media (max-width: 759px) {
+    .choice {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+      align-items: center;
+      padding: 0.5rem;
+    }
+    .choice-caption {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .choice-name {
+      font-size: 1.3rem;
+    }
+    .choice-cta {
+      margin-top: 0.4rem;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.875rem;
+    }
+  }
+  @media (max-width: 520px) {
+    .socials {
+      width: 100%;
+      max-width: 22rem;
+    }
+    .socials .button {
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .choice,
+    .choice::before,
+    .choice-cta {
+      transition: none;
+    }
+  }
+</style>

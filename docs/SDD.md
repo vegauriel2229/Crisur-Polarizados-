@@ -1,8 +1,11 @@
 # Crisur — Software Design Document
 
-> Estado: **v0.5 — Selector de vidrio + sección Servicios** · Última actualización: 2026-09-28
+> Estado: **v0.7 — Inicio con moneda + selector, carrusel de trabajos** · Última actualización: 2026-09-30
 >
-> v0.5 reemplaza el showroom 3D (v0.4, recuperable en el commit `07b90f7`) por un selector de ventanas de vidrio dibujadas con SVG + CSS, y agrega la sección de servicios.
+> v0.7 (pedido del cliente): el inicio deja de abrir en Autos. Ahora muestra el logo como una moneda que se lanza una vez al entrar (el logo en las dos caras), las redes, el selector de los tres servicios (diseño 2D de vidrio) y "Sobre nosotros". Cada página de servicio suma un carrusel de trabajos que se llena solo desde `src/assets/gallery/<servicio>/`. Las escenas 3D pasan a objetos claros (auto perla, hormigón claro). Se eliminan la ruleta del hero y las tarjetas de servicio de la home (§9.4).
+>
+> v0.6 agrega `/autos`, `/hogares` y `/negocios`, cada una con una escena 3D que aplica la lámina mientras se scrollea (§12), header y footer compartidos, secciones institucionales en la home y 404. "Locales" pasa a llamarse **Negocios** (pedido del usuario, 2026-09-30).
+> v0.5 reemplazó el showroom 3D (v0.4, commit `07b90f7`) por el selector de vidrio SVG + CSS de la home, que se mantiene.
 
 ## 1. Objetivo
 
@@ -30,14 +33,15 @@ Sitio web institucional de **Crisur Polarizados** (Godoy Cruz, Mendoza; +10 año
 
 | Ruta | Contenido |
 |---|---|
-| `/` | Hero + CTA WhatsApp, resumen de servicios (autos / hogar-oficina), galería destacada, diferenciales, CTA final |
-| `/autos` | Polarizado automotor: tipos de film, niveles de oscuridad, beneficios, CTA |
-| `/hogar-y-oficinas` | Polarizado y esmerilado arquitectónico: ventanales, mamparas, oficinas, CTA |
-| `/galeria` | Trabajos filtrables por categoría |
-| `/keystatic` | Panel de administración (protegido por login GitHub) |
+| `/` | Moneda con el logo (se lanza al entrar), redes, selector de los 3 servicios (→ página de cada uno), sobre nosotros, tipos de lámina, cómo trabajamos, preguntas frecuentes, CTA final (§9.4) |
+| `/autos` | Escena 3D del auto (§12) + técnicas, preguntas frecuentes, CTA, portal a Hogares |
+| `/hogares` | Escena 3D de la casa (§12) + técnicas, preguntas frecuentes, CTA, portal a Negocios |
+| `/negocios` | Escena 3D del frente comercial (§12) + técnicas, preguntas frecuentes, CTA, portal a Autos |
+| `/galeria` | Pendiente: sin fotos de trabajos todavía (hoy "Ver trabajos" lleva a Instagram) |
+| `/keystatic` | Pendiente (Keystatic todavía no está integrado) |
 | `/404` | Página no encontrada |
 
-Elementos globales: header con navegación, footer con contacto, botón flotante de WhatsApp.
+Elementos globales: header con navegación (`SiteHeader`), footer con contacto (`SiteFooter`), botón flotante de WhatsApp.
 
 ## 4. Modelo de datos (colecciones Keystatic)
 
@@ -134,19 +138,29 @@ En desarrollo, Keystatic usa almacenamiento `local` (sin credenciales).
 ```
 src/
   components/
-    hero/
-      ServiceHero.astro      # header, copy por servicio y selector de ventanas (tablist)
-      hero-controller.ts     # estado del selector, teclado, swipe, #hash, menú mobile
-    services/
-      ServicesSection.astro  # grilla de tarjetas de servicio
+    layout/
+      SiteHeader.astro · site-header.ts   # header compartido + menú mobile
+      SiteFooter.astro · WhatsAppFab.astro
+    home/                    # HomeHero (moneda + redes + selector), CoinLogo + coin.ts, AboutSection,
+                             # FilmTypesSection, ProcessSection, HomeFaqSection
+    service-story/
+      ServiceStory.astro     # escena fija + capítulos + portal (§12)
+      story-controller.ts    # scroll, índice, contador, carga diferida de la escena
+      ServiceDetails.astro   # beneficios + preguntas frecuentes
+      WorkGallery.astro      # carrusel de trabajos (o aviso mientras no hay fotos)
+    film-scene/              # motor 3D (§12): engine, studio, film-glass, camera-path, geometry, architecture
+      scenes/                # car.ts · house.ts · storefront.ts
     ServiceArt.astro         # ilustración SVG de cada servicio + capa de lámina animable
-    Icon.astro               # íconos SVG (WhatsApp, Instagram, beneficios)
+    Faq.astro · Icon.astro
   assets/brand/     # logo
   config/site.ts    # datos del negocio (provisorio hasta Keystatic)
-  data/services.ts  # contenido de los 3 servicios (hero + tarjetas)
+  data/services.ts  # contenido de los 3 servicios (hero, tarjetas, capítulos, preguntas)
+  data/home.ts      # pasos, tipos de lámina y preguntas de la home
+  data/gallery.ts   # fotos de trabajos por servicio (desde assets/gallery/<servicio>/)
+  assets/gallery/   # autos/ · hogares/ · negocios/: acá van las fotos del carrusel
   lib/whatsapp.ts · lib/seo.ts
   layouts/BaseLayout.astro  # <head>: meta, Open Graph, canonical, JSON-LD, preload de fuente
-  pages/index.astro · pages/robots.txt.ts · pages/sitemap.xml.ts
+  pages/index.astro · pages/[service].astro · pages/404.astro · pages/robots.txt.ts · pages/sitemap.xml.ts
   styles/
 public/og-image.jpg  # vista previa al compartir (captura del hero, 1200×630)
 ```
@@ -185,102 +199,41 @@ public/og-image.jpg  # vista previa al compartir (captura del hero, 1200×630)
 3. **El rojo es luz:** brillo bajo la ventana destacada, borde de la espátula y CTA; no se reparte en adornos.
 4. **Nada inventado:** sin cifras técnicas, fotos ni testimonios falsos (ver `PRODUCT.md`).
 
-## 9.4 Hero "Selector de vidrio" (home) — reemplaza al showroom 3D
-
-### Layout
+## 9.4 Inicio (v0.7) — reemplaza a la ruleta y a las tarjetas de v0.5
 
 ```
-Desktop / tablet                                      Mobile
-┌──────────────────────────────────────────────┐     ┌──────────────────┐
-│ ◉ crisur polarizados   Locales Autos Hogares ☐│     │ ◉ crisur      ☰  │
-├──────────────────────────────────────────────┤     ├──────────────────┤
-│              Polarizado para                 │     │ Polarizado para  │
-│                  AUTOS                       │     │      AUTOS       │
-│     Privacidad, menos calor y protección…    │     │  Privacidad, …   │
-│   [ ◯ Consultar por WhatsApp ] [ Trabajos ]  │     │ [◯ Consultar  ]  │
-│                                              │     │   Ver trabajos   │
-│  ┌──────┐   ┌────────────────┐   ┌──────┐    │     │┐ ┌────────────┐ ┌│
-│  │local │   │  AUTO + lámina │   │ casa │    │     ││ │AUTO+lámina │ ││
-│  └──────┘   └────────────────┘   └──────┘    │     │┘ └────────────┘ └│
-│   Locales     Autos (brillo rojo)  Hogares   │     │      Autos       │
-└──────────────────────────────────────────────┘     └──────────────────┘
+┌──────────────────────────────────────────────┐
+│ ◉ crisur polarizados  Autos Hogares Negocios Nosotros ◎ [Consultar] │
+├──────────────────────────────────────────────┤
+│                 ( moneda )                   │   logo en las dos caras; se lanza una vez al entrar
+│   Polarizados para autos, hogares y negocios │   h1
+│   Más de 10 años … Elegí qué querés …        │
+│        [ WhatsApp ]  [ @crisur2026 ]         │
+│            ¿Qué querés polarizar?            │
+│   [ Autos ]     [ Hogares ]    [ Negocios ]  │   ventanas de vidrio → /autos …
+├──────────────────────────────────────────────┤
+│ Sobre nosotros · Una lámina para cada vidrio · Cómo trabajamos · Preguntas + cierre │
+└──────────────────────────────────────────────┘
 ```
-
-- `.stage` = columna flex, `min-height: max(100svh, 640px)`: copy arriba, selector abajo (`flex: 1`).
-- Las 3 ventanas comparten la misma celda de grid; su lugar (izquierda/centro/derecha) es un `transform` según `data-pos`. En mobile las laterales asoman desde los bordes.
-
-### Ruleta (orden fijo, cíclico)
-
-`['locales', 'autos', 'hogares']` → al cargar: **Locales izquierda · Autos centro · Hogares derecha**. Elegir una lateral la trae al centro y las otras rotan un lugar.
-
-| `ServiceId` | Ilustración | Láminas dibujadas |
-|---|---|---|
-| `locales` | Frente comercial con vidriera y puerta | Vidriera polarizada + banda esmerilada + puerta espejada |
-| `autos` | Sedán de perfil | Ventanillas polarizadas |
-| `hogares` | Casa moderna de dos plantas | Ventanales espejados + ventanas esmeriladas |
 
 ### Contratos
 
 ```ts
-// src/data/services.ts
-type ServiceId = 'locales' | 'autos' | 'hogares';
-type Treatment = 'polarizado' | 'espejado' | 'esmerilado' | 'seguridad';
-type BenefitKind = 'heat' | 'privacy' | 'uv' | 'security';
-interface Benefit { kind: BenefitKind; title: string; text: string }
-interface Service {
-  id: ServiceId;
-  navLabel: string;
-  hero: { titlePrefix: string; title: string; lede: string };   // h1 en dos líneas (prefijo + palabra display) + bajada
-  summary: string;                                          // párrafo de la tarjeta
-  treatments: readonly Treatment[];
-  benefits: readonly Benefit[];
-  whatsappMessage: string;
-  ctaLabel: string;
-  photo?: { src: ImageMetadata; alt: string };             // foto real: reemplaza a la ilustración en hero y tarjeta
-}
-const services: readonly Service[];      // orden = orden de la ruleta
-const initialServiceId: ServiceId;
+// src/components/home/CoinLogo.astro + coin.ts
+// Sin props. role="img" con aria-label "Logo de Crisur Polarizados"; no es interactiva (pedido del cliente).
+function tossOnce(coin: HTMLElement): void;   // un solo lanzamiento de 2,8 s a los 300 ms de cargar
+// prefers-reduced-motion: sin lanzamiento, la moneda queda quieta mostrando el logo.
 
-// src/components/ServiceArt.astro
-interface Props { service: ServiceId; uid: string }        // uid: prefijo único de ids SVG (clipPath/gradientes)
-// API de estilo: --film ∈ [0, 1] (heredable, registrada con @property) = cuánto de la lámina está aplicada.
+// src/components/home/HomeHero.astro
+interface Props { whatsappUrl: string }                    // slot "header" = SiteHeader
+// Opciones = getService() en el orden del recorrido: autos, hogares, negocios.
+// Cada opción es un <a> con view-transition-name: portal-<id> (se convierte en la escena de su página).
 
-// src/components/hero/ServiceHero.astro
-interface Props { services: readonly Service[]; initial: ServiceId; whatsappNumber: string;
-                  defaultWhatsappMessage: string; instagramUrl: string }
-// @throws Error si services.length !== 3 o `initial` no existe (build time).
-
-// src/components/services/ServicesSection.astro
-interface Props { services: readonly Service[]; whatsappNumber: string; yearsOfExperience: number; serviceArea: string }
+// src/components/home/AboutSection.astro — id="nosotros" (link "Nosotros" del menú: /#nosotros)
 ```
 
-### Animación
-
-| Momento | Qué pasa | Duración |
-|---|---|---|
-| Entrada | Copy sube y se enfoca; las ventanas aparecen (centro primero); la espátula aplica la lámina en la ventana central | ~1.9 s |
-| Cambio de servicio | Las ventanas se deslizan a su nuevo lugar; la saliente pierde la lámina, la nueva destacada la recibe; el copy hace crossfade | ~1.6 s |
-| Tarjetas (hover/foco) | La lámina, detenida a mitad de camino, termina de aplicarse | 0.9 s |
-| `prefers-reduced-motion` | Sin entrada ni deslizamientos; cambio instantáneo | — |
-
-- La lámina se mueve con una sola variable CSS (`--film`), registrada con `@property` para que sea animable. Sin JS de animación: el JS solo cambia `data-pos`.
-
-### Interacción y accesibilidad
-
-- Selector = `role="tablist"`; cada ventana es un `role="tab"` que controla el copy (`role="tabpanel"`). Tabindex móvil: solo la ventana elegida entra en el orden de tabulación; ←/→ cambian de servicio.
-- Otros controles: click/tap en una lateral, swipe horizontal, links del nav, deep link por `#hash` (`/#hogares`).
-- `aria-live="polite"` anuncia el servicio mostrado. Las ilustraciones son `aria-hidden` (la información vive en el texto).
-
-### Rendimiento
-
-- Sin dependencias de runtime: SVG inline + CSS; JS del hero ≈ 2 KB.
-- Solo se animan `transform`, `opacity`, `filter` y `--film` (que termina en un `transform`). `backdrop-filter` solo en las 3 ventanas del hero.
-
-## 9.5 Sección "Servicios" (home, debajo del hero)
-
-- `id="servicios"`. Encabezado: h2 con el aval de años (`yearsOfExperience`) + párrafo de alcance (`serviceArea`).
-- Grilla de 3 tarjetas (1 columna < 900 px, 3 columnas ≥ 900 px). Cada tarjeta: ilustración con la lámina aplicada a medias (o `photo` si existe), técnicas (chips), resumen, 4 beneficios con ícono (calor, privacidad, UV, seguridad) y CTA a WhatsApp con el mensaje del servicio.
-- Copy provisorio y **sin cifras** (decisión del cliente). Crisur coloca láminas de seguridad (confirmado).
+- La moneda es gráfica plana en 3D (CSS `preserve-3d`): el logo en las dos caras y un canto de 12 discos apilados. Motion anima `rotateX` (2 vueltas parejas) e `y` (salto bajo, 0,3 del diámetro para no tocar el header: sube frenando, cae acelerando, un rebote) y la sombra.
+- "Sobre nosotros" usa solo hechos confirmados (negocio familiar, +10 años, Godoy Cruz, todas las láminas y tonos, atención por WhatsApp).
 
 ## 10. Operación
 
@@ -296,7 +249,98 @@ interface Props { services: readonly Service[]; whatsappNumber: string; yearsOfE
 | Diseño de las secciones siguientes | Cliente | Resto de la home |
 | Dirección exacta | Cliente | Footer, JSON-LD (no bloquea build) |
 | Horarios | Cliente | Footer, JSON-LD (no bloquea build) |
-| Fotos de trabajos | Cliente | Galería; foto por servicio en hero y tarjetas vía `Service.photo` (no bloquea build) |
+| Fotos de trabajos | Cliente | Carrusel de cada servicio: se copian en `src/assets/gallery/<servicio>/` (no bloquea build; mientras tanto, aviso con link a Instagram) |
 | Cifras técnicas de las láminas (UV, calor) | Cliente | Nada: hoy se publican beneficios sin cifras |
 | `og-image.jpg` con foto real (1200×630) | Cliente | Nada: hoy es una captura del hero |
 | Dominio | Cliente | Nada en v1 |
+| Confirmar los pasos de "Cómo trabajamos" y las preguntas frecuentes (`src/data/home.ts`, `faq` en `services.ts`) | Cliente | Nada: son textos generales, sin plazos ni precios |
+| Confirmar si la colocación en casas y negocios es a domicilio | Cliente | Nada: hoy el texto dice "coordinamos el turno" |
+
+## 12. Páginas de servicio con escena 3D (v0.6)
+
+Una página por servicio (`src/pages/[service].astro`, `getStaticPaths` sobre `services`). La escena se recorre con el scroll y aplica la lámina ventana por ventana. Dirección de diseño: `.impeccable/surfaces/src-pages-service-astro.md`; reglas visuales: `DESIGN.md` (The Film Scene Rule).
+
+### Estructura de la página
+
+```
+<ServiceStory>                           track de 6 × 100svh
+  viewport (sticky, 100svh)              canvas 3D · ilustración de respaldo · contador · índice
+  beats (margin-top: -100svh)            portada · 4 capítulos · cierre (CTA + portal)
+<ServiceDetails>                         beneficios · preguntas frecuentes · CTA
+```
+
+- Progreso del scroll (0–1) = posición en el track (`scroll()` de Motion, offset `start start` → `end end`). Cada capítulo empieza en un múltiplo de 0,2: los encuadres de cámara están en 0, 0,2, 0,4, 0,6, 0,8 y 1.
+- `ServiceStory` exige exactamente `STORY_CHAPTER_COUNT` (4) capítulos: falla el build si no (las escenas están coreografiadas para esa cantidad).
+
+### Contratos
+
+```ts
+// src/data/services.ts (se suma a §9.4)
+interface StoryChapter { id: string; indexLabel: string; title: string; text: string }   // id = ancla (#privacidad)
+interface FaqItem { question: string; answer: string }
+interface Service {
+  // …campos de §9.4
+  page: { title: string; description: string };   // <title> y meta de /{id}
+  story: readonly StoryChapter[];                  // 4 capítulos: vidrio original, lámina, 2 beneficios
+  closing: { title: string; text: string };        // cierre con CTA
+  faq: readonly FaqItem[];
+}
+function getService(id: ServiceId): Service;       // @throws Error si no existe (build time)
+function nextServiceOf(id: ServiceId): Service;    // recorrido autos → hogares → negocios → autos
+
+// src/components/film-scene/types.ts
+interface CameraKeyframe { at: number; position: Vec3; target: Vec3; shift?: number }  // shift: corre el objeto en pantalla (fracción del ancho)
+interface FilmPane { glass: FilmGlass; window: readonly [start: number, end: number] } // tramo del progreso en que la espátula cruza el vidrio
+interface SceneModel {
+  root: Object3D;
+  panes: readonly FilmPane[];
+  camera: { landscape: readonly CameraKeyframe[]; portrait: readonly CameraKeyframe[] };
+  update(progress: number): void;                // efectos propios (luz interior, grieta); sin asignar objetos
+  dispose(): void;
+}
+type SceneFactory = (context: { environment: Texture; quality: 'high' | 'low' }) => SceneModel;
+
+// src/components/film-scene/film-glass.ts
+function createFilmGlass(kind: 'tint' | 'mirror' | 'frost', axis: { direction: Vec3; from: number; to: number }): FilmGlass;
+interface FilmGlass { kind; material: MeshPhysicalMaterial; setCoverage(value: number): void; setBacklight(value: number): void }
+
+// src/components/film-scene/engine.ts
+function createFilmScene(canvas: HTMLCanvasElement, factory: SceneFactory, options: {
+  mood: 'studio' | 'dusk'; quality: 'high' | 'low'; reducedMotion: boolean;
+  shadow: { width: number; depth: number; opacity: number }; onContextLost(): void;
+}): { setProgress(progress: number): void; dispose(): void };
+// @throws WebGLUnavailableError → queda la ilustración SVG (data-scene="fallback")
+```
+
+### Escenas
+
+| Servicio | Módulo | Láminas (tramo del progreso) | Extra |
+|---|---|---|---|
+| Autos | `scenes/car.ts` (`studio`) | Laterales traseras 0,27–0,36 · delanteras 0,35–0,45 · luneta 0,47–0,57. El parabrisas queda limpio | El tapizado brilla cálido hasta que la lámina lo tapa |
+| Hogares | `scenes/house.ts` (`dusk`) | Ventanal del living (espejado) 0,27–0,39 · ventana de arriba (espejado) 0,35–0,47 · baños y paño lateral (esmerilado) 0,47–0,59 | El esmerilado deja pasar la luz del interior |
+| Negocios | `scenes/storefront.ts` (`dusk`) | Vidriera (polarizado) 0,27–0,38 · puerta (espejado) 0,36–0,44 · banda y oficina (esmerilado) 0,46–0,58 | Grieta de la lámina de seguridad 0,70–0,76: el vidrio se raja pero no cae |
+
+### Comportamiento y rendimiento
+
+- **Carga diferida:** Three.js y el modelo se descargan después de que la página ya es usable (chunk por escena). Mientras tanto, el contador de carga (0–100 %) avanza por etapas reales: motor, modelo, primer cuadro.
+- **Render a demanda:** solo se dibuja cuando cambia el scroll o el tamaño; la escena alcanza al scroll con amortiguación (sin loop permanente, sin gastar batería en reposo).
+- **Calidad:** equipos con ≤ 4 núcleos o pantalla chica usan resolución ≤ 1,5× y menos geometría.
+- **Vertical (< 0,9 de aspecto):** otro juego de encuadres, cámara más abierta (fov 50) y el objeto corrido hacia arriba para dejar el texto abajo.
+- **Movimiento reducido:** la cámara queda fija en el encuadre de portada; la lámina igual sigue al scroll (cambio de estado, no movimiento).
+- **Sin WebGL / sin JS / contexto perdido:** queda `ServiceArt` con la lámina aplicada.
+- **Portal:** View Transitions entre documentos (`@view-transition { navigation: auto }`); la ventana del portal y la escena de la página siguiente comparten `view-transition-name: portal-<id>`. Navegadores sin soporte navegan normal.
+
+### Carrusel de trabajos (v0.7)
+
+```ts
+// src/data/gallery.ts
+interface GalleryPhoto { src: ImageMetadata; alt: string }
+function galleryFor(service: ServiceId): readonly GalleryPhoto[];
+// import.meta.glob('../assets/gallery/*/*.{jpg,jpeg,png,webp,avif}') en build time.
+// Orden = nombre de archivo (numérico); alt = nombre sin número ni extensión ("02-auto-negro.jpg" → "Auto negro").
+
+// src/components/service-story/WorkGallery.astro
+interface Props { service: Service }
+// Con fotos: carrusel nativo (scroll-snap, rueda, swipe y teclado sin JS) + flechas que avanzan de a una foto.
+// Sin fotos: aviso con la ilustración del servicio y el botón a Instagram.
+```

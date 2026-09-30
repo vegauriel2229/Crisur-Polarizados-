@@ -1,28 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ServiceHero from '../components/hero/ServiceHero.astro';
-import ServicesSection from '../components/services/ServicesSection.astro';
-import { initialServiceId, services } from '../data/services';
-import { instagramUrl, siteSettings } from '../config/site';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import WhatsAppFab from '../components/layout/WhatsAppFab.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import AboutSection from '../components/home/AboutSection.astro';
+import FilmTypesSection from '../components/home/FilmTypesSection.astro';
+import ProcessSection from '../components/home/ProcessSection.astro';
+import HomeFaqSection from '../components/home/HomeFaqSection.astro';
+import { siteSettings } from '../config/site';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const defaultWhatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, siteSettings.whatsappDefaultMessage).href;
 ---
 
 <BaseLayout
-  title={`${siteSettings.businessName} | Polarizado de autos, locales y hogares en ${siteSettings.serviceArea}`}
-  description={`Polarizado, espejado y esmerilado para autos, locales y hogares. Más de ${siteSettings.yearsOfExperience} años en ${siteSettings.serviceArea}. Consultá por WhatsApp.`}
+  title={`${siteSettings.businessName} | Polarizado de autos, hogares y negocios en ${siteSettings.serviceArea}`}
+  description={`Polarizado, espejado, esmerilado y láminas de seguridad para autos, hogares y negocios. Más de ${siteSettings.yearsOfExperience} años en ${siteSettings.serviceArea}. Consultá por WhatsApp.`}
 >
   <main>
-    <ServiceHero
-      services={services}
-      initial={initialServiceId}
-      whatsappNumber={siteSettings.whatsappNumber}
-      defaultWhatsappMessage={siteSettings.whatsappDefaultMessage}
-      instagramUrl={instagramUrl}
-    />
-    <ServicesSection
-      services={services}
-      whatsappNumber={siteSettings.whatsappNumber}
-      yearsOfExperience={siteSettings.yearsOfExperience}
-      serviceArea={siteSettings.serviceArea}
-    />
+    <HomeHero whatsappUrl={defaultWhatsappUrl}>
+      <SiteHeader slot="header" whatsappUrl={defaultWhatsappUrl} />
+    </HomeHero>
+    <AboutSection />
+    <FilmTypesSection />
+    <ProcessSection />
+    <HomeFaqSection />
   </main>
+  <SiteFooter />
+  <WhatsAppFab href={defaultWhatsappUrl} label="Consultar por WhatsApp" />
 </BaseLayout>

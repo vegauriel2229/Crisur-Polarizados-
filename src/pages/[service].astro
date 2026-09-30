@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import WhatsAppFab from '../components/layout/WhatsAppFab.astro';
+import ServiceStory from '../components/service-story/ServiceStory.astro';
+import ServiceDetails from '../components/service-story/ServiceDetails.astro';
+import WorkGallery from '../components/service-story/WorkGallery.astro';
+import { nextServiceOf, services, type Service } from '../data/services';
+import { siteSettings } from '../config/site';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { service: service.id }, props: { service } }));
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, service.whatsappMessage).href;
+---
+
+<BaseLayout title={`${service.page.title} | ${siteSettings.businessName}`} description={service.page.description}>
+  <SiteHeader current={service.id} whatsappUrl={whatsappUrl} overlay />
+  <main>
+    <ServiceStory service={service} next={nextServiceOf(service.id)} whatsappUrl={whatsappUrl} />
+    <WorkGallery service={service} />
+    <ServiceDetails service={service} whatsappUrl={whatsappUrl} />
+  </main>
+  <SiteFooter />
+  <WhatsAppFab href={whatsappUrl} label={`${service.ctaLabel} por WhatsApp`} />
+</BaseLayout>

@@ -1,0 +1,205 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../Icon.astro';
+import ServiceArt from '../ServiceArt.astro';
+import { galleryFor } from '../../data/gallery';
+import type { Service } from '../../data/services';
+import { instagramUrl, siteSettings } from '../../config/site';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const photos = galleryFor(service.id);
+const serviceName = service.navLabel.toLowerCase();
+---
+
+<section class="gallery" aria-labelledby="gallery-title" data-gallery>
+  <header class="gallery-head">
+    <h2 id="gallery-title">Trabajos en {serviceName}</h2>
+    {
+      photos.length > 1 && (
+        <div class="gallery-controls">
+          <button class="gallery-button" type="button" data-gallery-prev aria-label="Foto anterior">
+            <span class="chevron chevron-left" aria-hidden="true" />
+          </button>
+          <button class="gallery-button" type="button" data-gallery-next aria-label="Foto siguiente">
+            <span class="chevron chevron-right" aria-hidden="true" />
+          </button>
+        </div>
+      )
+    }
+  </header>
+
+  {
+    photos.length > 0 ? (
+      /* Carrusel nativo (scroll-snap): funciona con swipe, rueda y teclado aunque el JS no cargue. */
+      <ul class="gallery-track" tabindex="0" aria-label={`Fotos de trabajos en ${serviceName}`} data-gallery-track>
+        {photos.map((photo, index) => (
+          <li class="gallery-item">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              widths={[480, 960]}
+              sizes="(min-width: 900px) 30rem, 82vw"
+              loading={index < 2 ? 'eager' : 'lazy'}
+              class="gallery-photo"
+            />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      /* FOTOS PENDIENTES: al copiar fotos en src/assets/gallery/<servicio>/ este espacio se convierte en el carrusel. */
+      <div class="gallery-empty">
+        <span class="empty-art" aria-hidden="true">
+          <ServiceArt service={service.id} uid={`gallery-${service.id}`} />
+        </span>
+        <div class="empty-copy">
+          <p class="empty-title">Muy pronto, fotos de nuestros trabajos en {serviceName}.</p>
+          <p class="empty-text">Mientras tanto, mirá los últimos trabajos en nuestro Instagram.</p>
+          <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer">
+            <Icon name="instagram" />
+            <span>@{siteSettings.instagramHandle}</span>
+          </a>
+        </div>
+      </div>
+    )
+  }
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const track = gallery.querySelector<HTMLElement>('[data-gallery-track]');
+    if (track === null) return;
+    const scrollByItem = (direction: 1 | -1): void => {
+      const item = track.querySelector<HTMLElement>('.gallery-item');
+      const step = item === null ? track.clientWidth : item.offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0');
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      track.scrollBy({ left: step * direction, behavior });
+    };
+    gallery.querySelector('[data-gallery-prev]')?.addEventListener('click', () => scrollByItem(-1));
+    gallery.querySelector('[data-gallery-next]')?.addEventListener('click', () => scrollByItem(1));
+  });
+</script>
+
+<style>
+  .gallery {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: clamp(4.5rem, 10vw, 7rem) clamp(1rem, 4vw, 2.5rem) 0;
+  }
+  .gallery-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  h2 {
+    max-width: 14ch;
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.1rem, 1.3rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .gallery-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .gallery-button {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .gallery-button:hover {
+    background: rgba(255, 255, 255, 0.09);
+  }
+  .chevron {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-right: 1.8px solid currentColor;
+    border-bottom: 1.8px solid currentColor;
+  }
+  .chevron-left {
+    transform: translateX(2px) rotate(135deg);
+  }
+  .chevron-right {
+    transform: translateX(-2px) rotate(-45deg);
+  }
+
+  .gallery-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(30rem, 82vw);
+    gap: 1.25rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+    padding-bottom: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    list-style: none;
+    border-radius: var(--radius-surface);
+  }
+  .gallery-item {
+    scroll-snap-align: start;
+  }
+  .gallery-track :global(.gallery-photo) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-surface);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+
+  .gallery-empty {
+    display: grid;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: var(--radius-surface);
+    background: var(--color-surface);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  @media (min-width: 760px) {
+    .gallery-empty {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+  }
+  .empty-art {
+    --film: 1;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-surface);
+    background: var(--art-backdrop);
+  }
+  .empty-title {
+    max-width: 24ch;
+    font-stretch: 112%;
+    font-weight: 750;
+    font-size: clamp(1.3rem, 0.95rem + 1.5vw, 2.3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .empty-text {
+    margin: 0.75rem 0 1.25rem;
+    color: var(--color-ink-muted);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-button {
+      transition: none;
+    }
+  }
+</style>

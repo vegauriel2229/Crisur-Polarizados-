@@ -1,0 +1,542 @@
+---
+import Icon from '../Icon.astro';
+import ServiceArt from '../ServiceArt.astro';
+import { STORY_CHAPTER_COUNT, type Service } from '../../data/services';
+
+interface Props {
+  service: Service;
+  next: Service;
+  whatsappUrl: string;
+}
+
+const { service, next, whatsappUrl } = Astro.props;
+
+// Las escenas están coreografiadas para portada + 4 capítulos + cierre (fail-fast en build).
+if (service.story.length !== STORY_CHAPTER_COUNT) {
+  throw new Error(`Service "${service.id}" needs exactly ${STORY_CHAPTER_COUNT} story chapters.`);
+}
+---
+
+<section
+  class="story"
+  data-service-story
+  data-service={service.id}
+  data-chapters={service.story.length}
+  data-scene="loading"
+  aria-labelledby="story-title"
+>
+  <div class="track" data-track>
+    <!-- Escena fija: el canvas queda quieto mientras los capítulos pasan por encima. -->
+    <div class="viewport" style={`view-transition-name: portal-${service.id}`}>
+      <div class="scene-fallback" aria-hidden="true">
+        <span class="fallback-art"><ServiceArt service={service.id} uid={`story-${service.id}`} /></span>
+      </div>
+      <canvas class="scene-canvas" data-scene-canvas aria-hidden="true"></canvas>
+      <div class="shade" aria-hidden="true"></div>
+      <p class="loader" data-loader aria-hidden="true">
+        <span class="loader-value" data-loader-value>0</span><span class="loader-unit">%</span>
+      </p>
+      <nav class="chapter-index" aria-label="Capítulos">
+        <ol>
+          {
+            service.story.map((chapter) => (
+              <li>
+                <a href={`#${chapter.id}`} data-index-item>
+                  {chapter.indexLabel}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+    </div>
+
+    <div class="beats">
+      <header class="beat beat-cover">
+        <div class="cover-copy">
+          <h1 class="cover-title" id="story-title">
+            <span class="cover-prefix">{service.hero.titlePrefix}</span>
+            <span class="cover-word" style={`--title-chars:${service.hero.title.length}`}>{service.hero.title}</span>
+          </h1>
+          <p class="cover-lede">{service.hero.lede}</p>
+          <div class="actions">
+            <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <Icon name="whatsapp" />
+              <span>{service.ctaLabel}</span>
+            </a>
+          </div>
+        </div>
+        <dl class="facts">
+          {
+            service.benefits.map((benefit) => (
+              <div class="fact">
+                <dt>
+                  <Icon name={benefit.kind} />
+                  <span>{benefit.title.replace(/:$/, '')}</span>
+                </dt>
+                <dd>{benefit.text.charAt(0).toUpperCase() + benefit.text.slice(1)}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </header>
+
+      {
+        service.story.map((chapter, index) => (
+          <article class="beat beat-chapter" id={chapter.id} data-side={index % 2 === 0 ? 'left' : 'right'}>
+            <div class="chapter-copy">
+              <h2 class="chapter-title">{chapter.title}</h2>
+              <p class="chapter-text">{chapter.text}</p>
+            </div>
+          </article>
+        ))
+      }
+
+      <footer class="beat beat-closing" id="consultar">
+        <div class="closing-copy">
+          <h2 class="closing-title">{service.closing.title}</h2>
+          <p class="closing-text">{service.closing.text}</p>
+          <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <Icon name="whatsapp" />
+            <span>{service.ctaLabel}</span>
+          </a>
+        </div>
+        <!-- Portal: la ventana se convierte en la escena de la página siguiente (View Transitions). -->
+        <a class="portal" href={`/${next.id}`} data-portal aria-label={`Siguiente: ${next.navLabel}`}>
+          <span class="portal-heading">
+            <span>Siguiente</span>
+            <strong>{next.navLabel}</strong>
+          </span>
+          <span class="portal-window" style={`view-transition-name: portal-${next.id}`}>
+            <span class="portal-art">
+              <ServiceArt service={next.id} uid={`portal-${next.id}`} />
+            </span>
+          </span>
+        </a>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<script>
+  import './story-controller';
+</script>
+
+<style>
+  .story {
+    position: relative;
+    /* Las penumbras detrás del texto se extienden más allá del borde: se recortan acá, no en la página. */
+    overflow-x: clip;
+  }
+  .track {
+    position: relative;
+  }
+
+  /* ── Escena fija ───────────────────────────────────── */
+  .viewport {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    background: radial-gradient(ellipse 70% 55% at 50% 38%, #151a21, var(--color-bg) 72%);
+  }
+  .scene-canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.4s var(--ease-out);
+  }
+  .story[data-scene='ready'] .scene-canvas {
+    opacity: 1;
+  }
+  /* Sin WebGL (o sin JavaScript) queda la ilustración con la lámina aplicada. */
+  .scene-fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: start center;
+    padding: 14svh 6vw 0;
+    transition: opacity 0.6s var(--ease-out);
+  }
+  :global(html.js) .story:not([data-scene='fallback']) .scene-fallback {
+    opacity: 0;
+  }
+  .fallback-art {
+    --film: 1;
+    display: block;
+    width: min(46rem, 88vw);
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-surface);
+    overflow: hidden;
+    background: var(--art-backdrop);
+  }
+  .shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(12, 15, 19, 0) 48%, rgba(12, 15, 19, 0.9) 100%);
+  }
+
+  /* Contador de carga (referencia: el porcentaje fino del preloader). */
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.25rem;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+    color: var(--color-ink);
+    pointer-events: none;
+  }
+  .loader-value {
+    font-weight: 100;
+    font-size: 4rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .loader-unit {
+    padding-bottom: 0.3rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  .loader[data-state='done'] {
+    animation: loader-out 0.75s var(--ease-out) forwards;
+  }
+  :global(html:not(.js)) .loader {
+    display: none;
+  }
+  @keyframes loader-out {
+    to {
+      opacity: 0;
+      filter: blur(7px);
+      transform: translate(-50%, calc(-50% - 34px));
+    }
+  }
+
+  /* Índice de capítulos (referencia: la lista de planetas con punto activo). */
+  .chapter-index {
+    position: absolute;
+    left: clamp(1rem, 2vw, 1.75rem);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+  .chapter-index ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    list-style: none;
+  }
+  .chapter-index a {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 2rem;
+    color: var(--color-ink-muted);
+    font-size: 0.95rem;
+    text-decoration: none;
+    /* El índice flota sobre la escena: la sombra lo separa de vidrios claros (esmerilado, espejado). */
+    text-shadow: 0 1px 12px rgba(12, 15, 19, 0.95), 0 0 2px rgba(12, 15, 19, 0.8);
+    transition: color 0.3s;
+  }
+  .chapter-index a::before {
+    content: '';
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--color-ink);
+    transform: scale(0);
+    transition: transform 0.45s var(--ease-out);
+  }
+  .chapter-index a:hover {
+    color: var(--color-ink);
+  }
+  .chapter-index a[aria-current='step'] {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+  .chapter-index a[aria-current='step']::before {
+    transform: scale(1);
+  }
+
+  /* ── Capítulos que pasan por encima ────────────────── */
+  .beats {
+    position: relative;
+    z-index: 2;
+    margin-top: -100svh;
+  }
+  .beat {
+    display: grid;
+    min-height: 100svh;
+    padding: 5.5rem clamp(1.25rem, 4vw, 3.5rem) clamp(1.5rem, 4svh, 2.75rem);
+  }
+
+  .beat-cover {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: clamp(2rem, 5vw, 5rem);
+  }
+  .cover-copy {
+    /* El título gigante se mide contra su columna (container query), no contra toda la pantalla. */
+    container-type: inline-size;
+    min-width: 0;
+  }
+  .cover-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .cover-prefix {
+    font-stretch: 110%;
+    font-weight: 650;
+    font-size: clamp(1.3rem, 0.95rem + 1.5vw, 2.3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  /* Título gigante: se ajusta a su propio largo y al alto de pantalla (referencia: el nombre del planeta). */
+  .cover-word {
+    font-stretch: var(--font-display-stretch);
+    font-weight: var(--font-display-weight);
+    font-size: min(10.5rem, 17svh, calc(100cqi / (var(--title-chars) * 0.93)));
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    margin-left: -0.04em;
+  }
+  .cover-lede {
+    max-width: 36rem;
+    margin-top: clamp(0.9rem, 2svh, 1.3rem);
+    color: var(--color-ink-soft);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: clamp(1rem, 2.6svh, 1.6rem);
+  }
+
+  .facts {
+    width: min(27rem, 32vw);
+  }
+  .fact {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .fact:last-child {
+    border-bottom: 0;
+  }
+  .fact dt {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+  .fact dt :global(.icon) {
+    margin-top: 0.05rem;
+  }
+  .fact dd {
+    color: var(--color-ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .beat-chapter {
+    align-items: center;
+  }
+  .chapter-copy {
+    position: relative;
+    isolation: isolate;
+    max-width: 27rem;
+  }
+  .beat-chapter[data-side='left'] .chapter-copy {
+    justify-self: start;
+    margin-left: clamp(0rem, 10vw, 11rem);
+  }
+  .beat-chapter[data-side='right'] .chapter-copy {
+    justify-self: end;
+  }
+  /* Penumbra detrás del texto (no es una tarjeta): asegura contraste sobre la escena. */
+  .chapter-copy::before {
+    content: '';
+    position: absolute;
+    inset: -5rem -6rem;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgba(12, 15, 19, 0.86), rgba(12, 15, 19, 0));
+    pointer-events: none;
+  }
+  .chapter-title,
+  .closing-title {
+    max-width: 14ch;
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.1rem, 1.3rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .chapter-text,
+  .closing-text {
+    margin-top: 1rem;
+    color: var(--color-ink-soft);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .beat-closing {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: clamp(2rem, 5vw, 5rem);
+  }
+  .closing-copy {
+    position: relative;
+    isolation: isolate;
+    max-width: 34rem;
+  }
+  .closing-copy::before {
+    content: '';
+    position: absolute;
+    inset: -5rem -6rem;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgba(12, 15, 19, 0.8), rgba(12, 15, 19, 0));
+  }
+  .closing-copy .button {
+    margin-top: 1.5rem;
+  }
+
+  /* Portal al siguiente servicio (referencia: la ventana "Next"). */
+  .portal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: min(20rem, 30vw);
+    color: var(--color-ink);
+    text-decoration: none;
+    perspective: 900px;
+  }
+  .portal-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: var(--color-ink-muted);
+  }
+  .portal-heading strong {
+    color: var(--color-ink);
+    font-stretch: 112%;
+    font-weight: 750;
+    font-size: 1.15rem;
+  }
+  .portal-window {
+    --film: 0;
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    display: block;
+    padding: 0.55rem;
+    border-radius: 20px;
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 46%, rgba(255, 255, 255, 0.06));
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 40px 70px -34px rgba(227, 38, 43, 0.5);
+    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transition:
+      transform 0.5s var(--ease-out),
+      --film 0.9s var(--ease-out);
+  }
+  .portal-art {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-surface);
+    background: var(--art-backdrop);
+  }
+  .portal:hover .portal-window,
+  .portal:focus-visible .portal-window {
+    --film: 1;
+  }
+
+  /* ── Tablet y celular ──────────────────────────────── */
+  @media (max-width: 1100px) {
+    .beat-chapter[data-side='left'] .chapter-copy {
+      margin-left: 0;
+    }
+    .chapter-index {
+      display: none;
+    }
+  }
+  @media (max-width: 880px) {
+    .beat {
+      padding-top: 4.5rem;
+    }
+    .beat-cover,
+    .beat-closing {
+      grid-template-columns: 1fr;
+      row-gap: 1.75rem;
+    }
+    /* Cierre abajo de todo: el objeto queda visible en la mitad superior, como en los capítulos. */
+    .beat-closing {
+      align-content: end;
+    }
+    .facts {
+      display: none;
+    }
+    .beat-chapter {
+      align-items: end;
+    }
+    .beat-chapter .chapter-copy {
+      justify-self: stretch;
+      max-width: none;
+    }
+    .chapter-copy::before,
+    .closing-copy::before {
+      inset: -4rem -2rem -2rem;
+    }
+    .shade {
+      background: linear-gradient(180deg, rgba(12, 15, 19, 0) 36%, rgba(12, 15, 19, 0.92) 78%);
+    }
+    .loader {
+      top: 32%;
+    }
+    /* En celular el portal es una ventanita a la derecha: la escena sigue a la vista detrás del cierre. */
+    .portal {
+      justify-self: end;
+      width: min(15rem, 62%);
+    }
+  }
+  @media (max-width: 520px) {
+    .actions,
+    .closing-copy .button {
+      width: 100%;
+    }
+    .actions .button,
+    .closing-copy .button {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene-canvas,
+    .scene-fallback,
+    .chapter-index a,
+    .chapter-index a::before,
+    .portal-window {
+      transition: none;
+    }
+    .loader[data-state='done'] {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>

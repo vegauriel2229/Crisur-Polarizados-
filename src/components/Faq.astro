@@ -1,0 +1,63 @@
+---
+import type { FaqItem } from '../data/services';
+
+interface Props {
+  items: readonly FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item) => (
+      <details class="faq-item">
+        <summary>{item.question}</summary>
+        <p>{item.answer}</p>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq-item {
+    border-bottom: 1px solid var(--color-line);
+  }
+  .faq-item summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    min-height: 3.5rem;
+    padding: 0.75rem 0;
+    font-weight: 620;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::after {
+    content: '';
+    flex: none;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-right: 1.8px solid var(--color-ink-muted);
+    border-bottom: 1.8px solid var(--color-ink-muted);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform 0.25s var(--ease-out);
+  }
+  .faq-item[open] summary::after {
+    transform: translateY(25%) rotate(-135deg);
+  }
+  .faq-item p {
+    max-width: 60ch;
+    padding-bottom: 1.1rem;
+    color: var(--color-ink-muted);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item summary::after {
+      transition: none;
+    }
+  }
+</style>

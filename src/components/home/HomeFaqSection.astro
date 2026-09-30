@@ -1,0 +1,100 @@
+---
+import Faq from '../Faq.astro';
+import Icon from '../Icon.astro';
+import { HOME_FAQ } from '../../data/home';
+import { instagramUrl, siteSettings } from '../../config/site';
+import { buildWhatsAppUrl } from '../../lib/whatsapp';
+
+const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, siteSettings.whatsappDefaultMessage).href;
+---
+
+<section class="closing" aria-labelledby="faq-title">
+  <div class="closing-inner">
+    <div class="questions">
+      <h2 id="faq-title">Preguntas frecuentes</h2>
+      <Faq items={HOME_FAQ} />
+    </div>
+    <!-- Cierre de la página: la última acción es la misma que la primera (WhatsApp). -->
+    <div class="final">
+      <h2 class="final-title">Contanos qué vidrio querés tratar</h2>
+      <p>Mandanos fotos por WhatsApp y te respondemos con la lámina que conviene para tu caso.</p>
+      <div class="final-actions">
+        <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+          <Icon name="whatsapp" />
+          <span>Consultar por WhatsApp</span>
+        </a>
+        <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver trabajos en Instagram">
+          <Icon name="instagram" />
+          <span>Ver trabajos</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .closing {
+    padding: clamp(4rem, 9vw, 7rem) clamp(1rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--color-line);
+  }
+  .closing-inner {
+    display: grid;
+    gap: clamp(3rem, 6vw, 4rem);
+    max-width: 76rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .closing-inner {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 5rem;
+      align-items: start;
+    }
+  }
+  h2 {
+    margin-bottom: 1rem;
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  /* La luz roja vive detrás del cierre, como detrás de la ventana destacada del hero. */
+  .final {
+    position: relative;
+    isolation: isolate;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    border-radius: var(--radius-surface);
+    background: var(--color-surface);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  .final::before {
+    content: '';
+    position: absolute;
+    inset: auto 10% -18% 10%;
+    height: 60%;
+    z-index: -1;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(227, 38, 43, 0.4), transparent 72%);
+    pointer-events: none;
+  }
+  .final-title {
+    font-size: clamp(2.1rem, 1.3rem + 3vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    max-width: 14ch;
+  }
+  .final p {
+    color: var(--color-ink-soft);
+    max-width: 44ch;
+  }
+  .final-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 520px) {
+    .final-actions .button {
+      width: 100%;
+    }
+  }
+</style>

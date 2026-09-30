@@ -36,6 +36,8 @@ const schemaJson = JSON.stringify(schema).replace(/</g, '\\u003c');
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0c0f13" />
+    <!-- Antes del primer render: con JS, la escena 3D reemplaza a la ilustración sin que esta parpadee. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
@@ -56,7 +58,7 @@ const schemaJson = JSON.stringify(schema).replace(/</g, '\\u003c');
           <meta property="og:image" content={ogImage.href} />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
-          <meta property="og:image:alt" content={`${siteSettings.businessName}: polarizado para autos, locales y hogares`} />
+          <meta property="og:image:alt" content={`${siteSettings.businessName}: polarizado para autos, hogares y negocios`} />
         </>
       )
     }

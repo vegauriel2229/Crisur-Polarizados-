@@ -32,6 +32,13 @@
   --film-mirror-dark: #545c67;
   --film-frost-top: rgba(236, 241, 246, 0.72);
   --film-frost-bottom: rgba(205, 213, 222, 0.52);
+  /* Ambiente cálido detrás de las muestras de lámina (home): luz de lámpara, pared, sillón y piso. */
+  --art-room-light: rgba(255, 200, 140, 0.95);
+  --art-room-glow: rgba(255, 180, 107, 0.35);
+  --art-room-wall-top: #5a3f29;
+  --art-room-wall-bottom: #33261c;
+  --art-room-furniture: #2e241c;
+  --art-room-floor: #1c1510;
 
   --font-family: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   /* Display: Archivo expandido y extra negrita (eje wdth 125). */

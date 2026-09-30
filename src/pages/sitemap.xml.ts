@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
 
-// ponytail: lista manual de rutas (el sitio tiene una sola página); pasar a @astrojs/sitemap cuando haya más.
-const ROUTES = ['/'];
+import { services } from '../data/services';
+
+// ponytail: lista armada a mano (home + una página por servicio); pasar a @astrojs/sitemap si el sitio crece mucho.
+const ROUTES = ['/', ...services.map((service) => `/${service.id}`)];
 
 /** Sin dominio configurado el sitemap queda vacío: Google exige URLs absolutas. */
 export const GET: APIRoute = ({ site }) => {

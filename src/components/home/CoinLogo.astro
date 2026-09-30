@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo.jpeg';
+
+/** Capas del canto: discos apilados en Z que dan grosor a la moneda cuando gira. */
+const EDGE_LAYERS = 12;
+---
+
+<!-- El logo como una moneda: se lanza una sola vez al entrar a la página. Las dos caras son el logo. -->
+<div class="coin-stage">
+  <div class="coin" role="img" aria-label="Logo de Crisur Polarizados" data-coin>
+    <span class="coin-body" data-coin-body>
+      <span class="coin-face coin-heads">
+        <Image src={logo} alt="" width={384} class="coin-logo" loading="eager" />
+      </span>
+      {Array.from({ length: EDGE_LAYERS }, (_, index) => <span class="coin-edge" style={`--layer:${index / (EDGE_LAYERS - 1)}`} />)}
+      <span class="coin-face coin-tails">
+        <Image src={logo} alt="" width={384} class="coin-logo" loading="eager" />
+      </span>
+    </span>
+  </div>
+  <span class="coin-shadow" data-coin-shadow aria-hidden="true"></span>
+</div>
+
+<script>
+  import './coin';
+</script>
+
+<style>
+  .coin-stage {
+    --coin: clamp(8rem, 16vw, 11rem);
+    --thickness: calc(var(--coin) * 0.07);
+    display: grid;
+    justify-items: center;
+    perspective: 900px;
+  }
+  .coin {
+    width: var(--coin);
+    height: var(--coin);
+  }
+  .coin-body {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+  .coin-face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--color-brand-red);
+    backface-visibility: hidden;
+  }
+  .coin-heads {
+    transform: translateZ(calc(var(--thickness) / 2));
+  }
+  /* La otra cara es el mismo logo: girada 180° en X, se ve derecha cuando queda arriba. */
+  .coin-tails {
+    transform: rotateX(180deg) translateZ(calc(var(--thickness) / 2));
+  }
+  .coin-face :global(.coin-logo) {
+    width: 104%;
+    height: 104%;
+    object-fit: cover;
+    clip-path: circle(48%);
+  }
+  /* Canto: rojo más oscuro que las caras, para que el grosor se lea al girar. */
+  .coin-edge {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #a8151b;
+    /* 1px adentro de cada cara: a la misma profundidad, el canto taparía el logo. */
+    transform: translateZ(calc((var(--layer) - 0.5) * (var(--thickness) - 2px)));
+  }
+  .coin-shadow {
+    width: calc(var(--coin) * 0.8);
+    height: calc(var(--coin) * 0.12);
+    margin-top: calc(var(--coin) * 0.1);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent);
+    opacity: 0.55;
+  }
+</style>

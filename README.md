@@ -1,6 +1,14 @@
 # Crisur Polarizados — sitio web
 
-Landing de Crisur Polarizados (Godoy Cruz, Mendoza): polarizado, espejado, esmerilado y láminas de seguridad para autos, hogares y locales. Hecha con [Astro](https://astro.build) + TypeScript estricto, sin frameworks de UI ni librerías de animación.
+Sitio de Crisur Polarizados (Godoy Cruz, Mendoza): polarizado, espejado, esmerilado y láminas de seguridad para autos, hogares y negocios. Hecho con [Astro](https://astro.build) + TypeScript estricto, sin frameworks de UI. Las páginas de cada servicio tienen una escena 3D ([Three.js](https://threejs.org)) que aplica la lámina mientras se scrollea; el scroll lo mide [Motion](https://motion.dev).
+
+## Páginas
+
+| Ruta | Qué tiene |
+|---|---|
+| `/` | Moneda con el logo, redes, selector de los tres servicios, sobre nosotros, tipos de lámina, cómo trabajamos, preguntas frecuentes |
+| `/autos`, `/hogares`, `/negocios` | Escena 3D con capítulos, carrusel de trabajos, beneficios, preguntas frecuentes y portal al servicio siguiente |
+| `/404` | Página no encontrada |
 
 ## Comandos
 
@@ -15,23 +23,23 @@ Landing de Crisur Polarizados (Godoy Cruz, Mendoza): polarizado, espejado, esmer
 
 | Quiero cambiar… | Archivo |
 |---|---|
-| Textos del hero y de las tarjetas, mensajes de WhatsApp | `src/data/services.ts` |
+| Textos de cada servicio: portada, capítulos de la escena, cierre, preguntas frecuentes y mensajes de WhatsApp | `src/data/services.ts` |
+| Texto de "Sobre nosotros" | `src/components/home/AboutSection.astro` |
+| Pasos de "Cómo trabajamos", tipos de lámina y preguntas de la home | `src/data/home.ts` |
+| Modelos 3D, encuadres de cámara y en qué parte del scroll entra cada lámina | `src/components/film-scene/scenes/` (`car.ts`, `house.ts`, `storefront.ts`) |
+| Luces, reflejos y piso de las escenas | `src/components/film-scene/studio.ts` |
+| Cómo se ve la lámina en 3D (colores, borde de la espátula) | `src/components/film-scene/film-glass.ts` |
 | Teléfono, Instagram, años de experiencia, zona | `src/config/site.ts` |
 | Colores, tipografía, radios, colores de las láminas | `src/styles/tokens.css` |
-| Dibujos del auto, la casa y el local | `src/components/ServiceArt.astro` |
+| Dibujos del auto, la casa y el negocio (home y respaldo sin 3D) | `src/components/ServiceArt.astro` |
 
-## Fotos reales
+## Fotos de trabajos (carrusel)
 
-Buscá `FOTO REAL` en el código. Lo recomendado:
+Copiá las fotos en `src/assets/gallery/autos/`, `hogares/` o `negocios/` y listo: la página del servicio arma el carrusel sola (las optimiza a WebP/AVIF). Mientras la carpeta esté vacía se muestra un aviso con el link a Instagram.
 
-1. Guardá la foto en `src/assets/services/` (por ejemplo `autos.jpg`).
-2. En `src/data/services.ts`, importala y completá el campo `photo` del servicio:
-   ```ts
-   import autosPhoto from '../assets/services/autos.jpg';
-   // ...
-   photo: { src: autosPhoto, alt: 'Auto con polarizado negro humo en el taller' },
-   ```
-3. Listo: el hero y la tarjeta muestran la foto (optimizada a WebP/AVIF) en lugar del dibujo.
+- **Orden:** el del nombre del archivo; numerá al principio (`01-`, `02-`…).
+- **Descripción:** sale del nombre. `02-auto-polarizado-negro-humo.jpg` → "Auto polarizado negro humo".
+- Detalle en `src/assets/gallery/README.md`.
 
 La imagen de vista previa al compartir el link es `public/og-image.jpg` (1200×630).
 

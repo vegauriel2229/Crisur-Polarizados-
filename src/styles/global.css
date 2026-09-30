@@ -1,6 +1,17 @@
 @import '@fontsource-variable/archivo/wdth.css';
 @import './tokens.css';
 
+/*
+ * --film registrada como número (0 = vidrio limpio, 1 = lámina aplicada): sin esto el navegador
+ * no puede interpolarla y la lámina "saltaría" en vez de deslizarse. La usan la ilustración
+ * (ServiceArt), las tarjetas, las muestras de lámina y el portal.
+ */
+@property --film {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+
 *,
 *::before,
 *::after {
@@ -54,4 +65,86 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/*
+ * Transición entre páginas (View Transitions entre documentos): la ventana-portal de una
+ * página y la escena de la siguiente comparten `view-transition-name`, así que el navegador
+ * convierte una en la otra. Navegadores sin soporte navegan normal.
+ */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-group(*) {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* ── Botones (hero, escenas, tarjetas y cierre) ─────────── */
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  overflow: hidden;
+  border-radius: var(--radius-control);
+  font-size: 1rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+.button-primary {
+  background: var(--color-cta);
+  color: var(--color-on-red);
+  box-shadow:
+    0 12px 28px -12px rgba(227, 38, 43, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+/* Brillo que cruza el botón al pasar el mouse: el mismo gesto que la espátula sobre el vidrio. */
+.button-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-out);
+}
+.button-primary:hover {
+  background: var(--color-cta-hover);
+  transform: translateY(-1px);
+  box-shadow:
+    0 16px 32px -12px rgba(227, 38, 43, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.button-primary:hover::after {
+  transform: translateX(120%);
+}
+.button-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-1px);
+}
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button-primary::after {
+    transition: none;
+  }
 }

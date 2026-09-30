@@ -1,0 +1,264 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo.jpeg';
+import Icon from '../Icon.astro';
+import { services, type ServiceId } from '../../data/services';
+import { instagramUrl } from '../../config/site';
+
+interface Props {
+  /** Página actual: marca su link del menú. */
+  current?: ServiceId;
+  /** WhatsApp del botón "Consultar" (con el mensaje del servicio en su página). */
+  whatsappUrl: string;
+  /** Sobre la escena 3D: el header flota encima en vez de ocupar su propio alto. */
+  overlay?: boolean;
+}
+
+const { current, whatsappUrl, overlay = false } = Astro.props;
+// El menú sigue el recorrido de las páginas, no el orden del selector de la home.
+const navOrder: readonly ServiceId[] = ['autos', 'hogares', 'negocios'];
+const navItems = navOrder.flatMap((id) => services.filter((service) => service.id === id));
+---
+
+<header class:list={['site-header', { 'is-overlay': overlay }]} data-site-header>
+  <a class="brand" href="/" aria-label="Crisur Polarizados, inicio">
+    <Image src={logo} alt="" width={96} class="brand-mark" loading="eager" />
+    <span class="brand-name">crisur</span>
+    <span class="brand-suffix">polarizados</span>
+  </a>
+  <nav class="site-nav" id="site-nav" aria-label="Servicios">
+    {
+      navItems.map((service) => (
+        <a href={`/${service.id}`} aria-current={service.id === current ? 'page' : undefined}>
+          {service.navLabel}
+        </a>
+      ))
+    }
+    <a href="/#nosotros">Nosotros</a>
+    <a class="nav-icon" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram de Crisur">
+      <Icon name="instagram" class="nav-icon-svg" />
+      <span class="nav-icon-label">Instagram</span>
+    </a>
+    <a class="nav-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Consultar</a>
+  </nav>
+  <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<script>
+  import './site-header';
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: 4.5rem;
+    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    border-bottom: 1px solid var(--color-line);
+  }
+  /* Sobre la escena: sin filete (la escena no tiene "techo") y con un degradé que asegura contraste. */
+  .site-header.is-overlay {
+    position: absolute;
+    inset: 0 0 auto;
+    border-bottom: 0;
+    background: linear-gradient(180deg, rgba(12, 15, 19, 0.78), rgba(12, 15, 19, 0));
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .brand :global(.brand-mark) {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    clip-path: circle(48%);
+  }
+  .brand-name {
+    font-stretch: var(--font-display-stretch);
+    font-weight: var(--font-display-weight);
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-suffix {
+    font-size: 1rem;
+    font-weight: 450;
+    color: var(--color-ink-muted);
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .site-nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 0.95rem;
+    border-radius: var(--radius-control);
+    color: var(--color-ink-muted);
+    font-weight: 550;
+    text-decoration: none;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+  .site-nav a:hover {
+    color: var(--color-ink);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .site-nav a[aria-current='page'] {
+    color: var(--color-ink);
+  }
+  .site-nav a[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    left: 0.95rem;
+    right: 0.95rem;
+    bottom: 0.35rem;
+    height: 2px;
+    border-radius: var(--radius-hairline);
+    background: var(--color-brand-red);
+  }
+  .site-nav .nav-icon {
+    width: 2.75rem;
+    justify-content: center;
+    padding: 0;
+  }
+  .nav-icon-label {
+    display: none;
+  }
+  .site-nav .nav-cta {
+    margin-left: 0.5rem;
+    padding: 0 1.2rem;
+    min-height: 2.5rem;
+    background: var(--color-cta);
+    color: var(--color-on-red);
+    font-weight: 650;
+  }
+  .site-nav .nav-cta:hover {
+    background: var(--color-cta-hover);
+    color: var(--color-on-red);
+  }
+
+  .burger {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: none;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: var(--radius-hairline);
+    background: var(--color-ink);
+    transition:
+      transform 0.28s var(--ease-in-out),
+      opacity 0.18s linear;
+  }
+  .site-header[data-open='true'] .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .site-header[data-open='true'] .burger span:nth-child(2) {
+    opacity: 0;
+  }
+  .site-header[data-open='true'] .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 880px) {
+    .site-header {
+      height: 4rem;
+    }
+    .burger {
+      display: flex;
+    }
+    .site-nav {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 1rem;
+      left: 1rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      padding: 0.75rem;
+      border-radius: var(--radius-surface);
+      background: var(--color-surface);
+      box-shadow:
+        0 24px 48px -12px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px var(--color-line);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.22s ease,
+        transform 0.28s var(--ease-out),
+        visibility 0s linear 0.28s;
+    }
+    .site-header[data-open='true'] .site-nav {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
+    .site-nav a {
+      min-height: 3rem;
+      padding: 0 1rem;
+      font-size: 1.05rem;
+      color: var(--color-ink);
+    }
+    .site-nav a[aria-current='page']::after {
+      left: 1rem;
+      right: auto;
+      width: 1.5rem;
+      bottom: 0.45rem;
+    }
+    .site-nav .nav-icon {
+      width: auto;
+      justify-content: flex-start;
+      gap: 0.6rem;
+      padding: 0 1rem;
+    }
+    .nav-icon-label {
+      display: inline;
+    }
+    .site-nav .nav-cta {
+      margin: 0.5rem 0 0;
+      justify-content: center;
+      min-height: 3rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .brand-suffix {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav,
+    .burger span {
+      transition: none;
+    }
+  }
+</style>

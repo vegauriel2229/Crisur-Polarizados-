@@ -2,7 +2,7 @@
 /**
  * Ilustración minimalista de cada servicio (auto, casa, local) con sus vidrios.
  *
- * Cómo funciona la animación de la lámina (ver también ServiceHero y ServicesSection):
+ * Cómo funciona la animación de la lámina (la usan el inicio, el portal, la galería vacía y el respaldo sin 3D):
  * 1. Detrás de cada vidrio hay un "interior" (asientos, estantes, lámparas). A través del
  *    vidrio limpio se ve; la lámina lo oscurece, lo refleja o lo esmerila: así se demuestra
  *    la privacidad en vez de solo nombrarla.
@@ -103,7 +103,7 @@ const ART: Record<ServiceId, ArtSpec> = {
       { d: 'M186 126H214V156H186Z', film: 'frost' },
     ],
   },
-  locales: {
+  negocios: {
     viewBox: '16 20 288 180',
     body: [{ d: 'M28 34H292V172H28Z', tone: 'paint' }],
     interior: [
@@ -219,16 +219,7 @@ const ref = (name: string): string => `${uid}-${name}`;
 </svg>
 
 <style>
-  /*
-   * --film registrada como número: sin esto el navegador no puede interpolarla
-   * y la lámina "saltaría" de 0 a 1 en vez de deslizarse.
-   */
-  @property --film {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 1;
-  }
-
+  /* --film se registra en global.css (@property): acá solo se convierte en movimiento. */
   .art {
     display: block;
     width: 100%;

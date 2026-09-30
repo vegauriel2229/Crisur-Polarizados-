@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo.jpeg';
+import Icon from '../Icon.astro';
+import { instagramUrl, siteSettings } from '../../config/site';
+import { buildWhatsAppUrl } from '../../lib/whatsapp';
+
+const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, siteSettings.whatsappDefaultMessage).href;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="/" aria-label="Crisur Polarizados, inicio">
+        <Image src={logo} alt="" width={96} class="brand-mark" />
+        <span class="brand-name">crisur</span>
+        <span class="brand-suffix">polarizados</span>
+      </a>
+      <p class="footer-claim">
+        Polarizado, espejado, esmerilado y láminas de seguridad en {siteSettings.serviceArea}. Más de {siteSettings.yearsOfExperience} años.
+      </p>
+    </div>
+    <nav class="footer-links" aria-label="Servicios">
+      <p class="footer-title">Servicios</p>
+      <a href="/autos">Autos</a>
+      <a href="/hogares">Hogares</a>
+      <a href="/negocios">Negocios</a>
+    </nav>
+    <div class="footer-links">
+      <p class="footer-title">Contacto</p>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="whatsapp" />
+        <span>WhatsApp {siteSettings.phoneDisplay}</span>
+      </a>
+      <a href={instagramUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="instagram" />
+        <span>@{siteSettings.instagramHandle}</span>
+      </a>
+      {siteSettings.address && <p class="footer-note">{siteSettings.address}</p>}
+      {siteSettings.openingHours && <p class="footer-note">{siteSettings.openingHours}</p>}
+    </div>
+  </div>
+  <p class="footer-legal">© {year} {siteSettings.businessName}</p>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-line);
+    padding: clamp(3rem, 7vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) 2rem;
+    background: linear-gradient(180deg, var(--color-bg), #090b0e);
+  }
+  .footer-inner {
+    display: grid;
+    gap: 2.5rem;
+    max-width: 76rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 760px) {
+    .footer-inner {
+      grid-template-columns: 1.6fr 1fr 1fr;
+    }
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .brand :global(.brand-mark) {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    clip-path: circle(48%);
+  }
+  .brand-name {
+    font-stretch: var(--font-display-stretch);
+    font-weight: var(--font-display-weight);
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .brand-suffix {
+    color: var(--color-ink-muted);
+    font-weight: 450;
+  }
+  .footer-claim {
+    max-width: 34ch;
+    margin-top: 1rem;
+    color: var(--color-ink-muted);
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .footer-title {
+    margin-bottom: 0.35rem;
+    font-stretch: 112%;
+    font-weight: 750;
+  }
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 2.5rem;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: var(--color-ink);
+  }
+  .footer-note {
+    color: var(--color-ink-muted);
+  }
+  .footer-legal {
+    max-width: 76rem;
+    margin: 2.5rem auto 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+    color: var(--color-ink-muted);
+    font-size: 0.875rem;
+  }
+</style>

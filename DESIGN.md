@@ -1,6 +1,6 @@
 ---
 name: Crisur Polarizados
-description: "Window-film workshop landing: graphite glass, red brand light, film applied live by a squeegee."
+description: "Window-film workshop site: graphite glass, red brand light, film applied live by a squeegee (SVG on the home, a scroll-driven 3D scene per service page)."
 colors:
   brand-red: "#e3262b"
   cta: "#d91f26"
@@ -29,14 +29,41 @@ colors:
   art-tire: "#08090b"
   art-interior: "#12161b"
   art-interior-ink: "#4b5561"
+  art-room-light: "rgba(255, 200, 140, 0.95)"
+  art-room-glow: "rgba(255, 180, 107, 0.35)"
+  art-room-wall-top: "#5a3f29"
+  art-room-wall-bottom: "#33261c"
+  art-room-furniture: "#2e241c"
+  art-room-floor: "#1c1510"
+  scene-paint: "#d9dde2"
+  scene-wall: "#8b9299"
+  scene-wall-light: "#a7adb3"
+  coin-rim: "#a8151b"
+  scene-warm-interior: "#ffb46b"
 typography:
-  display:
+  display-giant:
     fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
-    fontSize: "min(6rem, 11svh, calc((100vw - 2.5rem) / (var(--title-chars) * 0.9)))"
+    fontSize: "min(10.5rem, 17svh, calc(100cqi / (var(--title-chars) * 0.93)))"
     fontWeight: 820
-    lineHeight: 0.92
+    lineHeight: 0.86
+    letterSpacing: "-0.035em"
+    fontVariation: "'wdth' 125"
+  step-number:
+    fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(2.4rem, 1.8rem + 2vw, 3.4rem)"
+    fontWeight: 820
+    lineHeight: 1
     letterSpacing: "-0.03em"
     fontVariation: "'wdth' 125"
+  counter:
+    fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "4rem"
+    fontWeight: 100
+    lineHeight: 1
+  counter-unit:
+    fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 300
   display-prefix:
     fontFamily: "'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "clamp(1.3rem, 0.95rem + 1.5vw, 2.3rem)"
@@ -137,13 +164,6 @@ components:
     height: "3.25rem"
   button-secondary-hover:
     backgroundColor: "rgba(255, 255, 255, 0.09)"
-  button-card-cta:
-    backgroundColor: "{colors.cta}"
-    textColor: "{colors.on-red}"
-    typography: "{typography.button}"
-    rounded: "{rounded.control}"
-    padding: "0 1.25rem"
-    height: "3rem"
   nav-link:
     textColor: "{colors.ink-muted}"
     typography: "{typography.nav}"
@@ -167,20 +187,39 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.control}"
     padding: "0.28rem 0.7rem"
-  card-service:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.surface}"
-    padding: "1.5rem 1.5rem 1.75rem"
-  glass-pane:
+  chooser-pane:
     textColor: "{colors.ink}"
     rounded: "{rounded.frame}"
-    padding: "0.55rem 0.55rem 0.8rem"
-    width: "min(27rem, 34vw, 46svh)"
+    padding: "0.55rem 0.55rem 1rem"
+  coin:
+    backgroundColor: "{colors.brand-red}"
+    textColor: "{colors.on-red}"
+    size: "clamp(8rem, 16vw, 11rem)"
+  panel-closing:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.surface}"
   menu-panel:
     backgroundColor: "{colors.surface}"
     rounded: "{rounded.surface}"
     padding: "0.75rem"
+  chapter-index-link:
+    textColor: "{colors.ink-muted}"
+    typography: "{typography.body-sm}"
+    height: "2rem"
+  chapter-index-link-active:
+    textColor: "{colors.ink}"
+  portal-pane:
+    textColor: "{colors.ink}"
+    rounded: "{rounded.frame}"
+    padding: "0.55rem"
+    width: "min(20rem, 30vw)"
+  film-swatch:
+    rounded: "{rounded.surface}"
+  whatsapp-fab:
+    backgroundColor: "{colors.cta}"
+    textColor: "{colors.on-red}"
+    rounded: "{rounded.control}"
+    size: "3.5rem"
 ---
 
 # Design System: Crisur Polarizados
@@ -193,29 +232,30 @@ A window-film workshop after dark. The page is tinted graphite, the product (gla
 
 Density is low and mobile-first. One family, Archivo, carries the whole hierarchy by changing width and weight: headings run wide and heavy like automotive lettering, body copy sits at normal width. Illustrations are fine chrome line drawings of a car, a house and a shopfront whose glass panes take real film fills (smoke, mirror, frost) and visibly hide the interior behind them. The system shows privacy instead of naming it.
 
-The previous 3D showroom was replaced by this flat vector glass world on purpose; palette and type survived the change. Real job photos, when they exist, replace the illustrations one-for-one; nothing is faked in the meantime.
+The home opens with the logo as a coin tossed heads or tails, then offers the three services as glass panes in this flat vector world. Each service page (/autos, /hogares, /negocios) adds one scroll-driven 3D **film scene** in the same world, chosen by the client on 2026-09-30 instead of realistic models: a dark photo studio, a pearl car and light-concrete façades whose curves and edges catch strip-light reflections, warm interiors seen through clear glass, and film applied pane by pane by a squeegee with a coral-to-white edge. The earlier 3D showroom (silver paint, pedestals, low-poly lawns) stays rejected; see The Film Scene Rule. Real job photos, when they exist, replace the illustrations one-for-one; nothing is faked in the meantime.
 
 **Key Characteristics:**
 - Tinted blue-graphite ground, never flat black.
 - Red used only as light and action, never as decoration.
-- Real glassmorphism (backdrop blur) only on the three hero panes, because they are windows.
+- Real glassmorphism (backdrop blur) only on things that are windows: the chooser panes, the portal, the frost swatch.
 - One variable typeface, hierarchy by width axis (100 to 125) and weight (400 to 820).
 - Pill controls, softly rounded solid cards, hairline edges at 14% ink.
-- One signature motion: a squeegee applying film, driven by a single CSS number (`--film`, 0 to 1).
+- One signature motion: a squeegee applying film, driven by a single number (`--film` in CSS, `coverage` per pane in the 3D scene, 0 to 1).
+- One scroll-driven 3D film scene per service page; everything around it (copy, index, portal) stays flat and quiet.
 
 ## Colors
 
 A cold, low-light graphite palette with one warm voice: the logo red, rationed as light.
 
 ### Primary
-- **Logo Red** (#e3262b): the brand's light source. The radial backlight behind the featured hero pane (at 50% alpha), the glow shadows under CTAs (75–85% alpha), the 2px underline of the active nav link, and text selection.
+- **Logo Red** (#e3262b): the brand's light source. The radial backlight behind the coin and behind a hovered chooser pane or the portal (at 22–50% alpha), the glow shadows under CTAs (75–85% alpha), the 2px underline of the active nav link, and text selection.
 - **Action Red** (#d91f26): the fill of every WhatsApp call to action, always with white text (about 5:1).
 - **Action Red Lit** (#e0232a): CTA hover fill; the brightest red that still keeps white text at 4.5:1 (AA).
 - **Signal Coral** (#ff5a5f): the red that has to read on dark at small sizes: the 2px focus outline and the squeegee's leading edge. No text or icon is red (see The Red Is Light Rule). Action Red is never a text color on graphite (under 4.5:1).
 
 ### Neutral
 - **Tinted Graphite** (#0c0f13): page background and browser theme color. The hero deepens it to #0e1116 then #0a0c10 and lays a cool top light over it (**Cool Light**, rgba(160, 180, 205, 0.09), `--color-cool-light`).
-- **Graphite Surface** (#1a1e24): solid containers: service cards and the mobile menu panel.
+- **Graphite Surface** (#1a1e24): solid containers: the home's closing panel, the empty photo gallery and the mobile menu panel.
 - **Chrome Ink** (#eef1f4): headings, primary text, line icons, illustration detail strokes.
 - **Soft Chrome** (#c9cfd6, `--color-ink-soft`): long reading text one step below ink: the hero lede and card summaries.
 - **Brushed Steel** (#a9b0b9): secondary text: nav links at rest, the services intro, chips, benefit bodies, the wordmark suffix.
@@ -239,6 +279,8 @@ The film and illustration materials. They live in `tokens.css` so a film color c
 
 **The Graphite Not Black Rule.** Page and surface backgrounds are blue graphite (#0c0f13, #1a1e24). Near-black values exist only as materials inside the drawings (tire, smoke film).
 
+**The Film Scene Rule.** 3D objects are light against the dark page, so a dark film reads at a glance (client request, 2026-09-30): **Scene Paint** #d9dde2 (pearl) on the car, **Scene Wall** #8b9299 / **Scene Wall Light** #a7adb3 (light concrete) on houses and shopfronts, all lit by strip-softbox reflections; every scene sits in a pool of Brand Red light on the floor (the same red that glows behind the home coin, drawn under the contact shadow) and a low red back rim marks the edges (full in the car studio, softer at dusk so façades and roofs only pick up a sheen); mirror glass catches a thin red line of the street. Glass starts clear with a warm interior visible behind it (**Warm Interior** #ffb46b, emissive so it never tints the bodywork) and the film must change what is seen. The scene clears to the page background with fog, so it has no edge. No pedestals, lawns, trees, props, silver showroom paint or realistic stock models.
+
 ## Typography
 
 **Display Font:** Archivo Variable at width 125 (fallback: Archivo, system-ui, sans-serif)
@@ -247,13 +289,15 @@ The film and illustration materials. They live in `tokens.css` so a film color c
 **Character:** A single self-hosted grotesque stretched wide and heavy for headings, like lettering on a car or a shop sign, and left at normal width for reading. Width steps (110, 112, 118, 125) do the work a second family would.
 
 ### Hierarchy
-- **Display** (820, fit-to-word up to 6rem, 0.92, -0.03em, width 125): the one giant service word in the hero ("AUTOS", "LOCALES", "HOGARES", authored in capitals). Its size is the smallest of 6rem, 11svh and the viewport width divided by its own character count.
-- **Display Prefix** (650, clamp 1.3–2.3rem, 1.1, -0.02em, width 110): the first line of the hero h1 ("Polarizado para"), same ink as the display word, one step down.
+- **Display Giant** (820, fit-to-column up to 10.5rem, 0.86, -0.035em, width 125): the service word on its own page, bottom-left over the 3D scene, the page's single loudest element. It is measured against its column with a container query (`100cqi`), so it never runs into the benefit rows beside it.
+- **Counter** (100, 4rem, unit at 300 and 1.5rem, tabular numerals): the thin 0–100 % loading count over the scene while the 3D loads; it leaves by rising and blurring.
+- **Step Number** (820, clamp 2.4–3.4rem, width 125, Brushed Steel): the numbers of "Cómo trabajamos", the only numbered sequence on the site.
+- **Display Prefix** (650, clamp 1.3–2.3rem, 1.1, -0.02em, width 110): the first line of a service page h1 ("Polarizado para"), same ink as the giant word, one step down; also the "¿Qué querés polarizar?" line and the Sobre nosotros statement.
 - **Headline** (780, clamp 2.1–3.75rem, 1.0, -0.03em, width 118): section h2, max 14ch, balanced wrap.
-- **Title** (780, 1.6rem, 1.1, -0.02em, width 118): card h3.
+- **Title** (780, 1.6rem, 1.1, -0.02em, width 118): the service name on each chooser pane.
 - **Title Small** (750, 1.15rem, -0.01em, width 112): glass pane caption name.
-- **Lede** (400, clamp 1–1.125rem, 1.6): hero lede (Soft Chrome, max 40rem) and the services intro (Brushed Steel, line height 1.65, max 52ch). Pretty wrap.
-- **Body** (400, 1rem, 1.55): base text and card summaries (line height 1.6).
+- **Lede** (400, clamp 1–1.125rem, 1.6): home and service-cover ledes (Soft Chrome, max 40rem) and section intros (Brushed Steel, line height 1.65, max 52ch). Pretty wrap.
+- **Body** (400, 1rem, 1.55): base text.
 - **Body Small** (400, 0.95rem, 1.5): benefit lines; the lead-in phrase is ink at weight 620, the rest Brushed Steel.
 - **Button / Nav** (650 / 550, 1rem): control labels. **Nav Mobile** (550, 1.05rem) for the full-width rows of the mobile menu.
 - **Wordmark** (820, 1.2rem, -0.02em, width 125): "crisur" in the header lockup.
@@ -268,11 +312,11 @@ Sizes are fluid (`clamp()` between a mobile floor and a desktop ceiling) rather 
 
 ## Layout
 
-A single full-bleed dark column. The hero is a flex column at least `max(100svh, 640px)` tall: a 4.5rem header (4rem at 880px and below), centered copy, and the pane selector filling the remaining height. On portrait tablets (600px and up, aspect ratio 4/5 or taller) the hero drops its minimum height so the next section shows.
+A single full-bleed dark column. The home opens centered: a 4.5rem header (4rem at 880px and below), the coin, the h1, the lede and the WhatsApp / Instagram pills, then the service chooser in a 76rem container (three equal columns from 760px, rows below). Sections after it (Sobre nosotros, film swatches, Cómo trabajamos, preguntas + cierre) sit in the same 76rem container with `section` vertical padding, `gutter` sides and a hairline between them; from 900px each splits into two columns (about 1.1fr / 1fr, 3–5rem gap).
 
-The services section sits in a 76rem container with `section` vertical padding and `gutter` sides (the header uses a slightly tighter clamp(1rem, 3vw, 2.5rem)). From 900px its header splits into two columns (1.1fr / 1fr, bottom-aligned, 3rem gap) and the card grid goes to three equal columns; below that, one column. Between 600px and 899px each card turns horizontal (art 0.9fr, text 1.1fr).
+Service pages are a six-viewport scroll track under a sticky scene (see Film Scene), then the work gallery and the details in the 76rem container.
 
-Spacing rhythm: 0.4rem inside clusters (chips, headline lines), 0.75rem between siblings (actions, benefits), 1rem inside card bodies, 1.25rem between cards, 1.5rem card and button padding. At 520px and below the hero actions stack full width (max 22rem) and the wordmark suffix hides. The body clips horizontal overflow so the side panes can bleed off-screen.
+Spacing rhythm: 0.4rem inside clusters, 0.75rem between siblings (actions, benefits), 1.25rem between panes and gallery items, 1.5rem button padding. At 520px and below paired buttons stack full width (max 22rem) and the wordmark suffix hides.
 
 ## Elevation & Depth
 
@@ -287,7 +331,7 @@ Hybrid: tonal layering (graphite ground, graphite surface) plus light. Shadows c
 - **Hairline Ring** (`box-shadow: inset 0 0 0 1px var(--color-line)`): cards, chips, the ghost button.
 
 ### Named Rules
-**The Glass Only Where Glass Is Rule.** `backdrop-filter` blur (16px, saturate 1.3) exists only on the three hero panes, because they are windows. Cards, menus and sections are solid.
+**The Glass Only Where Glass Is Rule.** `backdrop-filter` blur (16px, saturate 1.3) exists only on things that are windows: the three chooser panes, the portal pane, and the frost film swatch (9px). Containers, menus and sections are solid.
 
 **The Light Behind Glass Rule.** The featured pane is lit from behind: a red radial glow shares its grid cell and sits under it, and the pane's own blur diffuses it. Red light is placed behind glass, not painted on it.
 
@@ -299,20 +343,19 @@ Three radii, plus a 2px hairline radius for the thin bars (active-nav underline,
 
 ### Buttons
 Tactile pills that feel lit from below.
-- **Shape:** full pill (999px), 3.25rem tall in the hero, 3rem in cards, 2.5rem in the header.
+- **Shape:** full pill (999px), 3.25rem tall in page actions, 2.5rem in the header; the chooser's "Ver cómo queda" is a compact pill that turns red when its pane is hovered.
 - **Primary:** Action Red fill, white label at 650, WhatsApp glyph, CTA Glow. On hover the fill brightens to Action Red Lit, the button lifts 1px, and a diagonal white shine sweeps across it (0.7s), the same gesture as the squeegee on glass.
 - **Secondary (ghost):** 4% white fill with a Hairline Ring and ink label; hover raises the fill to 9% and lifts 1px. At 520px and below it drops fill and ring and sits under the primary as a 2.75rem text action.
 - **Active:** scale 0.98. **Focus:** the global 2px Signal Coral outline, 3px offset.
 
 ### Chips
-- **Style:** treatment tags on cards: no fill, Hairline Ring, pill, Brushed Steel label (550, 0.8125rem). Informational, not interactive.
+- **Style:** no fill, Hairline Ring, pill, Brushed Steel label (550, 0.8125rem). Informational, not interactive. (Currently unused: the treatments now read as a sentence under each chooser pane.)
 
-### Cards / Containers
+### Containers
 - **Corner Style:** 14px.
-- **Background:** Graphite Surface, solid; media well above in a dark vertical gradient (#1c222a to #0e1115) separated by a hairline.
-- **Shadow Strategy:** Hairline Ring only; no drop.
-- **Internal Padding:** 1.5rem sides, 1.75rem bottom, 1rem gap; the CTA is pushed to the bottom so all three align.
-- **Behavior:** the card art rests with its film half applied, the squeegee stopped on a pane (before and after in one image); hover or keyboard focus inside the card completes the film over 0.9s.
+- **Background:** Graphite Surface, solid (the closing panel of the home, the empty photo gallery); illustration wells use the Art Backdrop gradient.
+- **Shadow Strategy:** Hairline Ring only; no drop. The home's closing panel adds the red backlight under it (red as light).
+- **Internal Padding:** clamp(1.25rem, 3vw, 2rem) to clamp(1.75rem, 4vw, 2.5rem).
 
 ### Navigation
 - **Header:** hairline bottom rule; brand lockup of a 2.5rem circular logo, "crisur" in the display face (820, 1.2rem, width 125) and "polarizados" in Brushed Steel (450).
@@ -322,14 +365,29 @@ Tactile pills that feel lit from below.
 ### Icons
 Line icons at 1.25rem, 1.8 stroke, round caps, `currentColor` in ink. The WhatsApp glyph is the only filled icon. Benefit icons (heat, privacy, UV, security) sit in a 1.25rem column beside their text.
 
-### Glass Pane Selector (signature)
-Three glass frames stacked in one grid cell; `data-pos` (left, center, right) sets each one's transform. The frame is a translucent white gradient (11% to 3% to 6%) with 16px backdrop blur, 20px radius and the Glass Pane shadow; inside, a 14px 16:10 window holds the service art. Side panes scale to 0.74, dim to brightness 0.55 / saturation 0.7 (0.78 / 0.9 on hover) and hide their treatment line; below 880px they peek from the screen edges with captions hidden. The center pane gets the lit shadow and the red backlight. A change of service slides the panes (0.8s), peels the film off the leaving pane (0.4s) and replays the squeegee on the arriving one (1.1s); swipe, arrow keys, taps and nav links all drive it.
+### Coin Logo (signature, home)
+The logo as a coin: both faces are the logo itself (red circle, white ring), and the rim is twelve stacked discs of a darker red (#a8151b) so the thickness reads while it spins. Flat brand graphics in 3D space, no imitation metal. It is tossed exactly once, on page load, slowly enough to follow (2.8s: a low hop of 0.3 diameters so it never reaches the header, up with ease-out, two even spins, down with ease-in, one small bounce, a shadow that shrinks in the air); it is not interactive (client request, 2026-09-30). Red backlight behind it. With reduced motion it stays still.
+
+### Service Chooser (home)
+"¿Qué querés polarizar?" over three glass panes that are links (Autos, Hogares, Negocios, the order of the tour). Each pane is the glass frame (translucent white gradient 11% to 3% to 6%, 16px backdrop blur, 20px radius, Glass Pane shadow) with the service art in a 14px 16:10 window, the name (Title), the treatments (Caption) and a "Ver cómo queda" pill. The film rests at 0.35; hover or keyboard focus lifts the pane 4px, completes the film (0.9s), turns the pill red and lights the red backlight (Glass Pane Lit). Each pane shares `view-transition-name: portal-<id>` with its page's scene. Below 760px each pane becomes a row (art left, text right).
+
+### Work Gallery (service pages)
+"Trabajos en <servicio>": a native scroll-snap carousel of real job photos (4:3, 14px, Hairline Ring) with pill arrow buttons; photos load by themselves from `src/assets/gallery/<servicio>/`. While a folder is empty, a solid Graphite Surface panel shows the service art with its film applied, "Muy pronto, fotos de nuestros trabajos en …" and an Instagram button: an empty state that points somewhere, never stock photos.
 
 ### Service Art with Film (signature)
 Inline SVG in a 16:10 crop, layered: body paint, the interior visible through glass, clear glass with a diagonal sheen, then per-pane film clipped to each pane's exact shape, then frames and chrome outline on top. The film layer slides left to right by `translateX((--film - 1) * 100%)`; its leading edge is the squeegee, an 8-unit gradient from transparent Signal Coral to a white edge. `--film` is registered with `@property` as a number so it animates.
 
-### Copy Crossfade
-Hero text variants share one grid cell so the block never changes height. The leaving variant fades, drops 14px and blurs 6px (0.4s); the arriving one reverses it with a 0.1s delay.
+### Film Scene (signature, service pages)
+A sticky full-viewport canvas (Three.js) with the chapters scrolling over it; the track is six viewports tall (cover, four chapters, closing), so each chapter sits on a camera keyframe at 0, 0.2, 0.4, 0.6, 0.8 and 1. The scene renders only when scroll or size changes and eases toward the scroll position. Each glass pane has its own progress window; its `coverage` (0 to 1) moves the squeegee edge across it, a white line with a short coral trail. Chapter text sits over a soft graphite penumbra (not a card) and alternates sides on desktop; below 880px it sits at the bottom and the scene lifts into the upper half. Without WebGL or JavaScript the service illustration stays in place with the film applied; with reduced motion the camera stays on the cover framing while the film still follows the scroll.
+
+### Cover, Chapter Index and Portal (service pages)
+- **Cover:** "Polarizado para" + the Display Giant word bottom-left with the red CTA; on desktop four benefit rows (icon, bold title, Brushed Steel text, hairline between) sit bottom-right.
+- **Chapter index:** four chapter names left of center in Brushed Steel; the current one turns ink at weight 700 and grows a 0.7rem ink dot. Hidden below 1100px.
+- **Portal:** at the end of each page, a glass pane (Glass Pane Lit) holding the next service's illustration, titled "Siguiente" + the service name; it tilts toward the mouse and completes its film on hover. It shares `view-transition-name: portal-<id>` with the next page's scene, so the browser morphs the window into that scene. The home service chooser carries the same names.
+
+### Film Swatches (home)
+Four 4:3 glass samples over a warm room (the `--art-room-*` tokens), each with its film resting half applied and completing on hover: smoke, banded mirror, frost (real backdrop blur, because it is glass) and a clear security film over a crack that holds.
+
 
 ## Do's and Don'ts
 
@@ -339,13 +397,15 @@ Hero text variants share one grid cell so the block never changes height. The le
 - **Do** draw new illustrations as chrome line art over filled body shapes, with the interior visible through clear glass, so a dark film has something to hide.
 - **Do** drive any film animation through the single `--film` number (0 to 1) and let CSS transitions interpolate it; script only changes state attributes.
 - **Do** ease with `--ease-out` (cubic-bezier(0.16, 1, 0.3, 1)) for movement and `--ease-in-out` (cubic-bezier(0.65, 0, 0.35, 1)) for peeling and toggles; keep state changes at 0.2–0.25s.
+- **Do** give every new 3D film pane its own progress window and keep camera keyframes on the chapter beats (0, 0.2, 0.4, 0.6, 0.8, 1).
 - **Do** honor `prefers-reduced-motion`: drop transitions and the entrance. With motion on, the hero headline, lede and actions stay visible from the first frame: their entrance rises and un-blurs them but never fades them in from zero.
 
 ### Don't:
-- **Don't** put `backdrop-filter` glass on cards, menus or sections; translucent blur is reserved for the hero panes.
+- **Don't** put `backdrop-filter` glass on containers, menus or sections; translucent blur is reserved for the panes that are windows.
 - **Don't** use red on icons, headings, borders or decorative accents; red is light and action only.
 - **Don't** use pure black or flat neutral grey for page or surface backgrounds.
 - **Don't** add a second typeface or a system display face.
-- **Don't** bring back 3D or WebGL scenes; the world is flat vector glass and CSS.
+- **Don't** put 3D anywhere but the service-page film scene, and never with pedestals, lawns, low-poly props, silver showroom paint or realistic stock models (The Film Scene Rule).
+- **Don't** reuse a `view-transition-name` twice on one page; a duplicate cancels the portal transition.
 - **Don't** replace the illustrations with stock or placeholder photos; only real job photos, through the service's `photo` field, replace the art.
 - **Don't** animate layout properties (width, height, top, margin); motion uses transform, opacity, filter and `--film`.
