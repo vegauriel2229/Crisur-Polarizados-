@@ -1,57 +1,70 @@
 # Constitución del proyecto: Crisur Polarizados
 
-**Estado:** BORRADOR · **Versión:** 1
+**Estado:** APROBADO (2026-10-03) · **Versión:** 1
 
 > Documento de la Fase 0 (`/proyecto-existente`). Define las reglas del proyecto. Cada elección referencia la decisión del usuario que la originó. El stack es **existente**: se documenta, no se elige.
 
-> **Dónde quedamos (2026-10-03):** punto de guardado hecho (D-001), clon anidado copiado entero a `Desktop\Crisur-Polarizados-clon-viejo` (D-002), proyecto mudado a `C:\Proyectos\Crisur-Polarizados` y verificado: git íntegro, `npm run build` OK (D-003). Copia vieja de OneDrive borrada (D-004); queda solo la carpeta raíz vacía, que se borra al cerrar la sesión que la tenía abierta. Siguiente paso: relevamiento del `arquitecto` (paso 4 de `/proyecto-existente`) y luego la consulta de estándares (paso 5).
+> **Dónde quedamos (2026-10-03):** pasos 1–6 de `/proyecto-existente` hechos. Punto de guardado y mudanza fuera de OneDrive (D-001 a D-006), relevamiento del `arquitecto` (stack en §2, brechas en el Anexo A), estándares consultados (D-007 a D-012), rol de Vercel (D-013) y Keystatic (D-014). Constitución aprobada por el usuario el 2026-10-03. Siguiente: diagnóstico (paso 7).
 
 ## 1. Proyecto
 - Cliente / empresa: Crisur Polarizados — negocio familiar, +10 años, Godoy Cruz (Mendoza). Detalle en `PRODUCT.md`.
 - Tipo: Web (contenido)
 - Objetivo de negocio: convertir visitas en consultas por WhatsApp (y seguimiento por Instagram).
 - Usuarios principales: particulares y comerciantes del Gran Mendoza que llegan desde Instagram, en el celular.
+- Situación al 2026-10-03: online solo en `crisur-polarizados.vercel.app`; sin dominio; plan de Hostinger sin contratar.
 
 ## 2. Stack (existente)
-_Pendiente del relevamiento del `arquitecto`._
+Relevado por el `arquitecto` el 2026-10-03 sobre el commit `89311cd`. `npm run build` OK: 0 errores de tipos, 5 páginas, `dist/` de 1,3 MB.
 
 | Capa | Existente | Decisión |
 |---|---|---|
-| Framework | | existente |
-| Lenguaje | | existente |
-| Estilos / UI | | existente |
-| Base de datos | | |
-| ORM | | |
-| Autenticación | | |
-| Testing | | |
-| Gestor de paquetes | | |
+| Framework | Astro 7.3.5, salida estática, sin adapter ni integraciones | existente |
+| Lenguaje | TypeScript 6.0.3 con `astro/tsconfigs/strictest` (más estricto que `strict`) | existente |
+| Estilos / UI | CSS propio: custom properties en `src/styles/tokens.css` + `<style>` por componente. Sin Tailwind ni framework de UI | existente · sin Tailwind (D-007, D-009) |
+| 3D y animación | three.js 0.186.1 (escenas de `/autos`, `/hogares`, `/negocios`, carga diferida) · Motion 13.4.6 (API vanilla) | existente |
+| Tipografía | Archivo variable, self-hosted (`@fontsource-variable/archivo`) | existente |
+| Contenido | Módulos TS en `src/data/` y `src/config/`; fotos de trabajos en `src/assets/gallery/<servicio>/` | existente · Keystatic postergado (D-014) |
+| Base de datos | No hay | — |
+| ORM | No hay | — |
+| Autenticación | No hay | — |
+| Testing | No hay (solo typecheck con `astro check`) | meta según D-007 |
+| Gestor de paquetes | npm con `package-lock.json`. Node sin fijar (local 24.21.0; Astro pide ≥ 22.12) | existente |
 
 ## 3. Hosting y entornos
-_Pendiente._
-
 | Entorno | Dónde | URL | Decisión |
 |---|---|---|---|
 | Desarrollo | Local | localhost:4321 | — |
-| Preview / staging | | | |
-| Producción | Hostinger (pedido del usuario) | | |
+| Online provisorio | Vercel | `crisur-polarizados.vercel.app` | D-013: temporal, se da de baja al publicar en Hostinger |
+| Producción | Hostinger (sin contratar; plan a definir: compartido o VPS) | Sin dominio | Pedido del usuario, 2026-10-02 |
+
+Publicación en Hostinger hoy: build local y subida de `dist/` a `public_html` (README, "Publicar (Hostinger)"). `public/.htaccess` fuerza https sin `www` y sirve la 404 propia.
 
 ## 4. Estándares adoptados
-_Pendiente (paso 5)._
+Adoptar no cambia nada en el momento: lo que el proyecto no cumple pasa a mejoras candidatas (Anexo A) y se hace solo con tareas aprobadas.
 
 | Estándar | Adoptado | Excepciones aprobadas |
 |---|---|---|
-| `docs/estandares/codigo.md` | | |
-| `docs/estandares/git.md` | | |
-| `docs/estandares/diseno.md` | | |
-| `docs/estandares/deploy.md` | | |
-| `docs/estandares/definicion-de-terminado.md` | | |
+| `docs/estandares/stack.md` | Sí (D-007) | Sin Tailwind: se mantiene el CSS propio con tokens. Lint, Prettier, tests, `env.ts`, `@astrojs/sitemap` y Node fijado quedan como meta |
+| `docs/estandares/codigo.md` | Sí (D-008), sumando las reglas heredadas de Crisur (`CLAUDE.md`) | Componentes `.astro` en PascalCase · comentarios en español · slugs e IDs de dominio en español |
+| `docs/estandares/diseno.md` | Sí (D-009) | Sin Tailwind: tokens solo como variables CSS. Accesibilidad: WCAG 2.2 AA |
+| `docs/estandares/git.md` | Sí (D-010) | Sin PR ni CI obligatorios; las ramas `feature/*` y `fix/*` se mergean a `main` con el OK del usuario |
+| `docs/estandares/deploy.md` | Sí (D-011) | Se aplica la sección del plan de Hostinger que se contrate (compartido o VPS) |
+| `docs/estandares/definicion-de-terminado.md` | Sí (D-012) | Lint y tests se exigen recién cuando existan. Lighthouse ≥ 95 en mobile (meta del proyecto, en lugar de ≥ 90) |
 
 ## 5. Principios y restricciones del proyecto
 - Nada inventado: sin cifras técnicas, fotos ni testimonios falsos (`PRODUCT.md`).
-- Áreas a revisar y mejorar antes de publicar (pedido del usuario, 2026-10-02): textos y contenido · SEO local y Google · rendimiento y celular · diseño y accesibilidad.
+- Contacto solo por WhatsApp e Instagram: sin formularios, backend ni datos personales.
+- Mobile primero: la mayoría llega desde Instagram en el celular.
+- Accesibilidad WCAG 2.2 AA (D-009) y Lighthouse ≥ 95 en mobile (D-012).
+- Keystatic queda fuera del alcance actual; si se hace, va con spec propia (D-014).
+- Áreas a revisar y mejorar antes de publicar (pedido del usuario, 2026-10-02; confirmado 2026-10-03): textos y contenido · SEO local y Google · rendimiento y celular · diseño y accesibilidad.
 
 ## 6. Comandos
-_Pendiente del relevamiento._
+- Desarrollo: `npm run dev` (localhost:4321)
+- Typecheck: `npm run check` (`astro check`)
+- Build: `npm run build` (`astro check` + `astro build` → `dist/`)
+- Preview de la build: `npm run preview`
+- Tests: no hay · Lint: no hay · Formatter: no hay
 
 ## 7. Registro de decisiones del proyecto
 | ID | Tema | Opciones | Opción elegida por el usuario | Fecha |
@@ -62,11 +75,56 @@ _Pendiente del relevamiento._
 | D-004 | Copia vieja en OneDrive y cambios sin commitear | — (instrucción explícita del usuario) | **Commitear todo lo necesario y borrar la copia vieja** | 2026-10-03 |
 | D-005 | Qué más borrar | Clon viejo del Escritorio · carpeta `skills/` duplicada · capturas de `.impeccable/review/` · nada más | **Las tres**: clon viejo, `skills/` (copia de `.claude/skills/`) y capturas de `.impeccable/review/` | 2026-10-03 |
 | D-006 | Respaldo de los commits en GitHub | Push a main ahora · todavía no | **Push a main ahora** (sin force) | 2026-10-03 |
+| D-007 | Estándar `stack.md` | Adoptar sin Tailwind · respetar lo actual · adoptarlo completo (migrar a Tailwind) | **Adoptar sin Tailwind** | 2026-10-03 |
+| D-008 | Estándar `codigo.md` | Adoptar con excepciones (+ reglas heredadas) · respetar las reglas heredadas · adoptarlo completo | **Adoptar con excepciones**: `.astro` en PascalCase, comentarios y slugs en español, más las reglas heredadas de Crisur | 2026-10-03 |
+| D-009 | Estándar `diseno.md` | Adoptar sin Tailwind (WCAG 2.2) · adoptar sin Tailwind con WCAG 2.1 · respetar lo actual | **Adoptar sin Tailwind, con WCAG 2.2 AA** | 2026-10-03 |
+| D-010 | Estándar `git.md` | Adoptar con excepción (sin PR/CI obligatorios) · respetar lo actual (directo a main) · adoptarlo completo | **Adoptar con excepción**: `main` + `feature/*` y `fix/*`, merge con OK del usuario | 2026-10-03 |
+| D-011 | Estándar `deploy.md` | Adoptarlo · respetar lo actual (solo el README) | **Adoptarlo**, con la sección del plan de Hostinger que se contrate | 2026-10-03 |
+| D-012 | Definición de terminado | Excepciones + Lighthouse ≥ 95 · excepciones + Lighthouse ≥ 90 · adoptarla completa | **Excepciones + Lighthouse ≥ 95**: lint y tests se exigen cuando existan | 2026-10-03 |
+| D-013 | Papel de Vercel (`crisur-polarizados.vercel.app`) | Preview permanente · temporal, se baja al publicar | **Temporal**: se da de baja cuando Hostinger esté online; los restos de Vercel en la config pasan a mejoras candidatas | 2026-10-03 |
+| D-014 | Keystatic | Postergarlo con spec propia · sacarlo del proyecto · integrarlo antes de publicar | **Postergarlo con spec propia** | 2026-10-03 |
 
 ## 8. Specs
 | Spec | Estado | Fase |
 |---|---|---|
-| — | | |
+| — (se definen después del diagnóstico del paso 7) | | |
+| Keystatic (futura, D-014) | Sin priorizar | — |
+
+## Anexo A — Brechas y pendientes del relevamiento
+Hechos relevados el 2026-10-03, **sin decidir**. Son insumo para agrupar mejoras en specs (paso 7); ninguno se hace sin aprobación.
+
+- **Documentación desactualizada:**
+  - `PRODUCT.md` dice "deploy en Vercel".
+  - `docs/SDD.md`:
+    - Keystatic aparece como CMS (§1/§2/§4/§6/§10).
+    - El modelo de datos de §4 no coincide con `src/data/`.
+    - Figura una página `/galeria` que no existe.
+    - Dice "variables en Vercel".
+    - La fecha del encabezado quedó vieja.
+  - `README.md` dice que el proyecto vive en OneDrive.
+  - `.env.example` trae un dominio de ejemplo (`crisurpolarizados.com.ar`), pero todavía no hay dominio.
+- **Parches de OneDrive** (D-003): `preserveSymlinks` en `astro.config.mjs` y `extends` relativo en `tsconfig.json`.
+- **Restos de Vercel** (D-013): fallback `VERCEL_PROJECT_PRODUCTION_URL` en `astro.config.mjs` y `.vercel/` en `.gitignore`.
+- **Herramientas que faltan** (D-007, D-012): ESLint, Prettier, Vitest/Playwright, CI, `src/env.ts` con Zod, `@astrojs/sitemap` (hoy es manual) y versión de Node fijada.
+- **Código** (D-008):
+  - No se usa el alias `@/`.
+  - Hay funciones duplicadas: `requireElement` está definida 3 veces y `addBox` 2 (una sin usar).
+  - Hay funciones de alrededor de 110 líneas en el motor 3D.
+  - Algunos booleanos no llevan prefijo `is/has`.
+  - `vite` se importa en `astro.config.mjs` sin estar declarado en `package.json`.
+- **Diseño** (D-009):
+  - Hay colores sueltos en 11 componentes, más colores duplicados en `studio.ts`.
+  - No hay tokens de espaciado ni de sombras.
+  - Se usan breakpoints propios.
+  - Falta verificar WCAG 2.2 AA y las áreas táctiles.
+- **Deploy** (D-011): el `.htaccess` no tiene caché de estáticos y no hay un procedimiento documentado para volver atrás.
+- **Rendimiento:** el chunk de three.js pesa 539 KB (warning de Vite). Solo lo cargan las páginas de servicio.
+- **Higiene del repo:**
+  - `graphify-out/` se versiona con su caché.
+  - Hay 3 `.pyc` versionados en `.claude/skills/ui-ux-pro-max/scripts/__pycache__/`.
+  - El archivo de instrucciones se llama `claude.md` (en minúscula).
+  - `tsconfig.json` y `.graphifyignore` siguen nombrando `skills/`, que ya no existe.
+  - `.claude/settings.json` autoriza scripts que no existen (`lint`, `test`, `typecheck`).
 
 ## Aprobación
-- [ ] Aprobado por el usuario · Fecha:
+- [x] Aprobado por el usuario · Fecha: 2026-10-03
