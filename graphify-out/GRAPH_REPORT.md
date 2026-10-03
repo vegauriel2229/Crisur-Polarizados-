@@ -1,142 +1,150 @@
-# Graph Report - Crisur-Polarizados  (2026-09-28)
+# Graph Report - Crisur-Polarizados  (2026-10-02)
 
 ## Corpus Check
-- 29 files · ~52,756 words
-- Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 3 file(s) not represented in the graph (top: (none) 2, .css 1)
+- Corpus is ~41,873 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 289 nodes · 537 edges · 14 communities
-- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 33 edges (avg confidence: 0.85)
-- Token cost: 279,501 input · 0 output
+- 366 nodes · 702 edges · 16 communities (14 shown, 2 thin omitted)
+- Extraction: 90% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.88)
+- Token cost: 229,750 input · 0 output
 
 ## Community Hubs (Navigation)
-- SDD & Coding Rules
-- Hero Controller & Showroom
-- Package Manifest & Scripts
-- Diorama Primitives & House
-- Motion & Carousel Framing
-- Car Diorama & Loft Geometry
-- Astro Config, Site Data & Logo
-- Studio Environment & Textures
-- Hero Init & State Flow
-- Brand Identity & Tokens
-- Autos Poster
-- Hogares Poster
+- Home Page Components
+- Surface Briefs & Design Rules
+- 3D Film Scene Engine
+- Architecture Geometry (House/Storefront)
+- Car Loft Geometry
+- Film Scene Design Components
+- Package Dependencies
+- Astro Config, Gallery & SEO Routes
+- OG Share Image (Home Hero)
+- CLAUDE.md Coding Rules
+- Film Glass Materials
 - TypeScript Config
-- Locales Poster
+- Brand Logo Image
+- Brand Asset Guidelines
+- Mobile Header Menu
+- Archivo Typography
 
 ## God Nodes (most connected - your core abstractions)
-1. `createShowroom()` - 32 edges
-2. `addBox()` - 13 edges
-3. `initHero()` - 11 edges
-4. `ServiceId` - 11 edges
-5. `three` - 10 edges
-6. `createCar()` - 10 edges
-7. `ScalarTween` - 10 edges
-8. `Showroom 3D Hero` - 10 edges
-9. `createCanvas()` - 9 edges
-10. `createStorefront()` - 8 edges
+1. `Crisur Software Design Document (v0.7)` - 17 edges
+2. `createFilmScene()` - 16 edges
+3. `createScene()` - 14 edges
+4. `Product: Crisur Polarizados` - 12 edges
+5. `three` - 11 edges
+6. `siteSettings` - 11 edges
+7. `Film Scene (3D, Service Pages)` - 10 edges
+8. `addBox()` - 8 edges
+9. `spanProgress()` - 8 edges
+10. `createScene()` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `siteSettings` --implements--> `SiteSettings (singleton spec)`  [INFERRED]
-  src/config/site.ts → docs/SDD.md
-- `Brand Palette (tinted-glass graphite + logo red)` --shares_data_with--> `BRAND_RED`  [INFERRED]
-  docs/SDD.md → src/components/hero/showroom/materials.ts
-- `Showroom API Contract (createShowroom/Showroom/ShowroomOptions)` --references--> `createShowroom()`  [EXTRACTED]
-  docs/SDD.md → src/components/hero/showroom/showroom.ts
-- `Framing Zone via setViewOffset` --references--> `FramingZone`  [EXTRACTED]
-  docs/SDD.md → src/components/hero/showroom/types.ts
-- `Static Poster Fallback` --references--> `WebGLUnavailableError`  [EXTRACTED]
-  docs/SDD.md → src/components/hero/showroom/types.ts
+- `createFilmScene Engine Contract` --references--> `createFilmScene()`  [EXTRACTED]
+  docs/SDD.md → src/components/film-scene/engine.ts
+- `CoinLogo tossOnce Contract` --references--> `tossOnce()`  [EXTRACTED]
+  docs/SDD.md → src/components/home/coin.ts
+- `GalleryPhoto / galleryFor Contract` --references--> `galleryFor()`  [EXTRACTED]
+  docs/SDD.md → src/data/gallery.ts
+- `getService / nextServiceOf Contract` --references--> `getService()`  [EXTRACTED]
+  docs/SDD.md → src/data/services.ts
+- `getService / nextServiceOf Contract` --references--> `nextServiceOf()`  [EXTRACTED]
+  docs/SDD.md → src/data/services.ts
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **Keystatic Content Model** — docs_sdd_keystatic_cms, docs_sdd_service, docs_sdd_galleryitem, docs_sdd_sitesettings, docs_sdd_imageasset, docs_sdd_servicecategory [EXTRACTED 1.00]
-- **Hero Showroom Progressive Enhancement & Fallback** — docs_sdd_showroom_3d_hero, docs_sdd_deferred_threejs_loading, docs_sdd_static_poster_fallback, docs_sdd_render_posters_script, src_components_hero_showroom_types_webglunavailableerror [EXTRACTED 1.00]
-- **Fail-Fast WhatsApp Number Validation** — claude_specific_exception_handling_rule, docs_sdd_build_time_phone_validation, docs_sdd_buildwhatsappurl_contract, src_lib_whatsapp_invalidphonenumbererror, docs_sdd_argentina_whatsapp_9_prefix [INFERRED 0.85]
-- **Service Category Pedestals in Hero Carousel** — src_assets_hero_posters_autos_car_pedestal, src_assets_hero_posters_autos_commercial_storefront, src_assets_hero_posters_autos_residential_house, src_assets_hero_posters_autos_3d_service_carousel [INFERRED 0.85]
-- **Hero carousel of service categories (autos, hogares, comercios) on glowing pedestals** — src_assets_hero_posters_hogares_car_model, src_assets_hero_posters_hogares_modern_house_model, src_assets_hero_posters_hogares_storefront_model, src_assets_hero_posters_hogares_pedestal_carousel [INFERRED 0.85]
-- **Crisur Polarizados service lineup (locales, hogares, autos) on hero podiums** — src_assets_hero_posters_locales_commercial_storefront, src_assets_hero_posters_locales_residential_house, src_assets_hero_posters_locales_automotive_car, src_assets_hero_posters_locales_podium_carousel [INFERRED 0.85]
+- **Film Progress Signature (single 0-1 number in CSS and 3D)** — design_squeegee_film_application, design_film_variable, design_service_art_with_film, docs_sdd_film_glass, docs_sdd_film_pane [INFERRED 0.85]
+- **Portal View-Transition Chain (portal-<id> shared names)** — design_service_chooser, design_portal, design_film_scene, docs_sdd_view_transitions_portal, docs_sdd_home_hero_contract [INFERRED 0.85]
+- **Per-Service 3D Film Scenes** — docs_sdd_car_scene, docs_sdd_house_scene, docs_sdd_storefront_scene, docs_sdd_scene_factory, docs_sdd_film_scene_engine [INFERRED 0.85]
+- **Hero Conversion Flow (brand coin -> service pitch -> contact CTAs)** — public_og_image_interactive_coin_hero, public_og_image_hero_headline, public_og_image_whatsapp_cta, public_og_image_instagram_crisur2026 [INFERRED 0.85]
+- **Crisur Visual Identity** — src_assets_brand_logo_crisur_logo, src_assets_brand_logo_monogram_emblem, src_assets_brand_logo_red_circular_badge, src_assets_brand_logo_brand_color_palette [INFERRED 0.85]
 
-## Communities (14 total, 0 thin omitted)
+## Communities (16 total, 2 thin omitted)
 
-### Community 0 - "SDD & Coding Rules"
+### Community 0 - "Home Page Components"
+Cohesion: 0.08
+Nodes (33): src_assets_brand_logo, facts, choices, year, instagramUrl, siteSettings, FILM_TYPES, FilmType (+25 more)
+
+### Community 1 - "Surface Briefs & Design Rules"
 Cohesion: 0.06
-Nodes (43): Async/Await for I/O Rule, Mandatory Code Output Format, No Hardcoded Credentials / Use Env Vars, CLAUDE.md Project Instructions, SDD Methodology (Specification-Driven Development), Specific Exception Handling / Fail-Fast Rule, Strict Typing Rule, Token Economy & Communication Style (+35 more)
+Nodes (53): Home Surface Brief (index.astro), Home Direction Contract: Coin Toss + Glass Chooser, Service Pages Surface Brief ([service].astro), Dark Automotive Photo Studio Own-World, Service Direction Contract: Film Applied While Scrolling, Design System: Crisur Polarizados, The Clear Glass Rule, Coin Logo Component (+45 more)
 
-### Community 1 - "Hero Controller & Showroom"
-Cohesion: 0.09
-Nodes (25): Showroom API Contract (createShowroom/Showroom/ShowroomOptions), HeroConfig, initMenu(), requireElement(), Side, createPedestal(), Pedestal, PEDESTAL_RADIUS (+17 more)
+### Community 2 - "3D Film Scene Engine"
+Cohesion: 0.08
+Nodes (42): three, CameraPose, sampleCameraPath(), smootherStep(), spanProgress(), assertWebGL(), createFilmScene(), apply() (+34 more)
 
-### Community 2 - "Package Manifest & Scripts"
-Cohesion: 0.06
-Nodes (34): dependencies, astro, @fontsource-variable/archivo, three, devDependencies, @astrojs/check, puppeteer-core, @types/three (+26 more)
+### Community 3 - "Architecture Geometry (House/Storefront)"
+Cohesion: 0.07
+Nodes (45): addBox(), addCrack(), addGlazing(), addRoom(), addWallWithOpenings(), ArchitectureMaterials, createArchitectureMaterials(), createCrackTexture() (+37 more)
 
-### Community 3 - "Diorama Primitives & House"
+### Community 4 - "Car Loft Geometry"
+Cohesion: 0.11
+Nodes (30): createLoftGeometry(), createMonotoneCurve(), Curve1D, LoftFaceSample, LoftProfile, loftSurfacePoint(), loftYawAt(), sectionPoint() (+22 more)
+
+### Community 5 - "Film Scene Design Components"
+Cohesion: 0.10
+Nodes (31): Immersive Planet Portal Interaction Reference, Chapter Index, Service Cover with Display Giant, Film Materials (Smoke, Mirror, Frost, Clear Glass), Film Scene (3D, Service Pages), Film Swatches (Home), --film Custom Property (0-1), The Fit-To-Word Rule (+23 more)
+
+### Community 6 - "Package Dependencies"
+Cohesion: 0.08
+Nodes (24): dependencies, astro, @fontsource-variable/archivo, motion, three, devDependencies, @astrojs/check, @types/three (+16 more)
+
+### Community 7 - "Astro Config, Gallery & SEO Routes"
 Cohesion: 0.15
-Nodes (30): three, addBox(), addContactShadow(), addGlow(), addPane(), addShrub(), addTree(), BoxOptions (+22 more)
+Nodes (8): env, astro, ref_vite, altFromFileName(), files, galleryFor(), GalleryPhoto, ROUTES
 
-### Community 4 - "Motion & Carousel Framing"
-Cohesion: 0.12
-Nodes (18): clamp(), easeInOutCubic(), easeOutExpo(), lerp(), ScalarTween, smoothstep(), createShowroom(), computeFraming() (+10 more)
+### Community 8 - "OG Share Image (Home Hero)"
+Cohesion: 0.31
+Nodes (10): Crisur CJ Red Coin Logo, Dark Theme with Brand Red Accent, Godoy Cruz, Mendoza (Service Location), Hero Headline: Polarizados para autos, hogares y negocios, Instagram @crisur2026, Interactive Coin Hero (Toca la moneda), Open Graph Share Image (Home Hero Screenshot), Service Segments: Autos, Hogares, Negocios (+2 more)
 
-### Community 5 - "Car Diorama & Loft Geometry"
-Cohesion: 0.14
-Nodes (21): addPlate(), addWheelWell(), BODY_BASE, BODY_MATERIAL, BODY_TOP, bodyProfile, CABIN_MATERIAL, cabinProfile (+13 more)
+### Community 9 - "CLAUDE.md Coding Rules"
+Cohesion: 0.25
+Nodes (8): Async/Await for I/O Rule, Mandatory Code Output Format, No Hardcoded Credentials / Use Env Vars, CLAUDE.md Project Instructions, SDD Methodology (Specification-Driven Development), Specific Exception Handling / Fail-Fast Rule, Strict Typing Rule, Token Economy & Communication Style
 
-### Community 6 - "Astro Config, Site Data & Logo"
-Cohesion: 0.13
-Nodes (14): astro, Crisur Polarizados Brand Logo, Circular Badge Container with White Ring, Brand Palette (Red / Black / White), Interlocking C/J Monogram Mark, config, initialIndex, initialSlide (+6 more)
-
-### Community 7 - "Studio Environment & Textures"
-Cohesion: 0.27
-Nodes (15): createStudioEnvironment(), PanelSpec, createMaterialLibrary(), WARM_LIGHT, createCanvas(), createConcreteTexture(), createFloorAlphaTexture(), createPavingTexture() (+7 more)
-
-### Community 8 - "Hero Init & State Flow"
+### Community 10 - "Film Glass Materials"
 Cohesion: 0.33
-Nodes (9): initHero(), applyState(), framingZone(), positionLabels(), show(), sideOf(), startShowroom(), step() (+1 more)
+Nodes (6): CLEAR_GLASS, FILM_LOOK, FilmAxis, FilmLook, FROST_GLOW, Vec3
 
-### Community 9 - "Brand Identity & Tokens"
-Cohesion: 0.28
-Nodes (9): Archivo Variable Typography, Brand Palette (tinted-glass graphite + logo red), Design Tokens (src/styles/tokens.css), Pending Items (logo, palette confirmation, address, hours, photos, domain), Brand Asset Guidelines (Crisur Polarizados), isotipo.svg (symbol, used as favicon), logo-light.svg (dark-background variant), logo.svg (primary logo) (+1 more)
-
-### Community 10 - "Autos Poster"
-Cohesion: 0.29
-Nodes (7): Autos Hero Poster, 3D Service Category Carousel, Automotive Window Tinting Service, Silver Sedan on Central Pedestal, Commercial Storefront on Side Pedestal, Dark Background with Red Neon Glow Style, Residential House on Side Pedestal
-
-### Community 11 - "Hogares Poster"
+### Community 11 - "TypeScript Config"
 Cohesion: 0.40
-Nodes (6): Hero Poster: Hogares (Homes), Sedan Car Model (Automotive Tinting, side slot), Dark Background with Red Neon Glow Brand Palette, Low-poly Modern Two-Story House (Residential Window Film), 3D Pedestal Carousel Layout (center focus, flanking previews), Commercial Storefront Model (Business Glazing, side slot)
+Nodes (4): ./node_modules/astro/tsconfigs/strictest.json, exclude, extends, include
 
-### Community 12 - "TypeScript Config"
-Cohesion: 0.40
-Nodes (4): astro/tsconfigs/strictest, exclude, extends, include
+### Community 12 - "Brand Logo Image"
+Cohesion: 0.67
+Nodes (4): Brand Palette (Red / Black / White), Crisur Polarizados Brand Logo, Interlocking C/J Monogram Emblem, Red Circular Badge with White Ring
 
-### Community 13 - "Locales Poster"
-Cohesion: 0.40
-Nodes (5): Hero Poster: Locales (Commercial Storefront), Automotive Car 3D Model (Autos service, side), Commercial Storefront 3D Model (Locales service, focused), 3D Podium Carousel Hero Layout (dark bg, red neon rings), Residential House 3D Model (Hogares service, side)
+### Community 13 - "Brand Asset Guidelines"
+Cohesion: 0.50
+Nodes (4): Brand Asset Guidelines (Crisur Polarizados), isotipo.svg (symbol, used as favicon), logo-light.svg (dark-background variant), logo.svg (primary logo)
+
+## Ambiguous Edges - Review These
+- `Dark Automotive Photo Studio Own-World` → `The Film Scene Rule`  [AMBIGUOUS]
+  .impeccable/surfaces/src-pages-service-astro.md · relation: conceptually_related_to
+- `Service Categories: Autos, Hogares, Negocios` → `Service Interface`  [AMBIGUOUS]
+  docs/SDD.md · relation: conceptually_related_to
+- `Crisur Polarizados Brand Logo` → `Interlocking C/J Monogram Emblem`  [AMBIGUOUS]
+  src/assets/brand/logo.jpeg · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **77 isolated node(s):** `name`, `type`, `private`, `dev`, `check` (+72 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 111 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **93 isolated node(s):** `env`, `name`, `type`, `private`, `dev` (+88 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 121 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `three` connect `Diorama Primitives & House` to `Hero Controller & Showroom`, `Package Manifest & Scripts`, `Car Diorama & Loft Geometry`, `Studio Environment & Textures`?**
-  _High betweenness centrality (0.172) - this node is a cross-community bridge._
-- **Why does `createShowroom()` connect `Motion & Carousel Framing` to `Hero Controller & Showroom`, `Studio Environment & Textures`?**
-  _High betweenness centrality (0.106) - this node is a cross-community bridge._
-- **Why does `Showroom 3D Hero` connect `SDD & Coding Rules` to `Hero Controller & Showroom`?**
-  _High betweenness centrality (0.091) - this node is a cross-community bridge._
-- **Are the 6 inferred relationships involving `createShowroom()` (e.g. with `easeInOutCubic()` and `.start()`) actually correct?**
-  _`createShowroom()` has 6 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `name`, `type`, `private` to the rest of the system?**
-  _77 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `SDD & Coding Rules` be split into smaller, more focused modules?**
-  _Cohesion score 0.06262626262626263 - nodes in this community are weakly interconnected._
-- **Should `Hero Controller & Showroom` be split into smaller, more focused modules?**
-  _Cohesion score 0.08819345661450925 - nodes in this community are weakly interconnected._
+- **What is the exact relationship between `Dark Automotive Photo Studio Own-World` and `The Film Scene Rule`?**
+  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
+- **What is the exact relationship between `Service Categories: Autos, Hogares, Negocios` and `Service Interface`?**
+  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
+- **What is the exact relationship between `Crisur Polarizados Brand Logo` and `Interlocking C/J Monogram Emblem`?**
+  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
+- **Why does `createFilmScene()` connect `3D Film Scene Engine` to `Film Scene Design Components`?**
+  _High betweenness centrality (0.160) - this node is a cross-community bridge._
+- **Why does `createFilmScene Engine Contract` connect `Film Scene Design Components` to `Surface Briefs & Design Rules`, `3D Film Scene Engine`?**
+  _High betweenness centrality (0.149) - this node is a cross-community bridge._
+- **Why does `Crisur Software Design Document (v0.7)` connect `Surface Briefs & Design Rules` to `Film Scene Design Components`?**
+  _High betweenness centrality (0.131) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `createFilmScene()` (e.g. with `handleContextLost()` and `resize()`) actually correct?**
+  _`createFilmScene()` has 2 INFERRED edges - model-reasoned connections that need verification._
