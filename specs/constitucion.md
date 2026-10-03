@@ -96,7 +96,7 @@ Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026
 
 | Spec | Estado | Fase |
 |---|---|---|
-| 001-conversion-whatsapp | En curso · requisitos APROBADOS (2026-10-03) | 2 — Diseño (siguiente) |
+| 001-conversion-whatsapp | En curso · requisitos y diseño APROBADOS (2026-10-03) | 3 — Tareas (siguiente) |
 | 003-rendimiento-celular | En cola (2.ª) | — |
 | 002-accesibilidad | En cola (3.ª) | — |
 | 004-seo-local | En cola · espera datos del cliente (D-018) | — |
@@ -133,6 +133,7 @@ Hechos relevados el 2026-10-03, **sin decidir**. Son insumo para agrupar mejoras
   - No hay tokens de espaciado ni de sombras.
   - Se usan breakpoints propios.
   - Falta verificar WCAG 2.2 AA y las áreas táctiles.
+  - DESIGN.md dice que a ≤ 520 px el botón de Instagram es una acción de texto de 2,75 rem; el sitio lo muestra con fondo y anillo de 3,25 rem (detectado en la spec 001, D-032 de esa spec).
 - **Deploy** (D-011): el `.htaccess` no tiene caché de estáticos y no hay un procedimiento documentado para volver atrás.
 - **Rendimiento:** el chunk de three.js pesa 539 KB (warning de Vite). Solo lo cargan las páginas de servicio.
 - **Higiene del repo:**

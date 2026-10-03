@@ -18,6 +18,32 @@
 | D-012 | 1 | P12 · Hero a 360×640 | A) Medir primero (capturas en la Fase 2) y después proponer el ajuste | 2026-10-03 |
 | D-013 | 1 | Prioridades de R1–R9 | Confirmadas: Must R1, R2, R5 · Should R3, R4, R6, R7, R8, R9 | 2026-10-03 |
 | D-014 | 1 | Supuestos S2, S3, S4, S6, S7, S8, S9 | Confirmados todos (S1 = D-013; S5 resuelto por D-012) | 2026-10-03 |
+| D-015 | 2 | Qué cuenta como "hero" en el inicio (D-004) | Solo el intro (moneda, título, lede y botones); el selector no cuenta | 2026-10-03 |
+| D-016 | 2 | Forma del botón flotante | Píldora roja con glifo + "Consultar" visible | 2026-10-03 |
+| D-017 | 2 | Solapamiento del flotante (R5.6) | Se retira al llegar al cierre de cada servicio; capítulos con aire abajo en celular; en el inicio no se retira (aire extra al pie) | 2026-10-03 |
+| D-018 | 2 | Aparición del flotante | Fundido + subida de 12 px (la actual); sin animación con movimiento reducido | 2026-10-03 |
+| D-019 | 2 | Tratamiento del CTA corto de las secciones del inicio | Botón secundario ("ghost") con glifo de WhatsApp | 2026-10-03 |
+| D-020 | 2 | "Consultar" en el header | Píldora roja de 44 px: solo texto a ≤ 520 px, con glifo de WhatsApp desde 521 px | 2026-10-03 |
+| D-021 | 2 | Orden de la 404 | Acciones primero: ilustración · título · texto · [Consultar por WhatsApp] · [Ir al inicio] · frase · Autos/Hogares/Negocios | 2026-10-03 |
+| D-022 | 2 | Portada de servicio sin los datos | Una columna abajo a la izquierda, con el título gigante limitado a su tamaño actual | 2026-10-03 |
+| D-023 | 2 | Frase del hero que reemplaza "Elegí qué querés polarizar…" (R8.3) | "Elegí dónde va la lámina y mirá cómo queda." | 2026-10-03 |
+| D-024 | 2 | Frase de la 404 que reemplaza "Elegí qué querés polarizar:" (R8.3) | "¿Dónde querés colocar la lámina?" (línea propia sobre Autos / Hogares / Negocios) | 2026-10-03 |
+| D-025 | 2 | Ajuste del hero en celular (R5.3, D-012) | Ninguno: la medición muestra que R5.3 ya se cumple | 2026-10-03 |
+| D-026 | 2 | Link de WhatsApp del pie | Se deja como está ("WhatsApp" + número): es un dato de contacto, fuera de R4 | 2026-10-03 |
+| D-027 | 2 | Nombre accesible de "Consultar" (header y flotante) | "Consultar por WhatsApp": texto visible "Consultar" + "por WhatsApp" oculto a la vista (R4.4 leído como "empieza con el texto visible", WCAG 2.5.3) | 2026-10-03 |
+| D-028 | 2 | Si el flotante no encuentra el hero o la portada | Falla rápido: error en consola y el flotante no aparece | 2026-10-03 |
+| D-029 | 2 | Verificación de la spec | `npm run build` + checklist manual por criterio en 360/768/1024/1440 (teclado, movimiento reducido, sin JS) + capturas con Edge; sin dependencias nuevas | 2026-10-03 |
+| D-030 | 2 | Medición de RNF2 (Lighthouse) | 3 corridas por página antes y después, en la misma máquina; se compara la mediana; tolerancia de −3 puntos | 2026-10-03 |
+| D-031 | 2 | Paquete técnico T1–T11 | Aprobado en bloque con las sugerencias del `arquitecto` (detalle abajo) | 2026-10-03 |
+| D-032 | 2 | Instagram a ≤ 520 px: DESIGN.md vs. sitio | Fuera de esta spec: se anota en el Anexo A de la constitución para la spec 002 o 006 | 2026-10-03 |
+| D-033 | 2 | PD-2 · Qué elemento del cierre retira el flotante | El contenido del cierre (`.closing-copy` y el portal), no el bloque completo | 2026-10-03 |
+| D-034 | 2 | PD-3 · ¿El flotante vuelve después del cierre en servicios? | Sí: reaparece cuando el contenido del cierre sale de pantalla | 2026-10-03 |
+| D-035 | 2 | PD-4 · Aire extra al pie para el flotante | En el pie de todas las páginas, 5,5 rem (sin props nuevas) | 2026-10-03 |
+| D-036 | 2 | PD-10 · Celular en horizontal | Se verifica aparte a 640×360, con el método de capturas de D-025 | 2026-10-03 |
+| D-037 | 2 | PD-8 · Servidor de Lighthouse | Build local (`npm run preview`) antes y después, en la misma máquina | 2026-10-03 |
+| D-038 | 2 | PD-9 · Tolerancia del TBT (RNF2) | Mediana de después ≤ mediana de antes + 10 % | 2026-10-03 |
+| D-039 | 2 | PD-1, PD-5, PD-6, PD-7 · Detalles internos | Aprobados en bloque con las sugerencias (detalle abajo) | 2026-10-03 |
+| D-040 | 2 | Aprobación del diseño y de los 9 detalles propuestos de la interfaz | Aprobados tal como están en `diseno.md` v1 | 2026-10-03 |
 
 ---
 
@@ -165,4 +191,268 @@
 - **Contexto:** supuestos S2, S3, S4, S6, S7, S8 y S9 de `requisitos.md` (S1 se resolvió con D-013 y S5 con D-012).
 - **Opciones presentadas:** confirmar todos · corregir alguno.
 - **Decisión del usuario:** confirmados todos.
+- **Fecha:** 2026-10-03
+
+### D-015 — Qué cuenta como "hero" en el inicio (opciones T5 / V6)
+- **Fase:** 2
+- **Contexto:** la sección `home-hero` (`HomeHero.astro:17-61`) incluye el intro y el selector de servicios (~1,7 pantallas en celular). El header no es fijo.
+- **Opciones presentadas:**
+  - A) Solo el intro — pro: el flotante aparece cuando los botones del hero salen de pantalla; nunca hay tramo sin WhatsApp · contra: convive con el selector.
+  - B) Toda la sección — pro: selector limpio · contra: ~1 pantalla sin ningún WhatsApp a la vista.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-016 — Forma del botón flotante (opción V4)
+- **Fase:** 2
+- **Contexto:** hoy es un círculo de 56 px solo con el glifo; D-006 fija la etiqueta "Consultar".
+- **Opciones presentadas:**
+  - A) Píldora con glifo + "Consultar" (~140 px, 52 px de alto) — pro: etiqueta visible, misma palabra que el header · contra: ocupa ~39 % del ancho a 360 px.
+  - B) Círculo solo ícono — pro: tapa lo mínimo · contra: la etiqueta no se ve.
+  - C) Píldora que se contrae a círculo — contra: más movimiento y JS.
+  - Común a todas: margen para la barra de gestos de iOS (`safe-area-inset-bottom`).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-017 — Solapamiento del flotante (opciones T7 / V5)
+- **Fase:** 2
+- **Contexto:** en el cierre de cada servicio el flotante cae sobre el portal "Siguiente" (`ServiceStory.astro:513-516`) de forma permanente; en celular tapa el final del texto de los capítulos.
+- **Opciones presentadas:**
+  - A) Se retira al llegar al cierre del servicio; los capítulos reservan aire abajo en celular; en el inicio no se retira (aire extra al pie).
+  - B) A + se retira también en el bloque final del inicio.
+  - C) Siempre visible; el portal y los textos se corren — contra: más cambios de layout, dos WhatsApp a la vez en el cierre.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-018 — Aparición del flotante (opción V7)
+- **Fase:** 2
+- **Opciones presentadas:** A) fundido + subida (actual) · B) barrido tipo espátula · C) instantáneo. Con movimiento reducido, todas sin animación.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-019 — Tratamiento del CTA corto de las secciones del inicio (opción V2)
+- **Fase:** 2
+- **Contexto:** 3 CTA nuevos (D-001) con etiqueta "Consultar por WhatsApp" (D-006); con D-004/D-015 conviven con el flotante rojo.
+- **Opciones presentadas:**
+  - A) Rojo lleno en las tres — contra: 6 botones rojos más el flotante.
+  - B) Secundario "ghost" con glifo — pro: respeta "el rojo es luz y acción" · contra: menos peso visual.
+  - C) Franja con texto + botón rojo — contra: textos nuevos, parece banner.
+  - D) Graduado: ghost en dos, rojo en "Cómo trabajamos".
+- **Recomendación del equipo:** B.
+- **Decisión del usuario:** B.
+- **Fecha:** 2026-10-03
+
+### D-020 — "Consultar" en el header (opción V3)
+- **Fase:** 2
+- **Contexto:** a 360 px quedan ~165 px entre logo y hamburguesa; el botón sube de 40 a 44 px (R5.4).
+- **Opciones presentadas:**
+  - A) Solo texto siempre.
+  - B) Glifo + texto siempre — contra: ~31 px de holgura a 360 px.
+  - C) Solo texto a ≤ 520 px; glifo desde 521 px — contra: dos formas del mismo botón.
+- **Recomendación del equipo:** C.
+- **Decisión del usuario:** C.
+- **Fecha:** 2026-10-03
+
+### D-021 — Orden de la 404 (opción V8)
+- **Fase:** 2
+- **Opciones presentadas:**
+  - A) Acciones primero (WhatsApp entra en la primera pantalla a 360×640 y 360×560).
+  - B) Cambio mínimo — contra: el WhatsApp queda fuera de la primera pantalla en celular.
+  - C) A + ilustración más chica en pantallas bajas.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-022 — Portada de servicio sin los datos (opción V9)
+- **Fase:** 2
+- **Contexto:** al quitar la columna de datos (D-007, solo visible ≥ 881 px), el título gigante crecería ~50 % (se mide contra su contenedor).
+- **Opciones presentadas:**
+  - A) Una columna con el título limitado a su tamaño actual.
+  - B) El título crece hasta su tope — contra: puede tapar el 3D a 1024 px.
+  - C) A + pista de scroll — contra: elemento y texto nuevos fuera de la spec.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-023 — Frase del hero (opción V10, R8.3)
+- **Fase:** 2
+- **Contexto:** `HomeHero.astro:25`. Se cambia solo la segunda frase; límite medido de ~46 caracteres para que el párrafo siga en 3 líneas a 360 px (R5.3).
+- **Opciones presentadas:**
+  - A) "Elegí dónde va la lámina y mirá cómo queda." (43) — misma idea que D-009 sin repetir "colocar" · contra: "lámina" dos veces en el párrafo.
+  - B) "Elegí tu vidrio y mirá cómo queda." (33) — corta · contra: se aleja de la idea del título.
+  - C) "Elegí tu auto, casa o negocio y mirá cómo queda." (48) — pasa el límite, requeriría ajustar el hero.
+- **Recomendación del equipo:** A (el `disenador-ui` prefería B; el orquestador recomendó A porque R8.3 pide la misma idea que el título).
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-024 — Frase de la 404 (opción V11, R8.3)
+- **Fase:** 2
+- **Contexto:** `404.astro:18`; con D-021 la frase va en su propia línea, sobre las píldoras de servicios.
+- **Opciones presentadas:**
+  - A) "¿Dónde querés colocar la lámina?" — igual al selector del inicio.
+  - B) "Elegí dónde va la lámina:".
+  - C) "Escribinos por WhatsApp o elegí dónde querés la lámina:" — contra: repite el botón de arriba.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-025 — Ajuste del hero en celular (opción V1, D-012)
+- **Fase:** 2
+- **Contexto:** medición del 2026-10-03 (capturas con iframe de 360 px): el botón de WhatsApp entra completo a 360×640 (y≈485–537) y a 360×560 (holgura ≈ 28 px); Instagram queda cortado a 560.
+- **Opciones presentadas:**
+  - A) Ninguno, siempre que la frase de D-023 entre en 3 líneas.
+  - B) Seguro liviano en pantallas ≤ 600 px de alto (~20 px menos de espacios).
+  - C) B + moneda más chica — contra: toca la pieza firma.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-026 — Link de WhatsApp del pie (opción V12.1)
+- **Fase:** 2
+- **Contexto:** `SiteFooter.astro:34` muestra "WhatsApp" + número; R4.1–R4.3 no lo incluyen.
+- **Opciones presentadas:**
+  - A) Dejarlo: es un dato de contacto.
+  - B) Pasarlo a "Consultar por WhatsApp".
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-027 — Nombre accesible de "Consultar" (opción T9)
+- **Fase:** 2
+- **Contexto:** "Consultar" (header D-020 y flotante D-016) no dice que abre WhatsApp. R4.4 pide nombre accesible "coincidente" con el texto visible.
+- **Opciones presentadas:**
+  - A) Exactamente "Consultar" — lectura literal de R4.4 · contra: no anticipa WhatsApp.
+  - B) "Consultar" visible + "por WhatsApp" oculto a la vista (`.sr-only`) — nombre "Consultar por WhatsApp", empieza con el texto visible (WCAG 2.5.3) · contra: lee "coincidente" como "empieza igual".
+- **Recomendación del equipo:** B.
+- **Decisión del usuario:** B. Queda como interpretación de R4.4 para esta spec.
+- **Fecha:** 2026-10-03
+
+### D-028 — Si el flotante no encuentra el hero o la portada (opción T6.b)
+- **Fase:** 2
+- **Opciones presentadas:**
+  - A) Falla rápido: error en consola, el flotante no aparece (regla heredada de fail-fast; el "Consultar" del header sigue).
+  - B) Falla seguro: flotante siempre visible y error en consola.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-029 — Verificación de la spec (opciones T12 / T14)
+- **Fase:** 2
+- **Contexto:** no hay tests ni lint (constitución D-012: se exigen cuando existan).
+- **Opciones presentadas:**
+  - A) Build + checklist manual por criterio en 360/768/1024/1440 + capturas con Edge (método del iframe de 360 px que ya funcionó); Playwright queda para la spec 006.
+  - B) A + script de Node sin dependencias que revisa `dist/` — contra: roza la spec 006, frágil.
+  - C) Playwright ahora — contra: dependencia nueva, alarga la spec.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-030 — Medición de RNF2 (opción T13)
+- **Fase:** 2
+- **Contexto:** la línea de base del 2026-10-03 es de 1 corrida por página, con ±5 puntos de ruido.
+- **Opciones presentadas:**
+  - A) 3 corridas antes y después (misma máquina y configuración: Lighthouse 12.8.2, Edge headless, mobile), mediana, tolerancia −3 puntos.
+  - B) 3 corridas, sin tolerancia.
+  - C) 1 corrida contra la tabla del 2026-10-03.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-031 — Paquete técnico T1–T11 (aprobado en bloque)
+- **Fase:** 2
+- **Contexto:** decisiones de estructura interna sin efecto visible ni dependencias nuevas. Opciones completas (A/B/C con pro y contra) en el relevamiento del `arquitecto` del 2026-10-03; acá se registra la opción elegida de cada una.
+- **Opciones presentadas:** aprobar en bloque las sugerencias · revisarlas una por una.
+- **Decisión del usuario:** aprobar en bloque:
+  - **T1:** componente `WhatsAppButton.astro` (props `href`, `label`; siempre `target="_blank"`, `rel="noopener noreferrer"` y glifo) para los 4 CTA nuevos (3 del inicio + 404) y los 2 que cambian de etiqueta (`HomeHero`, `ServiceDetails`). Los 3 que no cambian quedan con su marcado (unificarlos → spec 006).
+  - **T1.b:** el CTA corto va dentro de cada sección, al final; la sección recibe la URL por prop.
+  - **T2:** "Consultar" y "Consultar por WhatsApp" en un módulo de datos nuevo (`src/data/cta.ts`); `ctaLabel` de servicios sigue en `services.ts`.
+  - **T3:** la página arma la URL de WhatsApp y la pasa por props (patrón actual).
+  - **T4:** aparición del flotante con `IntersectionObserver` nativo (reemplaza el listener de scroll).
+  - **T6:** el hero / la portada se marcan con un atributo `data-`; el script del flotante lo busca (con D-028 si falta).
+  - **T8:** el link "Consultar" sale del `<nav>` y queda en el header como hermano, entre el `<nav>` y la hamburguesa.
+  - **T10:** `[service].astro` renderiza `WorkGallery` solo si hay fotos (recibe las fotos por prop); se borra el bloque "Muy pronto…" sin uso.
+  - **T11:** texto literal de D-011 + ítem de revisión manual para R8.4.
+- **Fecha:** 2026-10-03
+
+### D-032 — Instagram a ≤ 520 px: DESIGN.md vs. sitio (opción V12.3)
+- **Fase:** 2
+- **Contexto:** DESIGN.md dice que a ≤ 520 px el botón de Instagram pasa a acción de texto de 2,75 rem; el sitio lo muestra con fondo y anillo de 3,25 rem.
+- **Opciones presentadas:** A) fuera de esta spec (anotarlo) · B) corregir el sitio en la 001 · C) corregir DESIGN.md.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-033 — Qué elemento del cierre retira el flotante (PD-2)
+- **Fase:** 2
+- **Contexto:** el cierre (`footer#consultar`, `ServiceStory.astro:95`) ocupa una pantalla; su contenido está abajo de todo. R2.1 pide el flotante durante los 4 capítulos.
+- **Opciones presentadas:**
+  - A) Todo el bloque del cierre — contra: en celular se va mientras se lee el capítulo 4.
+  - B) El contenido del cierre (`.closing-copy` y el portal) — pro: se va justo antes de tapar el portal; cumple R2.1 y R5.6.
+- **Recomendación del equipo:** B.
+- **Decisión del usuario:** B.
+- **Fecha:** 2026-10-03
+
+### D-034 — ¿El flotante vuelve después del cierre? (PD-3)
+- **Fase:** 2
+- **Opciones presentadas:**
+  - A) Reaparece cuando el cierre sale de pantalla — pro: misma regla que el inicio, acción a mano hasta el pie.
+  - B) Queda oculto hasta el final — contra: "Qué ganás" y la FAQ sin acción fija.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-035 — Aire extra al pie (PD-4)
+- **Fase:** 2
+- **Contexto:** D-017 pide aire al pie sin medida ni lugar; el pie es compartido por las 5 páginas.
+- **Opciones presentadas:**
+  - A) En el pie de todas las páginas, 5,5 rem — pro: un solo cambio de CSS · contra: en la 404 sobra un poco.
+  - B) Solo en páginas con flotante, con una prop nueva en `SiteFooter`.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A (incluye la medida de 5,5 rem).
+- **Fecha:** 2026-10-03
+
+### D-036 — Celular en horizontal (PD-10)
+- **Fase:** 2
+- **Opciones presentadas:** A) verificar a 640×360 con el método de capturas · B) no verificarlo aparte.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-037 — Servidor de Lighthouse (PD-8)
+- **Fase:** 2
+- **Opciones presentadas:**
+  - A) `npm run preview` (build local) antes y después — pro: mismas condiciones, nada que publicar · contra: no comparable uno a uno con la tabla del 2026-10-03.
+  - B) Vercel antes + deploy de preview después — contra: requiere deploy y depende de la red.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-038 — Tolerancia del TBT (PD-9)
+- **Fase:** 2
+- **Opciones presentadas:**
+  - A) Sin tolerancia — contra: el ruido puede dar un falso "empeoró".
+  - B) Mediana de después ≤ mediana de antes + 10 %.
+  - C) Evaluar solo el puntaje — contra: cambia RNF2 (aprobado).
+- **Recomendación del equipo:** B.
+- **Decisión del usuario:** B.
+- **Fecha:** 2026-10-03
+
+### D-039 — Detalles internos PD-1, PD-5, PD-6, PD-7 (aprobados en bloque)
+- **Fase:** 2
+- **Opciones presentadas:** aprobar en bloque las sugerencias · revisarlas una por una.
+- **Decisión del usuario:** aprobar en bloque:
+  - **PD-1:** `WhatsAppButton` recibe `variant: 'primary' | 'secondary'` (obligatoria, tipada) y `class?` para el layout del padre, y reparte `...rest` (patrón de `Icon.astro`).
+  - **PD-5:** la marca de retiro es opcional: sin marca no hay retiro y no hay error.
+  - **PD-6:** se quita la prop `label` de `WhatsAppFab`; toma "Consultar" de `src/data/cta.ts`, como el header.
+  - **PD-7:** el texto del botón de `HomeFaqSection.astro:24` pasa a `WHATSAPP_CTA_LABELS.general` (un import y una línea; el marcado no cambia).
+- **Fecha:** 2026-10-03
+
+### D-040 — Aprobación del diseño y de los detalles propuestos
+- **Fase:** 2
+- **Contexto:** `diseno.md` v1 incluye 9 detalles de interfaz que propuso el `disenador-ui` para que las decisiones funcionen: (1) CTA de sección alineado a la izquierda con margen superior `clamp(2rem, 4vw, 3rem)`; (2) ancho completo a ≤ 520 px (máx. 22 rem), al contenido desde 521 px; (3) en secciones de dos columnas desde 900 px, el CTA va debajo de ambas; (4) orden del header [Consultar][≡]; (5) paddings del "Consultar" del header (1 rem ≤ 520 px, 1,2 rem desde 521 px; 0,5 rem hasta la hamburguesa); (6) el panel de la hamburguesa ya no lleva su propio botón de WhatsApp; (7) flotante a 1 rem del borde + `safe-area-inset`; (8) aire inferior ≥ 5,5 rem en los capítulos en celular; (9) retirada del flotante con el gesto inverso de la aparición.
+- **Opciones presentadas:** aprobar el diseño con los 9 detalles · cambiar algún detalle antes de aprobar.
+- **Decisión del usuario:** aprobado tal como está.
 - **Fecha:** 2026-10-03
