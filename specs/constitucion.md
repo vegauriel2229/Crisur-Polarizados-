@@ -96,7 +96,7 @@ Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026
 
 | Spec | Estado | Fase |
 |---|---|---|
-| 001-conversion-whatsapp | En curso | 1 — Requisitos |
+| 001-conversion-whatsapp | En curso · requisitos APROBADOS (2026-10-03) | 2 — Diseño (siguiente) |
 | 003-rendimiento-celular | En cola (2.ª) | — |
 | 002-accesibilidad | En cola (3.ª) | — |
 | 004-seo-local | En cola · espera datos del cliente (D-018) | — |
