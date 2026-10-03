@@ -1,4 +1,4 @@
-# Guía del equipo — quién hace qué
+# Avengers — quién hace qué
 
 > Todos proponen, nadie decide: cada decisión vuelve al usuario (CLAUDE.md §0). La sesión principal (el **orquestador**) es la única que delega y te consulta. No hace falta llamar a los agentes por nombre: usás un comando o pedís lo que necesitás ("que el arquitecto me releve opciones de hosting") y el orquestador delega.
 
