@@ -60,6 +60,8 @@ _Pendiente del relevamiento._
 | D-002 | Clon anidado `Crisur-Polarizados/` (repos Git casi vacíos) | Moverlo fuera · dejarlo · borrarlo | **Moverlo fuera** → `Desktop\Crisur-Polarizados-clon-viejo` | 2026-10-02 |
 | D-003 | Proyecto dentro de OneDrive | Mover a `C:\Proyectos\` · dejarlo en OneDrive | **Mover a `C:\Proyectos\Crisur-Polarizados`** (los parches de config siguen hasta que se decida sacarlos) | 2026-10-02 |
 | D-004 | Copia vieja en OneDrive y cambios sin commitear | — (instrucción explícita del usuario) | **Commitear todo lo necesario y borrar la copia vieja** | 2026-10-03 |
+| D-005 | Qué más borrar | Clon viejo del Escritorio · carpeta `skills/` duplicada · capturas de `.impeccable/review/` · nada más | **Las tres**: clon viejo, `skills/` (copia de `.claude/skills/`) y capturas de `.impeccable/review/` | 2026-10-03 |
+| D-006 | Respaldo de los commits en GitHub | Push a main ahora · todavía no | **Push a main ahora** (sin force) | 2026-10-03 |
 
 ## 8. Specs
 | Spec | Estado | Fase |
