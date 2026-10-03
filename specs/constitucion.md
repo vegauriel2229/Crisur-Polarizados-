@@ -4,7 +4,7 @@
 
 > Documento de la Fase 0 (`/proyecto-existente`). Define las reglas del proyecto. Cada elección referencia la decisión del usuario que la originó. El stack es **existente**: se documenta, no se elige.
 
-> **Dónde quedamos (2026-10-03):** pasos 1–6 de `/proyecto-existente` hechos. Punto de guardado y mudanza fuera de OneDrive (D-001 a D-006), relevamiento del `arquitecto` (stack en §2, brechas en el Anexo A), estándares consultados (D-007 a D-012), rol de Vercel (D-013) y Keystatic (D-014). Constitución aprobada por el usuario el 2026-10-03. Siguiente: diagnóstico (paso 7).
+> **Dónde quedamos (2026-10-03):** pasos 1–6 de `/proyecto-existente` hechos. Punto de guardado y mudanza fuera de OneDrive (D-001 a D-006), relevamiento del `arquitecto` (stack en §2, brechas en el Anexo A), estándares consultados (D-007 a D-012), rol de Vercel (D-013) y Keystatic (D-014). Constitución aprobada por el usuario el 2026-10-03. Paso 7 hecho: diagnóstico en `docs/auditoria-2026-10-03.md`, specs y orden en §8 (D-015, D-019). **Fase 0 cerrada.**
 
 ## 1. Proyecto
 - Cliente / empresa: Crisur Polarizados — negocio familiar, +10 años, Godoy Cruz (Mendoza). Detalle en `PRODUCT.md`.
@@ -83,12 +83,28 @@ Adoptar no cambia nada en el momento: lo que el proyecto no cumple pasa a mejora
 | D-012 | Definición de terminado | Excepciones + Lighthouse ≥ 95 · excepciones + Lighthouse ≥ 90 · adoptarla completa | **Excepciones + Lighthouse ≥ 95**: lint y tests se exigen cuando existan | 2026-10-03 |
 | D-013 | Papel de Vercel (`crisur-polarizados.vercel.app`) | Preview permanente · temporal, se baja al publicar | **Temporal**: se da de baja cuando Hostinger esté online; los restos de Vercel en la config pasan a mejoras candidatas | 2026-10-03 |
 | D-014 | Keystatic | Postergarlo con spec propia · sacarlo del proyecto · integrarlo antes de publicar | **Postergarlo con spec propia** | 2026-10-03 |
+| D-015 | Agrupación de mejoras y primera spec (diagnóstico `/auditoria-web`) | Empezar por 001 conversion-whatsapp · 002 accesibilidad · 003 rendimiento-celular · 006 calidad-y-mantenimiento | **Agrupación de §8 aprobada; se empieza por 001 conversion-whatsapp** | 2026-10-03 |
+| D-016 | Cómo medir Lighthouse (PageSpeed sin cuota) | Lighthouse local ahora (`npx`) · reintentar PageSpeed mañana · primera tarea de la spec 003 | **Lighthouse local ahora** | 2026-10-03 |
+| D-017 | Guardar el informe de la auditoría | En `docs/auditoria-2026-10-03.md` · solo en el chat | **Guardarlo en `docs/auditoria-2026-10-03.md`** (commit con OK) | 2026-10-03 |
+| D-018 | Datos que faltan del cliente (calle, hora de cierre, Google Maps, fotos) | Borrador de mensaje con `gestor-cliente` · los pide el usuario | **Los pide el usuario** | 2026-10-03 |
+| D-019 | Orden de specs tras medir Lighthouse (rendimiento mobile 60–67) | 001 → 003 → 002 · mantener 001 → 002 → 003 · empezar por 003 | **001 → 003 → 002** | 2026-10-03 |
 
 ## 8. Specs
 | Spec | Estado | Fase |
 |---|---|---|
-| — (se definen después del diagnóstico del paso 7) | | |
-| Keystatic (futura, D-014) | Sin priorizar | — |
+Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026-10-03.md`.
+
+| Spec | Estado | Fase |
+|---|---|---|
+| 001-conversion-whatsapp | En curso | 1 — Requisitos |
+| 003-rendimiento-celular | En cola (2.ª) | — |
+| 002-accesibilidad | En cola (3.ª) | — |
+| 004-seo-local | En cola · espera datos del cliente (D-018) | — |
+| 005-publicacion-hostinger | En cola · espera contratar Hostinger y dominio | — |
+| 006-calidad-y-mantenimiento | Cuando el usuario lo decida | — |
+| keystatic (D-014) | Postergada | — |
+
+**Pendiente del cliente (lo pide el usuario, D-018):** calle y número del taller · hora de cierre · link de Google Maps / Perfil de empresa · fotos de trabajos.
 
 ## Anexo A — Brechas y pendientes del relevamiento
 Hechos relevados el 2026-10-03, **sin decidir**. Son insumo para agrupar mejoras en specs (paso 7); ninguno se hace sin aprobación.
