@@ -22,7 +22,7 @@ const site = Astro.site;
 const canonical = site === undefined ? undefined : new URL(Astro.url.pathname, site);
 const ogImage = site === undefined ? undefined : new URL('/og-image.jpg', site);
 const schema = buildLocalBusinessSchema(siteSettings, {
-  site: canonical,
+  site,
   image: site === undefined ? undefined : new URL(touchIcon.src, site),
   instagram: instagramUrl,
 });

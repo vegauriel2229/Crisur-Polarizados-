@@ -34,7 +34,7 @@ export const FILM_TYPES: readonly FilmType[] = [
 export const HOME_FAQ: readonly FaqItem[] = [
   {
     question: '¿Dónde están?',
-    answer: `Estamos en ${siteSettings.serviceArea}. Escribinos por WhatsApp y coordinamos.`,
+    answer: `Estamos en ${siteSettings.serviceArea}. ${siteSettings.openingHours}`,
   },
   {
     question: '¿Cuánto cuesta?',

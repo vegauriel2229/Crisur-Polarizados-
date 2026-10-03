@@ -23,9 +23,9 @@ const year = new Date().getFullYear();
     </div>
     <nav class="footer-links" aria-label="Servicios">
       <p class="footer-title">Servicios</p>
-      <a href="/autos">Autos</a>
-      <a href="/hogares">Hogares</a>
-      <a href="/negocios">Negocios</a>
+      <a href="/autos/">Autos</a>
+      <a href="/hogares/">Hogares</a>
+      <a href="/negocios/">Negocios</a>
     </nav>
     <div class="footer-links">
       <p class="footer-title">Contacto</p>
@@ -38,7 +38,7 @@ const year = new Date().getFullYear();
         <span>@{siteSettings.instagramHandle}</span>
       </a>
       {siteSettings.address && <p class="footer-note">{siteSettings.address}</p>}
-      {siteSettings.openingHours && <p class="footer-note">{siteSettings.openingHours}</p>}
+      <p class="footer-note">{siteSettings.openingHours}</p>
     </div>
   </div>
   <p class="footer-legal">© {year} {siteSettings.businessName}</p>

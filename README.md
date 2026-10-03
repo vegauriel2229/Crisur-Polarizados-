@@ -43,9 +43,13 @@ Copiá las fotos en `src/assets/gallery/autos/`, `hogares/` o `negocios/` y list
 
 La imagen de vista previa al compartir el link es `public/og-image.jpg` (1200×630).
 
-## Publicar (Vercel)
+## Publicar (Hostinger)
 
-Importá el repo en Vercel; detecta Astro solo. Cuando haya dominio propio, cargá la variable `PUBLIC_SITE_URL` (por ejemplo `https://crisurpolarizados.com.ar`). Sin ella se usa el dominio `*.vercel.app` que Vercel asigna.
+1. Copiá `.env.example` como `.env` y poné el dominio real en `PUBLIC_SITE_URL`. Sin esto la build sale sin canonical ni sitemap, y lo avisa en la consola.
+2. `npm run build`.
+3. En hPanel → Administrador de archivos, subí **el contenido** de `dist/` a `public_html`, incluido `.htaccess` (es un archivo oculto). Ese archivo fuerza https sin `www` y muestra la página 404 propia.
+
+Todas las URLs terminan en `/` (`/autos/`): así Hostinger no tiene que redirigir.
 
 ## Documentación
 

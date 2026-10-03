@@ -24,7 +24,7 @@ Sitio web institucional de **Crisur Polarizados** (Godoy Cruz, Mendoza; +10 año
 |---|---|---|
 | Framework | Astro + TypeScript estricto | HTML estático por defecto → máxima velocidad y SEO local; JS solo donde haga falta (islas). |
 | CMS | Keystatic (modo GitHub) | Contenido versionado en el repo, sin base de datos ni costo; panel en `/keystatic`. |
-| Hosting | Vercel (`@astrojs/vercel`) | Deploy automático por push; el commit de Keystatic dispara el rebuild. |
+| Hosting | Hostinger (decidido 2026-10-02, todavía sin contratar) | Hosting estático: se sube `dist/`. `public/.htaccess` fuerza https sin `www` y sirve `404.html`. Keystatic en modo GitHub necesita endpoints de servidor: en hosting estático solo corre en modo `local` (ver §10). |
 | Render | Estático + rutas on-demand solo para Keystatic | Las páginas públicas se prerenderizan; el panel necesita endpoints de servidor (OAuth GitHub). |
 | Imágenes | `astro:assets` (`<Image>`) | Conversión a WebP/AVIF, `srcset` y dimensiones automáticas → buen LCP/CLS. |
 | Contacto | Links `wa.me` con mensaje prearmado + Instagram | Sin backend ni datos personales que almacenar. |
@@ -40,6 +40,8 @@ Sitio web institucional de **Crisur Polarizados** (Godoy Cruz, Mendoza; +10 año
 | `/galeria` | Pendiente: sin fotos de trabajos todavía (hoy "Ver trabajos" lleva a Instagram) |
 | `/keystatic` | Pendiente (Keystatic todavía no está integrado) |
 | `/404` | Página no encontrada |
+
+Todas las rutas terminan en `/` (`trailingSlash: 'always'`): Hostinger redirige `/autos` → `/autos/`, así que links, canonical y sitemap apuntan directo a la URL final.
 
 Elementos globales: header con navegación (`SiteHeader`), footer con contacto (`SiteFooter`), botón flotante de WhatsApp.
 
@@ -80,16 +82,19 @@ interface SiteSettings {
   whatsappNumber: string;       // formato E.164 sin '+', ej. 5493511234567
   whatsappDefaultMessage: string;
   instagramHandle: string;      // sin '@'
-  serviceArea: string;          // "Godoy Cruz, Mendoza"
-  address?: string;             // pendiente; si está vacío, no se renderiza
-  openingHours?: string;        // pendiente; si está vacío, no se renderiza
+  city: string;                 // "Godoy Cruz" → JSON-LD addressLocality
+  province: string;             // "Mendoza"    → JSON-LD addressRegion
+  serviceArea: string;          // "Godoy Cruz, Mendoza" (textos)
+  address?: string;             // calle y número; pendiente → se omite
+  openingHours: string;         // frase para la gente (footer, FAQ); no va al JSON-LD
   yearsOfExperience: number;    // 10 → "+10 años"
 }
 ```
 
 ### Casos borde de contenido
 - **Galería vacía** (fotos aún no disponibles): la home oculta la sección de destacados; `/galeria` muestra un estado vacío con CTA a Instagram.
-- **Dirección/horarios vacíos:** se omiten en footer y en JSON-LD (no se publican campos vacíos a Google).
+- **Sin calle confirmada:** el footer no muestra dirección y el JSON-LD publica solo localidad, provincia y país.
+- **Horarios:** el JSON-LD no los incluye hasta tener hora de cierre (`openingHoursSpecification` exige apertura y cierre).
 
 ## 5. Contratos de funciones núcleo
 
@@ -101,7 +106,7 @@ interface SiteSettings {
 function buildWhatsAppUrl(phoneNumber: string, message: string): URL;
 
 // src/lib/seo.ts
-/** Genera JSON-LD schema.org/LocalBusiness para SEO local. Omite url/image si no hay dominio. */
+/** JSON-LD schema.org/LocalBusiness. `site` = raíz del sitio (url + @id `#negocio`, igual en todas las páginas). Omite url/@id/image si no hay dominio. */
 function buildLocalBusinessSchema(
   settings: SiteSettings,
   links: { site: URL | undefined; image: URL | undefined; instagram: string },
@@ -122,7 +127,7 @@ Variables (en Vercel, nunca en el repo):
 | `KEYSTATIC_GITHUB_CLIENT_SECRET` | OAuth de la GitHub App |
 | `KEYSTATIC_SECRET` | Firma de sesión |
 | `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | Identificador público de la App |
-| `PUBLIC_SITE_URL` | URL canónica (sitemap, OG, JSON-LD). Si falta, se usa `VERCEL_PROJECT_PRODUCTION_URL` (Vercel la define sola); sin ninguna, se omiten canonical, `og:image` y el sitemap queda vacío |
+| `PUBLIC_SITE_URL` | URL canónica (sitemap, OG, JSON-LD). Para Hostinger va en `.env` (copiar `.env.example`) antes de `npm run build`; la build avisa si falta. Si falta, se usa `VERCEL_PROJECT_PRODUCTION_URL` (Vercel la define sola); sin ninguna, se omiten canonical, `og:image` y el sitemap queda vacío |
 
 En desarrollo, Keystatic usa almacenamiento `local` (sin credenciales).
 
@@ -238,7 +243,8 @@ interface Props { whatsappUrl: string }                    // slot "header" = Si
 ## 10. Operación
 
 - **Administrador del contenido:** el hijo del dueño, con su cuenta de GitHub (login del panel Keystatic).
-- **Dominio:** no hay aún. Se publica en el subdominio de Vercel (`*.vercel.app`); al registrar el dominio (ej. `.com.ar` vía NIC Argentina) solo cambia `PUBLIC_SITE_URL` y la config DNS.
+- **Dominio:** no hay aún. Propuesto: `.com.ar` en NIC Argentina, apuntado a Hostinger. Al tenerlo solo cambia `PUBLIC_SITE_URL` y el DNS.
+- **Publicación (Hostinger):** `npm run build` con `.env` → subir el contenido de `dist/` a `public_html` (incluido `.htaccess`).
 
 ## 11. Pendientes
 
@@ -248,7 +254,7 @@ interface Props { whatsappUrl: string }                    // slot "header" = Si
 | Confirmar paleta derivada del logo (§9.1) | Cliente | Nada |
 | Diseño de las secciones siguientes | Cliente | Resto de la home |
 | Dirección exacta | Cliente | Footer, JSON-LD (no bloquea build) |
-| Horarios | Cliente | Footer, JSON-LD (no bloquea build) |
+| Hora de cierre (los horarios ya están: todos los días desde las 17 h, a coordinar) | Cliente | JSON-LD `openingHoursSpecification` (no bloquea build) |
 | Fotos de trabajos | Cliente | Carrusel de cada servicio: se copian en `src/assets/gallery/<servicio>/` (no bloquea build; mientras tanto, aviso con link a Instagram) |
 | Cifras técnicas de las láminas (UV, calor) | Cliente | Nada: hoy se publican beneficios sin cifras |
 | `og-image.jpg` con foto real (1200×630) | Cliente | Nada: hoy es una captura del hero |

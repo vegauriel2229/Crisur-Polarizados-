@@ -68,7 +68,7 @@ export const services: readonly Service[] = [
       lede: 'Vidrieras, oficinas y ventanales con polarizado, espejado o esmerilado: menos reflejo y calor adentro, más confort para tus clientes y una fachada prolija.',
     },
     page: {
-      title: 'Polarizado para negocios y oficinas en Godoy Cruz',
+      title: 'Polarizado para negocios y oficinas en Godoy Cruz, Mendoza',
       description:
         'Polarizado, espejado, esmerilado y láminas de seguridad para vidrieras, locales y oficinas en Godoy Cruz, Mendoza. Consultá por WhatsApp.',
     },
@@ -135,7 +135,7 @@ export const services: readonly Service[] = [
       lede: 'Más privacidad, menos calor y protección UV para vos y tu tapizado. Elegís la tonalidad y te asesoramos. Más de 10 años en Godoy Cruz, Mendoza.',
     },
     page: {
-      title: 'Polarizado de autos en Godoy Cruz',
+      title: 'Polarizado de autos en Godoy Cruz, Mendoza',
       description:
         'Polarizado y láminas de seguridad para autos en Godoy Cruz, Mendoza: más privacidad, menos calor y filtro UV. Más de 10 años. Consultá por WhatsApp.',
     },
@@ -202,7 +202,7 @@ export const services: readonly Service[] = [
       lede: 'Láminas espejadas y esmeriladas para ventanas, ventanales y mamparas. Privacidad de día, control solar y un acabado que renueva cada ambiente.',
     },
     page: {
-      title: 'Espejado y esmerilado para casas en Godoy Cruz',
+      title: 'Espejado y esmerilado para casas en Godoy Cruz, Mendoza',
       description:
         'Láminas espejadas, esmeriladas y de seguridad para ventanas, ventanales y mamparas en Godoy Cruz, Mendoza. Privacidad y control solar. Consultá por WhatsApp.',
     },

@@ -29,7 +29,7 @@ const navItems = navOrder.flatMap((id) => services.filter((service) => service.i
   <nav class="site-nav" id="site-nav" aria-label="Servicios">
     {
       navItems.map((service) => (
-        <a href={`/${service.id}`} aria-current={service.id === current ? 'page' : undefined}>
+        <a href={`/${service.id}/`} aria-current={service.id === current ? 'page' : undefined}>
           {service.navLabel}
         </a>
       ))

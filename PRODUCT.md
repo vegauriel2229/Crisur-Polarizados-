@@ -42,7 +42,8 @@ Taller local con más de 10 años que coloca láminas en los tres frentes (autos
 ## Evidence on Hand
 
 - Trayectoria: más de 10 años (confirmado).
-- Ubicación: Godoy Cruz, Mendoza. Dirección y horarios: pendientes.
+- Ubicación: Godoy Cruz, Mendoza. Calle: pendiente.
+- Horarios (2026-10-02): todos los días desde las 17 h (el dueño trabaja de mañana); día y hora se coordinan por WhatsApp. Hora de cierre: sin definir.
 - **No hay fotos de trabajos todavía**: no fabricar fotos, testimonios, clientes ni cifras. Las imágenes futuras tienen lugares marcados en el código.
 
 ## Product Principles

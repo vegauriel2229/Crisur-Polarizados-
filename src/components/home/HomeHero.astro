@@ -43,7 +43,7 @@ const choices = (['autos', 'hogares', 'negocios'] as const satisfies readonly Se
         choices.map((service) => (
           <li>
             {/* La ventana comparte nombre de transición con la escena 3D de su página: al entrar, se convierte en ella. */}
-            <a class="choice" href={`/${service.id}`} style={`view-transition-name: portal-${service.id}`}>
+            <a class="choice" href={`/${service.id}/`} style={`view-transition-name: portal-${service.id}`}>
               <span class="choice-window">
                 <ServiceArt service={service.id} uid={`choice-${service.id}`} />
               </span>
