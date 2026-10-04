@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Tareas
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 4 · **Basado en:** diseño v4 (APROBADO 2026-10-04)
+**Estado:** APROBADO (2026-10-04) · **Versión:** 5 · **Basado en:** diseño v5 (APROBADO 2026-10-04)
 
+> **v5 (2026-10-04):** se suma T8b: tipografía compacta en los capítulos en celular horizontal con pantalla baja (D-076, D-079, D-080). El resto no cambia respecto de v4. Aprobado el 2026-10-04 (D-082).
+>
 > **v4 (2026-10-04):** T7 suma `rootMargin: '-1px 0px'` al observer (D-071). El resto no cambia respecto de v3.
 >
 > **v3 (2026-10-04):** T9 usa la respuesta de la FAQ con el ploteo (D-063). El resto no cambia respecto de v2.
@@ -242,6 +244,27 @@
     - M: el menú abierto y las preguntas de la FAQ se pueden usar.
   - Estado: aprobada (2026-10-04; D-077 y D-078. El ajuste para pantallas bajas en horizontal, D-076, va aparte según D-079)
 
+- [ ] **T8b — Capítulos en celular horizontal con pantalla baja**
+  - Qué:
+    - En `ServiceStory.astro`, dentro de `@media (max-width: 880px) and (max-height: 340px)`, los capítulos usan tipografía compacta para que el texto entre en `100svh` sin quitar los 5,5 rem de aire de T8 (D-076, D-080):
+      - `.chapter-title { font-size: 1.625rem; line-height: 1.05 }`;
+      - `.chapter-text { margin-top: .5rem; font-size: .9375rem; line-height: 1.5 }`.
+    - El padding superior de los capítulos no cambia (D-080).
+    - Solo CSS. Las props no cambian.
+  - Archivos: `src/components/service-story/ServiceStory.astro`
+  - Requisitos: R2.3, R5.6
+  - Agente: `dev-frontend`
+  - Depende de: T8
+  - Verificación:
+    - B.
+    - Medición en Edge headless a 740×300, 667×320, 568×320 y 640×360, en los 3 servicios y en los 4 capítulos de cada uno:
+      - el alto de cada capítulo es igual a `innerHeight`;
+      - el flotante no se cruza con `.chapter-copy`.
+    - A 360×640, 768×1024 y 1024×768 no cambia nada (la media query no aplica).
+    - El script de medición queda fuera del repo (D-073).
+    - Si algún capítulo no entra, se frena y se consulta al usuario: no se ajustan valores por cuenta propia.
+  - Estado: pendiente
+
 - [ ] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
   - Qué:
     - `HomeHero.astro:25`: la segunda frase pasa a "Elegí dónde va la lámina y mirá cómo queda." (D-023). La primera no cambia.
@@ -389,7 +412,7 @@ No son tareas de implementación, pero completan la trazabilidad:
 | R1.5 | T2, T3, T4 | M, H |
 | R2.1 | T7 | M |
 | R2.2 | T6, T7 | H, M |
-| R2.3 | T6 (posición), T7, T8 | M |
+| R2.3 | T6 (posición), T7, T8, T8b (horizontal con pantalla baja) | M |
 | R2.4 | T7 (en el cierre solo se agregan las marcas) | M, H |
 | R3.1 | T3, T5, T6 (usan la URL del servicio que arma `[service].astro`) | H |
 | R3.2 | T2, T4, T5, T12 | H |
@@ -404,7 +427,7 @@ No son tareas de implementación, pero completan la trazabilidad:
 | R5.3 | T3, T5, T9, T12 | C |
 | R5.4 | T3, T4, T5, T6, T12 | M, K |
 | R5.5 | T5, T6, T7 | RM |
-| R5.6 | T7 (retiro y regreso), T8 (aire) | M, C |
+| R5.6 | T7 (retiro y regreso), T8 (aire), T8b (horizontal con pantalla baja) | M, C |
 | R6.1 | T10 | M |
 | R6.2 | T10 | R, M |
 | R6.3 | T10 · regla común | R |

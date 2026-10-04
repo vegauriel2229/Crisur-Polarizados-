@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Diseño
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 4 · **Basado en:** requisitos v2
+**Estado:** APROBADO (2026-10-04) · **Versión:** 5 · **Basado en:** requisitos v2
 
+> **v5 (2026-10-04):** en celular horizontal con pantalla baja, los capítulos de servicio usan tipografía compacta para que el texto entre en `100svh` sin quitar el aire para el flotante (D-076, D-080). El resto no cambia respecto de v4.
+>
 > **v4 (2026-10-04):** el observer del flotante usa `rootMargin: '-1px 0px'` para que la adyacencia por borde no cuente como visible (D-071, D-072). El resto no cambia respecto de v3.
 >
 > **v3 (2026-10-04):** la respuesta de la FAQ "¿Hacen autos, casas y negocios?" suma el ploteo (D-061, D-063). El resto no cambia respecto de v2.
@@ -408,6 +410,7 @@ Qué ganás con la lámina  →  [Consultar por mi auto/casa/negocio]
 
 1. **Portada.** Una columna abajo a la izquierda. El título gigante queda **limitado a su tamaño actual** [D-022]: el contenedor del texto tiene el ancho máximo equivalente a la columna actual, de modo que `100cqi` no lo haga crecer (hoy ≈ 113 px a 1440; sin límite llegaría a 168 px). Se **eliminan** los 4 renglones de beneficios (`.facts`, solo visibles ≥ 881 px) [D-007]. El botón de WhatsApp de la portada se conserva (R6.4) con la etiqueta "Consultar por mi auto/casa/negocio" (D-006). En celular la portada no cambia (los datos ya estaban ocultos).
 2. **Capítulos.** Sin cambios de contenido. En **celular** (≤ 880 px, texto abajo) reservan **aire inferior ≥ 5,5 rem** para que el flotante (52 px + margen) no tape las últimas líneas **[D-017; la medida es detalle propuesto, se aprueba con el diseño]**. En escritorio el texto va a los lados y no se solapa.
+   En **celular horizontal con pantalla baja** (`@media (max-width: 880px) and (max-height: 340px)`), los capítulos usan tipografía compacta para que el texto entre en `100svh` sin quitar los 5,5 rem de aire: `.chapter-title { font-size: 1.625rem; line-height: 1.05 }` y `.chapter-text { margin-top: .5rem; font-size: .9375rem; line-height: 1.5 }`. El padding superior no cambia **[D-076, D-080]**.
 3. **Cierre.** Sin cambios de layout: panel con su botón y el portal "Siguiente" (R2.4). **El flotante se retira cuando asoma el contenido del cierre** (texto y portal) [D-017, D-033] y **vuelve** cuando ese contenido sale de pantalla [D-034]; así nunca tapa el portal ni hay dos botones de WhatsApp a la vez.
 4. **Galería.** Sin fotos = **la sección no existe** (ni título, ni aviso, ni "Muy pronto…") [D-008, R7.1]. El cierre pasa directo a "Qué ganás con la lámina"; el padding superior de esa sección (`section`: 4,5–8 rem) conserva el ritmo vertical, sin espacio extra. Con fotos, la galería reaparece sola sin cambios visuales [R7.3].
 5. **"Qué ganás con la lámina".** Sin cambios; mantiene todos los beneficios [R6.1, R6.2]. Etiqueta del botón: "Consultar por mi auto/casa/negocio" [D-006].
@@ -656,6 +659,7 @@ No hay tests automáticos ni lint (constitución D-012) y no se suman dependenci
 | Servicio sin fotos hoy y con fotos mañana | Igual que R7.3 |
 | Servicios con distinta cantidad de tratamientos | Igual que R8.1 y R8.4 |
 | Celular en horizontal | C y M a 640×360 (D-036) |
+| Celular en horizontal con pantalla baja | C a 740×300, 667×320 y 568×320: cada capítulo mide `100svh` y el flotante no tapa el texto (D-076, D-080) |
 | Teclado en pantalla abierto | No aplica: el sitio no tiene campos de texto |
 | Visitante sin WhatsApp instalado | Fuera del control del sitio (`wa.me` abre WhatsApp Web) |
 

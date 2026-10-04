@@ -803,3 +803,28 @@
 - **Recomendación del equipo:** A.
 - **Decisión del usuario:** A.
 - **Fecha:** 2026-10-04
+
+### D-080 — Ajuste de los capítulos en horizontal con pantalla baja (D-076)
+- **Fase:** 2 (reabierta: diseño v5)
+- **Contexto:** a ≤ 880 px y con ≤ 340 px de alto, el header (72 px de padding superior) y el aire del flotante (88 px) dejan 140 px para el texto del capítulo, que mide entre 157 y 200 px. Las estimaciones de `disenador-ui` son por cálculo y se miden en la implementación.
+- **Opciones presentadas** (todas dentro de `@media (max-width: 880px) and (max-height: 340px)`, solo en `ServiceStory.astro`):
+  - A) Tipografía compacta: `.chapter-title { font-size: 1.625rem; line-height: 1.05 }` y `.chapter-text { margin-top: .5rem; font-size: .9375rem; line-height: 1.5 }` — pro: el cambio más chico, mantiene los 5,5 rem (D-017, D-040 detalle 8) · contra: el texto baja a 15 px; un texto largo o una pantalla angosta podría no entrar.
+  - A + `.beat { padding-top: 4rem }` — pro: 8 px más · contra: el título queda pegado al header cuando el texto llena el capítulo.
+  - B) Título y texto en dos columnas — contra: layout nuevo, hay que reajustar la penumbra.
+  - C) Aire al costado (`padding-right: 10rem` y el padding inferior anterior a T8) — contra: reabre D-017 y D-040 detalle 8.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A, sin cambiar el padding superior.
+- **Fecha:** 2026-10-04
+
+### D-081 — Mención de la tipografía compacta en "Componentes y archivos afectados"
+- **Fase:** 2 (diseño v5)
+- **Opciones presentadas:** A) dejar `diseno.md:128` como está; la regla queda en Interfaz y la trazabilidad de R2.3 y R5.6 apunta a T8b · B) sumar media línea que remita a Interfaz.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-082 — Aprobación de diseño v5 y tareas v5
+- **Fase:** 2 y 3
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar y commitear. Los dos documentos pasan a APROBADO (2026-10-04).
+- **Fecha:** 2026-10-04
