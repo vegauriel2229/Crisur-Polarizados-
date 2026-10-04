@@ -79,6 +79,18 @@
 | D-073 | 4 | Prueba de regresión del bug de T7 | Script de medición fuera del repo (scratchpad), como en D-070 | 2026-10-04 |
 | D-074 | 4 | Sugerencias menores de `code-reviewer` en T7 | En bloque: corregir el comentario del flotante; dejar los otros dos comentarios y `querySelectorAll` | 2026-10-04 |
 | D-075 | 4 | Aprobación de T7 y de diseño v4 / tareas v4 | Aprobados; commit en la rama | 2026-10-04 |
+| D-076 | 4 | Capítulos que crecen en celular horizontal con pantalla baja (~300 px) por el aire de T8 | Volver a Fase 2 para ajustarlo (diseño v5) | 2026-10-04 |
+| D-077 | 4 | Sugerencias de simplificación de `code-reviewer` en T8 | Dejar `calc(2rem + 5.5rem)` y el 5,5 rem en los 2 archivos | 2026-10-04 |
+| D-078 | 4 | Aprobación de T8 | Aprobada; commit en la rama | 2026-10-04 |
+| D-079 | 4 | Orden entre el commit de T8 y el ajuste de D-076 | Commit de T8 ahora; ajuste aparte como T8b | 2026-10-04 |
+| D-080 | 2 | Ajuste para pantallas bajas en horizontal (D-076) | Tipografía compacta en los capítulos; padding superior sin cambios | 2026-10-04 |
+| D-081 | 2 | Mención de la tipografía compacta en "Componentes y archivos afectados" | Dejarla como está (la regla vive en Interfaz) | 2026-10-04 |
+| D-082 | 2–3 | Aprobación de diseño v5 y tareas v5 (T8b) | Aprobados; commit en la rama | 2026-10-04 |
+| D-083 | 4 | Título del capítulo sobre el objeto 3D en horizontal con pantalla baja (T8b) | Anotarlo en el Anexo A de la constitución | 2026-10-04 |
+| D-084 | 4 | Aprobación de T8b | Aprobada; commit en la rama | 2026-10-04 |
+| D-085 | 4 | Lugar de las fotos de ploteo (reemplaza la ubicación de D-066) | Dentro del proyecto, en `fotos-pendientes/ploteo/`, fuera de `src/` y `public/` | 2026-10-04 |
+| D-086 | 4 | ¿Las fotos de ploteo van a Git? | No: `fotos-pendientes/` en `.gitignore` (una foto tiene la patente completa) | 2026-10-04 |
+| D-087 | 4 | `.claude/agent-memory/` sin trackear | Sumarla a `.gitignore` | 2026-10-04 |
 
 ---
 
@@ -841,4 +853,27 @@
 - **Fase:** 4 (T8b)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-085 — Lugar de las fotos de ploteo dentro del proyecto
+- **Fase:** 4 (reemplaza la ubicación de D-066; D-062 sigue vigente: no van a la galería hasta la spec 007)
+- **Contexto:** el usuario pidió que la carpeta de ploteos (`C:\Proyectos\Crisur-fotos-ploteo\`, 2 fotos) quede dentro del proyecto para ordenar. `gallery.ts` importa todo lo que esté en `src/assets/gallery/*/`.
+- **Opciones presentadas:** A) `fotos-pendientes/ploteo/` en la raíz, fuera de `src/` y `public/` · B) `src/assets/gallery/ploteo/` (el glob la importa ya; es lo descartado en D-062) · C) `Crisur-fotos-ploteo/` en la raíz, con su nombre actual.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Se movió el 2026-10-04; la carpeta externa ya no existe.
+- **Fecha:** 2026-10-04
+
+### D-086 — ¿Las fotos de ploteo van a Git?
+- **Fase:** 4
+- **Contexto:** una de las 2 fotos muestra la patente completa (D-066) y el repo tiene remoto en GitHub.
+- **Opciones presentadas:** A) no: `fotos-pendientes/` en `.gitignore` — contra: sin copia en Git · B) sí, en un commit aparte — contra: la patente queda en GitHub y en el historial.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-087 — `.claude/agent-memory/` en `.gitignore`
+- **Fase:** 4
+- **Opciones presentadas:** A) sumarla a `.gitignore` · B) dejarla sin trackear · C) commitearla.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
 - **Fecha:** 2026-10-04

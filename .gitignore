@@ -6,3 +6,7 @@ dist/
 .env.*
 !.env.example
 .impeccable/review/
+
+# Fotos que todavía no van al sitio (D-085, D-086) y memoria de los subagentes (D-087)
+fotos-pendientes/
+.claude/agent-memory/

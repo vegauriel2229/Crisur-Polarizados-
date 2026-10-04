@@ -97,7 +97,7 @@ Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026
 | Spec | Estado | Fase |
 |---|---|---|
 | 001-conversion-whatsapp | En curso · T1–T7 aprobadas; requisitos v2, diseño v4 y tareas v4 aprobados (2026-10-04) | 4 — Implementación (7/12) |
-| 007-ploteo | En cola (2.ª) · espera del cliente los tipos de ploteo y fotos (D-061, D-064 de la spec 001) | — |
+| 007-ploteo | En cola (2.ª) · espera del cliente los tipos de ploteo y fotos; ya hay 2 fotos en `fotos-pendientes/ploteo/`, fuera de Git (D-061, D-064, D-085 y D-086 de la spec 001) | — |
 | 003-rendimiento-celular | En cola (3.ª) | — |
 | 002-accesibilidad | En cola (4.ª) | — |
 | 004-seo-local | En cola · espera datos del cliente (D-018) | — |
