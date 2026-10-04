@@ -492,8 +492,10 @@ if (service.story.length !== STORY_CHAPTER_COUNT) {
     .facts {
       display: none;
     }
+    /* Aire inferior: el botón flotante de WhatsApp no tapa las últimas líneas del capítulo (D-017). */
     .beat-chapter {
       align-items: end;
+      padding-bottom: 5.5rem;
     }
     .beat-chapter .chapter-copy {
       justify-self: stretch;

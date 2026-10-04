@@ -223,7 +223,7 @@
     - D-028, por revisión de código (`code-reviewer`, D-045): si falta el disparador, el script lanza `Error` con un mensaje descriptivo y no toca `data-visible`.
   - Estado: aprobada (2026-10-04; D-071 a D-075)
 
-- [ ] **T8 — Aire para el flotante en los capítulos (celular) y en el pie**
+- [x] **T8 — Aire para el flotante en los capítulos (celular) y en el pie**
   - Qué:
     - En `ServiceStory.astro`, a ≤ 880 px, los capítulos (`.beat-chapter`) dejan al menos 5,5 rem de aire abajo (D-017; D-040, detalle 8).
     - En `SiteFooter.astro`, el padding inferior del pie suma 5,5 rem en todas las páginas (D-035).
@@ -240,7 +240,7 @@
     - M en 360, 768, 1024 y 1440: al final de `/` y de cada servicio, el flotante no queda sobre el texto del pie.
     - C a 640×360 (D-036): el flotante no tapa capítulos, portal ni pie.
     - M: el menú abierto y las preguntas de la FAQ se pueden usar.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-077 y D-078. El ajuste para pantallas bajas en horizontal, D-076, va aparte según D-079)
 
 - [ ] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
   - Qué:

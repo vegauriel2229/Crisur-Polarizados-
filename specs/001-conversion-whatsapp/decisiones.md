@@ -765,3 +765,41 @@
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear.
 - **Fecha:** 2026-10-04
+
+### D-076 — Capítulos en celular horizontal con pantalla baja (T8)
+- **Fase:** 4 (T8)
+- **Contexto:** 🟡 de `code-reviewer`, medido por el orquestador. A 640×360 (D-036) los capítulos conservan `100svh`. Con unos 300 px de alto (celular en horizontal con la barra del navegador), los 5,5 rem de T8 más los 4,5 rem de arriba no dejan lugar al texto:
+  - a 740×300, 1 o 2 capítulos por servicio crecen de 300 a 317–360 px;
+  - a 667×320, crece 1 capítulo por servicio, hasta 352 px;
+  - la escena 3D reparte el scroll en partes iguales (`story-controller.ts`) y queda ≈ 3 % desfasada;
+  - el flotante no tapa nada.
+  Antes de T8 no pasaba.
+- **Opciones presentadas:**
+  - A) Aceptar y anotarlo en el Anexo A de la constitución — pro: T8 cumple la spec tal cual · contra: el desfase queda en pantallas bajas.
+  - B) Volver a la Fase 2 para ajustarlo (diseño v5) — pro: sin desfase · contra: reabre diseño y tareas por un detalle menor.
+  - C) Aceptar sin anotar.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** B.
+- **Fecha:** 2026-10-04
+
+### D-077 — Sugerencias de simplificación de `code-reviewer` en T8
+- **Fase:** 4 (T8)
+- **Opciones presentadas:** A) dejar `calc(2rem + 5.5rem)` en el pie y el 5,5 rem repetido en los 2 archivos, cada uno con su D-ID · B) escribir `7.5rem` en el pie · C) mantener el código y anotar la unificación para la spec 006.
+- **Recomendación del equipo:** A (unificar el valor obliga a tocar `global.css`, que la regla común de `tareas.md` no permite).
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-078 — Aprobación de T8
+- **Fase:** 4 (T8)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-079 — Orden entre el commit de T8 y el ajuste de D-076
+- **Fase:** 4 (T8)
+- **Opciones presentadas:**
+  - A) Commitear T8 ahora (cumple la spec v4); después, diseño v5 con el ajuste, una tarea nueva T8b y su propio commit — pro: cada cambio queda registrado por separado · contra: dos commits sobre el mismo CSS.
+  - B) Ajustar antes del commit y commitear todo junto — contra: T8 queda abierta hasta aprobar el diseño v5.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
