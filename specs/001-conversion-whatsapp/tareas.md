@@ -325,7 +325,7 @@
     - R: `gallery.ts` no cambia y la página tiene la condición `photos.length > 0`. Instagram sigue en el header, el pie y el hero (R7.4).
   - Estado: aprobada (2026-10-04; D-095 y D-096)
 
-- [ ] **T12 — Página 404 con WhatsApp como acción principal**
+- [x] **T12 — Página 404 con WhatsApp como acción principal**
   - Qué: `404.astro` queda en el orden de D-021:
     1. Ilustración.
     2. Título.
@@ -354,7 +354,7 @@
     - C: a 360×640 y a 360×560, el botón de WhatsApp entra completo.
     - M en 768, 1024 y 1440: el orden se mantiene.
     - K: las dos acciones tienen foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-097 a D-099)
 
 ## Línea base de Lighthouse (resultado de T1)
 Medida el 2026-10-04 (D-042). Es la referencia para la medición "después" de la Fase 5.

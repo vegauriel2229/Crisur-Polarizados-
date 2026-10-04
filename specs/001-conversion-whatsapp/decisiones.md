@@ -100,6 +100,9 @@
 | D-094 | 3 | Aprobación de tareas v6 | Aprobada; commit y arranque de T11 | 2026-10-04 |
 | D-095 | 4 | Caso que nunca se ejecuta en el script de la galería (`item === null`, sugerencia de `code-reviewer` en T11) | Dejarlo: R7.3 pide no tocar el script | 2026-10-04 |
 | D-096 | 4 | Aprobación de T11 | Aprobada; commit en la rama | 2026-10-04 |
+| D-097 | 4 | Tres `<nav aria-label="Servicios">` en la 404 y la pregunta de D-024 sin asociar al `<nav>` (T12) | Dejarlo en la 001 y anotarlo en el Anexo A para la spec 006 | 2026-10-04 |
+| D-098 | 4 | Clase `.action` repetida en los dos botones de la 404 (T12) | Dejarla (mismo patrón que `.section-cta`) | 2026-10-04 |
+| D-099 | 4 | Aprobación de T12 | Aprobada; commit en la rama. Termina la Fase 4 | 2026-10-04 |
 
 ---
 
@@ -952,4 +955,25 @@
 - **Contexto:** al revisar el diff, el orquestador devolvió a su forma original la línea de `whatsappUrl` en `[service].astro`, a la que `dev-frontend` le había quitado un espacio sin necesidad.
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-097 — Nombres de las zonas de navegación en la 404 (T12)
+- **Fase:** 4 (T12, sugerencia de `code-reviewer`)
+- **Contexto:** la 404 tiene tres `<nav aria-label="Servicios">` (header, página y pie). La pregunta de D-024 no está asociada al `<nav>` de la página. Ya pasaba antes de T12 y no incumple WCAG; es una buena práctica (axe) que cada zona tenga un nombre distinto.
+- **Opciones presentadas:** A) dejarlo en la 001 y anotarlo en el Anexo A para la spec 006 (`aria-labelledby` hacia la pregunta) · B) cambiarlo ahora (diseño v6 y una tarea más) · C) dejarlo sin anotar.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-098 — Clase `.action` repetida en la 404 (T12)
+- **Fase:** 4 (T12, sugerencia de `code-reviewer`)
+- **Opciones presentadas:** A) dejarla, igual que `.section-cta` en T4 · B) usar `.actions .button` y sacar la clase.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-099 — Aprobación de T12
+- **Fase:** 4 (T12)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear. Con T12 quedan aprobadas todas las tareas de la Fase 4.
 - **Fecha:** 2026-10-04
