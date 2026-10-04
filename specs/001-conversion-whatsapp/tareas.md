@@ -153,7 +153,7 @@
     - K: foco visible.
   - Estado: aprobada (2026-10-04; D-055, D-056 y D-058)
 
-- [ ] **T6 — Botón flotante: forma de píldora y etiqueta de `cta.ts`**
+- [x] **T6 — Botón flotante: forma de píldora y etiqueta de `cta.ts`**
   - Qué:
     - `WhatsAppFab.astro` deja de ser un círculo con `aria-label` y pasa a ser una píldora. Lleva el glifo (1,25 rem), `WHATSAPP_CTA_LABELS.short` visible y un `<span class="sr-only">` con el complemento. Se quitan el `aria-label` y la prop `label` (D-016, D-027, D-039/PD-6).
     - CSS:
@@ -177,7 +177,7 @@
     - M a 360: mide ≈ 140 × 52 px y está abajo a la derecha, a 1 rem de los bordes.
     - RM: aparece sin animación.
     - K: oculto, no recibe foco; visible, tiene foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-059 y D-060)
 
 - [ ] **T7 — Botón flotante: aparición con `IntersectionObserver` y marcas de disparador y de retiro**
   - Qué:

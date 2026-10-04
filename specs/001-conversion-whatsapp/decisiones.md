@@ -62,6 +62,8 @@
 | D-056 | 4 | Tamaño explícito del glifo en el header (T5, S2 de `code-reviewer`) | Borrar las 4 líneas: usa el tamaño por defecto de `.icon` | 2026-10-04 |
 | D-057 | 4 | Índice de capítulos superpuesto con el título en `/autos/` a 1440×800 (fuera de T5) | Anotarlo en el Anexo A de la constitución y volver a mirarlo en T10 | 2026-10-04 |
 | D-058 | 4 | Aprobación de T5 | Aprobada con D-055 y D-056; commit tras verificar | 2026-10-04 |
+| D-059 | 4 | Tamaño explícito del glifo del flotante (T6, sugerencia de `code-reviewer`) | Borrarlo (y la clase `fab-icon`), como en D-056 | 2026-10-04 |
+| D-060 | 4 | Aprobación de T6 | Aprobada con D-059; commit tras verificar | 2026-10-04 |
 
 ---
 
@@ -634,4 +636,18 @@
 - **Fase:** 4 (T5)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear, con D-055 y D-056 aplicadas y verificadas antes del commit.
+- **Fecha:** 2026-10-04
+
+### D-059 — Tamaño explícito del glifo del flotante (T6)
+- **Fase:** 4 (T6)
+- **Contexto:** `.fab-icon { width/height: 1.25rem }` repite el tamaño por defecto de `.icon` (`Icon.astro`); mismo caso que D-056 en el header.
+- **Opciones presentadas:** A) borrar la regla y la clase `fab-icon`, que queda sin uso (resultado idéntico, 20 px) · B) mantenerlo explícito.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-060 — Aprobación de T6
+- **Fase:** 4 (T6)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear, con D-059 aplicada y verificada antes del commit.
 - **Fecha:** 2026-10-04
