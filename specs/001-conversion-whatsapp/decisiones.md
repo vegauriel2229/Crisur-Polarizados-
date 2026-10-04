@@ -93,6 +93,9 @@
 | D-087 | 4 | `.claude/agent-memory/` sin trackear | Sumarla a `.gitignore` | 2026-10-04 |
 | D-088 | 4 | "Polarizado(s)" como término general en el `h1`, el `<title>` y "Sobre nosotros" (fuera de T9) | Anotarlo en el Anexo A para la spec 004 (SEO) | 2026-10-04 |
 | D-089 | 4 | Aprobación de T9 | Aprobada; 2 commits: `chore` (D-085 a D-087) y T9 | 2026-10-04 |
+| D-090 | 4 | Superposiciones de la portada a 1440 px anteriores a T10 (índice sobre el título; título sobre el objeto 3D en hogares y negocios) | Anotarlas en el Anexo A para una spec de la escena 3D y aprobar T10 | 2026-10-04 |
+| D-091 | 4 | Sugerencias menores de `code-reviewer` en T10 (media query 881, comentario, selector de ≤ 880 px) | Dejar todo como está | 2026-10-04 |
+| D-092 | 4 | Aprobación de T10 | Aprobada; commit en la rama | 2026-10-04 |
 
 ---
 
@@ -893,4 +896,27 @@
 - **Contexto:** QA informó que el botón del hero sobresalía 5,4 px a 360×560. Era un artefacto de la emulación de escritorio (barra de scroll de 15 px: 345 px de ancho y `h1` en 4 líneas). Con emulación de celular (360 px, `h1` en 3 líneas) la holgura es de 28 px, igual que en la medición de D-025.
 - **Opciones presentadas:** aprobar con 2 commits (`chore` + T9) · aprobar con 1 commit · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar con 2 commits.
+- **Fecha:** 2026-10-04
+
+### D-090 — Superposiciones de la portada a 1440 px (T10)
+- **Fase:** 4 (T10)
+- **Contexto:** QA midió que el ancho de `.cover-copy` es exactamente el de la columna anterior (0 px de diferencia): el título conserva tamaño y posición. Aun así, a 1440 px:
+  - el índice de capítulos se cruza con "…para" de la portada a 1440×800 en los 3 servicios y a 1440×900 en autos (10 px) (D-057);
+  - a 1440×900, en hogares y negocios, el título pisa la parte baja de la casa y del local. El criterio de T10 "el título no tapa el objeto 3D" no se cumple ahí, aunque ya pasaba antes de T10.
+- **Opciones presentadas:** A) anotar las dos en el Anexo A para una spec de la escena 3D y aprobar T10 · B) corregir las dos en la 001 (diseño v6), con el riesgo de tocar la escena 3D o `story-controller.ts` · C) corregir solo el índice en la 001 y anotar lo del objeto.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-091 — Sugerencias menores de `code-reviewer` en T10
+- **Fase:** 4 (T10)
+- **Opciones presentadas:** A) dejar todo como está · B) solo acortar el comentario de `.cover-copy` · C) aplicar las 3 (comentario, `@media (width > 880px)` y sacar `.beat-cover` de la regla compartida de ≤ 880 px).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-092 — Aprobación de T10
+- **Fase:** 4 (T10)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
 - **Fecha:** 2026-10-04

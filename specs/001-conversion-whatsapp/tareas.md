@@ -284,7 +284,7 @@
     - R: los textos usan voseo y no tienen cifras ni precios (R8.5). La respuesta de la FAQ coincide con los `treatments` actuales (R8.4), más la frase del ploteo, que todavía no es un `treatment` (D-061: lo define la spec 007).
   - Estado: aprobada (2026-10-04; D-088 y D-089)
 
-- [ ] **T10 — Portada de servicio sin los datos, en una columna**
+- [x] **T10 — Portada de servicio sin los datos, en una columna**
   - Qué:
     - En `ServiceStory.astro` se quitan `<dl class="facts">` (`:69-81`) y su CSS (`:324-351` y `:492-494`) (D-007).
     - La grilla de la portada (`:278-282`) pasa a una columna, abajo a la izquierda (D-022).
@@ -301,7 +301,7 @@
     - M a 1024 y 1440: la portada va en una columna, abajo a la izquierda, y el título no tapa el objeto 3D.
     - M a 360 y 768: la portada no cambia.
     - M: el botón "Consultar por mi …" de la portada está en los 4 anchos (R6.4).
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-090 a D-092)
 
 - [ ] **T11 — Galería solo cuando hay fotos**
   - Qué (D-031/T10, D-008):
