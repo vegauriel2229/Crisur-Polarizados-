@@ -103,6 +103,9 @@
 | D-097 | 4 | Tres `<nav aria-label="Servicios">` en la 404 y la pregunta de D-024 sin asociar al `<nav>` (T12) | Dejarlo en la 001 y anotarlo en el Anexo A para la spec 006 | 2026-10-04 |
 | D-098 | 4 | Clase `.action` repetida en los dos botones de la 404 (T12) | Dejarla (mismo patrón que `.section-cta`) | 2026-10-04 |
 | D-099 | 4 | Aprobación de T12 | Aprobada; commit en la rama. Termina la Fase 4 | 2026-10-04 |
+| D-100 | 5 | `graphify-out/` versionado en Git (52 archivos cambiados al actualizar el grafo) | Sacarlo de Git: `.gitignore` + `git rm --cached` (los archivos quedan en disco) | 2026-10-04 |
+| D-101 | 5 | ¿Arrancar ya la Fase 5? | Más tarde | 2026-10-04 |
+| D-102 | 5 | Commit de D-100 y D-101 | Commitear (`chore: stop tracking graphify output`) | 2026-10-04 |
 
 ---
 
@@ -976,4 +979,19 @@
 - **Fase:** 4 (T12)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear. Con T12 quedan aprobadas todas las tareas de la Fase 4.
+- **Fecha:** 2026-10-04
+
+### D-100 — `graphify-out/` fuera de Git
+- **Fase:** entre la 4 y la 5 (higiene del repo; Anexo A de la constitución)
+- **Contexto:** el usuario pidió actualizar el grafo. `python -m graphify update .` regeneró el grafo de código (733 nodos, 1.053 relaciones, 47 comunidades; commit `51faeac`) y cambió 52 archivos de `graphify-out/`, que estaba versionado con su caché. La parte semántica de los documentos sigue siendo la del 2026-10-02. Se corrigió `.graphify_root`, que apuntaba a la carpeta vieja en OneDrive.
+- **Opciones presentadas:** A) sacarlo de Git (`.gitignore` + `git rm --cached`) — contra: el grafo no viaja con el repo · B) commitearlo aparte — contra: ruido de caché en el historial · C) dejarlo sin commitear.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-101 — Arranque de la Fase 5
+- **Fase:** 5
+- **Opciones presentadas:** A) ahora, con los 3 verificadores en paralelo y consultas a graphify · B) ahora, de a uno · C) más tarde.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** C, más tarde.
 - **Fecha:** 2026-10-04

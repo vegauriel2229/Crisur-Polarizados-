@@ -96,7 +96,7 @@ Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026
 
 | Spec | Estado | Fase |
 |---|---|---|
-| 001-conversion-whatsapp | En curso · T1–T7 aprobadas; requisitos v2, diseño v4 y tareas v4 aprobados (2026-10-04) | 4 — Implementación (7/12) |
+| 001-conversion-whatsapp | En curso · T1–T12 y T8b aprobadas; requisitos v2, diseño v5 y tareas v6 aprobados (2026-10-04) | 5 — Verificación (pendiente) |
 | 007-ploteo | En cola (2.ª) · espera del cliente los tipos de ploteo y fotos; ya hay 2 fotos en `fotos-pendientes/ploteo/`, fuera de Git (D-061, D-064, D-085 y D-086 de la spec 001) | — |
 | 003-rendimiento-celular | En cola (3.ª) | — |
 | 002-accesibilidad | En cola (4.ª) | — |
@@ -143,7 +143,7 @@ Hechos relevados el 2026-10-03, **sin decidir**. Son insumo para agrupar mejoras
 - **Deploy** (D-011): el `.htaccess` no tiene caché de estáticos y no hay un procedimiento documentado para volver atrás.
 - **Rendimiento:** el chunk de three.js pesa 539 KB (warning de Vite). Solo lo cargan las páginas de servicio.
 - **Higiene del repo:**
-  - `graphify-out/` se versiona con su caché.
+  - ~~`graphify-out/` se versiona con su caché.~~ Resuelto el 2026-10-04: fuera de Git y en `.gitignore`; el grafo de código se regenera con `python -m graphify update .` (D-100 de la spec 001).
   - Hay 3 `.pyc` versionados en `.claude/skills/ui-ux-pro-max/scripts/__pycache__/`.
   - El archivo de instrucciones se llama `claude.md` (en minúscula).
   - `tsconfig.json` y `.graphifyignore` siguen nombrando `skills/`, que ya no existe.
