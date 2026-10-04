@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Tareas
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 5 · **Basado en:** diseño v5 (APROBADO 2026-10-04)
+**Estado:** APROBADO (2026-10-04) · **Versión:** 6 · **Basado en:** diseño v5 (APROBADO 2026-10-04)
 
+> **v6 (2026-10-04):** la verificación de T11 usa las 11 fotos reales de `/autos/` para R7.3 y verifica la ausencia de galería solo en `/hogares/` y `/negocios/`. Se quita la imagen temporal de D-046 (D-093). El resto no cambia respecto de v5. Aprobado el 2026-10-04 (D-094).
+>
 > **v5 (2026-10-04):** se suma T8b: tipografía compacta en los capítulos en celular horizontal con pantalla baja (D-076, D-079, D-080). El resto no cambia respecto de v4. Aprobado el 2026-10-04 (D-082).
 >
 > **v4 (2026-10-04):** T7 suma `rootMargin: '-1px 0px'` al observer (D-071). El resto no cambia respecto de v3.
@@ -317,10 +319,10 @@
   - Depende de: T1
   - Verificación:
     - B.
-    - H: en los 3 servicios de `dist/` no aparecen `data-gallery`, "Trabajos en" ni "Muy pronto".
-    - M: en los 4 anchos, el cierre pasa directo a "Qué ganás con la lámina".
+    - H en servicios sin fotos (`/hogares/` y `/negocios/`, D-093): en `dist/` no aparecen `data-gallery` ni "Trabajos en". En ningún archivo de `dist/` aparece "Muy pronto".
+    - M en `/hogares/` y `/negocios/`, en los 4 anchos: el cierre pasa directo a "Qué ganás con la lámina".
+    - Galería con fotos (R7.3, D-093, reemplaza la imagen temporal de D-046): `/autos/` tiene sus 11 fotos en `src/assets/gallery/autos/`. En `dist/autos/index.html` está `data-gallery` con 11 fotos, y en los 4 anchos el carrusel y sus controles se ven y funcionan como antes.
     - R: `gallery.ts` no cambia y la página tiene la condición `photos.length > 0`. Instagram sigue en el header, el pie y el hero (R7.4).
-    - Galería con fotos (R7.3, D-046): con OK del usuario, copiar una imagen de prueba (por ejemplo, `src/assets/brand/logo.jpeg`) en `src/assets/gallery/autos/`, compilar y ver el carrusel en `/autos/`; después, con OK, borrar la copia y comprobar que `git status` no la muestra.
   - Estado: pendiente
 
 - [ ] **T12 — Página 404 con WhatsApp como acción principal**
@@ -434,7 +436,7 @@ No son tareas de implementación, pero completan la trazabilidad:
 | R6.4 | T10 | M |
 | R7.1 | T11 | M, H |
 | R7.2 | T11 | M, R |
-| R7.3 | T11 (prueba real, D-046) | R |
+| R7.3 | T11 (prueba con las fotos reales de `/autos/`, D-093) | R |
 | R7.4 | T3 (Instagram del hero), T5 (Instagram del menú), T11 (sin tocar los demás accesos) | M |
 | R8.1 | T9 | H, R |
 | R8.2 | T9 | M |

@@ -96,6 +96,8 @@
 | D-090 | 4 | Superposiciones de la portada a 1440 px anteriores a T10 (índice sobre el título; título sobre el objeto 3D en hogares y negocios) | Anotarlas en el Anexo A para una spec de la escena 3D y aprobar T10 | 2026-10-04 |
 | D-091 | 4 | Sugerencias menores de `code-reviewer` en T10 (media query 881, comentario, selector de ≤ 880 px) | Dejar todo como está | 2026-10-04 |
 | D-092 | 4 | Aprobación de T10 | Aprobada; commit en la rama | 2026-10-04 |
+| D-093 | 4 | Verificación de T11 con 11 fotos reales en `/autos/` | Usar las fotos reales para R7.3; sin galería solo en hogares y negocios; se quita la imagen temporal de D-046 | 2026-10-04 |
+| D-094 | 3 | Aprobación de tareas v6 | Aprobada; commit y arranque de T11 | 2026-10-04 |
 
 ---
 
@@ -919,4 +921,18 @@
 - **Fase:** 4 (T10)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-093 — Verificación de T11 con las fotos reales de `/autos/`
+- **Fase:** 3 (tareas v6)
+- **Contexto:** desde D-066 a D-069, `src/assets/gallery/autos/` tiene 11 fotos; `hogares/` y `negocios/` están vacías. La verificación de T11 pedía que ningún servicio tuviera galería y probaba R7.3 con una imagen temporal (D-046).
+- **Opciones presentadas:** A) usar las fotos reales de `/autos/` para R7.3, verificar la ausencia de galería en hogares y negocios y quitar la imagen temporal · B) A + mantener la imagen temporal en hogares para probar el paso de 0 fotos a tener.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. `diseno.md:634` no cambia: allí la imagen temporal es una prueba opcional.
+- **Fecha:** 2026-10-04
+
+### D-094 — Aprobación de tareas v6
+- **Fase:** 3
+- **Opciones presentadas:** aprobar, commitear y arrancar T11 · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar, commitear y arrancar T11.
 - **Fecha:** 2026-10-04
