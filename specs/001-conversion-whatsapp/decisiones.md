@@ -69,6 +69,10 @@
 | D-063 | 4 | Texto de la FAQ "¿Hacen autos, casas y negocios?" con el ploteo (reemplaza el texto de D-011) | D-011 + "También hacemos ploteo, sobre todo en autos." | 2026-10-04 |
 | D-064 | 4 | Lugar de la spec 007-ploteo en el plan | Después de la 001: 001 → 007 → 003 → 002 | 2026-10-04 |
 | D-065 | 4 | Aprobación de requisitos v2, diseño v3 y tareas v3 (FAQ con ploteo) | Aprobados; commit en la rama | 2026-10-04 |
+| D-066 | 4 | Fotos de ploteo subidas a `gallery/autos/` (Beetle "Herbie", 2) | Moverlas fuera del repo, a `C:\Proyectos\Crisur-fotos-ploteo\` (D-062) | 2026-10-04 |
+| D-067 | 4 | Foto de la Chrysler PT Cruiser de frente | Es polarizado: va a la galería | 2026-10-04 |
+| D-068 | 4 | Patentes cortadas en el borde de 4 fotos | Dejarlas como están (no se leen completas) | 2026-10-04 |
+| D-069 | 4 | Nombres (descripción) y orden de las 11 fotos de `/autos` | Los propuestos; commit aparte | 2026-10-04 |
 
 ---
 
@@ -696,4 +700,13 @@
 - **Fase:** 4
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
 - **Decisión del usuario:** aprobar y commitear. Los tres documentos pasan a APROBADO (2026-10-04).
+- **Fecha:** 2026-10-04
+
+### D-066 a D-069 — Fotos de autos subidas por el usuario
+- **Fase:** 4 (fuera de las tareas; la galería ya las carga sola, R7.3)
+- **Contexto:** el usuario subió 13 fotos a `src/assets/gallery/autos/` con nombres de WhatsApp ("WhatsApp Image…", "as", "o"). El nombre del archivo es el `alt` de la foto. 2 eran de ploteo (Beetle "Herbie", una con la patente completa).
+- **D-066:** A) mover las 2 de ploteo fuera del repo (`C:\Proyectos\Crisur-fotos-ploteo\`) · B) las mueve el usuario · C) dejarlas en `autos/`. Recomendación: A. **Elegida: A.**
+- **D-067:** la PT Cruiser de frente: A) polarizado · B) otro trabajo · C) dejarla afuera. **Elegida: A.**
+- **D-068:** 4 fotos con un pedazo de patente en el borde: A) dejarlas · B) las recorta el usuario · C) sacarlas. **Elegida: A.**
+- **D-069:** renombrar con número de orden + descripción de lo que se ve (sin tonos ni marcas de lámina) y commit aparte. Orden: Hilux, Mercedes coupé, Captur, C3 Aircross, luneta C3 Aircross, Etios, 207, Focus, luneta Focus, sedán gris oscuro, PT Cruiser. **Elegida: sí, como se propuso.**
 - **Fecha:** 2026-10-04
