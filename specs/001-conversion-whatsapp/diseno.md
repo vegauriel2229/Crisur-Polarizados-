@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Diseño
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 2 · **Basado en:** requisitos v1
+**Estado:** APROBADO (2026-10-04) · **Versión:** 3 · **Basado en:** requisitos v2
 
+> **v3 (2026-10-04):** la respuesta de la FAQ "¿Hacen autos, casas y negocios?" suma el ploteo (D-061, D-063). El resto no cambia respecto de v2.
+>
 > **v2 (2026-10-04):** el protocolo de Lighthouse usa 5 corridas en `/` (D-048) y define qué hacer si `/` no pasa (D-049). El resto no cambia respecto de v1 (APROBADO 2026-10-03).
 
 > Fuentes: `requisitos.md` (APROBADO 2026-10-03), `decisiones.md` (D-001 a D-039, todas del usuario), el relevamiento técnico del `arquitecto` y las opciones visuales del `disenador-ui` (2026-10-03), y el código del commit `405f6e0`. Las referencias `archivo:línea` apuntan al código **actual** (antes de implementar). Los pendientes que surgieron al redactar (PD-1 a PD-10) los resolvió el usuario en D-033 a D-039.
@@ -22,7 +24,7 @@ Cada página arma una sola vez su URL de WhatsApp (mensaje general o del servici
 | D-008 | Galería sin fotos | Se oculta hasta que haya fotos |
 | D-009 | Reemplazo de "Elegí qué querés polarizar" | "¿Dónde querés colocar la lámina?" (título del selector; frases del hero y la 404 en D-023 y D-024) |
 | D-010 | WhatsApp en la 404 | Acción principal; "Ir al inicio" pasa a secundaria |
-| D-011 | FAQ "¿Hacen autos, casas y negocios?" | Texto literal con los tratamientos reales |
+| D-011, D-063 | FAQ "¿Hacen autos, casas y negocios?" | Texto literal con los tratamientos reales, más la frase del ploteo |
 | D-012 | Hero a 360×640 | Medir primero (lo resuelve D-025) |
 | D-013 | Prioridades | Must: R1, R2, R5 · Should: R3, R4, R6, R7, R8, R9 |
 | D-014 | Supuestos | Confirmados S2, S3, S4, S6, S7, S8 y S9 |
@@ -145,7 +147,7 @@ index.astro ── buildWhatsAppUrl(número, whatsappDefaultMessage) ──► U
 - Estructura: las dos acciones van en un grupo propio. Los 3 servicios siguen en `<nav aria-label="Servicios">`, con la línea de D-024 encima. "Ir al inicio" sale de ese `<nav>` porque en el orden de D-021 queda arriba de la frase.
 - Usa la URL general que ya arma en `:9` (R3.2). No tiene flotante, porque R5.2 no lo pide.
 
-**`src/data/home.ts`**: la respuesta de la FAQ (`:49`) pasa al texto literal de D-011 (ver Modelo de datos).
+**`src/data/home.ts`**: la respuesta de la FAQ (`:49`) pasa al texto literal de D-063 (ver Modelo de datos).
 
 **`src/components/layout/SiteFooter.astro`**: el link de WhatsApp no cambia (D-026). El pie suma 5,5 rem de aire inferior en todas las páginas, para que el flotante no tape su texto (D-017, D-035). Solo CSS; las props no cambian.
 
@@ -186,7 +188,7 @@ export const WHATSAPP_CTA_LABELS = {
 
 **`src/config/site.ts`**: sin cambios. `whatsappDefaultMessage` (`:28`) sigue siendo el mensaje del inicio, la 404 y el pie (R3.2), y el contrato `SiteSettings` no se toca (ese es el motivo de T2).
 
-**`src/data/home.ts`**: en `HOME_FAQ`, la respuesta (`:49`) a "¿Hacen autos, casas y negocios?" (`:48`) pasa a: "Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas." (D-011). Va literal; no se genera desde `treatments` (T11).
+**`src/data/home.ts`**: en `HOME_FAQ`, la respuesta (`:49`) a "¿Hacen autos, casas y negocios?" (`:48`) pasa a: "Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos." (D-011, D-063). Va literal; no se genera desde `treatments` (T11).
 
 ## Contratos
 Como es un sitio estático, no hay endpoints ni permisos. Los contratos son las props de los componentes, que `astro check` verifica en el build, y los atributos `data-` que conectan el flotante con cada página.
@@ -300,7 +302,7 @@ Convenciones de este documento:
 | CTA de sección (3) | Inicio: "Una lámina para cada vidrio", "Sobre nosotros", "Cómo trabajamos" | Nuevo; ghost con glifo; "Consultar por WhatsApp" | D-001, D-005, D-006, D-019 |
 | Botón del hero | Inicio | Etiqueta "WhatsApp" pasa a "Consultar por WhatsApp" | D-006 |
 | Frase del hero y título del selector | Inicio | Textos nuevos | D-009, D-023 |
-| FAQ "¿Hacen autos…?" | Inicio | Respuesta nueva | D-011 |
+| FAQ "¿Hacen autos…?" | Inicio | Respuesta nueva | D-011, D-063 |
 | Portada de servicio | `/autos`, `/hogares`, `/negocios` | Sin datos de beneficios; una columna; título gigante a su tamaño actual | D-007, D-022 |
 | Capítulos (celular) | Servicios | Aire inferior ≥ 5,5 rem | D-017 |
 | Cierre de servicio | Servicios | Sin cambios de layout; el flotante se retira cuando asoma su contenido y vuelve después | D-017, D-033, D-034, R2.4 |
@@ -518,7 +520,7 @@ Todos los textos son los de las decisiones; no se reescribe ninguno.
 | ¿Dónde querés colocar la lámina? | Título del selector de servicios del inicio (reemplaza "¿Qué querés polarizar?") | D-009, R8.2 |
 | ¿Dónde querés colocar la lámina? | 404: línea propia sobre Autos / Hogares / Negocios (reemplaza "Elegí qué querés polarizar:") | D-024, R8.3 |
 | Ir al inicio | 404: botón secundario (texto sin cambio) | D-010, R9.2 |
-| Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. | Respuesta de la FAQ "¿Hacen autos, casas y negocios?" | D-011, R8.1 |
+| Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos. | Respuesta de la FAQ "¿Hacen autos, casas y negocios?" | D-011, D-063, R8.1 |
 | ¡Hola Crisur! Quiero hacer una consulta. | Mensaje prearmado general (inicio, 404, pie): **sin cambios** | D-005, R3.2 |
 | `whatsappMessage` de cada servicio (`src/data/services.ts`) | Mensaje prearmado de servicios (cuerpo y flotante): **sin cambios** | D-005, R3.1 |
 | WhatsApp + número | Link del pie: **sin cambios** | D-026 |
@@ -625,7 +627,7 @@ No hay tests automáticos ni lint (constitución D-012) y no se suman dependenci
 | R7.2 | M, R | Ninguna página muestra fotos, testimonios ni ilustraciones presentadas como trabajos reales |
 | R7.3 | R (+ prueba opcional) | Revisión: `galleryFor` y el glob no cambian, y la página tiene la condición `photos.length > 0`. Prueba real opcional: copiar una imagen de prueba en `src/assets/gallery/autos/`, compilar, ver el carrusel y borrar la imagen (crear y borrar el archivo requiere el OK del usuario) |
 | R7.4 | M | Instagram sigue en el header (dentro del menú), en el pie y en el hero |
-| R8.1 | H, R | La respuesta de la FAQ en `/` es exactamente el texto de D-011 |
+| R8.1 | H, R | La respuesta de la FAQ en `/` es exactamente el texto de D-063 |
 | R8.2 | M | El título del selector es "¿Dónde querés colocar la lámina?" |
 | R8.3 | M, C | El hero dice "Elegí dónde va la lámina y mirá cómo queda." (D-023), la 404 tiene "¿Dónde querés colocar la lámina?" en su propia línea (D-024) y "Elegí qué querés polarizar" ya no aparece en `dist/` |
 | R8.4 | R | Queda como ítem de la checklist de revisión (T11): si cambia `treatments`, se revisan los textos escritos a mano (`home.ts:49`, `AboutSection.astro:7`, `SiteFooter.astro:21`, `index.astro:19` y los textos de cada servicio en `services.ts`: `hero`, `page`, `story`, `faq`). Los que usan `describeTreatments` se actualizan solos (`HomeHero.astro:52`, `ServiceDetails.astro:18`). En esta spec: los textos coinciden con los `treatments` actuales |

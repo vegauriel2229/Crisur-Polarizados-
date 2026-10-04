@@ -26,6 +26,7 @@ Taller local con más de 10 años que coloca láminas en los tres frentes (autos
 ## Capabilities and Constraints
 
 - Servicios: polarizado, espejado y esmerilado; láminas de seguridad (anti-astillas / antivandálicas) — confirmado por el cliente 2026-09-28.
+- Ploteo, principalmente de autos — informado por el usuario 2026-10-04. Todavía no tiene página ni sección propia: lo define la spec 007 (D-061 y D-064 de la spec 001).
 - Categorías: Autos, Hogares, Negocios ("Locales" pasó a "Negocios" por pedido del cliente, 2026-09-30). Orden en el inicio, el menú y el recorrido entre páginas: Autos → Hogares → Negocios → Autos.
 - Inicio (pedido del cliente, 2026-09-30): el logo como moneda que se lanza una vez al entrar (logo en las dos caras, lenta, no interactiva), las redes (WhatsApp, Instagram), los tres servicios para elegir con el diseño 2D y "Sobre nosotros".
 - Páginas: `/` (inicio institucional) y una página por servicio (`/autos`, `/hogares`, `/negocios`) con una escena 3D que aplica la lámina mientras se scrollea. Estilo 3D "cromo y vidrio" elegido por el cliente el 2026-09-30 (no modelos realistas).

@@ -96,9 +96,10 @@ Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026
 
 | Spec | Estado | Fase |
 |---|---|---|
-| 001-conversion-whatsapp | En curso · requisitos y diseño APROBADOS (2026-10-03) | 3 — Tareas (siguiente) |
-| 003-rendimiento-celular | En cola (2.ª) | — |
-| 002-accesibilidad | En cola (3.ª) | — |
+| 001-conversion-whatsapp | En curso · T1–T6 aprobadas; requisitos v2, diseño v3 y tareas v3 aprobados por el ploteo (2026-10-04) | 4 — Implementación (6/12) |
+| 007-ploteo | En cola (2.ª) · espera del cliente los tipos de ploteo y fotos (D-061, D-064 de la spec 001) | — |
+| 003-rendimiento-celular | En cola (3.ª) | — |
+| 002-accesibilidad | En cola (4.ª) | — |
 | 004-seo-local | En cola · espera datos del cliente (D-018) | — |
 | 005-publicacion-hostinger | En cola · espera contratar Hostinger y dominio | — |
 | 006-calidad-y-mantenimiento | Cuando el usuario lo decida | — |

@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Tareas
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 2 · **Basado en:** diseño v2 (APROBADO 2026-10-04)
+**Estado:** APROBADO (2026-10-04) · **Versión:** 3 · **Basado en:** diseño v3 (APROBADO 2026-10-04)
 
+> **v3 (2026-10-04):** T9 usa la respuesta de la FAQ con el ploteo (D-063). El resto no cambia respecto de v2.
+>
 > **v2 (2026-10-04):** T1 y la verificación de cierre usan 5 corridas en `/` (D-048), y la verificación de cierre suma la revisión de origen si `/` no pasa (D-049). v1 fue APROBADO el 2026-10-03 (D-047); v2, el 2026-10-04 (D-050).
 
 > Implementación de a **una tarea por vez**. Al terminar cada una: verificar, mostrar resultado y esperar el OK del usuario.
@@ -242,7 +244,7 @@
   - Qué:
     - `HomeHero.astro:25`: la segunda frase pasa a "Elegí dónde va la lámina y mirá cómo queda." (D-023). La primera no cambia.
     - `HomeHero.astro:40`: el título pasa a "¿Dónde querés colocar la lámina?" (D-009).
-    - `home.ts:49`: la respuesta pasa al texto literal de D-011 (D-031/T11).
+    - `home.ts:49`: la respuesta pasa al texto literal de D-063 (D-011 con la frase del ploteo; D-031/T11).
     - No se ajustan tamaños ni espacios del hero (D-025).
   - Archivos:
     - `src/components/home/HomeHero.astro`
@@ -254,7 +256,7 @@
     - B.
     - H: `dist/index.html` tiene los 3 textos exactos y ya no tiene "¿Qué querés polarizar?" ni "Elegí qué querés polarizar".
     - C: a 360×640 y a 360×560, el lede sigue en 3 líneas y el botón de WhatsApp del hero entra completo (R5.3, D-025).
-    - R: los textos usan voseo y no tienen cifras ni precios (R8.5). La respuesta de la FAQ coincide con los `treatments` actuales (R8.4).
+    - R: los textos usan voseo y no tienen cifras ni precios (R8.5). La respuesta de la FAQ coincide con los `treatments` actuales (R8.4), más la frase del ploteo, que todavía no es un `treatment` (D-061: lo define la spec 007).
   - Estado: pendiente
 
 - [ ] **T10 — Portada de servicio sin los datos, en una columna**
@@ -373,7 +375,7 @@ No son tareas de implementación, pero completan la trazabilidad:
 | D-031/T6 | Marcas `data-` de disparador y de retiro | T7 |
 | D-031/T8 | "Consultar" fuera del `<nav>` | T5 |
 | D-031/T10 | Galería solo con fotos; se borra "Muy pronto…" | T11 |
-| D-031/T11 | Texto literal de D-011 + ítem de revisión de R8.4 | T9 · Fase 5 |
+| D-031/T11 | Texto literal de D-011 (con la frase de D-063) + ítem de revisión de R8.4 | T9 · Fase 5 |
 
 ## Trazabilidad requisito → tareas
 | Criterio | Tarea(s) | Además, en Fase 5 |

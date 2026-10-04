@@ -64,6 +64,11 @@
 | D-058 | 4 | Aprobación de T5 | Aprobada con D-055 y D-056; commit tras verificar | 2026-10-04 |
 | D-059 | 4 | Tamaño explícito del glifo del flotante (T6, sugerencia de `code-reviewer`) | Borrarlo (y la clase `fab-icon`), como en D-056 | 2026-10-04 |
 | D-060 | 4 | Aprobación de T6 | Aprobada con D-059; commit tras verificar | 2026-10-04 |
+| D-061 | 4 | Cómo sumar el ploteo (servicio nuevo informado por el usuario) | Mínimo ahora (FAQ + `PRODUCT.md`) y spec propia (007) para mostrarlo | 2026-10-04 |
+| D-062 | 4 | Fotos de ploteo | Fuera del proyecto por ahora; en `gallery/autos/` solo fotos de polarizado | 2026-10-04 |
+| D-063 | 4 | Texto de la FAQ "¿Hacen autos, casas y negocios?" con el ploteo (reemplaza el texto de D-011) | D-011 + "También hacemos ploteo, sobre todo en autos." | 2026-10-04 |
+| D-064 | 4 | Lugar de la spec 007-ploteo en el plan | Después de la 001: 001 → 007 → 003 → 002 | 2026-10-04 |
+| D-065 | 4 | Aprobación de requisitos v2, diseño v3 y tareas v3 (FAQ con ploteo) | Aprobados; commit en la rama | 2026-10-04 |
 
 ---
 
@@ -650,4 +655,45 @@
 - **Fase:** 4 (T6)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
 - **Decisión del usuario:** aprobar y commitear, con D-059 aplicada y verificada antes del commit.
+- **Fecha:** 2026-10-04
+
+### D-061 — Cómo sumar el ploteo
+- **Fase:** 4 (entre T6 y T7). Reabre requisitos (v2), diseño (v3) y tareas (v3).
+- **Contexto:** el usuario informó que Crisur también hace ploteos, principalmente de autos. No figuraba en `PRODUCT.md`, `services.ts`, la FAQ ni los mensajes.
+- **Opciones presentadas:**
+  - A) Mínimo ahora (la FAQ de D-011 y `PRODUCT.md`) + spec propia para mostrarlo — pro: la 001 no publica una lista incompleta · contra: reabrir requisitos, diseño y tareas por una frase.
+  - B) Spec nueva sin tocar la 001 — contra: la FAQ queda sin el ploteo hasta entonces.
+  - C) Todo dentro de la 001 — contra: amplía mucho el alcance.
+  - D) Anotarlo y decidir después.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. `services.ts` (`treatments`) no cambia en la 001: el ploteo como servicio lo define la spec 007.
+- **Fecha:** 2026-10-04
+
+### D-062 — Fotos de ploteo
+- **Fase:** 4
+- **Opciones presentadas:** A) en `gallery/autos/` solo polarizado; las de ploteo fuera del proyecto hasta la spec 007 · B) crear `gallery/ploteo/` ahora · C) mezclarlas en `autos/` · D) son todas de polarizado.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-063 — Texto de la FAQ con el ploteo
+- **Fase:** 4 (reabre R8.1)
+- **Opciones presentadas:**
+  - A) Agregar al final: "…y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos." — pro: fiel a "principalmente autos", sin afirmar nada de casas o negocios.
+  - B) Sumarlo a la lista de autos: "Sí: polarizado, láminas de seguridad y ploteo para autos; …" — contra: da a entender que es solo para autos.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Texto completo: "Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos."
+- **Fecha:** 2026-10-04
+
+### D-064 — Lugar de la spec 007-ploteo
+- **Fase:** 4
+- **Opciones presentadas:** A) después de la 001 (001 → 007 → 003 → 002) · B) después de la 003 · C) al final de la cola.
+- **Recomendación del equipo:** A, porque es un servicio que ya venden y el sitio no muestra.
+- **Decisión del usuario:** A. Necesita del cliente los tipos de ploteo y fotos.
+- **Fecha:** 2026-10-04
+
+### D-065 — Aprobación de requisitos v2, diseño v3 y tareas v3
+- **Fase:** 4
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar y commitear. Los tres documentos pasan a APROBADO (2026-10-04).
 - **Fecha:** 2026-10-04
