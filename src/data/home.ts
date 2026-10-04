@@ -46,6 +46,6 @@ export const HOME_FAQ: readonly FaqItem[] = [
   },
   {
     question: '¿Hacen autos, casas y negocios?',
-    answer: 'Sí: polarizado para autos, espejado y esmerilado para casas, y todas las opciones para vidrieras y oficinas.',
+    answer: 'Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos.',
   },
 ];

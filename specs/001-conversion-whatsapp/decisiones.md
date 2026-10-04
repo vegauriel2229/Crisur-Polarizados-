@@ -91,6 +91,8 @@
 | D-085 | 4 | Lugar de las fotos de ploteo (reemplaza la ubicación de D-066) | Dentro del proyecto, en `fotos-pendientes/ploteo/`, fuera de `src/` y `public/` | 2026-10-04 |
 | D-086 | 4 | ¿Las fotos de ploteo van a Git? | No: `fotos-pendientes/` en `.gitignore` (una foto tiene la patente completa) | 2026-10-04 |
 | D-087 | 4 | `.claude/agent-memory/` sin trackear | Sumarla a `.gitignore` | 2026-10-04 |
+| D-088 | 4 | "Polarizado(s)" como término general en el `h1`, el `<title>` y "Sobre nosotros" (fuera de T9) | Anotarlo en el Anexo A para la spec 004 (SEO) | 2026-10-04 |
+| D-089 | 4 | Aprobación de T9 | Aprobada; 2 commits: `chore` (D-085 a D-087) y T9 | 2026-10-04 |
 
 ---
 
@@ -876,4 +878,19 @@
 - **Opciones presentadas:** A) sumarla a `.gitignore` · B) dejarla sin trackear · C) commitearla.
 - **Recomendación del equipo:** A.
 - **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-088 — "Polarizado(s)" como término general en el inicio
+- **Fase:** 4 (T9, sugerencia de `code-reviewer`)
+- **Contexto:** fuera de D-009 y de T9 quedan 3 textos que usan "polarizado(s)" para todo: el `h1` "Polarizados para autos, hogares y negocios" (`HomeHero.astro:25`), el `<title>` (`index.astro:18`) y "Sobre nosotros" (`AboutSection.astro:30`, sin las láminas de seguridad). En hogares no se ofrece polarizado.
+- **Opciones presentadas:** A) anotarlo en el Anexo A para la spec 004 (SEO), donde se deciden el `h1` y el `<title>` · B) dejarlos como están ("polarizado" es la palabra coloquial y de la marca).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-089 — Aprobación de T9
+- **Fase:** 4 (T9)
+- **Contexto:** QA informó que el botón del hero sobresalía 5,4 px a 360×560. Era un artefacto de la emulación de escritorio (barra de scroll de 15 px: 345 px de ancho y `h1` en 4 líneas). Con emulación de celular (360 px, `h1` en 3 líneas) la holgura es de 28 px, igual que en la medición de D-025.
+- **Opciones presentadas:** aprobar con 2 commits (`chore` + T9) · aprobar con 1 commit · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar con 2 commits.
 - **Fecha:** 2026-10-04

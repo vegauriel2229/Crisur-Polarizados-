@@ -265,7 +265,7 @@
     - Si algún capítulo no entra, se frena y se consulta al usuario: no se ajustan valores por cuenta propia.
   - Estado: aprobada (2026-10-04; D-083 y D-084)
 
-- [ ] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
+- [x] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
   - Qué:
     - `HomeHero.astro:25`: la segunda frase pasa a "Elegí dónde va la lámina y mirá cómo queda." (D-023). La primera no cambia.
     - `HomeHero.astro:40`: el título pasa a "¿Dónde querés colocar la lámina?" (D-009).
@@ -282,7 +282,7 @@
     - H: `dist/index.html` tiene los 3 textos exactos y ya no tiene "¿Qué querés polarizar?" ni "Elegí qué querés polarizar".
     - C: a 360×640 y a 360×560, el lede sigue en 3 líneas y el botón de WhatsApp del hero entra completo (R5.3, D-025).
     - R: los textos usan voseo y no tienen cifras ni precios (R8.5). La respuesta de la FAQ coincide con los `treatments` actuales (R8.4), más la frase del ploteo, que todavía no es un `treatment` (D-061: lo define la spec 007).
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-088 y D-089)
 
 - [ ] **T10 — Portada de servicio sin los datos, en una columna**
   - Qué:

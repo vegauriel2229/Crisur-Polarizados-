@@ -24,7 +24,7 @@ const choices = (['autos', 'hogares', 'negocios'] as const satisfies readonly Se
     <CoinLogo />
     <h1 class="home-title" id="home-title">Polarizados para autos, hogares y negocios</h1>
     <p class="home-lede">
-      Más de {siteSettings.yearsOfExperience} años colocando láminas en {siteSettings.serviceArea}. Elegí qué querés polarizar y mirá cómo queda.
+      Más de {siteSettings.yearsOfExperience} años colocando láminas en {siteSettings.serviceArea}. Elegí dónde va la lámina y mirá cómo queda.
     </p>
     <div class="socials">
       <WhatsAppButton href={whatsappUrl} label={WHATSAPP_CTA_LABELS.general} variant="primary" />
@@ -36,7 +36,7 @@ const choices = (['autos', 'hogares', 'negocios'] as const satisfies readonly Se
   </div>
 
   <nav class="chooser" aria-labelledby="chooser-title">
-    <h2 class="chooser-title" id="chooser-title">¿Qué querés polarizar?</h2>
+    <h2 class="chooser-title" id="chooser-title">¿Dónde querés colocar la lámina?</h2>
     <ul class="choices">
       {
         choices.map((service) => (
