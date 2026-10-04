@@ -517,6 +517,18 @@ if (service.story.length !== STORY_CHAPTER_COUNT) {
       width: min(15rem, 62%);
     }
   }
+  /* En horizontal con pantalla baja, el texto del capítulo tiene que entrar en 100svh sin quitar el aire del flotante (D-080). */
+  @media (max-width: 880px) and (max-height: 340px) {
+    .chapter-title {
+      font-size: 1.625rem;
+      line-height: 1.05;
+    }
+    .chapter-text {
+      margin-top: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+  }
   @media (max-width: 520px) {
     .actions,
     .closing-copy .button {

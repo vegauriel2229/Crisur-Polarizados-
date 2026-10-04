@@ -244,7 +244,7 @@
     - M: el menú abierto y las preguntas de la FAQ se pueden usar.
   - Estado: aprobada (2026-10-04; D-077 y D-078. El ajuste para pantallas bajas en horizontal, D-076, va aparte según D-079)
 
-- [ ] **T8b — Capítulos en celular horizontal con pantalla baja**
+- [x] **T8b — Capítulos en celular horizontal con pantalla baja**
   - Qué:
     - En `ServiceStory.astro`, dentro de `@media (max-width: 880px) and (max-height: 340px)`, los capítulos usan tipografía compacta para que el texto entre en `100svh` sin quitar los 5,5 rem de aire de T8 (D-076, D-080):
       - `.chapter-title { font-size: 1.625rem; line-height: 1.05 }`;
@@ -263,7 +263,7 @@
     - A 360×640, 768×1024 y 1024×768 no cambia nada (la media query no aplica).
     - El script de medición queda fuera del repo (D-073).
     - Si algún capítulo no entra, se frena y se consulta al usuario: no se ajustan valores por cuenta propia.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-083 y D-084)
 
 - [ ] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
   - Qué:

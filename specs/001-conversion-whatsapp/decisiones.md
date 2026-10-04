@@ -828,3 +828,17 @@
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
 - **Decisión del usuario:** aprobar y commitear. Los dos documentos pasan a APROBADO (2026-10-04).
 - **Fecha:** 2026-10-04
+
+### D-083 — Título sobre el objeto 3D en horizontal con pantalla baja (T8b)
+- **Fase:** 4 (T8b)
+- **Contexto:** en la captura de `qa-tester` a 740×300 (`/autos/`, capítulo 2), el título del capítulo queda encima del auto y tapa las ventanillas. Se lee bien gracias a la penumbra. En 300 px de alto no entran el objeto y el texto uno arriba del otro; el aire de T8 subió el texto unos 64 px.
+- **Opciones presentadas:** A) anotarlo en el Anexo A de la constitución y revisarlo en una spec de la escena 3D · B) aceptarlo sin registrar · C) ajustarlo en esta spec (diseño v6), con el riesgo de tocar la escena 3D, que está fuera del alcance.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-084 — Aprobación de T8b
+- **Fase:** 4 (T8b)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
