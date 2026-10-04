@@ -71,7 +71,7 @@
     - H: en `dist/index.html`, el botón del cierre sigue diciendo "Consultar por WhatsApp", con el mismo `href`, `target` y `rel` que antes.
   - Estado: aprobada (2026-10-04)
 
-- [ ] **T3 — Componente `WhatsAppButton` y los 2 botones que cambian de etiqueta**
+- [x] **T3 — Componente `WhatsAppButton` y los 2 botones que cambian de etiqueta**
   - Qué: crear `src/components/WhatsAppButton.astro` (D-031/T1, D-039/PD-1):
     - Props del diseño: `href`, `label`, `variant: 'primary' | 'secondary'` y `class?`.
     - Reparte `...rest`, con el mismo patrón que `Icon.astro`.
@@ -94,7 +94,7 @@
     - M (360 y 1440): se conservan los estilos que pone el padre. `.socials .button` va a ancho completo a ≤ 520 px. `.faq-cta` conserva su margen y el ancho completo a ≤ 520 px.
     - C: a 360×640 y a 360×560, el botón del hero entra completo (R5.3).
     - K: los dos botones tienen foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; contrato sin `extends`, D-051)
 
 - [ ] **T4 — CTA corto al final de las 3 secciones del inicio**
   - Qué:

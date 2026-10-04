@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** URL de wa.me que arma la página (T3). */
+  href: string;
+  /** Texto visible y también nombre accesible (R4.4): el glifo es aria-hidden. */
+  label: string;
+  /** Principal (rojo) o secundario (ghost, D-019). Obligatoria y tipada (D-039). */
+  variant: 'primary' | 'secondary';
+  /** Clase de layout que pone el padre (p. ej. `faq-cta`). */
+  class?: string;
+}
+
+// `...rest` lleva el atributo de estilos con scope del padre: así sus reglas de layout siguen aplicando al botón.
+const { href, label, variant, class: className, ...rest } = Astro.props;
+---
+
+<a class:list={['button', `button-${variant}`, className]} href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+  <Icon name="whatsapp" />
+  <span>{label}</span>
+</a>

@@ -1,8 +1,10 @@
 ---
 import CoinLogo from './CoinLogo.astro';
 import Icon from '../Icon.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
 import ServiceArt from '../ServiceArt.astro';
 import { describeTreatments, getService, type ServiceId } from '../../data/services';
+import { WHATSAPP_CTA_LABELS } from '../../data/cta';
 import { instagramUrl, siteSettings } from '../../config/site';
 
 interface Props {
@@ -25,10 +27,7 @@ const choices = (['autos', 'hogares', 'negocios'] as const satisfies readonly Se
       Más de {siteSettings.yearsOfExperience} años colocando láminas en {siteSettings.serviceArea}. Elegí qué querés polarizar y mirá cómo queda.
     </p>
     <div class="socials">
-      <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-        <Icon name="whatsapp" />
-        <span>WhatsApp</span>
-      </a>
+      <WhatsAppButton href={whatsappUrl} label={WHATSAPP_CTA_LABELS.general} variant="primary" />
       <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label={`Instagram @${siteSettings.instagramHandle}`}>
         <Icon name="instagram" />
         <span>@{siteSettings.instagramHandle}</span>

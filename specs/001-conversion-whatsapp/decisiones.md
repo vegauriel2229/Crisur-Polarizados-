@@ -54,6 +54,7 @@
 | D-048 | 4 | Corridas de Lighthouse en el inicio (varianza en T1) | 5 corridas en `/` antes y después (mediana de 5); los servicios siguen con 3. Ajusta D-030 | 2026-10-04 |
 | D-049 | 4 | Qué pasa si `/` no pasa el piso o el techo en la Fase 5 | Revisar el origen: si los scripts del bloqueo no son archivos tocados por la spec, se informa como variación y decide el usuario | 2026-10-04 |
 | D-050 | 4 | Aprobación de T1 y de `diseno.md` / `tareas.md` v2 | Aprobados; commit en `main` y rama `feature/001-conversion-whatsapp` (D-041) | 2026-10-04 |
+| D-051 | 4 | Contrato de `WhatsAppButton` (T3): ¿`extends HTMLAttributes<'a'>`? | Quitarlo: queda el contrato literal del diseño (`href`, `label`, `variant`, `class?`) | 2026-10-04 |
 
 ---
 
@@ -557,4 +558,14 @@
 - **Fase:** 4 (T1)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
 - **Decisión del usuario:** aprobar y commitear. T1 aprobada; `diseno.md` v2 y `tareas.md` v2 (D-048 y D-049) pasan a APROBADO. Commit en `main` sin push y creación de la rama `feature/001-conversion-whatsapp` (D-041).
+- **Fecha:** 2026-10-04
+
+### D-051 — Contrato de `WhatsAppButton` (T3)
+- **Fase:** 4 (T3)
+- **Contexto:** la implementación usaba `interface Props extends Omit<HTMLAttributes<'a'>, 'href' | 'target' | 'rel'>`, como `Icon.astro`. El contrato de `diseno.md` no tiene `extends`. `code-reviewer` comprobó que sin el `extends` compila con 0 errores, que el CSS con scope del padre sigue llegando por `...rest` y que `target` y `rel` siguen sin poder pisarse (RNF8).
+- **Opciones presentadas:**
+  - A) Quitar el `extends` y el import de `HTMLAttributes` — pro: contrato literal aprobado, más corto · contra: distinto de `Icon.astro`.
+  - B) Mantenerlo y registrarlo como cambio de contrato — pro: igual que `Icon.astro` · contra: acepta atributos que la spec no pide (`onclick`, `style`, `id`…).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
 - **Fecha:** 2026-10-04
