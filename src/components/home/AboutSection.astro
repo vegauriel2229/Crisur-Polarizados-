@@ -1,5 +1,7 @@
 ---
 import { siteSettings } from '../../config/site';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { WHATSAPP_CTA_LABELS } from '../../data/cta';
 
 // Solo hechos confirmados por el cliente (PRODUCT.md): negocio familiar, +10 años, Godoy Cruz, todas las láminas y tonos.
 const facts = [
@@ -8,6 +10,13 @@ const facts = [
   { title: 'Todas las láminas y tonos', text: 'sin catálogo cerrado: te recomendamos la justa para tu caso.' },
   { title: 'Atención por WhatsApp', text: 'consultás, mandás fotos y coordinás el turno por el mismo chat.' },
 ] as const;
+
+interface Props {
+  /** URL con el mensaje general (whatsappDefaultMessage), armada en index.astro (T3, D-005). */
+  whatsappUrl: string;
+}
+
+const { whatsappUrl } = Astro.props;
 ---
 
 <section class="about" id="nosotros" aria-labelledby="about-title">
@@ -36,6 +45,7 @@ const facts = [
         }
       </dl>
     </div>
+    <WhatsAppButton href={whatsappUrl} label={WHATSAPP_CTA_LABELS.general} variant="secondary" class="section-cta" />
   </div>
 </section>
 
@@ -103,7 +113,20 @@ const facts = [
   .fact dd {
     color: var(--color-ink-muted);
   }
+  /* Debajo de las dos columnas (desde 900 px), no dentro de una. El hueco lo da el `gap` de la grilla. */
+  .section-cta {
+    justify-self: start;
+  }
+  @media (min-width: 900px) {
+    .section-cta {
+      grid-column: 1 / -1;
+    }
+  }
   @media (max-width: 520px) {
+    .section-cta {
+      width: 100%;
+      max-width: 22rem;
+    }
     .fact {
       grid-template-columns: 1fr;
       gap: 0.2rem;

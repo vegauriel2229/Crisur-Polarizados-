@@ -96,7 +96,7 @@
     - K: los dos botones tienen foco visible.
   - Estado: aprobada (2026-10-04; contrato sin `extends`, D-051)
 
-- [ ] **T4 — CTA corto al final de las 3 secciones del inicio**
+- [x] **T4 — CTA corto al final de las 3 secciones del inicio**
   - Qué:
     - `AboutSection`, `FilmTypesSection` y `ProcessSection` reciben la prop obligatoria `whatsappUrl: string`. Al final de su contenido, dentro del `<section>`, suman un `WhatsAppButton` con `WHATSAPP_CTA_LABELS.general` y `variant="secondary"` (D-031/T1.b, D-001, D-019).
     - `index.astro` les pasa `defaultWhatsappUrl` (`:14`, `:25-27`; D-031/T3, D-005).
@@ -118,7 +118,7 @@
     - H: en `dist/index.html` hay un "Consultar por WhatsApp" al final de cada una de las 3 secciones. Los 3 `href` son `https://wa.me/5492616256467?text=…`, el `text` decodificado es "¡Hola Crisur! Quiero hacer una consulta." y todos llevan `target` y `rel`.
     - M en 360, 768, 1024 y 1440: los 3 botones son ghost con glifo. A 360 ocupan el ancho completo (máx. 22 rem); desde 768, el ancho del contenido. En "Sobre nosotros", a 1024 y 1440, el botón queda debajo de las dos columnas.
     - K: con Tab se llega a los 3 botones, con foco visible. Miden al menos 44 px de alto.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; espacio de About por el `gap`, D-053; CSS con scope repetido, D-054)
 
 - [ ] **T5 — "Consultar" fuera del menú en el header**
   - Qué:

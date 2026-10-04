@@ -55,6 +55,9 @@
 | D-049 | 4 | Qué pasa si `/` no pasa el piso o el techo en la Fase 5 | Revisar el origen: si los scripts del bloqueo no son archivos tocados por la spec, se informa como variación y decide el usuario | 2026-10-04 |
 | D-050 | 4 | Aprobación de T1 y de `diseno.md` / `tareas.md` v2 | Aprobados; commit en `main` y rama `feature/001-conversion-whatsapp` (D-041) | 2026-10-04 |
 | D-051 | 4 | Contrato de `WhatsAppButton` (T3): ¿`extends HTMLAttributes<'a'>`? | Quitarlo: queda el contrato literal del diseño (`href`, `label`, `variant`, `class?`) | 2026-10-04 |
+| D-052 | 4 | Ritmo de T4–T12 | Una tarea a la vez, con OK y confirmación de commit en cada una | 2026-10-04 |
+| D-053 | 4 | Espacio sobre el CTA de "Sobre nosotros" (T4) | El `gap` de la grilla `.about-inner` (`clamp(2rem, 5vw, 3rem)`), sin `margin-top` extra | 2026-10-04 |
+| D-054 | 4 | Bloque `.section-cta` repetido en las 3 secciones (T4, sugerencia 🟡 de `code-reviewer`) | Mantenerlo con scope en cada sección; `global.css` sin cambios | 2026-10-04 |
 
 ---
 
@@ -566,6 +569,34 @@
 - **Opciones presentadas:**
   - A) Quitar el `extends` y el import de `HTMLAttributes` — pro: contrato literal aprobado, más corto · contra: distinto de `Icon.astro`.
   - B) Mantenerlo y registrarlo como cambio de contrato — pro: igual que `Icon.astro` · contra: acepta atributos que la spec no pide (`onclick`, `style`, `id`…).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-052 — Ritmo de las tareas T4 a T12
+- **Fase:** 4 (T4)
+- **Contexto:** el usuario pidió "seguí todo lo que sea necesario"; se consultó si eso cambiaba la aprobación por tarea.
+- **Opciones presentadas:** A) encadenar T4–T12 con un commit por tarea sin confirmar cada uno, frenando solo ante decisiones o 🔴 · B) una a la vez, como hasta ahora · C) encadenar sin commits hasta la revisión final.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** B — una tarea a la vez, con OK y confirmación de commit en cada una.
+- **Fecha:** 2026-10-04
+
+### D-053 — Espacio sobre el CTA de "Sobre nosotros" (T4)
+- **Fase:** 4 (T4)
+- **Contexto:** el CTA queda dentro de `.about-inner`, una grilla con `gap: clamp(2rem, 5vw, 3rem)`. Sumar el `margin-top: clamp(2rem, 4vw, 3rem)` del diseño (D-040, detalle 1) daría 4–6 rem. Con solo el `gap`, la diferencia con el diseño va de 0 a ~8 px entre 640 y 1200 px (igual a 360 y a 1440).
+- **Opciones presentadas:**
+  - A) Usar el `gap` de la grilla — pro: sin markup extra · contra: no es literal el valor del diseño.
+  - B) Sacar el botón de la grilla, con un contenedor de 76 rem y el `margin-top` exacto — pro: valor exacto · contra: un `div` que el diseño no menciona.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Las secciones "Láminas" y "Proceso" usan el `margin-top` del diseño.
+- **Fecha:** 2026-10-04
+
+### D-054 — Bloque `.section-cta` repetido (T4)
+- **Fase:** 4 (T4)
+- **Contexto:** sugerencia 🟡 de `code-reviewer`: el CSS de ubicación del CTA (~9 líneas) se repite en `AboutSection`, `FilmTypesSection` y `ProcessSection`.
+- **Opciones presentadas:**
+  - A) Mantenerlo — pro: es lo que pide el diseño (estilos con scope, `global.css` sin cambios), igual que `.faq-cta` · contra: ~9 líneas repetidas.
+  - B) Pasarlo a una utilidad en `global.css` — pro: una sola copia · contra: reabre el diseño (v3).
 - **Recomendación del equipo:** A.
 - **Decisión del usuario:** A.
 - **Fecha:** 2026-10-04
