@@ -9,7 +9,7 @@ interface Props {
 const { href } = Astro.props;
 ---
 
-<!-- Aparece al dejar atrás la primera pantalla (ahí ya hay un CTA visible). -->
+<!-- Visible salvo mientras se ve el hero o la portada (disparador) o el contenido del cierre en servicios (retiro): ahí ya hay un CTA. -->
 <a class="whatsapp-fab" href={href} target="_blank" rel="noopener noreferrer" data-whatsapp-fab>
   <Icon name="whatsapp" />
   {WHATSAPP_CTA_LABELS.short}<span class="sr-only"> {WHATSAPP_CTA_LABELS.hiddenSuffix}</span>
@@ -17,12 +17,35 @@ const { href } = Astro.props;
 
 <script>
   const fab = document.querySelector<HTMLElement>('[data-whatsapp-fab]');
-  if (fab !== null) {
-    const update = (): void => {
-      fab.dataset['visible'] = String(window.scrollY > window.innerHeight * 0.8);
-    };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
+  if (fab === null) {
+    throw new Error('WhatsAppFab: missing element "[data-whatsapp-fab]"');
+  }
+  const triggers = document.querySelectorAll<HTMLElement>('[data-whatsapp-fab-trigger]');
+  if (triggers.length === 0) {
+    throw new Error('WhatsAppFab: missing element "[data-whatsapp-fab-trigger]"');
+  }
+  const retires = document.querySelectorAll<HTMLElement>('[data-whatsapp-fab-retire]');
+
+  // visible = !disparadorVisible && !retiroActivo: basta que alguna marca cruce el viewport para ocultarlo.
+  const intersecting = new Set<Element>();
+
+  // El observer entrega solo las entradas que cambiaron: el estado de todos vive en `intersecting`.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          intersecting.add(entry.target);
+        } else {
+          intersecting.delete(entry.target);
+        }
+      }
+      fab.dataset['visible'] = String(intersecting.size === 0);
+    },
+    // La spec de IO cuenta como intersección quedar pegado al borde (0 px); con la raíz achicada 1 px, tocar el borde = 1 px visible.
+    { threshold: 0, rootMargin: '-1px 0px' },
+  );
+  for (const element of [...triggers, ...retires]) {
+    observer.observe(element);
   }
 </script>
 

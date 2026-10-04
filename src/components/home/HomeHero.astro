@@ -20,7 +20,7 @@ const choices = (['autos', 'hogares', 'negocios'] as const satisfies readonly Se
   <!-- Header compartido (SiteHeader): vive dentro del inicio para compartir su fondo. -->
   <slot name="header" />
 
-  <div class="intro">
+  <div class="intro" data-whatsapp-fab-trigger>
     <CoinLogo />
     <h1 class="home-title" id="home-title">Polarizados para autos, hogares y negocios</h1>
     <p class="home-lede">

@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Diseño
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 3 · **Basado en:** requisitos v2
+**Estado:** APROBADO (2026-10-04) · **Versión:** 4 · **Basado en:** requisitos v2
 
+> **v4 (2026-10-04):** el observer del flotante usa `rootMargin: '-1px 0px'` para que la adyacencia por borde no cuente como visible (D-071, D-072). El resto no cambia respecto de v3.
+>
 > **v3 (2026-10-04):** la respuesta de la FAQ "¿Hacen autos, casas y negocios?" suma el ploteo (D-061, D-063). El resto no cambia respecto de v2.
 >
 > **v2 (2026-10-04):** el protocolo de Lighthouse usa 5 corridas en `/` (D-048) y define qué hacer si `/` no pasa (D-049). El resto no cambia respecto de v1 (APROBADO 2026-10-03).
@@ -259,6 +261,7 @@ interface Props {
 ### Regla de visibilidad del flotante (T4)
 - `visible = !disparadorVisible && !retiroActivo`.
 - `disparadorVisible`: el disparador cruza el viewport en al menos un píxel (umbral 0). Mientras se vea cualquier parte del hero o de la portada, el flotante no se muestra (R5.2 al pie de la letra).
+- "Al menos un píxel": la spec de `IntersectionObserver` cuenta como intersección un elemento pegado al borde aunque se vean 0 px (pasa al entrar por el ancla de un capítulo: la portada termina justo en el borde). Por eso el observer usa `rootMargin: '-1px 0px'`: con la raíz achicada 1 px arriba y abajo, estar pegado al borde equivale a tener 1 px visible (D-071).
 - `retiroActivo`: alguna marca de retiro cruza el viewport. Cuando las marcas salen de pantalla (por arriba o por abajo), el flotante vuelve (D-034).
 - Cuando el `IntersectionObserver` empieza a observar, informa el estado inicial. Por eso, si se entra por un ancla (`/#nosotros`, `/autos/#<capítulo>`) con el disparador fuera de pantalla, el flotante aparece sin scrollear (caso borde).
 - No se ejecuta código en cada evento de scroll (RNF2).

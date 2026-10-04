@@ -52,7 +52,7 @@ if (service.story.length !== STORY_CHAPTER_COUNT) {
     </div>
 
     <div class="beats">
-      <header class="beat beat-cover">
+      <header class="beat beat-cover" data-whatsapp-fab-trigger>
         <div class="cover-copy">
           <h1 class="cover-title" id="story-title">
             <span class="cover-prefix">{service.hero.titlePrefix}</span>
@@ -93,7 +93,7 @@ if (service.story.length !== STORY_CHAPTER_COUNT) {
       }
 
       <footer class="beat beat-closing" id="consultar">
-        <div class="closing-copy">
+        <div class="closing-copy" data-whatsapp-fab-retire>
           <h2 class="closing-title">{service.closing.title}</h2>
           <p class="closing-text">{service.closing.text}</p>
           <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
@@ -102,7 +102,7 @@ if (service.story.length !== STORY_CHAPTER_COUNT) {
           </a>
         </div>
         <!-- Portal: la ventana se convierte en la escena de la página siguiente (View Transitions). -->
-        <a class="portal" href={`/${next.id}/`} data-portal aria-label={`Siguiente: ${next.navLabel}`}>
+        <a class="portal" href={`/${next.id}/`} data-portal data-whatsapp-fab-retire aria-label={`Siguiente: ${next.navLabel}`}>
           <span class="portal-heading">
             <span>Siguiente</span>
             <strong>{next.navLabel}</strong>

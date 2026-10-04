@@ -1,7 +1,9 @@
 # Spec 001 — Conversión a WhatsApp · Tareas
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 3 · **Basado en:** diseño v3 (APROBADO 2026-10-04)
+**Estado:** APROBADO (2026-10-04) · **Versión:** 4 · **Basado en:** diseño v4 (APROBADO 2026-10-04)
 
+> **v4 (2026-10-04):** T7 suma `rootMargin: '-1px 0px'` al observer (D-071). El resto no cambia respecto de v3.
+>
 > **v3 (2026-10-04):** T9 usa la respuesta de la FAQ con el ploteo (D-063). El resto no cambia respecto de v2.
 >
 > **v2 (2026-10-04):** T1 y la verificación de cierre usan 5 corridas en `/` (D-048), y la verificación de cierre suma la revisión de origen si `/` no pasa (D-049). v1 fue APROBADO el 2026-10-03 (D-047); v2, el 2026-10-04 (D-050).
@@ -181,14 +183,14 @@
     - K: oculto, no recibe foco; visible, tiene foco visible.
   - Estado: aprobada (2026-10-04; D-059 y D-060)
 
-- [ ] **T7 — Botón flotante: aparición con `IntersectionObserver` y marcas de disparador y de retiro**
+- [x] **T7 — Botón flotante: aparición con `IntersectionObserver` y marcas de disparador y de retiro**
   - Qué:
     - Marcas (D-031/T6):
       - `data-whatsapp-fab-trigger` en `.intro` (`HomeHero.astro:21`, D-015) y en `header.beat-cover` (`ServiceStory.astro:55`);
       - `data-whatsapp-fab-retire` en `.closing-copy` (`:96`) y en el portal (`:105`) (D-033);
       - el inicio no lleva marca de retiro (D-017).
     - Script (D-031/T4):
-      - un `IntersectionObserver` con umbral 0 reemplaza el listener de `scroll` (`WhatsAppFab.astro:17-26`);
+      - un `IntersectionObserver` con umbral 0 y `rootMargin: '-1px 0px'` (D-071) reemplaza el listener de `scroll` (`WhatsAppFab.astro:17-26`);
       - aplica la regla del diseño (Contratos): `visible = !disparadorVisible && !retiroActivo`;
       - el flotante vuelve cuando las marcas de retiro salen de pantalla (D-034);
       - la marca de retiro es opcional (D-039/PD-5);
@@ -219,7 +221,7 @@
     - M con anclas: al entrar por `/#nosotros` y por `/autos/#<capítulo>`, aparece sin scrollear.
     - RM: aparece y se retira sin animación.
     - D-028, por revisión de código (`code-reviewer`, D-045): si falta el disparador, el script lanza `Error` con un mensaje descriptivo y no toca `data-visible`.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-071 a D-075)
 
 - [ ] **T8 — Aire para el flotante en los capítulos (celular) y en el pie**
   - Qué:

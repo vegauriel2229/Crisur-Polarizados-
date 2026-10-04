@@ -74,6 +74,11 @@
 | D-068 | 4 | Patentes cortadas en el borde de 4 fotos | Dejarlas como están (no se leen completas) | 2026-10-04 |
 | D-069 | 4 | Nombres (descripción) y orden de las 11 fotos de `/autos` | Los propuestos; commit aparte | 2026-10-04 |
 | D-070 | 4 | Bug: la galería muestra las fotos verticales (480 × 803) en lugar de 4:3 | Corregirlo ahora con `height: auto` en `.gallery-photo`, commit aparte | 2026-10-04 |
+| D-071 | 4 | Bug de T7: el flotante no aparece al entrar por el ancla de un capítulo (adyacencia por borde) | `rootMargin: '-1px 0px'` en el observer | 2026-10-04 |
+| D-072 | 4 | Documentar el `rootMargin` | Diseño v4 y tareas v4 con la nota; se aprueban con T7 | 2026-10-04 |
+| D-073 | 4 | Prueba de regresión del bug de T7 | Script de medición fuera del repo (scratchpad), como en D-070 | 2026-10-04 |
+| D-074 | 4 | Sugerencias menores de `code-reviewer` en T7 | En bloque: corregir el comentario del flotante; dejar los otros dos comentarios y `querySelectorAll` | 2026-10-04 |
+| D-075 | 4 | Aprobación de T7 y de diseño v4 / tareas v4 | Aprobados; commit en la rama | 2026-10-04 |
 
 ---
 
@@ -721,4 +726,42 @@
   - C) Dejarlo para después (Anexo A).
 - **Recomendación del equipo:** A.
 - **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-071 — Bug de T7: el flotante no aparece al entrar por el ancla de un capítulo
+- **Fase:** 4 (T7, antes de aprobarla)
+- **Diagnóstico (`debugger`):** la spec de `IntersectionObserver` da `isIntersecting = true` también cuando el elemento queda pegado al borde de la raíz con área 0. Al entrar por `/<servicio>/#vidrio-original`, la portada termina justo en el borde (`cover.bottom = 0`) y el flotante se oculta. Afecta también al índice de capítulos, a un scroll que caiga justo en el borde y a la vuelta del flotante después del cierre a 1440. Los "6 px a 1440" que midió `qa-tester` venían del `scroll-behavior: smooth` (medición a mitad de la animación), no del layout.
+- **Opciones presentadas:**
+  - A) `rootMargin: '-1px 0px'` — pro: una línea, cumple "al menos un píxel" en los dos bordes · contra: una franja de menos de 1 px cuenta como no visible.
+  - B) `.beat-chapter { scroll-margin-top: -1px }` — contra: solo arregla los enlaces.
+  - C) `threshold: [0, 1e-6]` + `intersectionRatio > 0` — contra: dos cambios, regla menos legible.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-072 — Documentar el `rootMargin`
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** A) diseño v4 y tareas v4 con la nota, aprobados junto con T7 · B) tomarlo como detalle de implementación.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-073 — Prueba de regresión del bug de T7
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** A) script de medición fuera del repo, como en D-070 · B) script en el repo sin dependencias (lo recomendó el `debugger`) · C) Playwright (dependencia nueva, contra D-029).
+- **Recomendación del equipo (orquestador):** A, por coherencia con D-012 y D-070 y para no fijar la ruta del Edge en el repo.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-074 — Sugerencias menores de `code-reviewer` en T7
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** aceptar en bloque (corregir el comentario de `WhatsAppFab.astro:12` a "el hero o la portada (disparador) o el contenido del cierre en servicios (retiro)"; dejar los comentarios de `:29` y `:32`; dejar `querySelectorAll` para el disparador) · solo corregir el comentario · no tocar nada.
+- **Recomendación del equipo:** aceptar en bloque.
+- **Decisión del usuario:** aceptar en bloque.
+- **Fecha:** 2026-10-04
+
+### D-075 — Aprobación de T7 y de diseño v4 / tareas v4
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
 - **Fecha:** 2026-10-04
