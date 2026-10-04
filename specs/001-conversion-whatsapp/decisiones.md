@@ -73,6 +73,7 @@
 | D-067 | 4 | Foto de la Chrysler PT Cruiser de frente | Es polarizado: va a la galería | 2026-10-04 |
 | D-068 | 4 | Patentes cortadas en el borde de 4 fotos | Dejarlas como están (no se leen completas) | 2026-10-04 |
 | D-069 | 4 | Nombres (descripción) y orden de las 11 fotos de `/autos` | Los propuestos; commit aparte | 2026-10-04 |
+| D-070 | 4 | Bug: la galería muestra las fotos verticales (480 × 803) en lugar de 4:3 | Corregirlo ahora con `height: auto` en `.gallery-photo`, commit aparte | 2026-10-04 |
 
 ---
 
@@ -709,4 +710,15 @@
 - **D-067:** la PT Cruiser de frente: A) polarizado · B) otro trabajo · C) dejarla afuera. **Elegida: A.**
 - **D-068:** 4 fotos con un pedazo de patente en el borde: A) dejarlas · B) las recorta el usuario · C) sacarlas. **Elegida: A.**
 - **D-069:** renombrar con número de orden + descripción de lo que se ve (sin tonos ni marcas de lámina) y commit aparte. Orden: Hilux, Mercedes coupé, Captur, C3 Aircross, luneta C3 Aircross, Etios, 207, Focus, luneta Focus, sedán gris oscuro, PT Cruiser. **Elegida: sí, como se propuso.**
+- **Fecha:** 2026-10-04
+
+### D-070 — Bug del recorte vertical de la galería
+- **Fase:** 4 (bug, fuera de las tareas)
+- **Diagnóstico:** `<Image>` de Astro pone `width="1070" height="803"` en el `<img>`. El atributo `height` fija el alto y anula el `aspect-ratio: 4 / 3` de `.gallery-photo` (`WorkGallery.astro:156-163`): las tarjetas quedan de 480 × 803 px y `object-fit: cover` recorta los costados. DESIGN.md pide fotos 4:3. No se veía porque la galería estaba vacía.
+- **Opciones presentadas:**
+  - A) Corregirlo ahora con `height: auto`, commit aparte `fix(gallery)` — pro: cumple DESIGN.md, una línea.
+  - B) Meterlo en T11 (tareas v4) — contra: hasta entonces las fotos se ven recortadas.
+  - C) Dejarlo para después (Anexo A).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
 - **Fecha:** 2026-10-04
