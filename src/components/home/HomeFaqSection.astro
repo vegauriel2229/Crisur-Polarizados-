@@ -2,6 +2,7 @@
 import Faq from '../Faq.astro';
 import Icon from '../Icon.astro';
 import { HOME_FAQ } from '../../data/home';
+import { WHATSAPP_CTA_LABELS } from '../../data/cta';
 import { instagramUrl, siteSettings } from '../../config/site';
 import { buildWhatsAppUrl } from '../../lib/whatsapp';
 
@@ -21,7 +22,7 @@ const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, siteSettings.w
       <div class="final-actions">
         <a class="button button-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
           <Icon name="whatsapp" />
-          <span>Consultar por WhatsApp</span>
+          <span>{WHATSAPP_CTA_LABELS.general}</span>
         </a>
         <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver trabajos en Instagram">
           <Icon name="instagram" />

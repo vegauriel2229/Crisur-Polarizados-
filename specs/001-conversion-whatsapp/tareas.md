@@ -55,7 +55,7 @@
   - Resultado: ver "Línea base de Lighthouse (resultado de T1)", antes de la verificación de cierre.
   - Estado: aprobada (2026-10-04, D-050)
 
-- [ ] **T2 — Etiquetas de WhatsApp en `src/data/cta.ts`**
+- [x] **T2 — Etiquetas de WhatsApp en `src/data/cta.ts`**
   - Qué:
     - Crear `src/data/cta.ts` con `WHATSAPP_CTA_LABELS` (`short`, `hiddenSuffix` y `general`), tal como el bloque "Modelo de datos" del diseño (D-031/T2, D-006, D-027).
     - En `HomeFaqSection.astro:24`, el texto del botón pasa a `WHATSAPP_CTA_LABELS.general`. Es un import y una línea; el marcado no cambia (D-039/PD-7).
@@ -69,7 +69,7 @@
     - B.
     - R: `cta.ts` coincide con el diseño. El diff de `HomeFaqSection.astro` es solo el import y la línea `:24`.
     - H: en `dist/index.html`, el botón del cierre sigue diciendo "Consultar por WhatsApp", con el mismo `href`, `target` y `rel` que antes.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04)
 
 - [ ] **T3 — Componente `WhatsAppButton` y los 2 botones que cambian de etiqueta**
   - Qué: crear `src/components/WhatsAppButton.astro` (D-031/T1, D-039/PD-1):
