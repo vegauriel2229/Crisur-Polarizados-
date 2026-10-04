@@ -98,6 +98,8 @@
 | D-092 | 4 | Aprobación de T10 | Aprobada; commit en la rama | 2026-10-04 |
 | D-093 | 4 | Verificación de T11 con 11 fotos reales en `/autos/` | Usar las fotos reales para R7.3; sin galería solo en hogares y negocios; se quita la imagen temporal de D-046 | 2026-10-04 |
 | D-094 | 3 | Aprobación de tareas v6 | Aprobada; commit y arranque de T11 | 2026-10-04 |
+| D-095 | 4 | Caso que nunca se ejecuta en el script de la galería (`item === null`, sugerencia de `code-reviewer` en T11) | Dejarlo: R7.3 pide no tocar el script | 2026-10-04 |
+| D-096 | 4 | Aprobación de T11 | Aprobada; commit en la rama | 2026-10-04 |
 
 ---
 
@@ -935,4 +937,19 @@
 - **Fase:** 3
 - **Opciones presentadas:** aprobar, commitear y arrancar T11 · aprobar sin commit · cambiar algo.
 - **Decisión del usuario:** aprobar, commitear y arrancar T11.
+- **Fecha:** 2026-10-04
+
+### D-095 — Caso que nunca se ejecuta en el script de la galería (T11)
+- **Fase:** 4 (T11, sugerencia de `code-reviewer`)
+- **Contexto:** en `WorkGallery.astro`, el caso `item === null ? track.clientWidth` no se ejecuta nunca, porque los botones solo existen con 2 fotos o más.
+- **Opciones presentadas:** A) dejarlo (R7.3 pide no tocar el script) · B) anotarlo en el Anexo A para la spec 006.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-096 — Aprobación de T11
+- **Fase:** 4 (T11)
+- **Contexto:** al revisar el diff, el orquestador devolvió a su forma original la línea de `whatsappUrl` en `[service].astro`, a la que `dev-frontend` le había quitado un espacio sin necesidad.
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
 - **Fecha:** 2026-10-04

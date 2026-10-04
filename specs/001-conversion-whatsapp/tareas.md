@@ -305,7 +305,7 @@
     - M: el botón "Consultar por mi …" de la portada está en los 4 anchos (R6.4).
   - Estado: aprobada (2026-10-04; D-090 a D-092)
 
-- [ ] **T11 — Galería solo cuando hay fotos**
+- [x] **T11 — Galería solo cuando hay fotos**
   - Qué (D-031/T10, D-008):
     - `[service].astro` arma `photos = galleryFor(service.id)` y renderiza `<WorkGallery service={service} photos={photos} />` solo si `photos.length > 0`.
     - `WorkGallery.astro` recibe `photos: readonly GalleryPhoto[]` por prop y deja de llamar a `galleryFor` (`:5`, `:14`).
@@ -323,7 +323,7 @@
     - M en `/hogares/` y `/negocios/`, en los 4 anchos: el cierre pasa directo a "Qué ganás con la lámina".
     - Galería con fotos (R7.3, D-093, reemplaza la imagen temporal de D-046): `/autos/` tiene sus 11 fotos en `src/assets/gallery/autos/`. En `dist/autos/index.html` está `data-gallery` con 11 fotos, y en los 4 anchos el carrusel y sus controles se ven y funcionan como antes.
     - R: `gallery.ts` no cambia y la página tiene la condición `photos.length > 0`. Instagram sigue en el header, el pie y el hero (R7.4).
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-095 y D-096)
 
 - [ ] **T12 — Página 404 con WhatsApp como acción principal**
   - Qué: `404.astro` queda en el orden de D-021:
