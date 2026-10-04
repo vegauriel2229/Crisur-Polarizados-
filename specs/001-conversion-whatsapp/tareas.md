@@ -1,6 +1,8 @@
 # Spec 001 — Conversión a WhatsApp · Tareas
 
-**Estado:** APROBADO (2026-10-03) · **Versión:** 1 · **Basado en:** diseño v1 (APROBADO 2026-10-03)
+**Estado:** APROBADO (2026-10-04) · **Versión:** 2 · **Basado en:** diseño v2 (APROBADO 2026-10-04)
+
+> **v2 (2026-10-04):** T1 y la verificación de cierre usan 5 corridas en `/` (D-048), y la verificación de cierre suma la revisión de origen si `/` no pasa (D-049). v1 fue APROBADO el 2026-10-03 (D-047); v2, el 2026-10-04 (D-050).
 
 > Implementación de a **una tarea por vez**. Al terminar cada una: verificar, mostrar resultado y esperar el OK del usuario.
 > Estados: `pendiente` · `en curso` · `esperando OK` · `aprobada` · `bloqueada (motivo)`
@@ -37,8 +39,8 @@
 
 ## Tareas
 
-- [ ] **T1 — Medición "antes" de Lighthouse**
-  - Qué: sobre `main`, antes de cualquier cambio de código, correr `npm run build` y `npm run preview`. Después, 3 corridas de Lighthouse en cada página: `/`, `/autos/`, `/hogares/` y `/negocios/` (12 en total). La configuración es la de la auditoría: Lighthouse 12.8.2 local, Edge headless y emulación mobile (constitución D-016, D-030, D-037). Por página se registran:
+- [x] **T1 — Medición "antes" de Lighthouse**
+  - Qué: sobre `main`, antes de cualquier cambio de código, correr `npm run build` y `npm run preview`. Después, 3 corridas de Lighthouse en `/autos/`, `/hogares/` y `/negocios/`, y 5 en `/` (14 en total, D-048). La configuración es la de la auditoría: Lighthouse 12.8.2 local, Edge headless y emulación mobile (constitución D-016, D-030, D-037). Por página se registran:
     - los 3 valores y la mediana de Rendimiento y de TBT;
     - Accesibilidad, Buenas prácticas y SEO.
   - Archivos: ninguno del código. Los resultados se anotan en este documento, como resultado de T1 (D-042).
@@ -46,11 +48,12 @@
   - Agente: `seo-rendimiento`
   - Depende de: — (va primera: ninguna tarea de código puede empezar antes)
   - Verificación:
-    - Las 12 corridas terminaron sin errores.
-    - La tabla tiene los 3 valores y la mediana por página (Rendimiento y TBT), más Accesibilidad, Buenas prácticas y SEO.
+    - Las 14 corridas terminaron sin errores.
+    - La tabla tiene los valores de cada corrida y la mediana por página (Rendimiento y TBT), más Accesibilidad, Buenas prácticas y SEO.
     - Quedaron anotados el commit medido y las versiones de Lighthouse y de Edge.
     - `git status` no muestra cambios en `src/`.
-  - Estado: pendiente
+  - Resultado: ver "Línea base de Lighthouse (resultado de T1)", antes de la verificación de cierre.
+  - Estado: aprobada (2026-10-04, D-050)
 
 - [ ] **T2 — Etiquetas de WhatsApp en `src/data/cta.ts`**
   - Qué:
@@ -324,12 +327,32 @@
     - K: las dos acciones tienen foco visible.
   - Estado: pendiente
 
+## Línea base de Lighthouse (resultado de T1)
+Medida el 2026-10-04 (D-042). Es la referencia para la medición "después" de la Fase 5.
+
+- **Qué se midió:** commit `968ef00` (`main`), sin cambios en `src/`. `npm run build` (0 errores, 5 páginas) + `npm run preview` en `http://localhost:4321`.
+- **Herramientas:** Lighthouse 12.8.2 (`npx --offline -y lighthouse@12.8.2 <url> --output=json --chrome-flags="--headless=new" --quiet`, con `CHROME_PATH` apuntando a `msedge.exe`), preset mobile con throttling simulado, Edge 154 headless, Node v24.21.0, Astro 7.3.5. Corridas secuenciales; `benchmarkIndex` entre 1.032 y 1.446.
+- **Build sin `PUBLIC_SITE_URL`:** sale sin canonical ni sitemap. El "después" se mide igual.
+
+| Página | Corridas | Rendimiento (por corrida) | Mediana | Piso "después" (−3, D-030) | TBT ms (por corrida) | Mediana | Techo "después" (+10 %, D-038) | A11y | BP | SEO |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `/` | 5 (D-048) | 91 / 71 / 99 / 99 / 99 | **99** | 96 | 358 / 2.192 / 50 / 15 / 43 | **50** | 55,0 | 100 | 100 | 100 |
+| `/autos/` | 3 | 44 / 53 / 48 | **48** | 45 | 8.082 / 4.852 / 5.878 | **5.878** | 6.465,8 | 100 | 100 | 100 |
+| `/hogares/` | 3 | 55 / 54 / 55 | **55** | 52 | 3.669 / 3.653 / 3.364 | **3.653** | 4.018,3 | 100 | 100 | 100 |
+| `/negocios/` | 3 | 56 / 55 / 44 | **55** | 52 | 3.405 / 3.397 / 2.264 | **3.397** | 3.736,7 | 100 | 100 | 100 |
+
+Observaciones:
+- `/` se comporta en dos niveles: 3 corridas rápidas (TBT 15–50 ms) y 2 lentas (358 y 2.192 ms).
+- Las páginas de servicio dan menos que en la auditoría del 2026-10-03 (66/63/60). La auditoría midió el sitio publicado en Vercel y esto es el build local: D-030 y D-037 comparan local contra local.
+- Los JSON de las 14 corridas quedaron fuera del repo (D-042).
+
 ## Verificación de cierre (Fase 5, `/spec-verificar`)
 No son tareas de implementación, pero completan la trazabilidad:
-- `seo-rendimiento` hace la medición "después" con el mismo protocolo de T1 y compara las medianas (RNF2):
+- `seo-rendimiento` hace la medición "después" con el mismo protocolo de T1 (5 corridas en `/`, 3 en cada servicio; D-048) y compara las medianas (RNF2):
   - Rendimiento: después ≥ antes − 3 (D-030).
   - TBT: después ≤ antes + 10 % (D-038).
   - Accesibilidad, Buenas prácticas y SEO: 100.
+  - Si `/` no pasa, revisa qué scripts causan el bloqueo; si ninguno es un archivo tocado por esta spec, lo informa como variación y decide el usuario (D-049).
 - `qa-tester` recorre la tabla "Requisito → verificación" del diseño completa (46 criterios):
   - en 360, 768, 1024 y 1440, y en horizontal a 640×360 (D-036);
   - con teclado (K), movimiento reducido (RM) y sin JS (NJ);

@@ -1,6 +1,8 @@
 # Spec 001 — Conversión a WhatsApp · Diseño
 
-**Estado:** APROBADO (2026-10-03) · **Versión:** 1 · **Basado en:** requisitos v1
+**Estado:** APROBADO (2026-10-04) · **Versión:** 2 · **Basado en:** requisitos v1
+
+> **v2 (2026-10-04):** el protocolo de Lighthouse usa 5 corridas en `/` (D-048) y define qué hacer si `/` no pasa (D-049). El resto no cambia respecto de v1 (APROBADO 2026-10-03).
 
 > Fuentes: `requisitos.md` (APROBADO 2026-10-03), `decisiones.md` (D-001 a D-039, todas del usuario), el relevamiento técnico del `arquitecto` y las opciones visuales del `disenador-ui` (2026-10-03), y el código del commit `405f6e0`. Las referencias `archivo:línea` apuntan al código **actual** (antes de implementar). Los pendientes que surgieron al redactar (PD-1 a PD-10) los resolvió el usuario en D-033 a D-039.
 
@@ -578,14 +580,15 @@ No hay tests automáticos ni lint (constitución D-012) y no se suman dependenci
 | L | Lighthouse, con el protocolo de abajo |
 | R | Revisión de textos y de código (`code-reviewer` o `qa-tester`) |
 
-### Protocolo de Lighthouse (D-030, D-037, D-038; RNF2)
+### Protocolo de Lighthouse (D-030, D-037, D-038, D-048, D-049; RNF2)
 - Se usa la misma configuración del 2026-10-03 (constitución D-016): Lighthouse 12.8.2 local, Edge headless, emulación mobile, en la misma máquina.
-- Páginas: `/`, `/autos/`, `/hogares/` y `/negocios/`. Se hacen 3 corridas por página **antes** y 3 **después** (24 en total).
+- Páginas: `/`, `/autos/`, `/hogares/` y `/negocios/`. Se hacen 3 corridas por página **antes** y 3 **después**, salvo en `/`, que lleva 5 antes y 5 después por su varianza (D-048). En total, 28.
 - El "antes" se mide sobre `main`, antes de implementar la primera tarea. El "después", al terminar todas las tareas. Los dos sobre `npm run preview` (build local), en la misma máquina (D-037).
 - Se compara la **mediana**:
   - Rendimiento: la mediana de después tiene que ser ≥ la de antes − 3 puntos (D-030).
   - TBT: la mediana de después tiene que ser ≤ la de antes + 10 % (D-038).
   - Accesibilidad, Buenas prácticas y SEO: 100.
+- Si `/` no pasa el piso de Rendimiento o el techo de TBT, `seo-rendimiento` revisa en el reporte qué scripts causan el bloqueo. Si ninguno es un archivo tocado por esta spec, lo informa como variación y decide el usuario (D-049).
 - La tabla antes/después va en el informe de verificación.
 
 ### Requisito → verificación

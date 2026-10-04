@@ -51,6 +51,9 @@
 | D-045 | 3 | PT-5 · Verificación de D-028 | A) Revisión de código (`code-reviewer`) | 2026-10-03 |
 | D-046 | 3 | PT-6 · Prueba real de R7.3 | A) Sí, en T11: imagen de prueba que se crea y se borra, con OK del usuario | 2026-10-03 |
 | D-047 | 3 | Aprobación de `tareas.md` v1 | Aprobado tal como está: T1–T12 en ese orden | 2026-10-03 |
+| D-048 | 4 | Corridas de Lighthouse en el inicio (varianza en T1) | 5 corridas en `/` antes y después (mediana de 5); los servicios siguen con 3. Ajusta D-030 | 2026-10-04 |
+| D-049 | 4 | Qué pasa si `/` no pasa el piso o el techo en la Fase 5 | Revisar el origen: si los scripts del bloqueo no son archivos tocados por la spec, se informa como variación y decide el usuario | 2026-10-04 |
+| D-050 | 4 | Aprobación de T1 y de `diseno.md` / `tareas.md` v2 | Aprobados; commit en `main` y rama `feature/001-conversion-whatsapp` (D-041) | 2026-10-04 |
 
 ---
 
@@ -528,3 +531,30 @@
 - **Opciones presentadas:** aprobar `tareas.md` v1 · cambiar antes (reordenar, dividir o quitar tareas) · leerlo primero.
 - **Decisión del usuario:** aprobado tal como está (T1–T12, en ese orden).
 - **Fecha:** 2026-10-03
+
+### D-048 — Corridas de Lighthouse en el inicio (T1)
+- **Fase:** 4 (T1)
+- **Contexto:** en la medición "antes", `/` varió mucho entre corridas (Rendimiento 91/71/99, TBT 358/2.192/50 ms). Con 3 corridas, el techo de TBT +10 % (D-038) queda en 394 ms y un "empeoró" por azar es probable. Los servicios dieron valores parejos.
+- **Opciones presentadas:**
+  - A) 5 corridas en `/` antes y después (mediana de 5); los servicios siguen con 3 — pro: línea base más firme, ~4 min más · contra: ajusta D-030 solo en el inicio.
+  - B) 3 corridas, como en D-030, anotando el rango junto a la mediana — pro: lo aprobado · contra: falso "empeoró" probable en `/`.
+  - C) 5 corridas en las 4 páginas — pro: criterio uniforme · contra: ~10 min más ahora y en la Fase 5.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Modifica D-030 para `/`: `diseno.md` y `tareas.md` pasan a v2.
+- **Fecha:** 2026-10-04
+
+### D-049 — Qué pasa si `/` no pasa el piso o el techo en la Fase 5
+- **Fase:** 4 (T1)
+- **Contexto:** con 5 corridas, la mediana de `/` quedó en 99 / 50 ms; el piso es 96 y el techo de TBT 55 ms. `/` alterna corridas rápidas (15–50 ms) y lentas (358 y 2.192 ms), así que un "empeoró" por azar es probable (≈ 1 de cada 3).
+- **Opciones presentadas:**
+  - A) Revisar el origen: si `/` no pasa, `seo-rendimiento` mira en el reporte qué scripts causan el bloqueo; si ninguno es un archivo tocado por la spec 001, se informa como variación y decide el usuario — pro: separa azar de problema real · contra: un paso más en la Fase 5.
+  - B) Dejarlo como está y consultar en la Fase 5 — contra: sin método acordado.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-050 — Aprobación de T1 y de la v2 del diseño y las tareas
+- **Fase:** 4 (T1)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar y commitear. T1 aprobada; `diseno.md` v2 y `tareas.md` v2 (D-048 y D-049) pasan a APROBADO. Commit en `main` sin push y creación de la rama `feature/001-conversion-whatsapp` (D-041).
+- **Fecha:** 2026-10-04
