@@ -120,7 +120,7 @@
     - K: con Tab se llega a los 3 botones, con foco visible. Miden al menos 44 px de alto.
   - Estado: aprobada (2026-10-04; espacio de About por el `gap`, D-053; CSS con scope repetido, D-054)
 
-- [ ] **T5 — "Consultar" fuera del menú en el header**
+- [x] **T5 — "Consultar" fuera del menú en el header**
   - Qué:
     - En `SiteHeader.astro`, el enlace "Consultar" (`:42`) sale del `<nav id="site-nav">` y queda como hermano, entre el `<nav>` y la hamburguesa (D-031/T8, D-003).
     - Contenido: glifo de WhatsApp (oculto a ≤ 520 px) + `WHATSAPP_CTA_LABELS.short` + `<span class="sr-only">` con el complemento de `hiddenSuffix` (D-020, D-027).
@@ -151,7 +151,7 @@
       - el alto del header no cambia.
     - RM: sin transiciones.
     - K: foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-055, D-056 y D-058)
 
 - [ ] **T6 — Botón flotante: forma de píldora y etiqueta de `cta.ts`**
   - Qué:

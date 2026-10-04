@@ -58,6 +58,10 @@
 | D-052 | 4 | Ritmo de T4–T12 | Una tarea a la vez, con OK y confirmación de commit en cada una | 2026-10-04 |
 | D-053 | 4 | Espacio sobre el CTA de "Sobre nosotros" (T4) | El `gap` de la grilla `.about-inner` (`clamp(2rem, 5vw, 3rem)`), sin `margin-top` extra | 2026-10-04 |
 | D-054 | 4 | Bloque `.section-cta` repetido en las 3 secciones (T4, sugerencia 🟡 de `code-reviewer`) | Mantenerlo con scope en cada sección; `global.css` sin cambios | 2026-10-04 |
+| D-055 | 4 | Margen negativo para D-044 en el header (T5, S1 de `code-reviewer`) | Simplificar: `gap` del header a 0,75 rem, sin margen negativo | 2026-10-04 |
+| D-056 | 4 | Tamaño explícito del glifo en el header (T5, S2 de `code-reviewer`) | Borrar las 4 líneas: usa el tamaño por defecto de `.icon` | 2026-10-04 |
+| D-057 | 4 | Índice de capítulos superpuesto con el título en `/autos/` a 1440×800 (fuera de T5) | Anotarlo en el Anexo A de la constitución y volver a mirarlo en T10 | 2026-10-04 |
+| D-058 | 4 | Aprobación de T5 | Aprobada con D-055 y D-056; commit tras verificar | 2026-10-04 |
 
 ---
 
@@ -599,4 +603,35 @@
   - B) Pasarlo a una utilidad en `global.css` — pro: una sola copia · contra: reabre el diseño (v3).
 - **Recomendación del equipo:** A.
 - **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-055 — Margen negativo para D-044 en el header (T5)
+- **Fase:** 4 (T5)
+- **Contexto:** para los 12 px entre Instagram y "Consultar" (D-044), la implementación usaba `.header-cta { margin-left: -0.75rem }` para compensar el `gap: 1.5rem` del header.
+- **Opciones presentadas:**
+  - A) Simplificar: `gap` del header a 0,75 rem, sin margen negativo; el `margin-left: auto` queda en `.site-nav` — pro: más simple y robusto · contra: el mínimo entre logo y menú baja de 24 a 12 px (hoy no se alcanza).
+  - B) Dejarlo como está — contra: si cambia el `gap`, deja de cumplir D-044.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-056 — Tamaño explícito del glifo en el header (T5)
+- **Fase:** 4 (T5)
+- **Opciones presentadas:** A) borrar las 4 líneas (`width/height: 1.25rem`), que repiten el tamaño por defecto de `.icon` · B) mantenerlas explícitas.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-057 — Índice de capítulos superpuesto en `/autos/` (fuera de T5)
+- **Fase:** 4 (T5)
+- **Contexto:** en la captura de `qa-tester` a 1440×800, el índice de capítulos de la escena se superpone con "Polarizado para". T5 solo tocó el header (mismo alto que antes): es anterior a la spec.
+- **Opciones presentadas:** A) anotarlo en el Anexo A de la constitución y volver a mirarlo en T10 · B) incluirlo en esta spec (diseño v3) · C) ignorarlo.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-058 — Aprobación de T5
+- **Fase:** 4 (T5)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear, con D-055 y D-056 aplicadas y verificadas antes del commit.
 - **Fecha:** 2026-10-04

@@ -134,6 +134,7 @@ Hechos relevados el 2026-10-03, **sin decidir**. Son insumo para agrupar mejoras
   - Se usan breakpoints propios.
   - Falta verificar WCAG 2.2 AA y las áreas táctiles.
   - DESIGN.md dice que a ≤ 520 px el botón de Instagram es una acción de texto de 2,75 rem; el sitio lo muestra con fondo y anillo de 3,25 rem (detectado en la spec 001, D-032 de esa spec).
+  - En `/autos/` a 1440×800, el índice de capítulos de la escena ("Vidrio original", "La lámina", "Privacidad"…) se superpone con "Polarizado para" en la portada. Es anterior a la spec 001; se vuelve a mirar en su T10, que cambia la portada (detectado en la T5 de la spec 001, D-057 de esa spec).
 - **Deploy** (D-011): el `.htaccess` no tiene caché de estáticos y no hay un procedimiento documentado para volver atrás.
 - **Rendimiento:** el chunk de three.js pesa 539 KB (warning de Vite). Solo lo cargan las páginas de servicio.
 - **Higiene del repo:**
