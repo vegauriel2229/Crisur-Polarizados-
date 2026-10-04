@@ -44,6 +44,13 @@
 | D-038 | 2 | PD-9 · Tolerancia del TBT (RNF2) | Mediana de después ≤ mediana de antes + 10 % | 2026-10-03 |
 | D-039 | 2 | PD-1, PD-5, PD-6, PD-7 · Detalles internos | Aprobados en bloque con las sugerencias (detalle abajo) | 2026-10-03 |
 | D-040 | 2 | Aprobación del diseño y de los 9 detalles propuestos de la interfaz | Aprobados tal como están en `diseno.md` v1 | 2026-10-03 |
+| D-041 | 3 | PT-1 · Rama y commits durante la implementación | A) `feature/001-conversion-whatsapp` después de T1, un commit por tarea aprobada, merge a `main` al aprobar la entrega | 2026-10-03 |
+| D-042 | 3 | PT-2 · Dónde se registran las mediciones y las capturas | A) Tabla de T1 en `tareas.md` (pasa al informe de Fase 5); las capturas se muestran y no se guardan | 2026-10-03 |
+| D-043 | 3 | PT-3 · Quién hace los chequeos manuales | A) Mixto: `qa-tester` hace build, HTML y capturas; el usuario recorre una checklist corta de lo interactivo | 2026-10-03 |
+| D-044 | 3 | PT-4 · Header en escritorio (≥ 881 px) | A) Como hoy: `<nav>` a la derecha, a ≈ 0,75 rem de "Consultar" | 2026-10-03 |
+| D-045 | 3 | PT-5 · Verificación de D-028 | A) Revisión de código (`code-reviewer`) | 2026-10-03 |
+| D-046 | 3 | PT-6 · Prueba real de R7.3 | A) Sí, en T11: imagen de prueba que se crea y se borra, con OK del usuario | 2026-10-03 |
+| D-047 | 3 | Aprobación de `tareas.md` v1 | Aprobado tal como está: T1–T12 en ese orden | 2026-10-03 |
 
 ---
 
@@ -455,4 +462,69 @@
 - **Contexto:** `diseno.md` v1 incluye 9 detalles de interfaz que propuso el `disenador-ui` para que las decisiones funcionen: (1) CTA de sección alineado a la izquierda con margen superior `clamp(2rem, 4vw, 3rem)`; (2) ancho completo a ≤ 520 px (máx. 22 rem), al contenido desde 521 px; (3) en secciones de dos columnas desde 900 px, el CTA va debajo de ambas; (4) orden del header [Consultar][≡]; (5) paddings del "Consultar" del header (1 rem ≤ 520 px, 1,2 rem desde 521 px; 0,5 rem hasta la hamburguesa); (6) el panel de la hamburguesa ya no lleva su propio botón de WhatsApp; (7) flotante a 1 rem del borde + `safe-area-inset`; (8) aire inferior ≥ 5,5 rem en los capítulos en celular; (9) retirada del flotante con el gesto inverso de la aparición.
 - **Opciones presentadas:** aprobar el diseño con los 9 detalles · cambiar algún detalle antes de aprobar.
 - **Decisión del usuario:** aprobado tal como está.
+- **Fecha:** 2026-10-03
+
+### D-041 — Rama y commits durante la implementación (PT-1)
+- **Fase:** 3
+- **Opciones presentadas:**
+  - A) Rama `feature/001-conversion-whatsapp` desde `main` después de T1; un commit por tarea aprobada (Conventional Commits, en inglés); merge a `main` al aprobar la entrega — pro: cada tarea se puede revertir sola · contra: ~11 confirmaciones de commit.
+  - B) La misma rama, un solo commit al terminar la Fase 4 — pro: menos interrupciones · contra: trabajo sin respaldo varios días.
+  - C) Commits directo en `main` — contra: no cumple constitución D-010.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Cada commit y el merge se siguen confirmando con el usuario.
+- **Fecha:** 2026-10-03
+
+### D-042 — Dónde se registran las mediciones y las capturas (PT-2)
+- **Fase:** 3
+- **Opciones presentadas:**
+  - A) Tabla de T1 en `tareas.md`, que después pasa al informe de Fase 5; las capturas se muestran y no se guardan — pro: sin imágenes en el repo · contra: las capturas no quedan como evidencia.
+  - B) Carpeta versionada `specs/001-conversion-whatsapp/evidencia/` — pro: evidencia duradera · contra: imágenes en el repo y más commits.
+  - C) Solo en el chat — contra: el "antes" puede perderse.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-043 — Quién hace los chequeos manuales (PT-3)
+- **Fase:** 3
+- **Opciones presentadas:**
+  - A) Mixto: `qa-tester` hace build, HTML y capturas con Edge headless, y arma una checklist corta de lo interactivo (scroll del flotante, Tab, movimiento reducido, sin JS) que el usuario recorre en Edge — pro: lo interactivo lo comprueba una persona · contra: unos minutos del usuario por tarea.
+  - B) Todo el usuario — contra: más carga.
+  - C) Todo el agente con Edge headless — contra: no cubre Tab ni el scroll real.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-044 — Header en escritorio (PT-4)
+- **Fase:** 3
+- **Contexto:** al sacar "Consultar" del `<nav>`, con el `justify-content: space-between` actual el `<nav>` quedaría centrado.
+- **Opciones presentadas:**
+  - A) Como hoy: `<nav>` a la derecha, pegado a "Consultar", a ≈ 0,75 rem de Instagram — pro: el escritorio se ve igual.
+  - B) A la derecha con el gap del header (1,5 rem) — pro: CSS más simple · contra: cambia un poco el escritorio.
+  - C) Centrado entre el logo y "Consultar" — contra: cambia la composición.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-045 — Verificación de D-028 (PT-5)
+- **Fase:** 3
+- **Opciones presentadas:**
+  - A) Revisión de código (`code-reviewer`): el script lanza `Error` con mensaje descriptivo y no toca `data-visible` — pro: sin pasos extra · contra: no se ve funcionando.
+  - B) A + prueba en Edge con "Local overrides" — contra: un paso manual más.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-046 — Prueba real de R7.3 (PT-6)
+- **Fase:** 3
+- **Opciones presentadas:**
+  - A) En T11: copiar una imagen de prueba (ej. copia de `src/assets/brand/logo.jpeg`) en `src/assets/gallery/autos/`, compilar, ver el carrusel y borrarla; crear y borrar el archivo con OK del usuario — pro: confirma que funciona sin tocar código.
+  - B) Solo revisión de código — contra: R7.3 sin prueba real.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-03
+
+### D-047 — Aprobación de las tareas
+- **Fase:** 3
+- **Opciones presentadas:** aprobar `tareas.md` v1 · cambiar antes (reordenar, dividir o quitar tareas) · leerlo primero.
+- **Decisión del usuario:** aprobado tal como está (T1–T12, en ese orden).
 - **Fecha:** 2026-10-03
