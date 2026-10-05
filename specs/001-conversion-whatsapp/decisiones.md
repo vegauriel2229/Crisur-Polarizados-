@@ -106,6 +106,13 @@
 | D-100 | 5 | `graphify-out/` versionado en Git (52 archivos cambiados al actualizar el grafo) | Sacarlo de Git: `.gitignore` + `git rm --cached` (los archivos quedan en disco) | 2026-10-04 |
 | D-101 | 5 | ¿Arrancar ya la Fase 5? | Más tarde | 2026-10-04 |
 | D-102 | 5 | Commit de D-100 y D-101 | Commitear (`chore: stop tracking graphify output`) | 2026-10-04 |
+| D-103 | 5 | ¿Las 11 fotos de autos entran en la actualización semántica de graphify? | Solo documentos; las fotos quedan fuera del grafo semántico (se pueden sumar después) | 2026-10-04 |
+| D-104 | 5 | `/hogares/` y `/negocios/` no pasan RNF2 en la medición "después" | Medición A/B el mismo día: línea base `968ef00` (copia temporal fuera del repo) contra HEAD, alternando, 5 corridas de cada una en hogares y negocios y autos de control | 2026-10-04 |
+| D-105 | 5 | Cierre de RNF2 en `/hogares/` y `/negocios/` | Cumplido por la medición A/B del mismo día (HEAD igual o mejor que `968ef00`); la falla contra la tabla de T1 queda como variación de máquina | 2026-10-04 |
+| D-106 | 5 | `README.md:38` describe el aviso de galería vacía que T11 quitó | Lo corrige el `documentador` al cierre | 2026-10-04 |
+| D-107 | 5 | Comentario de `SiteHeader.astro:148` y orden de `{...rest}` en `WhatsAppButton` | Dejar ambos | 2026-10-04 |
+| D-108 | 5 | Con movimiento reducido, `translateY(-1px)` instantáneo en el hover de los botones (`global.css`) | No incumple R5.5 (sin transición ni animación); se anota en el Anexo A para la spec 002 | 2026-10-04 |
+| D-109 | 5 | Aprobación de la entrega de la spec 001 | Aprobada; commit del informe y merge local a `main` (`--no-ff`), sin push | 2026-10-04 |
 
 ---
 
@@ -994,4 +1001,58 @@
 - **Opciones presentadas:** A) ahora, con los 3 verificadores en paralelo y consultas a graphify · B) ahora, de a uno · C) más tarde.
 - **Recomendación del equipo:** A.
 - **Decisión del usuario:** C, más tarde.
+- **Fecha:** 2026-10-04
+
+### D-103 — Fotos en la actualización semántica de graphify
+- **Fase:** 5 (antes de arrancar la verificación)
+- **Contexto:** el usuario pidió actualizar graphify por completo y trabajar con él. La detección incremental marcó 31 documentos (~47 mil palabras, sin caché) y 11 fotos de autos. Cada foto necesita su propio subagente de visión; el protocolo permite 3 subagentes en paralelo.
+- **Opciones presentadas:** A) solo documentos (3 subagentes) · B) documentos y fotos (11 subagentes de visión más, en 4 tandas).
+- **Recomendación del equipo:** A (la descripción de cada foto ya está en su nombre de archivo y en `gallery.ts`).
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-104 — RNF2 en `/hogares/` y `/negocios/` (Fase 5)
+- **Fase:** 5
+- **Contexto:** medición "después" (HEAD `c04eeb2`, 14 corridas): `/` 99 / TBT 37,7 ms y `/autos/` 47 / 5.622 ms pasan; `/hogares/` 50 / 4.765 ms y `/negocios/` 51 / 4.700 ms no pasan el piso (52) ni el techo (4.018,3 y 3.736,7 ms). A11y, BP y SEO: 100. El bloqueo viene de `engine.js` y `animate.js` (motor 3D y Motion), que salen de `story-controller.ts` y `coin.ts`, no tocados por la spec. La línea base se midió otro día; `benchmarkIndex` variable (870–1.662).
+- **Opciones presentadas:** A) comparación A/B el mismo día: build de `968ef00` en una copia temporal fuera del repo y medición alternada contra HEAD, 5 corridas de cada una en hogares y negocios y autos de control · B) repetir solo el "después" con 5 corridas por servicio · C) aceptarlo como variación (como D-049).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-105 — Cierre de RNF2 con la medición A/B
+- **Fase:** 5
+- **Contexto:** medición A/B el mismo día (D-104): build de `968ef00` (línea base) y de `c04eeb2` (HEAD), servidos con el mismo servidor estático sin compresión, Lighthouse 12.8.2 mobile alternando versiones. Medianas base → HEAD: `/hogares/` 35 → 36 y TBT 5.119 → 5.048 ms (5 corridas c/u); `/negocios/` 35 → 36 y 5.261 → 5.143 ms (5 c/u); `/autos/` (control) 35 → 35 y 5.857 → 5.615 ms (3 c/u). A11y, BP y SEO: 100. Los absolutos son menores que con `astro preview` por la falta de compresión; afecta igual a las dos versiones.
+- **Opciones presentadas:** A) cerrar RNF2 con la evidencia A/B · B) repetir la A/B con `astro preview` para tener absolutos comparables.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-106 — `README.md:38` desactualizado por T11
+- **Fase:** 5 (hallazgo de `code-reviewer`)
+- **Opciones presentadas:** A) lo corrige el `documentador` al cierre · B) tarea T13 antes de la entrega.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-107 — Comentario del header y orden del spread en `WhatsAppButton`
+- **Fase:** 5 (sugerencias de `code-reviewer`)
+- **Contexto:** el comentario de D-044 en `SiteHeader.astro:148` cuesta leerlo; en `WhatsAppButton.astro:19`, `{...rest}` va después de `target`/`rel` (como el fragmento aprobado en `diseno.md`), así que un padre podría pisarlos; hoy ninguno lo hace.
+- **Opciones presentadas:** A) dejar ambos · B) solo reescribir el comentario (T13) · C) ambos (el spread cambia el diseño).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-108 — Hover con movimiento reducido
+- **Fase:** 5 (observación de `qa-tester`)
+- **Contexto:** con `prefers-reduced-motion: reduce`, `.button-primary:hover` y `.button-secondary:hover` aplican `translateY(-1px)` sin transición (`global.css:125`, `:140`). `global.css` no cambia en esta spec.
+- **Opciones presentadas:** A) no cuenta como animación para R5.5; anotarlo en el Anexo A para la spec 002 · B) aceptarlo sin anotar · C) corregirlo ahora (diseño v6 y una tarea).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-109 — Aprobación de la entrega
+- **Fase:** 5
+- **Contexto:** 46 de 46 criterios verificados, sin hallazgos 🔴; RNF2 cerrado por D-105; observaciones resueltas en D-106 a D-108.
+- **Opciones presentadas:** aprobar + commit + merge local · aprobar + merge + push a GitHub (si Vercel está conectado, publica) · aprobar sin merge · algo no está bien.
+- **Decisión del usuario:** aprobar, commitear el informe y hacer el merge local a `main` (`--no-ff`), sin push.
 - **Fecha:** 2026-10-04

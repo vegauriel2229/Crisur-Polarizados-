@@ -96,7 +96,7 @@ Agrupación aprobada en D-015 y orden en D-019, a partir de `docs/auditoria-2026
 
 | Spec | Estado | Fase |
 |---|---|---|
-| 001-conversion-whatsapp | En curso · T1–T12 y T8b aprobadas; requisitos v2, diseño v5 y tareas v6 aprobados (2026-10-04) | 5 — Verificación (pendiente) |
+| 001-conversion-whatsapp | Entregada (2026-10-04, D-109) · 46/46 criterios; merge local a `main`, sin push | 5 — Cerrada |
 | 007-ploteo | En cola (2.ª) · espera del cliente los tipos de ploteo y fotos; ya hay 2 fotos en `fotos-pendientes/ploteo/`, fuera de Git (D-061, D-064, D-085 y D-086 de la spec 001) | — |
 | 003-rendimiento-celular | En cola (3.ª) | — |
 | 002-accesibilidad | En cola (4.ª) | — |
@@ -134,6 +134,7 @@ Hechos relevados el 2026-10-03, **sin decidir**. Son insumo para agrupar mejoras
   - No hay tokens de espaciado ni de sombras.
   - Se usan breakpoints propios.
   - Falta verificar WCAG 2.2 AA y las áreas táctiles.
+  - Con movimiento reducido, `.button-primary:hover` y `.button-secondary:hover` igual aplican `translateY(-1px)` (sin transición, `global.css:125` y `:140`). No incumple la spec 001, pero conviene anularlo en `prefers-reduced-motion` en la spec 002 (detectado en la Fase 5 de la spec 001, D-108 de esa spec).
   - La 404 tiene tres `<nav aria-label="Servicios">` (header, página y pie), y la pregunta "¿Dónde querés colocar la lámina?" no está asociada a su `<nav>`. No incumple WCAG, pero conviene que cada zona tenga un nombre distinto: en la spec 006, el `<nav>` de la 404 toma su nombre de la pregunta (`aria-labelledby`), como el selector del inicio (detectado en la T12 de la spec 001, D-097 de esa spec).
   - DESIGN.md dice que a ≤ 520 px el botón de Instagram es una acción de texto de 2,75 rem; el sitio lo muestra con fondo y anillo de 3,25 rem (detectado en la spec 001, D-032 de esa spec).
   - En `/autos/` a 1440×800, el índice de capítulos de la escena ("Vidrio original", "La lámina", "Privacidad"…) se superpone con "Polarizado para" en la portada. Es anterior a la spec 001; se vuelve a mirar en su T10, que cambia la portada (detectado en la T5 de la spec 001, D-057 de esa spec). Revisado en la T10: sigue a 1440×800 en los 3 servicios y a 1440×900 en autos (10 px); la T10 no cambió el tamaño ni la posición del título. Se revisa en una spec de la escena 3D (D-090 de la spec 001).

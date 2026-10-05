@@ -375,6 +375,22 @@ Observaciones:
 - Las páginas de servicio dan menos que en la auditoría del 2026-10-03 (66/63/60). La auditoría midió el sitio publicado en Vercel y esto es el build local: D-030 y D-037 comparan local contra local.
 - Los JSON de las 14 corridas quedaron fuera del repo (D-042).
 
+## Resultado de la verificación de cierre (Fase 5, 2026-10-04)
+Medido sobre `c04eeb2` (13 tareas aprobadas). Sin hallazgos 🔴.
+
+**Lighthouse "después"** (mismo protocolo que T1, `npm run preview`, Edge 154):
+
+| Página | Rendimiento (corridas) | Mediana después / antes | TBT ms (corridas) | Mediana después / antes | A11y / BP / SEO | Resultado |
+|---|---|---|---|---|---|---|
+| `/` | 97 / 94 / 99 / 99 / 99 | **99** / 99 | 0 / 233,8 / 37,7 / 71,7 / 27,2 | **37,7** / 50 | 100 | Pasa |
+| `/autos/` | 47 / 48 / 47 | **47** / 48 | 5.622 / 5.291 / 6.237 | **5.622** / 5.878 | 100 | Pasa |
+| `/hogares/` | 50 / 49 / 61 | **50** / 55 | 4.420 / 4.765 / 5.142 | **4.765** / 3.653 | 100 | Pasa por A/B (D-105) |
+| `/negocios/` | 50 / 67 / 51 | **51** / 55 | 4.700 / 4.935 / 4.575 | **4.700** / 3.397 | 100 | Pasa por A/B (D-105) |
+
+**A/B del mismo día** (D-104, D-105): `968ef00` contra `c04eeb2`, mismo servidor estático sin compresión, corridas alternadas. Medianas base → HEAD: `/hogares/` 35 → 36 y TBT 5.119 → 5.048 ms; `/negocios/` 35 → 36 y 5.261 → 5.143 ms; `/autos/` 35 → 35 y 5.857 → 5.615 ms. Sin regresión: la falla contra la tabla de T1 fue variación de la máquina. El bloqueo de las páginas de servicio viene del motor 3D (`engine.js`, `animate.js`), que esta spec no tocó.
+
+**Criterios:** 46 de 46 verificados. R1–R5 (`qa-tester` + chequeos del orquestador: ancla, movimiento reducido, foco del flotante, menú, FAQ y glifos), R6–R9 y RNF1, RNF3–RNF8 (`qa-tester`), RNF2 (`seo-rendimiento` + A/B). `code-reviewer`: diff completo conforme. Observaciones derivadas: D-106 (README), D-107 (sin cambios) y D-108 (Anexo A, spec 002).
+
 ## Verificación de cierre (Fase 5, `/spec-verificar`)
 No son tareas de implementación, pero completan la trazabilidad:
 - `seo-rendimiento` hace la medición "después" con el mismo protocolo de T1 (5 corridas en `/`, 3 en cada servicio; D-048) y compara las medianas (RNF2):
