@@ -35,7 +35,7 @@ Sitio de Crisur Polarizados (Godoy Cruz, Mendoza): polarizado, espejado, esmeril
 
 ## Fotos de trabajos (carrusel)
 
-Copiá las fotos en `src/assets/gallery/autos/`, `hogares/` o `negocios/` y listo: la página del servicio arma el carrusel sola (las optimiza a WebP/AVIF). Mientras la carpeta esté vacía se muestra un aviso con el link a Instagram.
+Copiá las fotos en `src/assets/gallery/autos/`, `hogares/` o `negocios/` y listo: la página del servicio arma el carrusel sola (las optimiza a WebP/AVIF). Si la carpeta de un servicio está vacía, la galería no aparece; aparece sola en cuanto hay fotos y se vuelve a compilar.
 
 - **Orden:** el del nombre del archivo; numerá al principio (`01-`, `02-`…).
 - **Descripción:** sale del nombre. `02-auto-polarizado-negro-humo.jpg` → "Auto polarizado negro humo".

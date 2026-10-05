@@ -113,6 +113,11 @@
 | D-107 | 5 | Comentario de `SiteHeader.astro:148` y orden de `{...rest}` en `WhatsAppButton` | Dejar ambos | 2026-10-04 |
 | D-108 | 5 | Con movimiento reducido, `translateY(-1px)` instantáneo en el hover de los botones (`global.css`) | No incumple R5.5 (sin transición ni animación); se anota en el Anexo A para la spec 002 | 2026-10-04 |
 | D-109 | 5 | Aprobación de la entrega de la spec 001 | Aprobada; commit del informe y merge local a `main` (`--no-ff`), sin push | 2026-10-04 |
+| D-110 | 5 | Documentación de cierre | `documentador`: README + CHANGELOG + manual del cliente | 2026-10-04 |
+| D-111 | 5 | ¿Quién carga las fotos de trabajos? (manual del cliente) | El cliente las manda por WhatsApp y el usuario las carga; el manual no lleva rutas técnicas | 2026-10-04 |
+| D-112 | 5 | Versión del CHANGELOG | `[Unreleased]` hasta publicar en Hostinger (spec 005) | 2026-10-04 |
+| D-113 | 5 | Idioma del CHANGELOG | Español, como el README | 2026-10-04 |
+| D-114 | 5 | Aprobación y commit de la documentación de cierre | Aprobada; commit en la rama de la spec y merge `--no-ff` a `main`, sin push | 2026-10-04 |
 
 ---
 
@@ -1055,4 +1060,13 @@
 - **Contexto:** 46 de 46 criterios verificados, sin hallazgos 🔴; RNF2 cerrado por D-105; observaciones resueltas en D-106 a D-108.
 - **Opciones presentadas:** aprobar + commit + merge local · aprobar + merge + push a GitHub (si Vercel está conectado, publica) · aprobar sin merge · algo no está bien.
 - **Decisión del usuario:** aprobar, commitear el informe y hacer el merge local a `main` (`--no-ff`), sin push.
+- **Fecha:** 2026-10-04
+
+### D-110 a D-113 — Documentación de cierre
+- **Fase:** 5 (cierre)
+- **D-110:** A) README + CHANGELOG · B) README + CHANGELOG + manual del cliente · C) solo README · D) nada por ahora. Recomendación: A. **Elegida: B.**
+- **D-111 (quién carga las fotos):** A) el cliente las manda y el usuario las carga (manual sin rutas técnicas) · B) el cliente las copia en las carpetas. Recomendación: A. **Elegida: A.**
+- **D-112 (versión del CHANGELOG):** A) `[Unreleased]` hasta publicar · B) fecha 2026-10-04 · C) 1.0.0. Recomendación: A. **Elegida: A.**
+- **D-113 (idioma del CHANGELOG):** A) español, como el README · B) inglés, como los commits. Recomendación: A. **Elegida: A.**
+- **Nota:** el orquestador corrigió el borrador del `documentador` para que coincida con lo implementado (retiro del flotante solo en servicios, Instagram en el menú, la descripción de la foto no se ve en la página, contenido real de `WHATSAPP_CTA_LABELS`, fotos de autos y arreglo 4:3 de D-070).
 - **Fecha:** 2026-10-04
