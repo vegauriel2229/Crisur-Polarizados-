@@ -47,7 +47,8 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     border-top: 1px solid var(--color-line);
-    padding: clamp(3rem, 7vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) 2rem;
+    /* Los 5,5 rem extra al pie son aire para que el botón flotante de WhatsApp no tape el texto (D-035). */
+    padding: clamp(3rem, 7vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) calc(2rem + 5.5rem);
     background: linear-gradient(180deg, var(--color-bg), #090b0e);
   }
   .footer-inner {

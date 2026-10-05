@@ -54,6 +54,65 @@
 | D-048 | 4 | Corridas de Lighthouse en el inicio (varianza en T1) | 5 corridas en `/` antes y después (mediana de 5); los servicios siguen con 3. Ajusta D-030 | 2026-10-04 |
 | D-049 | 4 | Qué pasa si `/` no pasa el piso o el techo en la Fase 5 | Revisar el origen: si los scripts del bloqueo no son archivos tocados por la spec, se informa como variación y decide el usuario | 2026-10-04 |
 | D-050 | 4 | Aprobación de T1 y de `diseno.md` / `tareas.md` v2 | Aprobados; commit en `main` y rama `feature/001-conversion-whatsapp` (D-041) | 2026-10-04 |
+| D-051 | 4 | Contrato de `WhatsAppButton` (T3): ¿`extends HTMLAttributes<'a'>`? | Quitarlo: queda el contrato literal del diseño (`href`, `label`, `variant`, `class?`) | 2026-10-04 |
+| D-052 | 4 | Ritmo de T4–T12 | Una tarea a la vez, con OK y confirmación de commit en cada una | 2026-10-04 |
+| D-053 | 4 | Espacio sobre el CTA de "Sobre nosotros" (T4) | El `gap` de la grilla `.about-inner` (`clamp(2rem, 5vw, 3rem)`), sin `margin-top` extra | 2026-10-04 |
+| D-054 | 4 | Bloque `.section-cta` repetido en las 3 secciones (T4, sugerencia 🟡 de `code-reviewer`) | Mantenerlo con scope en cada sección; `global.css` sin cambios | 2026-10-04 |
+| D-055 | 4 | Margen negativo para D-044 en el header (T5, S1 de `code-reviewer`) | Simplificar: `gap` del header a 0,75 rem, sin margen negativo | 2026-10-04 |
+| D-056 | 4 | Tamaño explícito del glifo en el header (T5, S2 de `code-reviewer`) | Borrar las 4 líneas: usa el tamaño por defecto de `.icon` | 2026-10-04 |
+| D-057 | 4 | Índice de capítulos superpuesto con el título en `/autos/` a 1440×800 (fuera de T5) | Anotarlo en el Anexo A de la constitución y volver a mirarlo en T10 | 2026-10-04 |
+| D-058 | 4 | Aprobación de T5 | Aprobada con D-055 y D-056; commit tras verificar | 2026-10-04 |
+| D-059 | 4 | Tamaño explícito del glifo del flotante (T6, sugerencia de `code-reviewer`) | Borrarlo (y la clase `fab-icon`), como en D-056 | 2026-10-04 |
+| D-060 | 4 | Aprobación de T6 | Aprobada con D-059; commit tras verificar | 2026-10-04 |
+| D-061 | 4 | Cómo sumar el ploteo (servicio nuevo informado por el usuario) | Mínimo ahora (FAQ + `PRODUCT.md`) y spec propia (007) para mostrarlo | 2026-10-04 |
+| D-062 | 4 | Fotos de ploteo | Fuera del proyecto por ahora; en `gallery/autos/` solo fotos de polarizado | 2026-10-04 |
+| D-063 | 4 | Texto de la FAQ "¿Hacen autos, casas y negocios?" con el ploteo (reemplaza el texto de D-011) | D-011 + "También hacemos ploteo, sobre todo en autos." | 2026-10-04 |
+| D-064 | 4 | Lugar de la spec 007-ploteo en el plan | Después de la 001: 001 → 007 → 003 → 002 | 2026-10-04 |
+| D-065 | 4 | Aprobación de requisitos v2, diseño v3 y tareas v3 (FAQ con ploteo) | Aprobados; commit en la rama | 2026-10-04 |
+| D-066 | 4 | Fotos de ploteo subidas a `gallery/autos/` (Beetle "Herbie", 2) | Moverlas fuera del repo, a `C:\Proyectos\Crisur-fotos-ploteo\` (D-062) | 2026-10-04 |
+| D-067 | 4 | Foto de la Chrysler PT Cruiser de frente | Es polarizado: va a la galería | 2026-10-04 |
+| D-068 | 4 | Patentes cortadas en el borde de 4 fotos | Dejarlas como están (no se leen completas) | 2026-10-04 |
+| D-069 | 4 | Nombres (descripción) y orden de las 11 fotos de `/autos` | Los propuestos; commit aparte | 2026-10-04 |
+| D-070 | 4 | Bug: la galería muestra las fotos verticales (480 × 803) en lugar de 4:3 | Corregirlo ahora con `height: auto` en `.gallery-photo`, commit aparte | 2026-10-04 |
+| D-071 | 4 | Bug de T7: el flotante no aparece al entrar por el ancla de un capítulo (adyacencia por borde) | `rootMargin: '-1px 0px'` en el observer | 2026-10-04 |
+| D-072 | 4 | Documentar el `rootMargin` | Diseño v4 y tareas v4 con la nota; se aprueban con T7 | 2026-10-04 |
+| D-073 | 4 | Prueba de regresión del bug de T7 | Script de medición fuera del repo (scratchpad), como en D-070 | 2026-10-04 |
+| D-074 | 4 | Sugerencias menores de `code-reviewer` en T7 | En bloque: corregir el comentario del flotante; dejar los otros dos comentarios y `querySelectorAll` | 2026-10-04 |
+| D-075 | 4 | Aprobación de T7 y de diseño v4 / tareas v4 | Aprobados; commit en la rama | 2026-10-04 |
+| D-076 | 4 | Capítulos que crecen en celular horizontal con pantalla baja (~300 px) por el aire de T8 | Volver a Fase 2 para ajustarlo (diseño v5) | 2026-10-04 |
+| D-077 | 4 | Sugerencias de simplificación de `code-reviewer` en T8 | Dejar `calc(2rem + 5.5rem)` y el 5,5 rem en los 2 archivos | 2026-10-04 |
+| D-078 | 4 | Aprobación de T8 | Aprobada; commit en la rama | 2026-10-04 |
+| D-079 | 4 | Orden entre el commit de T8 y el ajuste de D-076 | Commit de T8 ahora; ajuste aparte como T8b | 2026-10-04 |
+| D-080 | 2 | Ajuste para pantallas bajas en horizontal (D-076) | Tipografía compacta en los capítulos; padding superior sin cambios | 2026-10-04 |
+| D-081 | 2 | Mención de la tipografía compacta en "Componentes y archivos afectados" | Dejarla como está (la regla vive en Interfaz) | 2026-10-04 |
+| D-082 | 2–3 | Aprobación de diseño v5 y tareas v5 (T8b) | Aprobados; commit en la rama | 2026-10-04 |
+| D-083 | 4 | Título del capítulo sobre el objeto 3D en horizontal con pantalla baja (T8b) | Anotarlo en el Anexo A de la constitución | 2026-10-04 |
+| D-084 | 4 | Aprobación de T8b | Aprobada; commit en la rama | 2026-10-04 |
+| D-085 | 4 | Lugar de las fotos de ploteo (reemplaza la ubicación de D-066) | Dentro del proyecto, en `fotos-pendientes/ploteo/`, fuera de `src/` y `public/` | 2026-10-04 |
+| D-086 | 4 | ¿Las fotos de ploteo van a Git? | No: `fotos-pendientes/` en `.gitignore` (una foto tiene la patente completa) | 2026-10-04 |
+| D-087 | 4 | `.claude/agent-memory/` sin trackear | Sumarla a `.gitignore` | 2026-10-04 |
+| D-088 | 4 | "Polarizado(s)" como término general en el `h1`, el `<title>` y "Sobre nosotros" (fuera de T9) | Anotarlo en el Anexo A para la spec 004 (SEO) | 2026-10-04 |
+| D-089 | 4 | Aprobación de T9 | Aprobada; 2 commits: `chore` (D-085 a D-087) y T9 | 2026-10-04 |
+| D-090 | 4 | Superposiciones de la portada a 1440 px anteriores a T10 (índice sobre el título; título sobre el objeto 3D en hogares y negocios) | Anotarlas en el Anexo A para una spec de la escena 3D y aprobar T10 | 2026-10-04 |
+| D-091 | 4 | Sugerencias menores de `code-reviewer` en T10 (media query 881, comentario, selector de ≤ 880 px) | Dejar todo como está | 2026-10-04 |
+| D-092 | 4 | Aprobación de T10 | Aprobada; commit en la rama | 2026-10-04 |
+| D-093 | 4 | Verificación de T11 con 11 fotos reales en `/autos/` | Usar las fotos reales para R7.3; sin galería solo en hogares y negocios; se quita la imagen temporal de D-046 | 2026-10-04 |
+| D-094 | 3 | Aprobación de tareas v6 | Aprobada; commit y arranque de T11 | 2026-10-04 |
+| D-095 | 4 | Caso que nunca se ejecuta en el script de la galería (`item === null`, sugerencia de `code-reviewer` en T11) | Dejarlo: R7.3 pide no tocar el script | 2026-10-04 |
+| D-096 | 4 | Aprobación de T11 | Aprobada; commit en la rama | 2026-10-04 |
+| D-097 | 4 | Tres `<nav aria-label="Servicios">` en la 404 y la pregunta de D-024 sin asociar al `<nav>` (T12) | Dejarlo en la 001 y anotarlo en el Anexo A para la spec 006 | 2026-10-04 |
+| D-098 | 4 | Clase `.action` repetida en los dos botones de la 404 (T12) | Dejarla (mismo patrón que `.section-cta`) | 2026-10-04 |
+| D-099 | 4 | Aprobación de T12 | Aprobada; commit en la rama. Termina la Fase 4 | 2026-10-04 |
+| D-100 | 5 | `graphify-out/` versionado en Git (52 archivos cambiados al actualizar el grafo) | Sacarlo de Git: `.gitignore` + `git rm --cached` (los archivos quedan en disco) | 2026-10-04 |
+| D-101 | 5 | ¿Arrancar ya la Fase 5? | Más tarde | 2026-10-04 |
+| D-102 | 5 | Commit de D-100 y D-101 | Commitear (`chore: stop tracking graphify output`) | 2026-10-04 |
+| D-103 | 5 | ¿Las 11 fotos de autos entran en la actualización semántica de graphify? | Solo documentos; las fotos quedan fuera del grafo semántico (se pueden sumar después) | 2026-10-04 |
+| D-104 | 5 | `/hogares/` y `/negocios/` no pasan RNF2 en la medición "después" | Medición A/B el mismo día: línea base `968ef00` (copia temporal fuera del repo) contra HEAD, alternando, 5 corridas de cada una en hogares y negocios y autos de control | 2026-10-04 |
+| D-105 | 5 | Cierre de RNF2 en `/hogares/` y `/negocios/` | Cumplido por la medición A/B del mismo día (HEAD igual o mejor que `968ef00`); la falla contra la tabla de T1 queda como variación de máquina | 2026-10-04 |
+| D-106 | 5 | `README.md:38` describe el aviso de galería vacía que T11 quitó | Lo corrige el `documentador` al cierre | 2026-10-04 |
+| D-107 | 5 | Comentario de `SiteHeader.astro:148` y orden de `{...rest}` en `WhatsAppButton` | Dejar ambos | 2026-10-04 |
+| D-108 | 5 | Con movimiento reducido, `translateY(-1px)` instantáneo en el hover de los botones (`global.css`) | No incumple R5.5 (sin transición ni animación); se anota en el Anexo A para la spec 002 | 2026-10-04 |
+| D-109 | 5 | Aprobación de la entrega de la spec 001 | Aprobada; commit del informe y merge local a `main` (`--no-ff`), sin push | 2026-10-04 |
 
 ---
 
@@ -557,4 +616,443 @@
 - **Fase:** 4 (T1)
 - **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
 - **Decisión del usuario:** aprobar y commitear. T1 aprobada; `diseno.md` v2 y `tareas.md` v2 (D-048 y D-049) pasan a APROBADO. Commit en `main` sin push y creación de la rama `feature/001-conversion-whatsapp` (D-041).
+- **Fecha:** 2026-10-04
+
+### D-051 — Contrato de `WhatsAppButton` (T3)
+- **Fase:** 4 (T3)
+- **Contexto:** la implementación usaba `interface Props extends Omit<HTMLAttributes<'a'>, 'href' | 'target' | 'rel'>`, como `Icon.astro`. El contrato de `diseno.md` no tiene `extends`. `code-reviewer` comprobó que sin el `extends` compila con 0 errores, que el CSS con scope del padre sigue llegando por `...rest` y que `target` y `rel` siguen sin poder pisarse (RNF8).
+- **Opciones presentadas:**
+  - A) Quitar el `extends` y el import de `HTMLAttributes` — pro: contrato literal aprobado, más corto · contra: distinto de `Icon.astro`.
+  - B) Mantenerlo y registrarlo como cambio de contrato — pro: igual que `Icon.astro` · contra: acepta atributos que la spec no pide (`onclick`, `style`, `id`…).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-052 — Ritmo de las tareas T4 a T12
+- **Fase:** 4 (T4)
+- **Contexto:** el usuario pidió "seguí todo lo que sea necesario"; se consultó si eso cambiaba la aprobación por tarea.
+- **Opciones presentadas:** A) encadenar T4–T12 con un commit por tarea sin confirmar cada uno, frenando solo ante decisiones o 🔴 · B) una a la vez, como hasta ahora · C) encadenar sin commits hasta la revisión final.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** B — una tarea a la vez, con OK y confirmación de commit en cada una.
+- **Fecha:** 2026-10-04
+
+### D-053 — Espacio sobre el CTA de "Sobre nosotros" (T4)
+- **Fase:** 4 (T4)
+- **Contexto:** el CTA queda dentro de `.about-inner`, una grilla con `gap: clamp(2rem, 5vw, 3rem)`. Sumar el `margin-top: clamp(2rem, 4vw, 3rem)` del diseño (D-040, detalle 1) daría 4–6 rem. Con solo el `gap`, la diferencia con el diseño va de 0 a ~8 px entre 640 y 1200 px (igual a 360 y a 1440).
+- **Opciones presentadas:**
+  - A) Usar el `gap` de la grilla — pro: sin markup extra · contra: no es literal el valor del diseño.
+  - B) Sacar el botón de la grilla, con un contenedor de 76 rem y el `margin-top` exacto — pro: valor exacto · contra: un `div` que el diseño no menciona.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Las secciones "Láminas" y "Proceso" usan el `margin-top` del diseño.
+- **Fecha:** 2026-10-04
+
+### D-054 — Bloque `.section-cta` repetido (T4)
+- **Fase:** 4 (T4)
+- **Contexto:** sugerencia 🟡 de `code-reviewer`: el CSS de ubicación del CTA (~9 líneas) se repite en `AboutSection`, `FilmTypesSection` y `ProcessSection`.
+- **Opciones presentadas:**
+  - A) Mantenerlo — pro: es lo que pide el diseño (estilos con scope, `global.css` sin cambios), igual que `.faq-cta` · contra: ~9 líneas repetidas.
+  - B) Pasarlo a una utilidad en `global.css` — pro: una sola copia · contra: reabre el diseño (v3).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-055 — Margen negativo para D-044 en el header (T5)
+- **Fase:** 4 (T5)
+- **Contexto:** para los 12 px entre Instagram y "Consultar" (D-044), la implementación usaba `.header-cta { margin-left: -0.75rem }` para compensar el `gap: 1.5rem` del header.
+- **Opciones presentadas:**
+  - A) Simplificar: `gap` del header a 0,75 rem, sin margen negativo; el `margin-left: auto` queda en `.site-nav` — pro: más simple y robusto · contra: el mínimo entre logo y menú baja de 24 a 12 px (hoy no se alcanza).
+  - B) Dejarlo como está — contra: si cambia el `gap`, deja de cumplir D-044.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-056 — Tamaño explícito del glifo en el header (T5)
+- **Fase:** 4 (T5)
+- **Opciones presentadas:** A) borrar las 4 líneas (`width/height: 1.25rem`), que repiten el tamaño por defecto de `.icon` · B) mantenerlas explícitas.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-057 — Índice de capítulos superpuesto en `/autos/` (fuera de T5)
+- **Fase:** 4 (T5)
+- **Contexto:** en la captura de `qa-tester` a 1440×800, el índice de capítulos de la escena se superpone con "Polarizado para". T5 solo tocó el header (mismo alto que antes): es anterior a la spec.
+- **Opciones presentadas:** A) anotarlo en el Anexo A de la constitución y volver a mirarlo en T10 · B) incluirlo en esta spec (diseño v3) · C) ignorarlo.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-058 — Aprobación de T5
+- **Fase:** 4 (T5)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear, con D-055 y D-056 aplicadas y verificadas antes del commit.
+- **Fecha:** 2026-10-04
+
+### D-059 — Tamaño explícito del glifo del flotante (T6)
+- **Fase:** 4 (T6)
+- **Contexto:** `.fab-icon { width/height: 1.25rem }` repite el tamaño por defecto de `.icon` (`Icon.astro`); mismo caso que D-056 en el header.
+- **Opciones presentadas:** A) borrar la regla y la clase `fab-icon`, que queda sin uso (resultado idéntico, 20 px) · B) mantenerlo explícito.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-060 — Aprobación de T6
+- **Fase:** 4 (T6)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear, con D-059 aplicada y verificada antes del commit.
+- **Fecha:** 2026-10-04
+
+### D-061 — Cómo sumar el ploteo
+- **Fase:** 4 (entre T6 y T7). Reabre requisitos (v2), diseño (v3) y tareas (v3).
+- **Contexto:** el usuario informó que Crisur también hace ploteos, principalmente de autos. No figuraba en `PRODUCT.md`, `services.ts`, la FAQ ni los mensajes.
+- **Opciones presentadas:**
+  - A) Mínimo ahora (la FAQ de D-011 y `PRODUCT.md`) + spec propia para mostrarlo — pro: la 001 no publica una lista incompleta · contra: reabrir requisitos, diseño y tareas por una frase.
+  - B) Spec nueva sin tocar la 001 — contra: la FAQ queda sin el ploteo hasta entonces.
+  - C) Todo dentro de la 001 — contra: amplía mucho el alcance.
+  - D) Anotarlo y decidir después.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. `services.ts` (`treatments`) no cambia en la 001: el ploteo como servicio lo define la spec 007.
+- **Fecha:** 2026-10-04
+
+### D-062 — Fotos de ploteo
+- **Fase:** 4
+- **Opciones presentadas:** A) en `gallery/autos/` solo polarizado; las de ploteo fuera del proyecto hasta la spec 007 · B) crear `gallery/ploteo/` ahora · C) mezclarlas en `autos/` · D) son todas de polarizado.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-063 — Texto de la FAQ con el ploteo
+- **Fase:** 4 (reabre R8.1)
+- **Opciones presentadas:**
+  - A) Agregar al final: "…y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos." — pro: fiel a "principalmente autos", sin afirmar nada de casas o negocios.
+  - B) Sumarlo a la lista de autos: "Sí: polarizado, láminas de seguridad y ploteo para autos; …" — contra: da a entender que es solo para autos.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Texto completo: "Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos."
+- **Fecha:** 2026-10-04
+
+### D-064 — Lugar de la spec 007-ploteo
+- **Fase:** 4
+- **Opciones presentadas:** A) después de la 001 (001 → 007 → 003 → 002) · B) después de la 003 · C) al final de la cola.
+- **Recomendación del equipo:** A, porque es un servicio que ya venden y el sitio no muestra.
+- **Decisión del usuario:** A. Necesita del cliente los tipos de ploteo y fotos.
+- **Fecha:** 2026-10-04
+
+### D-065 — Aprobación de requisitos v2, diseño v3 y tareas v3
+- **Fase:** 4
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar y commitear. Los tres documentos pasan a APROBADO (2026-10-04).
+- **Fecha:** 2026-10-04
+
+### D-066 a D-069 — Fotos de autos subidas por el usuario
+- **Fase:** 4 (fuera de las tareas; la galería ya las carga sola, R7.3)
+- **Contexto:** el usuario subió 13 fotos a `src/assets/gallery/autos/` con nombres de WhatsApp ("WhatsApp Image…", "as", "o"). El nombre del archivo es el `alt` de la foto. 2 eran de ploteo (Beetle "Herbie", una con la patente completa).
+- **D-066:** A) mover las 2 de ploteo fuera del repo (`C:\Proyectos\Crisur-fotos-ploteo\`) · B) las mueve el usuario · C) dejarlas en `autos/`. Recomendación: A. **Elegida: A.**
+- **D-067:** la PT Cruiser de frente: A) polarizado · B) otro trabajo · C) dejarla afuera. **Elegida: A.**
+- **D-068:** 4 fotos con un pedazo de patente en el borde: A) dejarlas · B) las recorta el usuario · C) sacarlas. **Elegida: A.**
+- **D-069:** renombrar con número de orden + descripción de lo que se ve (sin tonos ni marcas de lámina) y commit aparte. Orden: Hilux, Mercedes coupé, Captur, C3 Aircross, luneta C3 Aircross, Etios, 207, Focus, luneta Focus, sedán gris oscuro, PT Cruiser. **Elegida: sí, como se propuso.**
+- **Fecha:** 2026-10-04
+
+### D-070 — Bug del recorte vertical de la galería
+- **Fase:** 4 (bug, fuera de las tareas)
+- **Diagnóstico:** `<Image>` de Astro pone `width="1070" height="803"` en el `<img>`. El atributo `height` fija el alto y anula el `aspect-ratio: 4 / 3` de `.gallery-photo` (`WorkGallery.astro:156-163`): las tarjetas quedan de 480 × 803 px y `object-fit: cover` recorta los costados. DESIGN.md pide fotos 4:3. No se veía porque la galería estaba vacía.
+- **Opciones presentadas:**
+  - A) Corregirlo ahora con `height: auto`, commit aparte `fix(gallery)` — pro: cumple DESIGN.md, una línea.
+  - B) Meterlo en T11 (tareas v4) — contra: hasta entonces las fotos se ven recortadas.
+  - C) Dejarlo para después (Anexo A).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-071 — Bug de T7: el flotante no aparece al entrar por el ancla de un capítulo
+- **Fase:** 4 (T7, antes de aprobarla)
+- **Diagnóstico (`debugger`):** la spec de `IntersectionObserver` da `isIntersecting = true` también cuando el elemento queda pegado al borde de la raíz con área 0. Al entrar por `/<servicio>/#vidrio-original`, la portada termina justo en el borde (`cover.bottom = 0`) y el flotante se oculta. Afecta también al índice de capítulos, a un scroll que caiga justo en el borde y a la vuelta del flotante después del cierre a 1440. Los "6 px a 1440" que midió `qa-tester` venían del `scroll-behavior: smooth` (medición a mitad de la animación), no del layout.
+- **Opciones presentadas:**
+  - A) `rootMargin: '-1px 0px'` — pro: una línea, cumple "al menos un píxel" en los dos bordes · contra: una franja de menos de 1 px cuenta como no visible.
+  - B) `.beat-chapter { scroll-margin-top: -1px }` — contra: solo arregla los enlaces.
+  - C) `threshold: [0, 1e-6]` + `intersectionRatio > 0` — contra: dos cambios, regla menos legible.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-072 — Documentar el `rootMargin`
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** A) diseño v4 y tareas v4 con la nota, aprobados junto con T7 · B) tomarlo como detalle de implementación.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-073 — Prueba de regresión del bug de T7
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** A) script de medición fuera del repo, como en D-070 · B) script en el repo sin dependencias (lo recomendó el `debugger`) · C) Playwright (dependencia nueva, contra D-029).
+- **Recomendación del equipo (orquestador):** A, por coherencia con D-012 y D-070 y para no fijar la ruta del Edge en el repo.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-074 — Sugerencias menores de `code-reviewer` en T7
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** aceptar en bloque (corregir el comentario de `WhatsAppFab.astro:12` a "el hero o la portada (disparador) o el contenido del cierre en servicios (retiro)"; dejar los comentarios de `:29` y `:32`; dejar `querySelectorAll` para el disparador) · solo corregir el comentario · no tocar nada.
+- **Recomendación del equipo:** aceptar en bloque.
+- **Decisión del usuario:** aceptar en bloque.
+- **Fecha:** 2026-10-04
+
+### D-075 — Aprobación de T7 y de diseño v4 / tareas v4
+- **Fase:** 4 (T7)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-076 — Capítulos en celular horizontal con pantalla baja (T8)
+- **Fase:** 4 (T8)
+- **Contexto:** 🟡 de `code-reviewer`, medido por el orquestador. A 640×360 (D-036) los capítulos conservan `100svh`. Con unos 300 px de alto (celular en horizontal con la barra del navegador), los 5,5 rem de T8 más los 4,5 rem de arriba no dejan lugar al texto:
+  - a 740×300, 1 o 2 capítulos por servicio crecen de 300 a 317–360 px;
+  - a 667×320, crece 1 capítulo por servicio, hasta 352 px;
+  - la escena 3D reparte el scroll en partes iguales (`story-controller.ts`) y queda ≈ 3 % desfasada;
+  - el flotante no tapa nada.
+  Antes de T8 no pasaba.
+- **Opciones presentadas:**
+  - A) Aceptar y anotarlo en el Anexo A de la constitución — pro: T8 cumple la spec tal cual · contra: el desfase queda en pantallas bajas.
+  - B) Volver a la Fase 2 para ajustarlo (diseño v5) — pro: sin desfase · contra: reabre diseño y tareas por un detalle menor.
+  - C) Aceptar sin anotar.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** B.
+- **Fecha:** 2026-10-04
+
+### D-077 — Sugerencias de simplificación de `code-reviewer` en T8
+- **Fase:** 4 (T8)
+- **Opciones presentadas:** A) dejar `calc(2rem + 5.5rem)` en el pie y el 5,5 rem repetido en los 2 archivos, cada uno con su D-ID · B) escribir `7.5rem` en el pie · C) mantener el código y anotar la unificación para la spec 006.
+- **Recomendación del equipo:** A (unificar el valor obliga a tocar `global.css`, que la regla común de `tareas.md` no permite).
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-078 — Aprobación de T8
+- **Fase:** 4 (T8)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-079 — Orden entre el commit de T8 y el ajuste de D-076
+- **Fase:** 4 (T8)
+- **Opciones presentadas:**
+  - A) Commitear T8 ahora (cumple la spec v4); después, diseño v5 con el ajuste, una tarea nueva T8b y su propio commit — pro: cada cambio queda registrado por separado · contra: dos commits sobre el mismo CSS.
+  - B) Ajustar antes del commit y commitear todo junto — contra: T8 queda abierta hasta aprobar el diseño v5.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-080 — Ajuste de los capítulos en horizontal con pantalla baja (D-076)
+- **Fase:** 2 (reabierta: diseño v5)
+- **Contexto:** a ≤ 880 px y con ≤ 340 px de alto, el header (72 px de padding superior) y el aire del flotante (88 px) dejan 140 px para el texto del capítulo, que mide entre 157 y 200 px. Las estimaciones de `disenador-ui` son por cálculo y se miden en la implementación.
+- **Opciones presentadas** (todas dentro de `@media (max-width: 880px) and (max-height: 340px)`, solo en `ServiceStory.astro`):
+  - A) Tipografía compacta: `.chapter-title { font-size: 1.625rem; line-height: 1.05 }` y `.chapter-text { margin-top: .5rem; font-size: .9375rem; line-height: 1.5 }` — pro: el cambio más chico, mantiene los 5,5 rem (D-017, D-040 detalle 8) · contra: el texto baja a 15 px; un texto largo o una pantalla angosta podría no entrar.
+  - A + `.beat { padding-top: 4rem }` — pro: 8 px más · contra: el título queda pegado al header cuando el texto llena el capítulo.
+  - B) Título y texto en dos columnas — contra: layout nuevo, hay que reajustar la penumbra.
+  - C) Aire al costado (`padding-right: 10rem` y el padding inferior anterior a T8) — contra: reabre D-017 y D-040 detalle 8.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A, sin cambiar el padding superior.
+- **Fecha:** 2026-10-04
+
+### D-081 — Mención de la tipografía compacta en "Componentes y archivos afectados"
+- **Fase:** 2 (diseño v5)
+- **Opciones presentadas:** A) dejar `diseno.md:128` como está; la regla queda en Interfaz y la trazabilidad de R2.3 y R5.6 apunta a T8b · B) sumar media línea que remita a Interfaz.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-082 — Aprobación de diseño v5 y tareas v5
+- **Fase:** 2 y 3
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar y commitear. Los dos documentos pasan a APROBADO (2026-10-04).
+- **Fecha:** 2026-10-04
+
+### D-083 — Título sobre el objeto 3D en horizontal con pantalla baja (T8b)
+- **Fase:** 4 (T8b)
+- **Contexto:** en la captura de `qa-tester` a 740×300 (`/autos/`, capítulo 2), el título del capítulo queda encima del auto y tapa las ventanillas. Se lee bien gracias a la penumbra. En 300 px de alto no entran el objeto y el texto uno arriba del otro; el aire de T8 subió el texto unos 64 px.
+- **Opciones presentadas:** A) anotarlo en el Anexo A de la constitución y revisarlo en una spec de la escena 3D · B) aceptarlo sin registrar · C) ajustarlo en esta spec (diseño v6), con el riesgo de tocar la escena 3D, que está fuera del alcance.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-084 — Aprobación de T8b
+- **Fase:** 4 (T8b)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-085 — Lugar de las fotos de ploteo dentro del proyecto
+- **Fase:** 4 (reemplaza la ubicación de D-066; D-062 sigue vigente: no van a la galería hasta la spec 007)
+- **Contexto:** el usuario pidió que la carpeta de ploteos (`C:\Proyectos\Crisur-fotos-ploteo\`, 2 fotos) quede dentro del proyecto para ordenar. `gallery.ts` importa todo lo que esté en `src/assets/gallery/*/`.
+- **Opciones presentadas:** A) `fotos-pendientes/ploteo/` en la raíz, fuera de `src/` y `public/` · B) `src/assets/gallery/ploteo/` (el glob la importa ya; es lo descartado en D-062) · C) `Crisur-fotos-ploteo/` en la raíz, con su nombre actual.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. Se movió el 2026-10-04; la carpeta externa ya no existe.
+- **Fecha:** 2026-10-04
+
+### D-086 — ¿Las fotos de ploteo van a Git?
+- **Fase:** 4
+- **Contexto:** una de las 2 fotos muestra la patente completa (D-066) y el repo tiene remoto en GitHub.
+- **Opciones presentadas:** A) no: `fotos-pendientes/` en `.gitignore` — contra: sin copia en Git · B) sí, en un commit aparte — contra: la patente queda en GitHub y en el historial.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-087 — `.claude/agent-memory/` en `.gitignore`
+- **Fase:** 4
+- **Opciones presentadas:** A) sumarla a `.gitignore` · B) dejarla sin trackear · C) commitearla.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-088 — "Polarizado(s)" como término general en el inicio
+- **Fase:** 4 (T9, sugerencia de `code-reviewer`)
+- **Contexto:** fuera de D-009 y de T9 quedan 3 textos que usan "polarizado(s)" para todo: el `h1` "Polarizados para autos, hogares y negocios" (`HomeHero.astro:25`), el `<title>` (`index.astro:18`) y "Sobre nosotros" (`AboutSection.astro:30`, sin las láminas de seguridad). En hogares no se ofrece polarizado.
+- **Opciones presentadas:** A) anotarlo en el Anexo A para la spec 004 (SEO), donde se deciden el `h1` y el `<title>` · B) dejarlos como están ("polarizado" es la palabra coloquial y de la marca).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-089 — Aprobación de T9
+- **Fase:** 4 (T9)
+- **Contexto:** QA informó que el botón del hero sobresalía 5,4 px a 360×560. Era un artefacto de la emulación de escritorio (barra de scroll de 15 px: 345 px de ancho y `h1` en 4 líneas). Con emulación de celular (360 px, `h1` en 3 líneas) la holgura es de 28 px, igual que en la medición de D-025.
+- **Opciones presentadas:** aprobar con 2 commits (`chore` + T9) · aprobar con 1 commit · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar con 2 commits.
+- **Fecha:** 2026-10-04
+
+### D-090 — Superposiciones de la portada a 1440 px (T10)
+- **Fase:** 4 (T10)
+- **Contexto:** QA midió que el ancho de `.cover-copy` es exactamente el de la columna anterior (0 px de diferencia): el título conserva tamaño y posición. Aun así, a 1440 px:
+  - el índice de capítulos se cruza con "…para" de la portada a 1440×800 en los 3 servicios y a 1440×900 en autos (10 px) (D-057);
+  - a 1440×900, en hogares y negocios, el título pisa la parte baja de la casa y del local. El criterio de T10 "el título no tapa el objeto 3D" no se cumple ahí, aunque ya pasaba antes de T10.
+- **Opciones presentadas:** A) anotar las dos en el Anexo A para una spec de la escena 3D y aprobar T10 · B) corregir las dos en la 001 (diseño v6), con el riesgo de tocar la escena 3D o `story-controller.ts` · C) corregir solo el índice en la 001 y anotar lo del objeto.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-091 — Sugerencias menores de `code-reviewer` en T10
+- **Fase:** 4 (T10)
+- **Opciones presentadas:** A) dejar todo como está · B) solo acortar el comentario de `.cover-copy` · C) aplicar las 3 (comentario, `@media (width > 880px)` y sacar `.beat-cover` de la regla compartida de ≤ 880 px).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-092 — Aprobación de T10
+- **Fase:** 4 (T10)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-093 — Verificación de T11 con las fotos reales de `/autos/`
+- **Fase:** 3 (tareas v6)
+- **Contexto:** desde D-066 a D-069, `src/assets/gallery/autos/` tiene 11 fotos; `hogares/` y `negocios/` están vacías. La verificación de T11 pedía que ningún servicio tuviera galería y probaba R7.3 con una imagen temporal (D-046).
+- **Opciones presentadas:** A) usar las fotos reales de `/autos/` para R7.3, verificar la ausencia de galería en hogares y negocios y quitar la imagen temporal · B) A + mantener la imagen temporal en hogares para probar el paso de 0 fotos a tener.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A. `diseno.md:634` no cambia: allí la imagen temporal es una prueba opcional.
+- **Fecha:** 2026-10-04
+
+### D-094 — Aprobación de tareas v6
+- **Fase:** 3
+- **Opciones presentadas:** aprobar, commitear y arrancar T11 · aprobar sin commit · cambiar algo.
+- **Decisión del usuario:** aprobar, commitear y arrancar T11.
+- **Fecha:** 2026-10-04
+
+### D-095 — Caso que nunca se ejecuta en el script de la galería (T11)
+- **Fase:** 4 (T11, sugerencia de `code-reviewer`)
+- **Contexto:** en `WorkGallery.astro`, el caso `item === null ? track.clientWidth` no se ejecuta nunca, porque los botones solo existen con 2 fotos o más.
+- **Opciones presentadas:** A) dejarlo (R7.3 pide no tocar el script) · B) anotarlo en el Anexo A para la spec 006.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-096 — Aprobación de T11
+- **Fase:** 4 (T11)
+- **Contexto:** al revisar el diff, el orquestador devolvió a su forma original la línea de `whatsappUrl` en `[service].astro`, a la que `dev-frontend` le había quitado un espacio sin necesidad.
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear.
+- **Fecha:** 2026-10-04
+
+### D-097 — Nombres de las zonas de navegación en la 404 (T12)
+- **Fase:** 4 (T12, sugerencia de `code-reviewer`)
+- **Contexto:** la 404 tiene tres `<nav aria-label="Servicios">` (header, página y pie). La pregunta de D-024 no está asociada al `<nav>` de la página. Ya pasaba antes de T12 y no incumple WCAG; es una buena práctica (axe) que cada zona tenga un nombre distinto.
+- **Opciones presentadas:** A) dejarlo en la 001 y anotarlo en el Anexo A para la spec 006 (`aria-labelledby` hacia la pregunta) · B) cambiarlo ahora (diseño v6 y una tarea más) · C) dejarlo sin anotar.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-098 — Clase `.action` repetida en la 404 (T12)
+- **Fase:** 4 (T12, sugerencia de `code-reviewer`)
+- **Opciones presentadas:** A) dejarla, igual que `.section-cta` en T4 · B) usar `.actions .button` y sacar la clase.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-099 — Aprobación de T12
+- **Fase:** 4 (T12)
+- **Opciones presentadas:** aprobar y commitear · aprobar sin commit · algo no está bien.
+- **Decisión del usuario:** aprobar y commitear. Con T12 quedan aprobadas todas las tareas de la Fase 4.
+- **Fecha:** 2026-10-04
+
+### D-100 — `graphify-out/` fuera de Git
+- **Fase:** entre la 4 y la 5 (higiene del repo; Anexo A de la constitución)
+- **Contexto:** el usuario pidió actualizar el grafo. `python -m graphify update .` regeneró el grafo de código (733 nodos, 1.053 relaciones, 47 comunidades; commit `51faeac`) y cambió 52 archivos de `graphify-out/`, que estaba versionado con su caché. La parte semántica de los documentos sigue siendo la del 2026-10-02. Se corrigió `.graphify_root`, que apuntaba a la carpeta vieja en OneDrive.
+- **Opciones presentadas:** A) sacarlo de Git (`.gitignore` + `git rm --cached`) — contra: el grafo no viaja con el repo · B) commitearlo aparte — contra: ruido de caché en el historial · C) dejarlo sin commitear.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-101 — Arranque de la Fase 5
+- **Fase:** 5
+- **Opciones presentadas:** A) ahora, con los 3 verificadores en paralelo y consultas a graphify · B) ahora, de a uno · C) más tarde.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** C, más tarde.
+- **Fecha:** 2026-10-04
+
+### D-103 — Fotos en la actualización semántica de graphify
+- **Fase:** 5 (antes de arrancar la verificación)
+- **Contexto:** el usuario pidió actualizar graphify por completo y trabajar con él. La detección incremental marcó 31 documentos (~47 mil palabras, sin caché) y 11 fotos de autos. Cada foto necesita su propio subagente de visión; el protocolo permite 3 subagentes en paralelo.
+- **Opciones presentadas:** A) solo documentos (3 subagentes) · B) documentos y fotos (11 subagentes de visión más, en 4 tandas).
+- **Recomendación del equipo:** A (la descripción de cada foto ya está en su nombre de archivo y en `gallery.ts`).
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-104 — RNF2 en `/hogares/` y `/negocios/` (Fase 5)
+- **Fase:** 5
+- **Contexto:** medición "después" (HEAD `c04eeb2`, 14 corridas): `/` 99 / TBT 37,7 ms y `/autos/` 47 / 5.622 ms pasan; `/hogares/` 50 / 4.765 ms y `/negocios/` 51 / 4.700 ms no pasan el piso (52) ni el techo (4.018,3 y 3.736,7 ms). A11y, BP y SEO: 100. El bloqueo viene de `engine.js` y `animate.js` (motor 3D y Motion), que salen de `story-controller.ts` y `coin.ts`, no tocados por la spec. La línea base se midió otro día; `benchmarkIndex` variable (870–1.662).
+- **Opciones presentadas:** A) comparación A/B el mismo día: build de `968ef00` en una copia temporal fuera del repo y medición alternada contra HEAD, 5 corridas de cada una en hogares y negocios y autos de control · B) repetir solo el "después" con 5 corridas por servicio · C) aceptarlo como variación (como D-049).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-105 — Cierre de RNF2 con la medición A/B
+- **Fase:** 5
+- **Contexto:** medición A/B el mismo día (D-104): build de `968ef00` (línea base) y de `c04eeb2` (HEAD), servidos con el mismo servidor estático sin compresión, Lighthouse 12.8.2 mobile alternando versiones. Medianas base → HEAD: `/hogares/` 35 → 36 y TBT 5.119 → 5.048 ms (5 corridas c/u); `/negocios/` 35 → 36 y 5.261 → 5.143 ms (5 c/u); `/autos/` (control) 35 → 35 y 5.857 → 5.615 ms (3 c/u). A11y, BP y SEO: 100. Los absolutos son menores que con `astro preview` por la falta de compresión; afecta igual a las dos versiones.
+- **Opciones presentadas:** A) cerrar RNF2 con la evidencia A/B · B) repetir la A/B con `astro preview` para tener absolutos comparables.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-106 — `README.md:38` desactualizado por T11
+- **Fase:** 5 (hallazgo de `code-reviewer`)
+- **Opciones presentadas:** A) lo corrige el `documentador` al cierre · B) tarea T13 antes de la entrega.
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-107 — Comentario del header y orden del spread en `WhatsAppButton`
+- **Fase:** 5 (sugerencias de `code-reviewer`)
+- **Contexto:** el comentario de D-044 en `SiteHeader.astro:148` cuesta leerlo; en `WhatsAppButton.astro:19`, `{...rest}` va después de `target`/`rel` (como el fragmento aprobado en `diseno.md`), así que un padre podría pisarlos; hoy ninguno lo hace.
+- **Opciones presentadas:** A) dejar ambos · B) solo reescribir el comentario (T13) · C) ambos (el spread cambia el diseño).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-108 — Hover con movimiento reducido
+- **Fase:** 5 (observación de `qa-tester`)
+- **Contexto:** con `prefers-reduced-motion: reduce`, `.button-primary:hover` y `.button-secondary:hover` aplican `translateY(-1px)` sin transición (`global.css:125`, `:140`). `global.css` no cambia en esta spec.
+- **Opciones presentadas:** A) no cuenta como animación para R5.5; anotarlo en el Anexo A para la spec 002 · B) aceptarlo sin anotar · C) corregirlo ahora (diseño v6 y una tarea).
+- **Recomendación del equipo:** A.
+- **Decisión del usuario:** A.
+- **Fecha:** 2026-10-04
+
+### D-109 — Aprobación de la entrega
+- **Fase:** 5
+- **Contexto:** 46 de 46 criterios verificados, sin hallazgos 🔴; RNF2 cerrado por D-105; observaciones resueltas en D-106 a D-108.
+- **Opciones presentadas:** aprobar + commit + merge local · aprobar + merge + push a GitHub (si Vercel está conectado, publica) · aprobar sin merge · algo no está bien.
+- **Decisión del usuario:** aprobar, commitear el informe y hacer el merge local a `main` (`--no-ff`), sin push.
 - **Fecha:** 2026-10-04

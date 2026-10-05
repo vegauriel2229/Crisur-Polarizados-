@@ -6,6 +6,7 @@ import WhatsAppFab from '../components/layout/WhatsAppFab.astro';
 import ServiceStory from '../components/service-story/ServiceStory.astro';
 import ServiceDetails from '../components/service-story/ServiceDetails.astro';
 import WorkGallery from '../components/service-story/WorkGallery.astro';
+import { galleryFor } from '../data/gallery';
 import { nextServiceOf, services, type Service } from '../data/services';
 import { siteSettings } from '../config/site';
 import { buildWhatsAppUrl } from '../lib/whatsapp';
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const { service } = Astro.props;
+const photos = galleryFor(service.id);
 const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, service.whatsappMessage).href;
 ---
 
@@ -26,9 +28,9 @@ const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, service.whatsa
   <SiteHeader current={service.id} whatsappUrl={whatsappUrl} overlay />
   <main>
     <ServiceStory service={service} next={nextServiceOf(service.id)} whatsappUrl={whatsappUrl} />
-    <WorkGallery service={service} />
+    {photos.length > 0 && <WorkGallery service={service} photos={photos} />}
     <ServiceDetails service={service} whatsappUrl={whatsappUrl} />
   </main>
   <SiteFooter />
-  <WhatsAppFab href={whatsappUrl} label={`${service.ctaLabel} por WhatsApp`} />
+  <WhatsAppFab href={whatsappUrl} />
 </BaseLayout>

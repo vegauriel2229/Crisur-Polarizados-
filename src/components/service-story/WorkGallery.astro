@@ -1,17 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import Icon from '../Icon.astro';
-import ServiceArt from '../ServiceArt.astro';
-import { galleryFor } from '../../data/gallery';
+import type { GalleryPhoto } from '../../data/gallery';
 import type { Service } from '../../data/services';
-import { instagramUrl, siteSettings } from '../../config/site';
 
 interface Props {
   service: Service;
+  photos: readonly GalleryPhoto[];
 }
 
-const { service } = Astro.props;
-const photos = galleryFor(service.id);
+const { service, photos } = Astro.props;
 const serviceName = service.navLabel.toLowerCase();
 ---
 
@@ -32,40 +29,21 @@ const serviceName = service.navLabel.toLowerCase();
     }
   </header>
 
-  {
-    photos.length > 0 ? (
-      /* Carrusel nativo (scroll-snap): funciona con swipe, rueda y teclado aunque el JS no cargue. */
-      <ul class="gallery-track" tabindex="0" aria-label={`Fotos de trabajos en ${serviceName}`} data-gallery-track>
-        {photos.map((photo, index) => (
-          <li class="gallery-item">
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              widths={[480, 960]}
-              sizes="(min-width: 900px) 30rem, 82vw"
-              loading={index < 2 ? 'eager' : 'lazy'}
-              class="gallery-photo"
-            />
-          </li>
-        ))}
-      </ul>
-    ) : (
-      /* FOTOS PENDIENTES: al copiar fotos en src/assets/gallery/<servicio>/ este espacio se convierte en el carrusel. */
-      <div class="gallery-empty">
-        <span class="empty-art" aria-hidden="true">
-          <ServiceArt service={service.id} uid={`gallery-${service.id}`} />
-        </span>
-        <div class="empty-copy">
-          <p class="empty-title">Muy pronto, fotos de nuestros trabajos en {serviceName}.</p>
-          <p class="empty-text">Mientras tanto, mirá los últimos trabajos en nuestro Instagram.</p>
-          <a class="button button-secondary" href={instagramUrl} target="_blank" rel="noopener noreferrer">
-            <Icon name="instagram" />
-            <span>@{siteSettings.instagramHandle}</span>
-          </a>
-        </div>
-      </div>
-    )
-  }
+  {/* Carrusel nativo (scroll-snap): funciona con swipe, rueda y teclado aunque el JS no cargue. */}
+  <ul class="gallery-track" tabindex="0" aria-label={`Fotos de trabajos en ${serviceName}`} data-gallery-track>
+    {photos.map((photo, index) => (
+      <li class="gallery-item">
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          widths={[480, 960]}
+          sizes="(min-width: 900px) 30rem, 82vw"
+          loading={index < 2 ? 'eager' : 'lazy'}
+          class="gallery-photo"
+        />
+      </li>
+    ))}
+  </ul>
 </section>
 
 <script>
@@ -156,47 +134,13 @@ const serviceName = service.navLabel.toLowerCase();
   .gallery-track :global(.gallery-photo) {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: var(--radius-surface);
     box-shadow: inset 0 0 0 1px var(--color-line);
   }
 
-  .gallery-empty {
-    display: grid;
-    align-items: center;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    margin-top: clamp(1.5rem, 3vw, 2rem);
-    padding: clamp(1.25rem, 3vw, 2rem);
-    border-radius: var(--radius-surface);
-    background: var(--color-surface);
-    box-shadow: inset 0 0 0 1px var(--color-line);
-  }
-  @media (min-width: 760px) {
-    .gallery-empty {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    }
-  }
-  .empty-art {
-    --film: 1;
-    display: block;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    border-radius: var(--radius-surface);
-    background: var(--art-backdrop);
-  }
-  .empty-title {
-    max-width: 24ch;
-    font-stretch: 112%;
-    font-weight: 750;
-    font-size: clamp(1.3rem, 0.95rem + 1.5vw, 2.3rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-  .empty-text {
-    margin: 0.75rem 0 1.25rem;
-    color: var(--color-ink-muted);
-  }
   @media (prefers-reduced-motion: reduce) {
     .gallery-button {
       transition: none;

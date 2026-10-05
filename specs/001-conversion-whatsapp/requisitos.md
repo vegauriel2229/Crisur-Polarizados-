@@ -1,6 +1,8 @@
 # Spec 001 — Conversión a WhatsApp · Requisitos
 
-**Estado:** APROBADO (2026-10-03) · **Versión:** 1
+**Estado:** APROBADO (2026-10-04) · **Versión:** 2
+
+> **v2 (2026-10-04):** la respuesta de R8.1 suma el ploteo (D-061, D-063). El resto no cambia respecto de v1 (APROBADO 2026-10-03).
 
 > Fuente: `docs/auditoria-2026-10-03.md` (hallazgo C1 y sección "Conversión y textos → spec 001"), `PRODUCT.md` y `specs/constitucion.md` (§4 y §5). Las preguntas abiertas se resolvieron con las decisiones D-001 a D-012, las prioridades con D-013 y los supuestos con D-014 (todas en `decisiones.md`).
 
@@ -115,7 +117,7 @@ Que el sitio cumpla su principio 1 ("cada sección termina en una acción de Wha
 **Prioridad:** Should *(confirmada, D-013)*
 
 **Criterios de aceptación (EARS):**
-- R8.1 EL SISTEMA DEBERÁ responder la FAQ "¿Hacen autos, casas y negocios?" con: "Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas." (D-011).
+- R8.1 EL SISTEMA DEBERÁ responder la FAQ "¿Hacen autos, casas y negocios?" con: "Sí: polarizado y láminas de seguridad para autos; espejado, esmerilado y seguridad para casas; y todas las opciones para negocios y oficinas. También hacemos ploteo, sobre todo en autos." (D-011, D-063).
 - R8.2 EL SISTEMA DEBERÁ usar "¿Dónde querés colocar la lámina?" como título del selector de servicios del inicio, en lugar de "¿Qué querés polarizar?" (D-009).
 - R8.3 EL SISTEMA DEBERÁ reemplazar "Elegí qué querés polarizar" en el párrafo del hero y en la 404 por una frase con la misma idea que el título de R8.2 (D-009). La redacción exacta de esas dos frases se propone en la Fase 2 y la aprueba el usuario.
 - R8.4 CUANDO cambie la lista de tratamientos de un servicio, EL SISTEMA DEBERÁ reflejarlo en todos los textos que la mencionan (criterio de revisión).

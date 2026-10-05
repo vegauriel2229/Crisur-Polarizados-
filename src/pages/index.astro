@@ -22,11 +22,11 @@ const defaultWhatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, siteSet
     <HomeHero whatsappUrl={defaultWhatsappUrl}>
       <SiteHeader slot="header" whatsappUrl={defaultWhatsappUrl} />
     </HomeHero>
-    <AboutSection />
-    <FilmTypesSection />
-    <ProcessSection />
+    <AboutSection whatsappUrl={defaultWhatsappUrl} />
+    <FilmTypesSection whatsappUrl={defaultWhatsappUrl} />
+    <ProcessSection whatsappUrl={defaultWhatsappUrl} />
     <HomeFaqSection />
   </main>
   <SiteFooter />
-  <WhatsAppFab href={defaultWhatsappUrl} label="Consultar por WhatsApp" />
+  <WhatsAppFab href={defaultWhatsappUrl} />
 </BaseLayout>

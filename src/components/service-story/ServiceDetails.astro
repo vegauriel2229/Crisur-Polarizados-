@@ -1,6 +1,7 @@
 ---
 import Faq from '../Faq.astro';
 import Icon from '../Icon.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
 import { describeTreatments, type Service } from '../../data/services';
 
 interface Props {
@@ -33,10 +34,7 @@ const { service, whatsappUrl } = Astro.props;
     <div class="questions">
       <h2 class="faq-title">Preguntas frecuentes</h2>
       <Faq items={service.faq} />
-      <a class="button button-primary faq-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-        <Icon name="whatsapp" />
-        <span>Hacer otra pregunta por WhatsApp</span>
-      </a>
+      <WhatsAppButton href={whatsappUrl} label={service.ctaLabel} variant="primary" class="faq-cta" />
     </div>
   </div>
 </section>

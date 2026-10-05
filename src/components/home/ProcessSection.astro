@@ -1,5 +1,14 @@
 ---
 import { PROCESS_STEPS } from '../../data/home';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { WHATSAPP_CTA_LABELS } from '../../data/cta';
+
+interface Props {
+  /** URL con el mensaje general (whatsappDefaultMessage), armada en index.astro (T3, D-005). */
+  whatsappUrl: string;
+}
+
+const { whatsappUrl } = Astro.props;
 ---
 
 <section class="process" aria-labelledby="process-title">
@@ -19,6 +28,7 @@ import { PROCESS_STEPS } from '../../data/home';
         ))
       }
     </ol>
+    <WhatsAppButton href={whatsappUrl} label={WHATSAPP_CTA_LABELS.general} variant="secondary" class="section-cta" />
   </div>
 </section>
 
@@ -77,5 +87,14 @@ import { PROCESS_STEPS } from '../../data/home';
     margin-top: 0.4rem;
     max-width: 32ch;
     color: var(--color-ink-muted);
+  }
+  .section-cta {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 520px) {
+    .section-cta {
+      width: 100%;
+      max-width: 22rem;
+    }
   }
 </style>

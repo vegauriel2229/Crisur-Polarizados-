@@ -1,7 +1,15 @@
 # Spec 001 — Conversión a WhatsApp · Tareas
 
-**Estado:** APROBADO (2026-10-04) · **Versión:** 2 · **Basado en:** diseño v2 (APROBADO 2026-10-04)
+**Estado:** APROBADO (2026-10-04) · **Versión:** 6 · **Basado en:** diseño v5 (APROBADO 2026-10-04)
 
+> **v6 (2026-10-04):** la verificación de T11 usa las 11 fotos reales de `/autos/` para R7.3 y verifica la ausencia de galería solo en `/hogares/` y `/negocios/`. Se quita la imagen temporal de D-046 (D-093). El resto no cambia respecto de v5. Aprobado el 2026-10-04 (D-094).
+>
+> **v5 (2026-10-04):** se suma T8b: tipografía compacta en los capítulos en celular horizontal con pantalla baja (D-076, D-079, D-080). El resto no cambia respecto de v4. Aprobado el 2026-10-04 (D-082).
+>
+> **v4 (2026-10-04):** T7 suma `rootMargin: '-1px 0px'` al observer (D-071). El resto no cambia respecto de v3.
+>
+> **v3 (2026-10-04):** T9 usa la respuesta de la FAQ con el ploteo (D-063). El resto no cambia respecto de v2.
+>
 > **v2 (2026-10-04):** T1 y la verificación de cierre usan 5 corridas en `/` (D-048), y la verificación de cierre suma la revisión de origen si `/` no pasa (D-049). v1 fue APROBADO el 2026-10-03 (D-047); v2, el 2026-10-04 (D-050).
 
 > Implementación de a **una tarea por vez**. Al terminar cada una: verificar, mostrar resultado y esperar el OK del usuario.
@@ -55,7 +63,7 @@
   - Resultado: ver "Línea base de Lighthouse (resultado de T1)", antes de la verificación de cierre.
   - Estado: aprobada (2026-10-04, D-050)
 
-- [ ] **T2 — Etiquetas de WhatsApp en `src/data/cta.ts`**
+- [x] **T2 — Etiquetas de WhatsApp en `src/data/cta.ts`**
   - Qué:
     - Crear `src/data/cta.ts` con `WHATSAPP_CTA_LABELS` (`short`, `hiddenSuffix` y `general`), tal como el bloque "Modelo de datos" del diseño (D-031/T2, D-006, D-027).
     - En `HomeFaqSection.astro:24`, el texto del botón pasa a `WHATSAPP_CTA_LABELS.general`. Es un import y una línea; el marcado no cambia (D-039/PD-7).
@@ -69,9 +77,9 @@
     - B.
     - R: `cta.ts` coincide con el diseño. El diff de `HomeFaqSection.astro` es solo el import y la línea `:24`.
     - H: en `dist/index.html`, el botón del cierre sigue diciendo "Consultar por WhatsApp", con el mismo `href`, `target` y `rel` que antes.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04)
 
-- [ ] **T3 — Componente `WhatsAppButton` y los 2 botones que cambian de etiqueta**
+- [x] **T3 — Componente `WhatsAppButton` y los 2 botones que cambian de etiqueta**
   - Qué: crear `src/components/WhatsAppButton.astro` (D-031/T1, D-039/PD-1):
     - Props del diseño: `href`, `label`, `variant: 'primary' | 'secondary'` y `class?`.
     - Reparte `...rest`, con el mismo patrón que `Icon.astro`.
@@ -94,9 +102,9 @@
     - M (360 y 1440): se conservan los estilos que pone el padre. `.socials .button` va a ancho completo a ≤ 520 px. `.faq-cta` conserva su margen y el ancho completo a ≤ 520 px.
     - C: a 360×640 y a 360×560, el botón del hero entra completo (R5.3).
     - K: los dos botones tienen foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; contrato sin `extends`, D-051)
 
-- [ ] **T4 — CTA corto al final de las 3 secciones del inicio**
+- [x] **T4 — CTA corto al final de las 3 secciones del inicio**
   - Qué:
     - `AboutSection`, `FilmTypesSection` y `ProcessSection` reciben la prop obligatoria `whatsappUrl: string`. Al final de su contenido, dentro del `<section>`, suman un `WhatsAppButton` con `WHATSAPP_CTA_LABELS.general` y `variant="secondary"` (D-031/T1.b, D-001, D-019).
     - `index.astro` les pasa `defaultWhatsappUrl` (`:14`, `:25-27`; D-031/T3, D-005).
@@ -118,9 +126,9 @@
     - H: en `dist/index.html` hay un "Consultar por WhatsApp" al final de cada una de las 3 secciones. Los 3 `href` son `https://wa.me/5492616256467?text=…`, el `text` decodificado es "¡Hola Crisur! Quiero hacer una consulta." y todos llevan `target` y `rel`.
     - M en 360, 768, 1024 y 1440: los 3 botones son ghost con glifo. A 360 ocupan el ancho completo (máx. 22 rem); desde 768, el ancho del contenido. En "Sobre nosotros", a 1024 y 1440, el botón queda debajo de las dos columnas.
     - K: con Tab se llega a los 3 botones, con foco visible. Miden al menos 44 px de alto.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; espacio de About por el `gap`, D-053; CSS con scope repetido, D-054)
 
-- [ ] **T5 — "Consultar" fuera del menú en el header**
+- [x] **T5 — "Consultar" fuera del menú en el header**
   - Qué:
     - En `SiteHeader.astro`, el enlace "Consultar" (`:42`) sale del `<nav id="site-nav">` y queda como hermano, entre el `<nav>` y la hamburguesa (D-031/T8, D-003).
     - Contenido: glifo de WhatsApp (oculto a ≤ 520 px) + `WHATSAPP_CTA_LABELS.short` + `<span class="sr-only">` con el complemento de `hiddenSuffix` (D-020, D-027).
@@ -151,9 +159,9 @@
       - el alto del header no cambia.
     - RM: sin transiciones.
     - K: foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-055, D-056 y D-058)
 
-- [ ] **T6 — Botón flotante: forma de píldora y etiqueta de `cta.ts`**
+- [x] **T6 — Botón flotante: forma de píldora y etiqueta de `cta.ts`**
   - Qué:
     - `WhatsAppFab.astro` deja de ser un círculo con `aria-label` y pasa a ser una píldora. Lleva el glifo (1,25 rem), `WHATSAPP_CTA_LABELS.short` visible y un `<span class="sr-only">` con el complemento. Se quitan el `aria-label` y la prop `label` (D-016, D-027, D-039/PD-6).
     - CSS:
@@ -177,16 +185,16 @@
     - M a 360: mide ≈ 140 × 52 px y está abajo a la derecha, a 1 rem de los bordes.
     - RM: aparece sin animación.
     - K: oculto, no recibe foco; visible, tiene foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-059 y D-060)
 
-- [ ] **T7 — Botón flotante: aparición con `IntersectionObserver` y marcas de disparador y de retiro**
+- [x] **T7 — Botón flotante: aparición con `IntersectionObserver` y marcas de disparador y de retiro**
   - Qué:
     - Marcas (D-031/T6):
       - `data-whatsapp-fab-trigger` en `.intro` (`HomeHero.astro:21`, D-015) y en `header.beat-cover` (`ServiceStory.astro:55`);
       - `data-whatsapp-fab-retire` en `.closing-copy` (`:96`) y en el portal (`:105`) (D-033);
       - el inicio no lleva marca de retiro (D-017).
     - Script (D-031/T4):
-      - un `IntersectionObserver` con umbral 0 reemplaza el listener de `scroll` (`WhatsAppFab.astro:17-26`);
+      - un `IntersectionObserver` con umbral 0 y `rootMargin: '-1px 0px'` (D-071) reemplaza el listener de `scroll` (`WhatsAppFab.astro:17-26`);
       - aplica la regla del diseño (Contratos): `visible = !disparadorVisible && !retiroActivo`;
       - el flotante vuelve cuando las marcas de retiro salen de pantalla (D-034);
       - la marca de retiro es opcional (D-039/PD-5);
@@ -217,9 +225,9 @@
     - M con anclas: al entrar por `/#nosotros` y por `/autos/#<capítulo>`, aparece sin scrollear.
     - RM: aparece y se retira sin animación.
     - D-028, por revisión de código (`code-reviewer`, D-045): si falta el disparador, el script lanza `Error` con un mensaje descriptivo y no toca `data-visible`.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-071 a D-075)
 
-- [ ] **T8 — Aire para el flotante en los capítulos (celular) y en el pie**
+- [x] **T8 — Aire para el flotante en los capítulos (celular) y en el pie**
   - Qué:
     - En `ServiceStory.astro`, a ≤ 880 px, los capítulos (`.beat-chapter`) dejan al menos 5,5 rem de aire abajo (D-017; D-040, detalle 8).
     - En `SiteFooter.astro`, el padding inferior del pie suma 5,5 rem en todas las páginas (D-035).
@@ -236,13 +244,34 @@
     - M en 360, 768, 1024 y 1440: al final de `/` y de cada servicio, el flotante no queda sobre el texto del pie.
     - C a 640×360 (D-036): el flotante no tapa capítulos, portal ni pie.
     - M: el menú abierto y las preguntas de la FAQ se pueden usar.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-077 y D-078. El ajuste para pantallas bajas en horizontal, D-076, va aparte según D-079)
 
-- [ ] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
+- [x] **T8b — Capítulos en celular horizontal con pantalla baja**
+  - Qué:
+    - En `ServiceStory.astro`, dentro de `@media (max-width: 880px) and (max-height: 340px)`, los capítulos usan tipografía compacta para que el texto entre en `100svh` sin quitar los 5,5 rem de aire de T8 (D-076, D-080):
+      - `.chapter-title { font-size: 1.625rem; line-height: 1.05 }`;
+      - `.chapter-text { margin-top: .5rem; font-size: .9375rem; line-height: 1.5 }`.
+    - El padding superior de los capítulos no cambia (D-080).
+    - Solo CSS. Las props no cambian.
+  - Archivos: `src/components/service-story/ServiceStory.astro`
+  - Requisitos: R2.3, R5.6
+  - Agente: `dev-frontend`
+  - Depende de: T8
+  - Verificación:
+    - B.
+    - Medición en Edge headless a 740×300, 667×320, 568×320 y 640×360, en los 3 servicios y en los 4 capítulos de cada uno:
+      - el alto de cada capítulo es igual a `innerHeight`;
+      - el flotante no se cruza con `.chapter-copy`.
+    - A 360×640, 768×1024 y 1024×768 no cambia nada (la media query no aplica).
+    - El script de medición queda fuera del repo (D-073).
+    - Si algún capítulo no entra, se frena y se consulta al usuario: no se ajustan valores por cuenta propia.
+  - Estado: aprobada (2026-10-04; D-083 y D-084)
+
+- [x] **T9 — Textos del inicio: frase del hero, título del selector y FAQ**
   - Qué:
     - `HomeHero.astro:25`: la segunda frase pasa a "Elegí dónde va la lámina y mirá cómo queda." (D-023). La primera no cambia.
     - `HomeHero.astro:40`: el título pasa a "¿Dónde querés colocar la lámina?" (D-009).
-    - `home.ts:49`: la respuesta pasa al texto literal de D-011 (D-031/T11).
+    - `home.ts:49`: la respuesta pasa al texto literal de D-063 (D-011 con la frase del ploteo; D-031/T11).
     - No se ajustan tamaños ni espacios del hero (D-025).
   - Archivos:
     - `src/components/home/HomeHero.astro`
@@ -254,10 +283,10 @@
     - B.
     - H: `dist/index.html` tiene los 3 textos exactos y ya no tiene "¿Qué querés polarizar?" ni "Elegí qué querés polarizar".
     - C: a 360×640 y a 360×560, el lede sigue en 3 líneas y el botón de WhatsApp del hero entra completo (R5.3, D-025).
-    - R: los textos usan voseo y no tienen cifras ni precios (R8.5). La respuesta de la FAQ coincide con los `treatments` actuales (R8.4).
-  - Estado: pendiente
+    - R: los textos usan voseo y no tienen cifras ni precios (R8.5). La respuesta de la FAQ coincide con los `treatments` actuales (R8.4), más la frase del ploteo, que todavía no es un `treatment` (D-061: lo define la spec 007).
+  - Estado: aprobada (2026-10-04; D-088 y D-089)
 
-- [ ] **T10 — Portada de servicio sin los datos, en una columna**
+- [x] **T10 — Portada de servicio sin los datos, en una columna**
   - Qué:
     - En `ServiceStory.astro` se quitan `<dl class="facts">` (`:69-81`) y su CSS (`:324-351` y `:492-494`) (D-007).
     - La grilla de la portada (`:278-282`) pasa a una columna, abajo a la izquierda (D-022).
@@ -274,9 +303,9 @@
     - M a 1024 y 1440: la portada va en una columna, abajo a la izquierda, y el título no tapa el objeto 3D.
     - M a 360 y 768: la portada no cambia.
     - M: el botón "Consultar por mi …" de la portada está en los 4 anchos (R6.4).
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-090 a D-092)
 
-- [ ] **T11 — Galería solo cuando hay fotos**
+- [x] **T11 — Galería solo cuando hay fotos**
   - Qué (D-031/T10, D-008):
     - `[service].astro` arma `photos = galleryFor(service.id)` y renderiza `<WorkGallery service={service} photos={photos} />` solo si `photos.length > 0`.
     - `WorkGallery.astro` recibe `photos: readonly GalleryPhoto[]` por prop y deja de llamar a `galleryFor` (`:5`, `:14`).
@@ -290,13 +319,13 @@
   - Depende de: T1
   - Verificación:
     - B.
-    - H: en los 3 servicios de `dist/` no aparecen `data-gallery`, "Trabajos en" ni "Muy pronto".
-    - M: en los 4 anchos, el cierre pasa directo a "Qué ganás con la lámina".
+    - H en servicios sin fotos (`/hogares/` y `/negocios/`, D-093): en `dist/` no aparecen `data-gallery` ni "Trabajos en". En ningún archivo de `dist/` aparece "Muy pronto".
+    - M en `/hogares/` y `/negocios/`, en los 4 anchos: el cierre pasa directo a "Qué ganás con la lámina".
+    - Galería con fotos (R7.3, D-093, reemplaza la imagen temporal de D-046): `/autos/` tiene sus 11 fotos en `src/assets/gallery/autos/`. En `dist/autos/index.html` está `data-gallery` con 11 fotos, y en los 4 anchos el carrusel y sus controles se ven y funcionan como antes.
     - R: `gallery.ts` no cambia y la página tiene la condición `photos.length > 0`. Instagram sigue en el header, el pie y el hero (R7.4).
-    - Galería con fotos (R7.3, D-046): con OK del usuario, copiar una imagen de prueba (por ejemplo, `src/assets/brand/logo.jpeg`) en `src/assets/gallery/autos/`, compilar y ver el carrusel en `/autos/`; después, con OK, borrar la copia y comprobar que `git status` no la muestra.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-095 y D-096)
 
-- [ ] **T12 — Página 404 con WhatsApp como acción principal**
+- [x] **T12 — Página 404 con WhatsApp como acción principal**
   - Qué: `404.astro` queda en el orden de D-021:
     1. Ilustración.
     2. Título.
@@ -325,7 +354,7 @@
     - C: a 360×640 y a 360×560, el botón de WhatsApp entra completo.
     - M en 768, 1024 y 1440: el orden se mantiene.
     - K: las dos acciones tienen foco visible.
-  - Estado: pendiente
+  - Estado: aprobada (2026-10-04; D-097 a D-099)
 
 ## Línea base de Lighthouse (resultado de T1)
 Medida el 2026-10-04 (D-042). Es la referencia para la medición "después" de la Fase 5.
@@ -345,6 +374,22 @@ Observaciones:
 - `/` se comporta en dos niveles: 3 corridas rápidas (TBT 15–50 ms) y 2 lentas (358 y 2.192 ms).
 - Las páginas de servicio dan menos que en la auditoría del 2026-10-03 (66/63/60). La auditoría midió el sitio publicado en Vercel y esto es el build local: D-030 y D-037 comparan local contra local.
 - Los JSON de las 14 corridas quedaron fuera del repo (D-042).
+
+## Resultado de la verificación de cierre (Fase 5, 2026-10-04)
+Medido sobre `c04eeb2` (13 tareas aprobadas). Sin hallazgos 🔴.
+
+**Lighthouse "después"** (mismo protocolo que T1, `npm run preview`, Edge 154):
+
+| Página | Rendimiento (corridas) | Mediana después / antes | TBT ms (corridas) | Mediana después / antes | A11y / BP / SEO | Resultado |
+|---|---|---|---|---|---|---|
+| `/` | 97 / 94 / 99 / 99 / 99 | **99** / 99 | 0 / 233,8 / 37,7 / 71,7 / 27,2 | **37,7** / 50 | 100 | Pasa |
+| `/autos/` | 47 / 48 / 47 | **47** / 48 | 5.622 / 5.291 / 6.237 | **5.622** / 5.878 | 100 | Pasa |
+| `/hogares/` | 50 / 49 / 61 | **50** / 55 | 4.420 / 4.765 / 5.142 | **4.765** / 3.653 | 100 | Pasa por A/B (D-105) |
+| `/negocios/` | 50 / 67 / 51 | **51** / 55 | 4.700 / 4.935 / 4.575 | **4.700** / 3.397 | 100 | Pasa por A/B (D-105) |
+
+**A/B del mismo día** (D-104, D-105): `968ef00` contra `c04eeb2`, mismo servidor estático sin compresión, corridas alternadas. Medianas base → HEAD: `/hogares/` 35 → 36 y TBT 5.119 → 5.048 ms; `/negocios/` 35 → 36 y 5.261 → 5.143 ms; `/autos/` 35 → 35 y 5.857 → 5.615 ms. Sin regresión: la falla contra la tabla de T1 fue variación de la máquina. El bloqueo de las páginas de servicio viene del motor 3D (`engine.js`, `animate.js`), que esta spec no tocó.
+
+**Criterios:** 46 de 46 verificados. R1–R5 (`qa-tester` + chequeos del orquestador: ancla, movimiento reducido, foco del flotante, menú, FAQ y glifos), R6–R9 y RNF1, RNF3–RNF8 (`qa-tester`), RNF2 (`seo-rendimiento` + A/B). `code-reviewer`: diff completo conforme. Observaciones derivadas: D-106 (README), D-107 (sin cambios) y D-108 (Anexo A, spec 002).
 
 ## Verificación de cierre (Fase 5, `/spec-verificar`)
 No son tareas de implementación, pero completan la trazabilidad:
@@ -373,7 +418,7 @@ No son tareas de implementación, pero completan la trazabilidad:
 | D-031/T6 | Marcas `data-` de disparador y de retiro | T7 |
 | D-031/T8 | "Consultar" fuera del `<nav>` | T5 |
 | D-031/T10 | Galería solo con fotos; se borra "Muy pronto…" | T11 |
-| D-031/T11 | Texto literal de D-011 + ítem de revisión de R8.4 | T9 · Fase 5 |
+| D-031/T11 | Texto literal de D-011 (con la frase de D-063) + ítem de revisión de R8.4 | T9 · Fase 5 |
 
 ## Trazabilidad requisito → tareas
 | Criterio | Tarea(s) | Además, en Fase 5 |
@@ -385,7 +430,7 @@ No son tareas de implementación, pero completan la trazabilidad:
 | R1.5 | T2, T3, T4 | M, H |
 | R2.1 | T7 | M |
 | R2.2 | T6, T7 | H, M |
-| R2.3 | T6 (posición), T7, T8 | M |
+| R2.3 | T6 (posición), T7, T8, T8b (horizontal con pantalla baja) | M |
 | R2.4 | T7 (en el cierre solo se agregan las marcas) | M, H |
 | R3.1 | T3, T5, T6 (usan la URL del servicio que arma `[service].astro`) | H |
 | R3.2 | T2, T4, T5, T12 | H |
@@ -400,14 +445,14 @@ No son tareas de implementación, pero completan la trazabilidad:
 | R5.3 | T3, T5, T9, T12 | C |
 | R5.4 | T3, T4, T5, T6, T12 | M, K |
 | R5.5 | T5, T6, T7 | RM |
-| R5.6 | T7 (retiro y regreso), T8 (aire) | M, C |
+| R5.6 | T7 (retiro y regreso), T8 (aire), T8b (horizontal con pantalla baja) | M, C |
 | R6.1 | T10 | M |
 | R6.2 | T10 | R, M |
 | R6.3 | T10 · regla común | R |
 | R6.4 | T10 | M |
 | R7.1 | T11 | M, H |
 | R7.2 | T11 | M, R |
-| R7.3 | T11 (prueba real, D-046) | R |
+| R7.3 | T11 (prueba con las fotos reales de `/autos/`, D-093) | R |
 | R7.4 | T3 (Instagram del hero), T5 (Instagram del menú), T11 (sin tocar los demás accesos) | M |
 | R8.1 | T9 | H, R |
 | R8.2 | T9 | M |

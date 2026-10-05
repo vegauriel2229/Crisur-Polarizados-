@@ -1,45 +1,73 @@
 ---
 import Icon from '../Icon.astro';
+import { WHATSAPP_CTA_LABELS } from '../../data/cta';
 
 interface Props {
   href: string;
-  label: string;
 }
 
-const { href, label } = Astro.props;
+const { href } = Astro.props;
 ---
 
-<!-- Aparece al dejar atrás la primera pantalla (ahí ya hay un CTA visible). -->
-<a class="whatsapp-fab" href={href} target="_blank" rel="noopener noreferrer" aria-label={label} data-whatsapp-fab>
-  <Icon name="whatsapp" class="fab-icon" />
+<!-- Visible salvo mientras se ve el hero o la portada (disparador) o el contenido del cierre en servicios (retiro): ahí ya hay un CTA. -->
+<a class="whatsapp-fab" href={href} target="_blank" rel="noopener noreferrer" data-whatsapp-fab>
+  <Icon name="whatsapp" />
+  {WHATSAPP_CTA_LABELS.short}<span class="sr-only"> {WHATSAPP_CTA_LABELS.hiddenSuffix}</span>
 </a>
 
 <script>
   const fab = document.querySelector<HTMLElement>('[data-whatsapp-fab]');
-  if (fab !== null) {
-    const update = (): void => {
-      fab.dataset['visible'] = String(window.scrollY > window.innerHeight * 0.8);
-    };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
+  if (fab === null) {
+    throw new Error('WhatsAppFab: missing element "[data-whatsapp-fab]"');
+  }
+  const triggers = document.querySelectorAll<HTMLElement>('[data-whatsapp-fab-trigger]');
+  if (triggers.length === 0) {
+    throw new Error('WhatsAppFab: missing element "[data-whatsapp-fab-trigger]"');
+  }
+  const retires = document.querySelectorAll<HTMLElement>('[data-whatsapp-fab-retire]');
+
+  // visible = !disparadorVisible && !retiroActivo: basta que alguna marca cruce el viewport para ocultarlo.
+  const intersecting = new Set<Element>();
+
+  // El observer entrega solo las entradas que cambiaron: el estado de todos vive en `intersecting`.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          intersecting.add(entry.target);
+        } else {
+          intersecting.delete(entry.target);
+        }
+      }
+      fab.dataset['visible'] = String(intersecting.size === 0);
+    },
+    // La spec de IO cuenta como intersección quedar pegado al borde (0 px); con la raíz achicada 1 px, tocar el borde = 1 px visible.
+    { threshold: 0, rootMargin: '-1px 0px' },
+  );
+  for (const element of [...triggers, ...retires]) {
+    observer.observe(element);
   }
 </script>
 
 <style>
   .whatsapp-fab {
     position: fixed;
-    right: clamp(1rem, 3vw, 1.75rem);
-    bottom: clamp(1rem, 3vw, 1.75rem);
+    right: calc(1rem + env(safe-area-inset-right));
+    bottom: calc(1rem + env(safe-area-inset-bottom));
     z-index: 30;
-    display: grid;
-    place-items: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 3.25rem;
+    padding: 0 1.25rem;
     border-radius: var(--radius-control);
     background: var(--color-cta);
     color: var(--color-on-red);
+    font-weight: 650;
+    text-decoration: none;
+    /* CTA Glow (DESIGN.md) */
     box-shadow:
-      0 14px 30px -12px rgba(227, 38, 43, 0.8),
+      0 12px 28px -12px rgba(227, 38, 43, 0.75),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
     opacity: 0;
     visibility: hidden;
@@ -59,9 +87,8 @@ const { href, label } = Astro.props;
   .whatsapp-fab:hover {
     background: var(--color-cta-hover);
   }
-  .whatsapp-fab :global(.fab-icon) {
-    width: 1.6rem;
-    height: 1.6rem;
+  .whatsapp-fab[data-visible='true']:active {
+    transform: scale(0.98);
   }
   @media (prefers-reduced-motion: reduce) {
     .whatsapp-fab {

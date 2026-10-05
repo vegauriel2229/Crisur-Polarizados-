@@ -1,5 +1,14 @@
 ---
 import { FILM_TYPES } from '../../data/home';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { WHATSAPP_CTA_LABELS } from '../../data/cta';
+
+interface Props {
+  /** URL con el mensaje general (whatsappDefaultMessage), armada en index.astro (T3, D-005). */
+  whatsappUrl: string;
+}
+
+const { whatsappUrl } = Astro.props;
 ---
 
 <section class="films" aria-labelledby="films-title">
@@ -29,6 +38,7 @@ import { FILM_TYPES } from '../../data/home';
         ))
       }
     </ul>
+    <WhatsAppButton href={whatsappUrl} label={WHATSAPP_CTA_LABELS.general} variant="secondary" class="section-cta" />
   </div>
 </section>
 
@@ -168,6 +178,15 @@ import { FILM_TYPES } from '../../data/home';
     margin-top: 0.35rem;
     color: var(--color-ink-muted);
     font-size: 0.95rem;
+  }
+  .section-cta {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 520px) {
+    .section-cta {
+      width: 100%;
+      max-width: 22rem;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .swatch {
